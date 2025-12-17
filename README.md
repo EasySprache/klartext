@@ -7,7 +7,6 @@ KlarText turns dense German or English text into easy-to-understand language and
 ## What it does (MVP)
 - Paste text → get an easy-to-read version (DE/EN)
 - Upload a PDF → extract text → simplify it
-- Choose a difficulty level: **Very Easy / Easy / Medium**
 - Optional **Text-to-Speech (TTS)** for the simplified text
 - No login required (MVP)
 
