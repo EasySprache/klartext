@@ -19,6 +19,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 from collections import Counter
+from typing import Any
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
@@ -102,6 +103,17 @@ def avg_sentence_length(text: str) -> float:
     return sum(len(s.split()) for s in sentences) / len(sentences)
 
 
+def is_valid_text(text: Any) -> bool:
+    """
+    Check if text is valid for processing.
+    
+    Args:
+        text: Text to validate (accepts any type for defensive validation)
+        
+    Returns:
+        True if text is a non-empty string, False otherwise
+    """
+    return isinstance(text, str) and bool(text.strip())
 def strip_thinking_tags(text: str) -> str:
     """
     Remove thinking tags and other verbose output that some models (like Qwen) include.
@@ -132,7 +144,19 @@ def strip_thinking_tags(text: str) -> str:
 def simplify_text(client: Groq, text: str, model: str) -> str:
     """
     Simplifies text using the specified model following Easy Language rules.
+    
+    Args:
+        client: Groq API client
+        text: Text to simplify
+        model: Model ID to use for simplification
+        
+    Returns:
+        Simplified text, or empty string if input is invalid
     """
+    # Validate input
+    if not is_valid_text(text):
+        return ""
+    
     system_prompt = f"""You are an expert in Easy Language (Leichte Sprache / Plain Language).
 Convert the following text into Easy Language by strictly following these rules:
 
@@ -167,7 +191,42 @@ IMPORTANT:
 def evaluate_compliance(client: Groq, original: str, simplified: str) -> dict:
     """
     Uses an LLM evaluator to score the simplification against Easy Language rules.
+    
+    Args:
+        client: Groq API client
+        original: Original text
+        simplified: Simplified text to evaluate
+        
+    Returns:
+        Dictionary with evaluation scores and notes, or error dict if input is invalid
     """
+    # Validate inputs
+    if not is_valid_text(simplified):
+        return {
+            "error": "Invalid or empty simplified text",
+            "sentence_length_score": 0,
+            "structure_score": 0,
+            "active_voice_score": 0,
+            "word_choice_score": 0,
+            "clarity_score": 0,
+            "overall_score": 0,
+            "violation_notes": ["No text to evaluate"],
+            "strengths": []
+        }
+    
+    if not is_valid_text(original):
+        return {
+            "error": "Invalid or empty original text",
+            "sentence_length_score": 0,
+            "structure_score": 0,
+            "active_voice_score": 0,
+            "word_choice_score": 0,
+            "clarity_score": 0,
+            "overall_score": 0,
+            "violation_notes": ["No original text provided"],
+            "strengths": []
+        }
+    
     eval_prompt = f"""You are a strict evaluator for Easy Language compliance.
 
 RULES TO CHECK:
@@ -239,19 +298,35 @@ def run_evaluation(
     client = Groq(api_key=api_key)
     print("✅ Connected to Groq API")
     
+    # Validate and filter test sentences early
+    valid_sentences = []
+    skipped = 0
+    for sentence in test_sentences:
+        if is_valid_text(sentence):
+            valid_sentences.append(sentence)
+        else:
+            skipped += 1
+    
+    if skipped > 0:
+        print(f"⚠️  Skipped {skipped} invalid/empty sentence(s)")
+    
+    if not valid_sentences:
+        print("❌ ERROR: No valid sentences to evaluate")
+        sys.exit(1)
+    
     # Run evaluation
     results = []
-    total_tasks = len(test_sentences) * len(models)
+    total_tasks = len(valid_sentences) * len(models)
     
     print(f"\n🚀 Starting evaluation...")
-    print(f"   {len(test_sentences)} sentences × {len(models)} models = {total_tasks} tasks")
+    print(f"   {len(valid_sentences)} sentences × {len(models)} models = {total_tasks} tasks")
     print(f"   Evaluator: {EVAL_MODEL}")
     print("=" * 70)
     
     task_num = 0
-    for i, sentence in enumerate(test_sentences, 1):
+    for i, sentence in enumerate(valid_sentences, 1):
         if verbose:
-            print(f"\n📝 Sentence {i}/{len(test_sentences)}:")
+            print(f"\n📝 Sentence {i}/{len(valid_sentences)}:")
             print(f"   \"{sentence[:80]}...\"")
         
         for model in models:
