@@ -48,6 +48,9 @@ DEFAULT_MODELS = [
 # Model used for evaluation
 EVAL_MODEL = "llama-3.3-70b-versatile"
 
+# Error prefix for API errors
+ERROR_PREFIX = "ERROR"
+
 # Easy Language Rules
 RULES_TEXT = """
 SENTENCE LEVEL RULES:
@@ -129,7 +132,7 @@ IMPORTANT:
         )
         return completion.choices[0].message.content.strip()
     except Exception as e:
-        return f"ERROR: {e}"
+        return f"{ERROR_PREFIX}: {e}"
 
 
 def evaluate_compliance(client: Groq, original: str, simplified: str) -> dict:
@@ -232,7 +235,7 @@ def run_evaluation(
             simplified = simplify_text(client, sentence, model)
             
             # 2. Check for API errors
-            if simplified.startswith("ERROR"):
+            if simplified.startswith(ERROR_PREFIX):
                 print(f"❌ API Error")
                 results.append({
                     "sentence_id": i,
@@ -281,7 +284,7 @@ def run_evaluation(
             score = eval_data.get("overall_score", "N/A")
             print(f"Score: {score}/10")
             
-            if verbose and simplified and not simplified.startswith("ERROR"):
+            if verbose and simplified and not simplified.startswith(ERROR_PREFIX):
                 print(f"      → \"{simplified[:100]}...\"")
     
     print("\n" + "=" * 70)
@@ -321,8 +324,8 @@ def print_summary(df: pd.DataFrame):
     
     # Filter out error rows for statistics
     if "error" in df.columns:
-        df_valid = df[df["error"] == False].copy()
-        error_count = df[df["error"] == True].shape[0]
+        df_valid = df[~df["error"]].copy()
+        error_count = df[df["error"]].shape[0]
         if error_count > 0:
             print(f"\n⚠️ {error_count} API error(s) excluded from statistics")
     else:
