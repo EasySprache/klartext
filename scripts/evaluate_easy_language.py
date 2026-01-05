@@ -102,6 +102,19 @@ def avg_sentence_length(text: str) -> float:
     return sum(len(s.split()) for s in sentences) / len(sentences)
 
 
+def is_valid_text(text) -> bool:
+    """
+    Check if text is valid for processing.
+    
+    Args:
+        text: Text to validate
+        
+    Returns:
+        True if text is a non-empty string, False otherwise
+    """
+    return isinstance(text, str) and bool(text.strip())
+
+
 def simplify_text(client: Groq, text: str, model: str) -> str:
     """
     Simplifies text using the specified model following Easy Language rules.
@@ -115,7 +128,7 @@ def simplify_text(client: Groq, text: str, model: str) -> str:
         Simplified text, or empty string if input is invalid
     """
     # Validate input
-    if not text or not isinstance(text, str) or not text.strip():
+    if not is_valid_text(text):
         return ""
     
     system_prompt = f"""You are an expert in Easy Language (Leichte Sprache / Plain Language).
@@ -157,7 +170,7 @@ def evaluate_compliance(client: Groq, original: str, simplified: str) -> dict:
         Dictionary with evaluation scores and notes, or error dict if input is invalid
     """
     # Validate inputs
-    if not simplified or not isinstance(simplified, str) or not simplified.strip():
+    if not is_valid_text(simplified):
         return {
             "error": "Invalid or empty simplified text",
             "sentence_length_score": 0,
@@ -170,7 +183,7 @@ def evaluate_compliance(client: Groq, original: str, simplified: str) -> dict:
             "strengths": []
         }
     
-    if not original or not isinstance(original, str) or not original.strip():
+    if not is_valid_text(original):
         return {
             "error": "Invalid or empty original text",
             "sentence_length_score": 0,
@@ -258,7 +271,7 @@ def run_evaluation(
     valid_sentences = []
     skipped = 0
     for sentence in test_sentences:
-        if sentence and isinstance(sentence, str) and sentence.strip():
+        if is_valid_text(sentence):
             valid_sentences.append(sentence)
         else:
             skipped += 1

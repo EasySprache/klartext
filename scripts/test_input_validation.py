@@ -16,6 +16,33 @@ class MockGroqClient:
     pass
 
 
+def test_is_valid_text():
+    """Test the is_valid_text helper function"""
+    from scripts.evaluate_easy_language import is_valid_text
+    
+    # Valid text
+    assert is_valid_text("Valid text") == True
+    print("✅ Valid text test passed")
+    
+    # Empty string
+    assert is_valid_text("") == False
+    print("✅ Empty string validation test passed")
+    
+    # Whitespace only
+    assert is_valid_text("   ") == False
+    print("✅ Whitespace validation test passed")
+    
+    # None
+    assert is_valid_text(None) == False
+    print("✅ None validation test passed")
+    
+    # Non-string types
+    assert is_valid_text(123) == False
+    assert is_valid_text([]) == False
+    assert is_valid_text({}) == False
+    print("✅ Non-string type validation test passed")
+
+
 def test_simplify_text_validation():
     """Test that simplify_text handles invalid inputs gracefully"""
     from scripts.evaluate_easy_language import simplify_text
@@ -27,7 +54,8 @@ def test_simplify_text_validation():
     assert result == "", f"Expected empty string, got: {result}"
     print("✅ Empty string test passed")
     
-    # Test None (would fail type check but we handle it)
+    # Test None - Important for robustness: while type hints suggest str,
+    # runtime Python doesn't enforce types, so defensive validation is needed
     result = simplify_text(client, None, "test-model")
     assert result == "", f"Expected empty string for None, got: {result}"
     print("✅ None test passed")
@@ -75,8 +103,8 @@ def test_evaluate_compliance_validation():
 
 def test_run_evaluation_filtering():
     """Test that run_evaluation filters invalid sentences"""
-    # This test would require mocking the Groq API and environment
-    # For now, we'll just verify the filtering logic in isolation
+    # This test verifies the filtering logic using the is_valid_text helper
+    from scripts.evaluate_easy_language import is_valid_text
     
     test_sentences = [
         "Valid sentence 1",
@@ -91,7 +119,7 @@ def test_run_evaluation_filtering():
     valid_sentences = []
     skipped = 0
     for sentence in test_sentences:
-        if sentence and isinstance(sentence, str) and sentence.strip():
+        if is_valid_text(sentence):
             valid_sentences.append(sentence)
         else:
             skipped += 1
@@ -107,6 +135,8 @@ if __name__ == "__main__":
     print("=" * 70)
     
     try:
+        test_is_valid_text()
+        print()
         test_simplify_text_validation()
         print()
         test_evaluate_compliance_validation()
