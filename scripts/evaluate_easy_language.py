@@ -19,6 +19,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 from collections import Counter
+from typing import Any
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
@@ -102,12 +103,12 @@ def avg_sentence_length(text: str) -> float:
     return sum(len(s.split()) for s in sentences) / len(sentences)
 
 
-def is_valid_text(text) -> bool:
+def is_valid_text(text: Any) -> bool:
     """
     Check if text is valid for processing.
     
     Args:
-        text: Text to validate
+        text: Text to validate (accepts any type for defensive validation)
         
     Returns:
         True if text is a non-empty string, False otherwise

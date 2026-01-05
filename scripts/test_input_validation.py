@@ -21,25 +21,25 @@ def test_is_valid_text():
     from scripts.evaluate_easy_language import is_valid_text
     
     # Valid text
-    assert is_valid_text("Valid text") == True
+    assert is_valid_text("Valid text")
     print("✅ Valid text test passed")
     
     # Empty string
-    assert is_valid_text("") == False
+    assert not is_valid_text("")
     print("✅ Empty string validation test passed")
     
     # Whitespace only
-    assert is_valid_text("   ") == False
+    assert not is_valid_text("   ")
     print("✅ Whitespace validation test passed")
     
     # None
-    assert is_valid_text(None) == False
+    assert not is_valid_text(None)
     print("✅ None validation test passed")
     
     # Non-string types
-    assert is_valid_text(123) == False
-    assert is_valid_text([]) == False
-    assert is_valid_text({}) == False
+    assert not is_valid_text(123)
+    assert not is_valid_text([])
+    assert not is_valid_text({})
     print("✅ Non-string type validation test passed")
 
 
