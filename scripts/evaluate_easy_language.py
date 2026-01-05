@@ -78,6 +78,9 @@ DEFAULT_MODELS = [
 # Model used for evaluation
 EVAL_MODEL = "llama-3.3-70b-versatile"
 
+# Error prefix for API errors
+ERROR_PREFIX = "ERROR"
+
 # Easy Language Rules
 RULES_TEXT = """
 SENTENCE LEVEL RULES:
@@ -509,7 +512,7 @@ def run_evaluation(
                 # Metrics were calculated, just evaluation failed
                 eval_data = {"error": str(e), "error_type": error_type}
             
-            # 4. Store results
+            # 5. Store results
             results.append({
                 "sentence_id": i,
                 "model": model,
@@ -519,10 +522,14 @@ def run_evaluation(
                 "simp_word_count": simp_words,
                 "orig_avg_sentence_len": round(orig_avg_len, 1),
                 "simp_avg_sentence_len": round(simp_avg_len, 1),
+                "error": False,
                 **eval_data
             })
             
-            if verbose and simplified and not is_error_result(simplified):
+            score = eval_data.get("overall_score", "N/A")
+            print(f"Score: {score}/10")
+            
+            if verbose and simplified and not simplified.startswith(ERROR_PREFIX):
                 print(f"      → \"{simplified[:100]}...\"")
     
     print("\n" + "=" * 70)
@@ -560,23 +567,36 @@ def print_summary(df: pd.DataFrame):
         print("\n⚠️ No score columns found in results")
         return
     
+    # Filter out error rows for statistics
+    if "error" in df.columns:
+        df_valid = df[~df["error"]].copy()
+        error_count = df[df["error"]].shape[0]
+        if error_count > 0:
+            print(f"\n⚠️ {error_count} API error(s) excluded from statistics")
+    else:
+        df_valid = df.copy()
+    
+    if df_valid.empty:
+        print("\n⚠️ No valid results to summarize (all requests failed)")
+        return
+    
     print("\n📊 SUMMARY BY MODEL")
     print("=" * 70)
     
-    summary = df.groupby("model")[score_cols].mean().round(2)
+    summary = df_valid.groupby("model")[score_cols].mean().round(2)
     print(summary.to_string())
     
     # Best model
-    if "overall_score" in df.columns:
+    if "overall_score" in df_valid.columns:
         best_model = summary["overall_score"].idxmax()
         best_score = summary.loc[best_model, "overall_score"]
         print(f"\n🏆 Best model: {best_model}")
         print(f"   Overall score: {best_score}/10")
     
     # Common violations
-    if "violation_notes" in df.columns:
+    if "violation_notes" in df_valid.columns:
         all_violations = []
-        for violations in df["violation_notes"].dropna():
+        for violations in df_valid["violation_notes"].dropna():
             if isinstance(violations, list):
                 all_violations.extend(violations)
         
