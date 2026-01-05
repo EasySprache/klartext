@@ -35,6 +35,35 @@ except ImportError as e:
 
 
 # =============================================================================
+# CUSTOM EXCEPTIONS
+# =============================================================================
+
+class SimplificationError(Exception):
+    """Base exception for text simplification errors."""
+    pass
+
+
+class APIError(SimplificationError):
+    """Exception raised when the API request fails."""
+    pass
+
+
+class RateLimitError(SimplificationError):
+    """Exception raised when API rate limit is exceeded."""
+    pass
+
+
+class ModelNotFoundError(SimplificationError):
+    """Exception raised when the specified model is not available."""
+    pass
+
+
+class EvaluationError(Exception):
+    """Exception raised when evaluation fails."""
+    pass
+
+
+# =============================================================================
 # CONFIGURATION
 # =============================================================================
 
@@ -105,6 +134,20 @@ def avg_sentence_length(text: str) -> float:
 def simplify_text(client: Groq, text: str, model: str) -> str:
     """
     Simplifies text using the specified model following Easy Language rules.
+    
+    Args:
+        client: Groq API client
+        text: Text to simplify
+        model: Model ID to use for simplification
+        
+    Returns:
+        Simplified text string
+        
+    Raises:
+        RateLimitError: If API rate limit is exceeded
+        ModelNotFoundError: If the specified model is not found
+        APIError: For other API-related errors
+        SimplificationError: For general simplification failures
     """
     system_prompt = f"""You are an expert in Easy Language (Leichte Sprache / Plain Language).
 Convert the following text into Easy Language by strictly following these rules:
@@ -129,12 +172,33 @@ IMPORTANT:
         )
         return completion.choices[0].message.content.strip()
     except Exception as e:
-        return f"ERROR: {e}"
+        error_msg = str(e).lower()
+        
+        # Check for specific error types
+        if "rate" in error_msg and "limit" in error_msg:
+            raise RateLimitError(f"API rate limit exceeded: {e}") from e
+        elif "model" in error_msg and ("not found" in error_msg or "does not exist" in error_msg):
+            raise ModelNotFoundError(f"Model '{model}' not found: {e}") from e
+        elif any(keyword in error_msg for keyword in ["api", "connection", "timeout", "network"]):
+            raise APIError(f"API request failed: {e}") from e
+        else:
+            raise SimplificationError(f"Text simplification failed: {e}") from e
 
 
 def evaluate_compliance(client: Groq, original: str, simplified: str) -> dict:
     """
     Uses an LLM evaluator to score the simplification against Easy Language rules.
+    
+    Args:
+        client: Groq API client
+        original: Original text
+        simplified: Simplified text to evaluate
+        
+    Returns:
+        Dictionary containing evaluation scores and notes
+        
+    Raises:
+        EvaluationError: If evaluation fails for any reason
     """
     eval_prompt = f"""You are a strict evaluator for Easy Language compliance.
 
@@ -169,8 +233,16 @@ Be strict but fair. A score of 10 means perfect compliance."""
             response_format={"type": "json_object"}
         )
         return json.loads(completion.choices[0].message.content)
+    except json.JSONDecodeError as e:
+        raise EvaluationError(f"Failed to parse evaluation response as JSON: {e}") from e
     except Exception as e:
-        return {"error": str(e)}
+        error_msg = str(e).lower()
+        if "rate" in error_msg and "limit" in error_msg:
+            raise EvaluationError(f"Evaluation failed due to rate limit: {e}") from e
+        elif any(keyword in error_msg for keyword in ["api", "connection", "timeout", "network"]):
+            raise EvaluationError(f"Evaluation failed due to API error: {e}") from e
+        else:
+            raise EvaluationError(f"Evaluation failed: {e}") from e
 
 
 # =============================================================================
@@ -228,24 +300,93 @@ def run_evaluation(
             
             print(f"[{task_num}/{total_tasks}] {model_short}...", end=" ", flush=True)
             
-            # 1. Simplify
-            simplified = simplify_text(client, sentence, model)
+            # Initialize default values for error cases
+            simplified = None
+            eval_data = {}
+            error_type = None
             
-            # 2. Calculate metrics
-            orig_words = count_words(sentence)
-            simp_words = count_words(simplified)
-            orig_avg_len = avg_sentence_length(sentence)
-            simp_avg_len = avg_sentence_length(simplified)
-            
-            # 3. Evaluate
-            eval_data = evaluate_compliance(client, sentence, simplified)
+            try:
+                # 1. Simplify
+                simplified = simplify_text(client, sentence, model)
+                
+                # 2. Calculate metrics
+                orig_words = count_words(sentence)
+                simp_words = count_words(simplified)
+                orig_avg_len = avg_sentence_length(sentence)
+                simp_avg_len = avg_sentence_length(simplified)
+                
+                # 3. Evaluate
+                eval_data = evaluate_compliance(client, sentence, simplified)
+                
+                score = eval_data.get("overall_score", "N/A")
+                print(f"Score: {score}/10")
+                
+            except RateLimitError as e:
+                error_type = "rate_limit"
+                simplified = f"[RATE_LIMIT_ERROR]"
+                print(f"⚠️ Rate limit exceeded")
+                if verbose:
+                    print(f"      Error: {e}")
+                # Set default metric values
+                orig_words = count_words(sentence)
+                simp_words = 0
+                orig_avg_len = avg_sentence_length(sentence)
+                simp_avg_len = 0
+                eval_data = {"error": str(e), "error_type": error_type}
+                
+            except ModelNotFoundError as e:
+                error_type = "model_not_found"
+                simplified = f"[MODEL_NOT_FOUND_ERROR]"
+                print(f"❌ Model not found")
+                if verbose:
+                    print(f"      Error: {e}")
+                # Set default metric values
+                orig_words = count_words(sentence)
+                simp_words = 0
+                orig_avg_len = avg_sentence_length(sentence)
+                simp_avg_len = 0
+                eval_data = {"error": str(e), "error_type": error_type}
+                
+            except APIError as e:
+                error_type = "api_error"
+                simplified = f"[API_ERROR]"
+                print(f"⚠️ API error")
+                if verbose:
+                    print(f"      Error: {e}")
+                # Set default metric values
+                orig_words = count_words(sentence)
+                simp_words = 0
+                orig_avg_len = avg_sentence_length(sentence)
+                simp_avg_len = 0
+                eval_data = {"error": str(e), "error_type": error_type}
+                
+            except SimplificationError as e:
+                error_type = "simplification_error"
+                simplified = f"[SIMPLIFICATION_ERROR]"
+                print(f"❌ Simplification failed")
+                if verbose:
+                    print(f"      Error: {e}")
+                # Set default metric values
+                orig_words = count_words(sentence)
+                simp_words = 0
+                orig_avg_len = avg_sentence_length(sentence)
+                simp_avg_len = 0
+                eval_data = {"error": str(e), "error_type": error_type}
+                
+            except EvaluationError as e:
+                error_type = "evaluation_error"
+                print(f"⚠️ Evaluation failed")
+                if verbose:
+                    print(f"      Error: {e}")
+                # Metrics were calculated, just evaluation failed
+                eval_data = {"error": str(e), "error_type": error_type}
             
             # 4. Store results
             results.append({
                 "sentence_id": i,
                 "model": model,
                 "original": sentence,
-                "simplified": simplified,
+                "simplified": simplified if simplified else "[ERROR]",
                 "orig_word_count": orig_words,
                 "simp_word_count": simp_words,
                 "orig_avg_sentence_len": round(orig_avg_len, 1),
@@ -253,10 +394,7 @@ def run_evaluation(
                 **eval_data
             })
             
-            score = eval_data.get("overall_score", "N/A")
-            print(f"Score: {score}/10")
-            
-            if verbose and simplified and not simplified.startswith("ERROR"):
+            if verbose and simplified and not any(simplified.startswith(f"[{err}") for err in ["RATE_LIMIT", "MODEL_NOT_FOUND", "API", "SIMPLIFICATION", "ERROR"]):
                 print(f"      → \"{simplified[:100]}...\"")
     
     print("\n" + "=" * 70)
