@@ -131,6 +131,41 @@ def avg_sentence_length(text: str) -> float:
     return sum(len(s.split()) for s in sentences) / len(sentences)
 
 
+def get_default_metrics(sentence: str) -> dict:
+    """
+    Get default metric values for a failed simplification.
+    
+    Args:
+        sentence: Original sentence
+        
+    Returns:
+        Dictionary with default metric values
+    """
+    return {
+        "orig_words": count_words(sentence),
+        "simp_words": 0,
+        "orig_avg_len": avg_sentence_length(sentence),
+        "simp_avg_len": 0
+    }
+
+
+def is_error_result(simplified: str) -> bool:
+    """
+    Check if a simplified text represents an error result.
+    
+    Args:
+        simplified: Simplified text to check
+        
+    Returns:
+        True if the text is an error marker, False otherwise
+    """
+    if not simplified:
+        return True
+    error_markers = ["[RATE_LIMIT_ERROR]", "[MODEL_NOT_FOUND_ERROR]", 
+                     "[API_ERROR]", "[SIMPLIFICATION_ERROR]", "[ERROR]"]
+    return any(simplified.startswith(marker) for marker in error_markers)
+
+
 def simplify_text(client: Groq, text: str, model: str) -> str:
     """
     Simplifies text using the specified model following Easy Language rules.
@@ -323,54 +358,58 @@ def run_evaluation(
                 
             except RateLimitError as e:
                 error_type = "rate_limit"
-                simplified = f"[RATE_LIMIT_ERROR]"
-                print(f"⚠️ Rate limit exceeded")
+                simplified = "[RATE_LIMIT_ERROR]"
+                print("⚠️ Rate limit exceeded")
                 if verbose:
                     print(f"      Error: {e}")
                 # Set default metric values
-                orig_words = count_words(sentence)
-                simp_words = 0
-                orig_avg_len = avg_sentence_length(sentence)
-                simp_avg_len = 0
+                metrics = get_default_metrics(sentence)
+                orig_words = metrics["orig_words"]
+                simp_words = metrics["simp_words"]
+                orig_avg_len = metrics["orig_avg_len"]
+                simp_avg_len = metrics["simp_avg_len"]
                 eval_data = {"error": str(e), "error_type": error_type}
                 
             except ModelNotFoundError as e:
                 error_type = "model_not_found"
-                simplified = f"[MODEL_NOT_FOUND_ERROR]"
-                print(f"❌ Model not found")
+                simplified = "[MODEL_NOT_FOUND_ERROR]"
+                print("❌ Model not found")
                 if verbose:
                     print(f"      Error: {e}")
                 # Set default metric values
-                orig_words = count_words(sentence)
-                simp_words = 0
-                orig_avg_len = avg_sentence_length(sentence)
-                simp_avg_len = 0
+                metrics = get_default_metrics(sentence)
+                orig_words = metrics["orig_words"]
+                simp_words = metrics["simp_words"]
+                orig_avg_len = metrics["orig_avg_len"]
+                simp_avg_len = metrics["simp_avg_len"]
                 eval_data = {"error": str(e), "error_type": error_type}
                 
             except APIError as e:
                 error_type = "api_error"
-                simplified = f"[API_ERROR]"
-                print(f"⚠️ API error")
+                simplified = "[API_ERROR]"
+                print("⚠️ API error")
                 if verbose:
                     print(f"      Error: {e}")
                 # Set default metric values
-                orig_words = count_words(sentence)
-                simp_words = 0
-                orig_avg_len = avg_sentence_length(sentence)
-                simp_avg_len = 0
+                metrics = get_default_metrics(sentence)
+                orig_words = metrics["orig_words"]
+                simp_words = metrics["simp_words"]
+                orig_avg_len = metrics["orig_avg_len"]
+                simp_avg_len = metrics["simp_avg_len"]
                 eval_data = {"error": str(e), "error_type": error_type}
                 
             except SimplificationError as e:
                 error_type = "simplification_error"
-                simplified = f"[SIMPLIFICATION_ERROR]"
-                print(f"❌ Simplification failed")
+                simplified = "[SIMPLIFICATION_ERROR]"
+                print("❌ Simplification failed")
                 if verbose:
                     print(f"      Error: {e}")
                 # Set default metric values
-                orig_words = count_words(sentence)
-                simp_words = 0
-                orig_avg_len = avg_sentence_length(sentence)
-                simp_avg_len = 0
+                metrics = get_default_metrics(sentence)
+                orig_words = metrics["orig_words"]
+                simp_words = metrics["simp_words"]
+                orig_avg_len = metrics["orig_avg_len"]
+                simp_avg_len = metrics["simp_avg_len"]
                 eval_data = {"error": str(e), "error_type": error_type}
                 
             except EvaluationError as e:
@@ -394,7 +433,7 @@ def run_evaluation(
                 **eval_data
             })
             
-            if verbose and simplified and not any(simplified.startswith(f"[{err}") for err in ["RATE_LIMIT", "MODEL_NOT_FOUND", "API", "SIMPLIFICATION", "ERROR"]):
+            if verbose and simplified and not is_error_result(simplified):
                 print(f"      → \"{simplified[:100]}...\"")
     
     print("\n" + "=" * 70)
