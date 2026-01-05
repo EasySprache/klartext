@@ -109,7 +109,6 @@ def strip_thinking_tags(text: str) -> str:
     This strips:
     - <think>...</think> blocks
     - <thinking>...</thinking> blocks
-    - Any other common verbose tags
     
     Args:
         text: The text to clean
