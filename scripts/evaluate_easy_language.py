@@ -30,9 +30,12 @@ try:
     from groq import Groq
     from dotenv import load_dotenv
 except ImportError as e:
-    print(f"❌ Missing dependency: {e}")
-    print("Run: pip install pandas groq python-dotenv")
-    sys.exit(1)
+    if __name__ == "__main__":
+        print(f"❌ Missing dependency: {e}")
+        print("Run: pip install pandas groq python-dotenv")
+        sys.exit(1)
+    else:
+        raise
 
 
 # =============================================================================
