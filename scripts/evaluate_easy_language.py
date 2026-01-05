@@ -231,16 +231,40 @@ def run_evaluation(
             # 1. Simplify
             simplified = simplify_text(client, sentence, model)
             
-            # 2. Calculate metrics
+            # 2. Check for API errors
+            if simplified.startswith("ERROR"):
+                print(f"❌ API Error")
+                results.append({
+                    "sentence_id": i,
+                    "model": model,
+                    "original": sentence,
+                    "simplified": simplified,
+                    "orig_word_count": count_words(sentence),
+                    "simp_word_count": None,
+                    "orig_avg_sentence_len": round(avg_sentence_length(sentence), 1),
+                    "simp_avg_sentence_len": None,
+                    "error": True,
+                    "sentence_length_score": None,
+                    "structure_score": None,
+                    "active_voice_score": None,
+                    "word_choice_score": None,
+                    "clarity_score": None,
+                    "overall_score": None,
+                    "violation_notes": None,
+                    "strengths": None
+                })
+                continue
+            
+            # 3. Calculate metrics
             orig_words = count_words(sentence)
             simp_words = count_words(simplified)
             orig_avg_len = avg_sentence_length(sentence)
             simp_avg_len = avg_sentence_length(simplified)
             
-            # 3. Evaluate
+            # 4. Evaluate
             eval_data = evaluate_compliance(client, sentence, simplified)
             
-            # 4. Store results
+            # 5. Store results
             results.append({
                 "sentence_id": i,
                 "model": model,
@@ -250,6 +274,7 @@ def run_evaluation(
                 "simp_word_count": simp_words,
                 "orig_avg_sentence_len": round(orig_avg_len, 1),
                 "simp_avg_sentence_len": round(simp_avg_len, 1),
+                "error": False,
                 **eval_data
             })
             
@@ -294,23 +319,36 @@ def print_summary(df: pd.DataFrame):
         print("\n⚠️ No score columns found in results")
         return
     
+    # Filter out error rows for statistics
+    if "error" in df.columns:
+        df_valid = df[df["error"] == False].copy()
+        error_count = df[df["error"] == True].shape[0]
+        if error_count > 0:
+            print(f"\n⚠️ {error_count} API error(s) excluded from statistics")
+    else:
+        df_valid = df.copy()
+    
+    if df_valid.empty:
+        print("\n⚠️ No valid results to summarize (all requests failed)")
+        return
+    
     print("\n📊 SUMMARY BY MODEL")
     print("=" * 70)
     
-    summary = df.groupby("model")[score_cols].mean().round(2)
+    summary = df_valid.groupby("model")[score_cols].mean().round(2)
     print(summary.to_string())
     
     # Best model
-    if "overall_score" in df.columns:
+    if "overall_score" in df_valid.columns:
         best_model = summary["overall_score"].idxmax()
         best_score = summary.loc[best_model, "overall_score"]
         print(f"\n🏆 Best model: {best_model}")
         print(f"   Overall score: {best_score}/10")
     
     # Common violations
-    if "violation_notes" in df.columns:
+    if "violation_notes" in df_valid.columns:
         all_violations = []
-        for violations in df["violation_notes"].dropna():
+        for violations in df_valid["violation_notes"].dropna():
             if isinstance(violations, list):
                 all_violations.extend(violations)
         
