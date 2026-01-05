@@ -102,6 +102,34 @@ def avg_sentence_length(text: str) -> float:
     return sum(len(s.split()) for s in sentences) / len(sentences)
 
 
+def strip_thinking_tags(text: str) -> str:
+    """
+    Remove thinking tags and other verbose output that some models (like Qwen) include.
+    
+    This strips:
+    - <think>...</think> blocks
+    - <thinking>...</thinking> blocks
+    - Any other common verbose tags
+    
+    Args:
+        text: The text to clean
+        
+    Returns:
+        Cleaned text with thinking tags removed
+    """
+    # Remove <think>...</think> blocks (case-insensitive, handles newlines)
+    text = re.sub(r'<think>.*?</think>', '', text, flags=re.IGNORECASE | re.DOTALL)
+    
+    # Remove <thinking>...</thinking> blocks
+    text = re.sub(r'<thinking>.*?</thinking>', '', text, flags=re.IGNORECASE | re.DOTALL)
+    
+    # Clean up extra whitespace that may result from removal
+    text = re.sub(r'\n\s*\n\s*\n', '\n\n', text)  # Multiple blank lines -> double newline
+    text = text.strip()
+    
+    return text
+
+
 def simplify_text(client: Groq, text: str, model: str) -> str:
     """
     Simplifies text using the specified model following Easy Language rules.
@@ -127,7 +155,12 @@ IMPORTANT:
             temperature=0.2,
             max_tokens=500
         )
-        return completion.choices[0].message.content.strip()
+        result = completion.choices[0].message.content.strip()
+        
+        # Strip thinking tags and other verbose output
+        result = strip_thinking_tags(result)
+        
+        return result
     except Exception as e:
         return f"ERROR: {e}"
 
