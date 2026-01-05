@@ -54,8 +54,7 @@ def test_simplify_text_validation():
     assert result == "", f"Expected empty string, got: {result}"
     print("✅ Empty string test passed")
     
-    # Test None - Important for robustness: while type hints suggest str,
-    # runtime Python doesn't enforce types, so defensive validation is needed
+    # Test None input (defensive validation for runtime type safety)
     result = simplify_text(client, None, "test-model")
     assert result == "", f"Expected empty string for None, got: {result}"
     print("✅ None test passed")
