@@ -171,6 +171,8 @@ def is_error_result(simplified: str) -> bool:
     error_markers = ["[RATE_LIMIT_ERROR]", "[MODEL_NOT_FOUND_ERROR]", 
                      "[API_ERROR]", "[SIMPLIFICATION_ERROR]", "[ERROR]"]
     return any(simplified.startswith(marker) for marker in error_markers)
+
+
 def is_valid_text(text: Any) -> bool:
     """
     Check if text is valid for processing.
@@ -182,6 +184,8 @@ def is_valid_text(text: Any) -> bool:
         True if text is a non-empty string, False otherwise
     """
     return isinstance(text, str) and bool(text.strip())
+
+
 def strip_thinking_tags(text: str) -> str:
     """
     Remove thinking tags and other verbose output that some models (like Qwen) include.
