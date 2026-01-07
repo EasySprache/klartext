@@ -1,0 +1,109 @@
+model,id,category,source_text,output_text,latency_s,out_sentences,out_avg_sent_len,out_pct_long_sent,out_lix,error
+qwen3-32b,001,legal,The Department of Justice provides for interested citizens access to nearly the entire body of current federal law at no cost via the Internet.,"<think>
+Okay, let's tackle this. The user wants me to rewrite the given text in plain English. First, I need to understand the original sentence. It says the Department of Justice gives interested citizens access to almost all current federal laws for free online.
+
+Now, applying the rules. Short sentences, active voice. The original is a bit long. Let me break it down. ""The Department of Justice provides for interested citizens access..."" Maybe start with ""The Department of Justice gives free online access..."" That's active voice. 
+
+Avoid passive constructions. The original uses ""provides for,"" which is a bit passive. Changing to ""gives"" makes it active. 
+
+Avoid negatives. The original doesn't have any, so that's good. 
+
+Explain difficult terms if necessary. ""Body of current federal law"" might be tricky. Maybe ""all current federal laws"" is simpler. 
+
+Use the same word for the same concept. ""Department of Justice"" is mentioned once, so that's consistent. 
+
+Keep the meaning. The key points are free access, online, to nearly all federal laws for interested citizens. 
+
+Putting it together: ""The Department of Justice gives free online access to nearly all current federal laws for interested citizens."" Check sentence length: 14 words. Good. Active voice. No negatives. Explained the term. Same concepts. Meaning intact. That should work.
+</think>
+
+The Department of Justice gives free online access to nearly all current federal laws for interested citizens.",0.95,33,7.1,0.0,35.0,False
+qwen3-32b,002,academic,This research analyzes the political framing evident in congressional debates surrounding the introduction of the so-called healthcare copayment.,"<think>
+Okay, let's tackle this. The user wants me to rewrite the given text in plain English. First, I need to understand the original sentence. It says, ""This research analyzes the political framing evident in congressional debates surrounding the introduction of the so-called healthcare copayment.""
+
+Breaking it down: ""Political framing"" might be a term that needs simplification. Maybe ""how politicians present the issue."" ""Congressional debates"" is clear, but maybe ""discussions in Congress"" is simpler. ""So-called healthcare copayment"" – ""so-called"" could be confusing. Perhaps ""healthcare copayment, which some call..."" but the user said to avoid adding new facts. So maybe just ""healthcare copayment.""
+
+Original sentence structure is a bit complex. Let me shorten it. Use active voice. The main action is analyzing the political framing. So maybe start with ""This study looks at how politicians frame the issue..."" Then mention the debates in Congress about introducing healthcare copayments.
+
+Check the rules: short sentences (12-15 words). Let me count. ""This study looks at how politicians frame the issue in Congress about introducing healthcare copayments."" That's 14 words. Good. Active voice. No passive. No negatives. Explained ""political framing"" as ""how politicians frame the issue."" Same concept throughout. Kept the meaning. No new facts added. Seems to meet all the rules. Let me double-check. Original mentions ""so-called,"" but since it's not necessary in plain English, I omitted it. The core meaning remains. Yeah, this should work.
+</think>
+
+This study looks at how politicians frame the issue in Congress about introducing healthcare copayments.",1.13,35,7.3,2.9,37.4,False
+qwen3-32b,003,bureaucratic,"Pursuant to Section 12, Subsection 3 of the Administrative Procedures Act, the applicant is obligated to submit all required documentation.","<think>
+Okay, let's see. The user wants me to rewrite the given legal text into plain English. The original sentence is a bit formal and uses legal jargon. First, I need to break down the components.
+
+The original text says, ""Pursuant to Section 12, Subsection 3 of the Administrative Procedures Act, the applicant is obligated to submit all required documentation."" 
+
+Starting with ""Pursuant to"" – that's a legal term meaning ""according to"" or ""as per."" So I can replace that with ""Under"" to make it simpler. 
+
+Next, ""Section 12, Subsection 3"" – maybe just say ""Section 12(3)"" to keep it concise. The full name of the act is ""Administrative Procedures Act,"" which might be okay, but if there's a common abbreviation, but the user didn't mention it, so I'll keep the full name.
+
+""The applicant is obligated to submit all required documentation."" ""Obligated"" can be simplified to ""must submit."" Also, ""required documentation"" is clear, but maybe ""all needed documents"" is more straightforward.
+
+Putting it all together: ""Under Section 12(3) of the Administrative Procedures Act, the applicant must submit all needed documents."" Let me check the rules again. Short sentences, active voice, avoid negatives. The original sentence is one sentence, and the rewritten version is also one sentence. It's under 20 words. Active voice is used here. No negatives. Terms are explained if necessary, but ""Administrative Procedures Act"" is a proper noun, so no need to explain unless specified. Same words used for the same concepts. Meaning is preserved. Looks good.
+</think>
+
+Under Section 12(3) of the Administrative Procedures Act, the applicant must submit all needed documents.",0.94,24,11.4,8.3,36.6,False
+qwen3-32b,004,legal,"The use of the database is free of charge, however commercial use of the documents requires prior consent from the Department.","<think>
+Okay, let's tackle this. The user wants me to rewrite the given sentence in plain English. First, I need to understand the original text. It says that using the database is free, but if you want to use the documents for commercial purposes, you need permission from the Department.
+
+The rules mention using short sentences, so I should break it down. The original has two parts: free use and commercial use requiring consent. Let me start with the first part. ""The use of the database is free of charge"" can be simplified to ""You can use the database for free."" That's active voice and short.
+
+Next part: ""commercial use of the documents requires prior consent from the Department."" The user wants active voice, so maybe ""You need permission from the Department to use the documents for business."" ""Prior consent"" becomes ""permission,"" which is simpler. Also, ""commercial"" is explained as ""business"" here, which is a common term.
+
+Check the rules again. Avoid negatives. The original doesn't have negatives, so that's good. Use the same word for the same concept. ""Department"" is consistent. Keep the meaning. Yes, the key points are there: free use, commercial use needs permission.
+
+Let me put it all together. ""You can use the database for free. You need permission from the Department to use the documents for business."" Each sentence is under 15 words. Active voice. Explained ""commercial"" as ""business."" No new facts added. Looks good.
+</think>
+
+You can use the database for free. You need permission from the Department to use the documents for business.",0.78,30,8.8,3.3,31.5,False
+qwen3-32b,005,academic,The conflictual dimension of political framing has heretofore received insufficient scholarly attention in the existing literature.,"<think>
+Okay, let's tackle this. The user wants me to rewrite the given academic sentence into plain English. First, I need to understand the original text. The key points are ""conflictual dimension of political framing,"" ""insufficient scholarly attention,"" and ""existing literature.""
+
+So, ""conflictual dimension"" probably refers to how political framing involves conflict. Maybe I can simplify that to ""how political framing involves conflict."" 
+
+""Heretofore received insufficient scholarly attention"" means that researchers haven't looked into this enough. ""Heretofore"" is an old-fashioned word for ""up to now,"" so I can say ""researchers haven't studied this much yet.""
+
+""Existing literature"" is just the current research or studies available. So putting it all together: ""Researchers haven't studied how political framing involves conflict enough in current research.""
+
+Check the rules: short sentences, active voice, avoid negatives. The original sentence is passive (""has received""), so changing to active voice. Also, ""insufficient"" is a negative, so maybe rephrase to avoid that. Instead of saying ""not enough attention,"" say ""haven't studied... enough.""
+
+Make sure to use the same terms. ""Political framing"" stays the same. Keep it simple. Let me see if that's under 15 words. ""Researchers haven't studied how political framing involves conflict enough in current research."" That's 14 words. Good. Active voice. No complex terms. Explained ""conflictual dimension"" as ""how political framing involves conflict."" That should work.
+</think>
+
+Researchers haven't studied how political framing involves conflict enough in current research.",0.99,27,9.0,3.7,46.9,False
+llama-3.3-70b-versatile,001,legal,The Department of Justice provides for interested citizens access to nearly the entire body of current federal law at no cost via the Internet.,The Department of Justice offers free access to federal laws on the Internet.,0.19,1,13.0,0.0,43.8,False
+llama-3.3-70b-versatile,002,academic,This research analyzes the political framing evident in congressional debates surrounding the introduction of the so-called healthcare copayment.,We study how lawmakers talk about a healthcare fee in Congress.,0.2,1,11.0,0.0,38.3,False
+llama-3.3-70b-versatile,003,bureaucratic,"Pursuant to Section 12, Subsection 3 of the Administrative Procedures Act, the applicant is obligated to submit all required documentation.","We need the applicant to submit all required documents. 
+This is stated in the Administrative Procedures Act.",0.27,2,8.5,0.0,37.9,False
+llama-3.3-70b-versatile,004,legal,"The use of the database is free of charge, however commercial use of the documents requires prior consent from the Department.","We provide the database for free. 
+You need our consent for commercial use.",0.22,2,6.5,0.0,37.3,False
+llama-3.3-70b-versatile,005,academic,The conflictual dimension of political framing has heretofore received insufficient scholarly attention in the existing literature.,Researchers have not studied the argument side of politics much yet.,0.17,1,11.0,0.0,47.4,False
+llama-3.1-8b-instant,001,legal,The Department of Justice provides for interested citizens access to nearly the entire body of current federal law at no cost via the Internet.,"The Department of Justice offers free access to federal laws online.
+
+Here's how it works:
+
+- The Department of Justice makes federal laws available online.
+- You can access these laws for free.
+- This includes most current federal laws.
+- You can find them on the internet.",0.25,5,9.0,0.0,33.4,False
+llama-3.1-8b-instant,002,academic,This research analyzes the political framing evident in congressional debates surrounding the introduction of the so-called healthcare copayment.,"Here's the rewritten text in Plain English:
+
+This study looks at how politicians talk about healthcare copays in Congress.
+
+(Note: I replaced ""research"" with ""study"" to make it more accessible. I also simplified the phrase ""political framing"" to ""how politicians talk about"" to make it easier to understand.)",0.24,4,12.2,0.0,38.8,False
+llama-3.1-8b-instant,003,bureaucratic,"Pursuant to Section 12, Subsection 3 of the Administrative Procedures Act, the applicant is obligated to submit all required documentation.","Here's the rewritten text in Plain English:
+
+The applicant must give us all the documents we need.
+This is required by law, as stated in the Administrative Procedures Act.
+
+(Note: I explained the term ""Administrative Procedures Act"" briefly, as it might be unfamiliar to some readers. I also used the word ""must"" instead of ""obligated"" to make the language more direct and easy to understand.)",0.29,5,13.2,0.0,39.0,False
+llama-3.1-8b-instant,004,legal,"The use of the database is free of charge, however commercial use of the documents requires prior consent from the Department.","Here's the rewritten text in Plain English:
+
+You can use the database for free. 
+But if you want to use the documents for business, you need permission first.",0.2,2,14.5,0.0,35.2,False
+llama-3.1-8b-instant,005,academic,The conflictual dimension of political framing has heretofore received insufficient scholarly attention in the existing literature.,"Here's the rewritten text in Plain English:
+
+The way people frame politics is a complex issue that needs more study.
+
+(I explained the term ""conflictual dimension"" by rephrasing it as ""complex issue"". I also changed the sentence structure to make it easier to understand.)",0.27,4,11.2,25.0,40.1,False

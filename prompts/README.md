@@ -40,5 +40,30 @@ When writing prompts for text simplification:
 
 1. Create the template file in `templates/`
 2. Add corresponding test cases in `eval/inputs/` and `eval/expected/`
-3. Test with the evaluation script (TODO)
+3. Test with the evaluation framework in `notebooks/05_easy_language_evaluation.ipynb`
+
+## Evaluation Framework
+
+The evaluation notebook (`notebooks/05_easy_language_evaluation.ipynb`) provides comprehensive metrics for testing prompts and models.
+
+> **Note:** The current iteration focuses on **English** first. German support will be added once the English pipeline is stable.
+
+### Metrics
+- **Readability**: Sentence length, word length, LIX/Flesch-Kincaid index
+- **Cognitive Load**: Long-word rate, entity density
+- **Semantic Focus**: Topic distribution, clarity, richness
+- **Meaning Preservation**: Embedding similarity (source vs. output)
+
+### Key Formulas
+| Metric | Formula | Example target (illustrative) |
+|--------|---------|-------------------------------|
+| LIX | (W/S) + (LW×100/W) | < 40 |
+| % Long Sentences | sentences > 20 words | < 10% |
+| Meaning Cosine | cos(emb_src, emb_out) | > 0.7 |
+
+> These example targets are illustrative only. Actual guardrail thresholds are derived from the calibration data (e.g., using 80th/20th percentiles) in `notebooks/05_easy_language_evaluation.ipynb`.
+### Usage
+1. Add English calibration texts to `data/easy/` and `data/hard/`
+2. Run the notebook to derive guardrail thresholds
+3. Test prompts against the guardrails
 
