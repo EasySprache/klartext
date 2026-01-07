@@ -55,12 +55,13 @@ The evaluation notebook (`notebooks/05_easy_language_evaluation.ipynb`) provides
 - **Meaning Preservation**: Embedding similarity (source vs. output)
 
 ### Key Formulas
-| Metric | Formula | Target |
-|--------|---------|--------|
+| Metric | Formula | Example target (illustrative) |
+|--------|---------|-------------------------------|
 | LIX | (W/S) + (LW×100/W) | < 40 |
 | % Long Sentences | sentences > 20 words | < 10% |
 | Meaning Cosine | cos(emb_src, emb_out) | > 0.7 |
 
+> These example targets are illustrative only. Actual guardrail thresholds are derived from the calibration data (e.g., using 80th/20th percentiles) in `notebooks/05_easy_language_evaluation.ipynb`.
 ### Usage
 1. Add English calibration texts to `data/easy/` and `data/hard/`
 2. Run the notebook to derive guardrail thresholds
