@@ -1,0 +1,9 @@
+You get help at the doctor.
+The doctor checks your body.
+The doctor asks about your health.
+Sometimes you need medicine.
+The doctor writes a prescription.
+You take the prescription to the pharmacy.
+You get the medicine there.
+The medicine helps when you are sick.
+

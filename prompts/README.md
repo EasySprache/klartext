@@ -44,10 +44,12 @@ When writing prompts for text simplification:
 
 ## Evaluation Framework
 
-The evaluation notebook (`notebooks/05_easy_language_evaluation.ipynb`) provides comprehensive metrics for testing prompts and models:
+The evaluation notebook (`notebooks/05_easy_language_evaluation.ipynb`) provides comprehensive metrics for testing prompts and models.
+
+> **Note:** The current iteration focuses on **English** first. German support will be added once the English pipeline is stable.
 
 ### Metrics
-- **Readability**: Sentence length, word length, LIX index
+- **Readability**: Sentence length, word length, LIX/Flesch-Kincaid index
 - **Cognitive Load**: Long-word rate, entity density
 - **Semantic Focus**: Topic distribution, clarity, richness
 - **Meaning Preservation**: Embedding similarity (source vs. output)
@@ -60,7 +62,7 @@ The evaluation notebook (`notebooks/05_easy_language_evaluation.ipynb`) provides
 | Meaning Cosine | cos(emb_src, emb_out) | > 0.7 |
 
 ### Usage
-1. Add calibration texts to `data/easy/` and `data/hard/`
+1. Add English calibration texts to `data/easy/` and `data/hard/`
 2. Run the notebook to derive guardrail thresholds
 3. Test prompts against the guardrails
 
