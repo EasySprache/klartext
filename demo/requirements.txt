@@ -1,0 +1,5 @@
+# KlarText Demo Dependencies
+gradio>=4.44.0
+groq>=0.9.0
+pybars3>=0.9.7  # Handlebars template rendering
+

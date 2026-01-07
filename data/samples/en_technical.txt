@@ -1,0 +1,2 @@
+Prior to initializing the system, ensure that all peripheral devices are properly connected and that the power supply unit is functioning within specified parameters. Improper configuration may result in data corruption or hardware malfunction. It is imperative that software updates be installed in accordance with the manufacturer's recommended schedule to maintain optimal performance.
+
