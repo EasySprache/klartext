@@ -1,0 +1,2 @@
+model,id_count,guardrails_pass_rate_mean,guardrails_pass_rate_median,latency_s_mean,out_meaning_cosine_mean,out_pct_sentences_gt20_mean,out_lix_mean,out_para_median_clarity_mean,out_para_worst_decile_richness_mean,out_para_pct_n_topics_gt2_mean
+groq_qwen3-32b,5,0.0,0.0,1.1103999999999998,0.42918,0.13008,41.7,0.35431,3.25608,0.9111111111111111
