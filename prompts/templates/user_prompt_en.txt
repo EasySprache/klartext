@@ -1,0 +1,3 @@
+Rewrite the following text in simple language:
+
+{{text}}
