@@ -109,3 +109,6 @@ wandb/
 
 # TensorBoard
 runs/
+
+# SSL certificates (Gradio sharing, local dev)
+*.pem
