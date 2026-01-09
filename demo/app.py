@@ -44,8 +44,8 @@ SAMPLES_DIR = PROJECT_ROOT / "data" / "samples"
 # Split into system (identity, rules, examples) and user (task) prompts
 TEMPLATE_FILES = {
     "de": {
-        "system": "simplify_de_fewshot.txt",  # Combined template for German (not yet split)
-        "user": None,  # Will use combined template
+        "system": "system_prompt_de.txt",
+        "user": "user_prompt_de.txt",
     },
     "en": {
         "system": "system_prompt_en.txt",
@@ -81,11 +81,11 @@ def load_templates(lang: str) -> tuple[str, str]:
     Load system and user prompt templates from prompts/templates/.
     
     Returns:
-        tuple of (system_prompt, user_template)
+        tuple of (system_template, user_template)
         
-    For languages with split templates (e.g., English), loads separate files.
-    For languages with combined templates (e.g., German), returns the combined
-    template as system prompt with a simple user template.
+    All languages use split templates:
+    - System: identity, rules, and examples
+    - User: task instruction with {{text}} placeholder
     """
     template_config = TEMPLATE_FILES.get(lang)
     if not template_config:
@@ -94,24 +94,19 @@ def load_templates(lang: str) -> tuple[str, str]:
     system_filename = template_config["system"]
     user_filename = template_config["user"]
     
-    # Load system prompt
+    # Load system template
     system_file = TEMPLATES_DIR / system_filename
     if not system_file.exists():
         raise FileNotFoundError(f"System template not found: {system_file}")
-    system_prompt = system_file.read_text(encoding="utf-8")
+    system_template = system_file.read_text(encoding="utf-8")
     
-    # Load user template (or use default if using combined template)
-    if user_filename:
-        user_file = TEMPLATES_DIR / user_filename
-        if not user_file.exists():
-            raise FileNotFoundError(f"User template not found: {user_file}")
-        user_template = user_file.read_text(encoding="utf-8")
-    else:
-        # For combined templates, the system prompt includes everything
-        # and we just pass the text directly as user message
-        user_template = "{{text}}"
+    # Load user template
+    user_file = TEMPLATES_DIR / user_filename
+    if not user_file.exists():
+        raise FileNotFoundError(f"User template not found: {user_file}")
+    user_template = user_file.read_text(encoding="utf-8")
     
-    return system_prompt, user_template
+    return system_template, user_template
 
 
 def render_user_prompt(user_template: str, text: str) -> str:
@@ -300,7 +295,11 @@ def simplify_text(
     
     # Build prompts from project templates (loaded fresh each time)
     try:
-        system_prompt, user_template = load_templates(lang=target_lang)
+        system_template, user_template = load_templates(lang=target_lang)
+        
+        # System: identity, rules, examples (no {{text}} placeholder)
+        # User: task instruction + text (has {{text}} placeholder)
+        system_prompt = system_template
         user_prompt = render_user_prompt(user_template, text)
     except FileNotFoundError as e:
         return f"❌ Error loading template: {e}", ""
@@ -458,18 +457,18 @@ def create_demo():
         def handle_pdf_upload(pdf_file):
             """Extract text from uploaded PDF."""
             if pdf_file is None:
-                return gr.update(), ""
+                return gr.skip(), ""
             
             try:
                 text = extract_pdf_text(pdf_file)
                 if not text.strip():
-                    return gr.update(), "⚠️ No text could be extracted from this PDF."
+                    return gr.skip(), "⚠️ No text could be extracted from this PDF."
                 
                 # Count extracted content
                 word_count = len(text.split())
                 return text, f"✅ Extracted ~{word_count} words from PDF"
             except Exception as e:
-                return gr.update(), f"❌ Error extracting PDF: {str(e)}"
+                return gr.skip(), f"❌ Error extracting PDF: {str(e)}"
         
         pdf_upload.change(
             fn=handle_pdf_upload,
