@@ -334,6 +334,59 @@ def simplify_text(
         return f"❌ Error calling Groq API: {str(e)}", ""
 
 
+# this is for testing the api locally, not used in production
+def simplify_via_api(
+    text: str,
+    target_lang: str,
+    api_url: str = "http://localhost:8000",
+) -> tuple[str, str]:
+    """Simplify text by calling the API instead of LLM directly.
+    
+    Returns:
+        tuple of (simplified_text, scores_markdown)
+    """
+    import requests
+    
+    if not text.strip():
+        return "⚠️ Please enter some text to simplify.", ""
+    
+    try:
+        response = requests.post(
+            f"{api_url}/v1/simplify",
+            json={
+                "text": text,
+                "target_lang": target_lang,
+                "level": "easy",  # Default level
+            },
+            timeout=30,
+        )
+        response.raise_for_status()
+        
+        result = response.json()
+        simplified = result["simplified_text"]
+        
+        # Compute scores on the API result
+        scores = compute_simple_scores(simplified)
+        scores_display = format_scores_markdown(scores)
+        
+        return simplified, scores_display
+        
+    except requests.exceptions.ConnectionError:
+        return "❌ API Error: Could not connect to API at http://localhost:8000. Make sure the API server is running.", ""
+    except requests.exceptions.Timeout:
+        return "❌ API Error: Request timed out after 30 seconds.", ""
+    except requests.exceptions.HTTPError as e:
+        try:
+            error_detail = response.json().get("detail", str(e))
+        except:
+            error_detail = str(e)
+        return f"❌ API Error: {error_detail}", ""
+    except requests.exceptions.RequestException as e:
+        return f"❌ API Error: {str(e)}", ""
+    except Exception as e:
+        return f"❌ Unexpected error: {str(e)}", ""
+
+
 # -----------------------------------------------------------------------------
 # Gradio Interface
 # -----------------------------------------------------------------------------
@@ -389,6 +442,17 @@ def create_demo():
                     label="Output Language / Ausgabesprache",
                 )
                 
+                # Mode selector: Direct LLM vs Via API
+                mode_selector = gr.Radio(
+                    choices=[
+                        ("🔗 Direct LLM (calls Groq directly)", "direct"),
+                        ("🌐 Via API (calls local API server)", "api")
+                    ],
+                    value="direct",
+                    label="Mode / Modus",
+                    info="Compare direct LLM calls vs. using the KlarText API",
+                )
+                
                 simplify_btn = gr.Button(
                     "✨ Simplify Text / Text vereinfachen",
                     variant="primary",
@@ -429,9 +493,16 @@ def create_demo():
             )
         
         # Event handlers
+        def handle_simplify(text, target_lang, api_key, mode):
+            """Handle simplification based on selected mode."""
+            if mode == "api":
+                return simplify_via_api(text, target_lang)
+            else:
+                return simplify_text(text, target_lang, api_key)
+        
         simplify_btn.click(
-            fn=simplify_text,
-            inputs=[input_text, target_lang, api_key_input],
+            fn=handle_simplify,
+            inputs=[input_text, target_lang, api_key_input, mode_selector],
             outputs=[output_text, scores_display],
         )
         
@@ -520,14 +591,19 @@ if __name__ == "__main__":
     
     # Custom CSS for accessibility
     custom_css = """
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+    
     .gradio-container {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         font-size: 18px !important;
     }
     .prose {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         font-size: 18px !important;
         line-height: 1.6 !important;
     }
     textarea {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         font-size: 18px !important;
         line-height: 1.5 !important;
     }
@@ -535,10 +611,15 @@ if __name__ == "__main__":
         color: #e5e5e5 !important;
     }
     button {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         font-size: 18px !important;
     }
     label {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
         font-size: 16px !important;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     }
     """
     
