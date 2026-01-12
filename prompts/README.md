@@ -6,12 +6,14 @@ This directory contains prompt templates and evaluation fixtures for the KlarTex
 
 ```
 prompts/
-├── templates/          # LLM prompt templates
-│   ├── simplify_de.txt
-│   └── simplify_en.txt
-├── eval/               # Evaluation fixtures
-│   ├── inputs/         # Sample input texts
-│   └── expected/       # Expected outputs for testing
+├── templates/          # LLM prompt templates (split system/user)
+│   ├── system_prompt_en.txt
+│   ├── user_prompt_en.txt
+│   ├── system_prompt_de.txt
+│   └── user_prompt_de.txt
+├── 01_prompt_exploration_alastair.ipynb
+├── 02_final_prompt_evaluation.ipynb
+├── 03_prompt_scoring.ipynb
 └── README.md
 ```
 
@@ -44,26 +46,16 @@ When writing prompts for text simplification:
 
 ## Evaluation Framework
 
-The evaluation notebook (`notebooks/05_easy_language_evaluation.ipynb`) provides comprehensive metrics for testing prompts and models.
-
-> **Note:** The current iteration focuses on **English** first. German support will be added once the English pipeline is stable.
+The primary evaluation notebook is `notebooks/07_model_scoring.ipynb` (Model Scoring) and `prompts/03_prompt_scoring.ipynb` (Prompt Scoring). These notebooks use a rule-based approach to check compliance with Easy Language standards.
 
 ### Metrics
-- **Readability**: Sentence length, word length, LIX/Flesch-Kincaid index
-- **Cognitive Load**: Long-word rate, entity density
-- **Semantic Focus**: Topic distribution, clarity, richness
-- **Meaning Preservation**: Embedding similarity (source vs. output)
+- **Short Sentences**: Checks if >15% of sentences have >10 words.
+- **Structure**: Checks for bullet points and clear paragraphs.
+- **Content Constraints**: Checks for no intro/outro text and no XML tags.
+- **Meaning Preservation**: TF-IDF cosine similarity > 0.3.
+- **Active Voice**: Usage of active voice construction.
 
-### Key Formulas
-| Metric | Formula | Example target (illustrative) |
-|--------|---------|-------------------------------|
-| LIX | (W/S) + (LW×100/W) | < 40 |
-| % Long Sentences | sentences > 20 words | < 10% |
-| Meaning Cosine | cos(emb_src, emb_out) | > 0.7 |
-
-> These example targets are illustrative only. Actual guardrail thresholds are derived from the calibration data (e.g., using 80th/20th percentiles) in `notebooks/05_easy_language_evaluation.ipynb`.
 ### Usage
-1. Add English calibration texts to `data/easy/` and `data/hard/`
-2. Run the notebook to derive guardrail thresholds
-3. Test prompts against the guardrails
+1. Add sample texts to `data/samples/`.
+2. Run `notebooks/07_model_scoring.ipynb` to evaluate model performance on these samples.
 
