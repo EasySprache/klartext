@@ -4,6 +4,41 @@ KlarText turns dense German or English text into easy-to-understand language and
 
 > **Important:** KlarText produces “easy language” / plain-language simplifications. It is **not** certified “Leichte Sprache” and does not guarantee legal/medical accuracy.
 
+## 🎯 Current Status
+
+**Phase 0: ✅ Complete** (January 10, 2026)
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| **API Core** | ✅ Working | `/v1/simplify` endpoint with Groq LLM |
+| **PDF Extraction** | ✅ Working | `/v1/ingest/pdf` with PyMuPDF |
+| **Gradio Demo** | ✅ Working | Direct LLM & Via API modes |
+| **Prompt Templates** | ✅ Working | German & English from `prompts/templates/` |
+| **Quality Scoring** | ✅ Working | LIX, sentence length, readability |
+| **Swagger Docs** | ✅ Available | `http://localhost:8000/docs` |
+| Batch Endpoint | 📝 Defined | Logic pending |
+| TTS | 📝 Defined | Logic pending |
+| URL Extraction | 📝 Defined | Logic pending |
+| Frontend (Next.js) | ⏳ Planned | Will replace Gradio |
+
+**Quick Start:**
+```bash
+# First time setup:
+cd services/api
+cp env.example .env
+# Edit .env and add your GROQ_API_KEY
+
+# Terminal 1: API
+cd services/api && uvicorn app.main:app --reload --port 8000
+
+# Terminal 2: Demo
+cd demo && python app.py
+
+# Open: http://localhost:7860
+```
+
+See `docs/phase_0_testing_guide.md` for detailed setup instructions.
+
 ## What it does (MVP)
 - Paste text → get an easy-to-read version (DE/EN)
 - Upload a PDF → extract text → simplify it
@@ -65,7 +100,9 @@ Base path: `/v1`
 - `GET /healthz`
 
 ### Swagger / OpenAPI docs
-Swagger UI: **(TBD link)**
+Swagger UI: **http://localhost:8000/docs** (when API is running)  
+ReDoc: **http://localhost:8000/redoc**  
+OpenAPI JSON: **http://localhost:8000/openapi.json**
 
 ## Quick start (local dev)
 ### 1) Prereqs
