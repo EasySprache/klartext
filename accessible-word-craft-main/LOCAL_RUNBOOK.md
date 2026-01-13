@@ -66,12 +66,16 @@ uvicorn app.main:app --reload --port 8000
 - `--port 8000`: Runs on port 8000.
 
 ### 3. Verify
+open a **new** terminal window (leave the previous one running) and run:
 - **Open Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Check Health:**
     ```bash
     curl http://localhost:8000/healthz
     # Expected output: {"ok":true}
     ```
+
+### 4. Stop
+To stop the server, press `Ctrl+C` in the terminal window where `uvicorn` is running.
 
 ---
 
@@ -103,6 +107,9 @@ You should see output indicating the server is running, typically on **port 8080
 - Open your browser to the URL shown in the terminal (usually [http://localhost:8080](http://localhost:8080)).
 - The UI should load (blue/clean "Accessible Word Craft" interface).
 - *Note: At this stage, clicking "Make it easier" uses mock data and does not call the API yet.*
+
+### 4. Stop
+To stop the server, press `Ctrl+C` in the terminal window where `npm` is running.
 
 ---
 
