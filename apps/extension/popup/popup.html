@@ -3,14 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Starter Extension</title>
+    <title>KlarText - Easy Language</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <main>
-      <h1>Easy Language</h1>
-      <p id="status">Click to simplify this page.</p>
-      <button id="simplify">Simplify page text</button>
+      <div class="header">
+        <h1>KlarText</h1>
+        <p class="tagline">Easy Language for Everyone</p>
+      </div>
+      
+      <div class="content">
+        <p class="description">
+          Transform complex text on this page into easy-to-understand language.
+        </p>
+        
+        <button id="simplify" class="primary-button">
+          <span class="button-icon">✨</span>
+          Simplify Page Text
+        </button>
+        
+        <div id="status" class="status-message" role="status" aria-live="polite"></div>
+      </div>
+      
+      <footer class="footer">
+        <p class="note">Refresh the page to restore original text</p>
+      </footer>
     </main>
     <script type="module" src="popup.js"></script>
   </body>

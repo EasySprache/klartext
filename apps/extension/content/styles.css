@@ -1,0 +1,117 @@
+/**
+ * KlarText Chrome Extension - Content Styles
+ * 
+ * Styles for loading overlay and UI elements injected into web pages.
+ * Follows accessibility best practices: high contrast, readable fonts, visible focus.
+ * Color palette aligned with accessible UI prototype.
+ */
+
+/* Loading Overlay */
+#klartext-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.klartext-loading-content {
+  background: hsl(45 30% 96%); /* Background - warm cream */
+  padding: 32px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .klartext-loading-content {
+    border: 2px solid black;
+  }
+}
+
+/* Loading Spinner */
+.klartext-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid hsl(220 20% 80%); /* Border - muted */
+  border-top-color: hsl(174 50% 35%); /* Secondary - teal */
+  border-radius: 50%;
+  animation: klartext-spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes klartext-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .klartext-loading-spinner {
+    animation: none;
+    border-top-color: hsl(174 50% 35%); /* Secondary - teal */
+    border-right-color: hsl(174 50% 35%);
+  }
+}
+
+/* Loading Message */
+.klartext-loading-message {
+  font-size: 18px;
+  line-height: 1.5;
+  color: hsl(220 40% 13%); /* Foreground - dark text */
+  font-weight: 500;
+}
+
+/* Error Banner */
+#klartext-error-banner {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(0 70% 45%); /* Error red */
+  color: hsl(0 0% 100%); /* White text */
+  padding: 16px 24px;
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  z-index: 1000000;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Success Banner */
+#klartext-success-banner {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(120 50% 35%); /* Success green */
+  color: hsl(0 0% 100%); /* White text */
+  padding: 16px 24px;
+  border-radius: 4px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  z-index: 1000000;
+  max-width: 500px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* High contrast mode for banners */
+@media (prefers-contrast: high) {
+  #klartext-error-banner,
+  #klartext-success-banner {
+    border: 2px solid white;
+    font-weight: 600;
+  }
+}
