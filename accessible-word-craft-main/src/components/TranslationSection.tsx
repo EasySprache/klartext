@@ -29,24 +29,40 @@ export default function TranslationSection() {
     }
 
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const demoOutputs: Record<string, Record<string, string>> = {
-      en: {
-        'very-easy': 'This is easy text. Short words. Easy to read.',
-        'easy': 'This text is simple. It uses common words and short sentences.',
-        'medium': 'This text has been simplified. It maintains meaning while using clearer language.',
-      },
-      de: {
-        'very-easy': 'Das ist einfacher Text. Kurze Wörter. Leicht zu lesen.',
-        'easy': 'Dieser Text ist einfach. Er nutzt einfache Wörter und kurze Sätze.',
-        'medium': 'Dieser Text wurde vereinfacht. Er behält die Bedeutung mit klarerer Sprache.',
-      },
-    };
-    
-    setOutputText(demoOutputs[language]?.[difficulty] || demoOutputs['en']['easy']);
-    setIsLoading(false);
-    toast({ title: '✓', description: t('resultHere') });
+
+    try {
+      const response = await fetch('http://localhost:8000/v1/simplify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: inputText,
+          target_lang: language, // 'de' or 'en'
+          level: 'easy' // currently hardcoded, or use {difficulty} state variable
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setOutputText(data.simplified_text);
+      toast({ title: '✓', description: t('resultHere') });
+
+    } catch (error) {
+      console.error("Translation failed:", error);
+      toast({
+        title: "Error",
+        description: "Failed to connect to the API. Is it running?",
+        variant: "destructive"
+      });
+      // Fallback for demo purposes if needed:
+      // setOutputText("Error connecting to backend.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCopy = async () => {
@@ -133,11 +149,10 @@ export default function TranslationSection() {
                 <Label
                   key={level.value}
                   htmlFor={level.value}
-                  className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
-                    difficulty === level.value
+                  className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${difficulty === level.value
                       ? 'border-secondary bg-secondary/10'
                       : 'border-border hover:border-secondary/50'
-                  }`}
+                    }`}
                 >
                   <RadioGroupItem value={level.value} id={level.value} className="mt-1" />
                   <div>
