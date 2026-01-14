@@ -3,23 +3,16 @@
  * 
  * This script runs on web pages and handles text simplification.
  * It collects text nodes, sends them to the KlarText API, and updates the page.
+ * 
+ * Configuration is loaded from config.js (injected by service worker before this script).
  */
 
-// Load configuration
-const CONFIG = {
-  API_ENDPOINT: 'http://localhost:8000',
-  API_ROUTES: {
-    SIMPLIFY: '/v1/simplify',
-    SIMPLIFY_BATCH: '/v1/simplify/batch',
-  },
-  DEFAULT_LANG: 'en',
-  DEFAULT_LEVEL: 'easy',
-  MAX_BATCH_SIZE: 10,
-  MAX_TEXT_LENGTH: 5000,
-  MIN_TEXT_LENGTH: 20,
-  REQUEST_TIMEOUT: 60000,
-  DEBUG: true,
-};
+// CONFIG is loaded from config.js - see background/service-worker.js
+// If CONFIG is not defined, something went wrong with script injection order
+if (typeof CONFIG === 'undefined') {
+  console.error('[KlarText] FATAL: CONFIG not loaded. Check service worker script injection order.');
+  throw new Error('KlarText configuration not loaded');
+}
 
 /**
  * Check if an element should be skipped during text collection
@@ -562,7 +555,7 @@ async function simplifyPage() {
     console.log('[KlarText] Starting page simplification...');
   }
   
-  // Capture errors
+  // Capture errors - save original console.error to restore later
   const originalConsoleError = console.error;
   console.error = function(...args) {
     if (args[0]?.includes?.('[KlarText]')) {
@@ -645,6 +638,9 @@ async function simplifyPage() {
     }
     
     showError(errorMsg);
+  } finally {
+    // CRITICAL: Restore original console.error to avoid polluting the page's global scope
+    console.error = originalConsoleError;
   }
 }
 

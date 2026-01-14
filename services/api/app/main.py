@@ -97,10 +97,34 @@ app = FastAPI(
     },
 )
 
-# CORS middleware for frontend
+# CORS middleware for frontend and extension
+# Note: In development, we allow all origins for Chrome extension testing
+# Content scripts run in webpage context, so they use webpage's origin (not chrome-extension://)
+# TODO: In production, restrict to specific domains only
+import os
+
+# Get environment
+environment = os.getenv("ENVIRONMENT", "development")
+
+if environment == "development":
+    # Development: Allow ALL origins for Chrome extension testing
+    # Content scripts make requests from the webpage's origin (e.g., https://wikipedia.org)
+    # So we need to accept requests from any webpage
+    allowed_origins = ["*"]
+    allow_origin_regex = None
+else:
+    # Production: Only allow specific origins
+    allowed_origins_str = os.getenv(
+        "ALLOWED_ORIGINS", 
+        "http://localhost:3000,http://localhost:5173,http://localhost:7860"
+    )
+    allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",")]
+    allow_origin_regex = None
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=allowed_origins,
+    allow_origin_regex=allow_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -923,34 +947,86 @@ def simplify_batch(req: BatchSimplifyRequest):
     - Potential for parallel LLM processing
     - Better rate limiting (counts as 1 API call or proportional credit usage)
     """
-    # TODO: Implement batch processing
-    # 1. Validate all texts (length, content)
-    # 2. Process each text (potentially in parallel)
-    # 3. Handle partial failures gracefully
-    # 4. Return results in same order as input
-    
-    # Placeholder implementation
+    from .core.llm_adapter import simplify_text_with_llm
     import uuid
+    
+    # Generate unique batch ID
     batch_id = f"batch_{uuid.uuid4().hex[:8]}"
     
+    # Validate batch size
+    if len(req.texts) > 10:
+        raise HTTPException(
+            status_code=400, 
+            detail="Maximum 10 texts per batch. Please split into multiple requests."
+        )
+    
     results = []
+    
+    # Process each text individually
     for i, text in enumerate(req.texts):
-        # Simulate processing each text
-        if len(text.strip()) < 10:
+        # Validate text length
+        if not text or len(text.strip()) < 10:
             results.append(BatchItemResult(
                 index=i,
                 simplified_text=None,
                 error="Text too short to simplify (minimum 10 characters)",
                 warnings=[],
             ))
-        else:
+            continue
+        
+        if len(text) > 5000:
             results.append(BatchItemResult(
                 index=i,
-                simplified_text=f"[{req.target_lang}/{req.level}] {text[:50]}...",
+                simplified_text=None,
+                error="Text too long (maximum 5000 characters per text in batch mode)",
+                warnings=[],
+            ))
+            continue
+        
+        # Simplify this text
+        try:
+            simplified_text = simplify_text_with_llm(
+                text=text,
+                target_lang=req.target_lang,
+                level=req.level,
+            )
+            
+            # Success
+            results.append(BatchItemResult(
+                index=i,
+                simplified_text=simplified_text,
                 error=None,
-                warnings=["placeholder_response"],
+                warnings=[],
+            ))
+            
+        except ValueError as e:
+            # Validation error for this specific text
+            results.append(BatchItemResult(
+                index=i,
+                simplified_text=None,
+                error=f"Validation error: {str(e)}",
+                warnings=[],
+            ))
+            
+        except FileNotFoundError as e:
+            # Template loading error (should not happen per-text, but handle it)
+            results.append(BatchItemResult(
+                index=i,
+                simplified_text=None,
+                error=f"Template error: {str(e)}",
+                warnings=[],
+            ))
+            
+        except Exception as e:
+            # LLM API or other errors for this specific text
+            results.append(BatchItemResult(
+                index=i,
+                simplified_text=None,
+                error=f"Simplification failed: {str(e)}",
+                warnings=[],
             ))
     
+    # Calculate success/failure counts
     successful_count = sum(1 for r in results if r.simplified_text is not None)
     failed_count = len(results) - successful_count
     

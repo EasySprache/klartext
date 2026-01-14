@@ -99,12 +99,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return;
       }
       
-      // Inject content script
-      // Note: We don't need to inject config.js separately since
-      // the content script has the config embedded
+      // Inject configuration first, then content script
+      // This ensures CONFIG is available when simplify.js runs
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: ['content/simplify.js'],
+        files: ['config.js', 'content/simplify.js'],
       });
       
       if (DEBUG) {

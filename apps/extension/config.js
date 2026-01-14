@@ -70,10 +70,8 @@ const CONFIG = {
   DEBUG: true,
 };
 
-// Export for use in other modules
-// Note: Chrome extensions use different module systems in different contexts
-// - Service worker (background): ES modules
-// - Content scripts: Can use this via injection
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = CONFIG;
-}
+// Note: This config file is injected into the content script context by the service worker.
+// When injected via chrome.scripting.executeScript(), CONFIG becomes a global variable
+// available to subsequently injected scripts (like simplify.js).
+// 
+// The service worker itself does not need access to CONFIG - only content scripts do.

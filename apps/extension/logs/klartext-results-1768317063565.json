@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "totalChunks": 22,
+    "successCount": 18,
+    "failCount": 4,
+    "totalTime": "8.1s",
+    "apiTime": "8.1s",
+    "timestamp": "2026-01-13T15:11:03.559Z",
+    "url": "https://radden.net/post/4b60883c-b5a6-4d56-9971-3436f4d49e4b",
+    "title": "Radden - AI Trends & Insights",
+    "successfulCount": 18,
+    "failedCount": 4,
+    "errorCount": 4
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-13T15:11:03.558Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499971, Requested 592. Please try again in 1m37.2864s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-13T15:11:03.558Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499970, Requested 623. Please try again in 1m42.4704s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-13T15:11:03.558Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499969, Requested 591. Please try again in 1m36.767999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-13T15:11:03.559Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499968, Requested 550. Please try again in 1m29.5104s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "AI-Generated Insights on Artificial Intelligence...",
+      "simplifiedText": "Here's the rewritten text:\n\nArtificial Intelligence Insights\n\n* This text is about AI.\n* AI is a type of computer science.\n* It helps computers think and learn....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Tuesday, January 13, 2026...",
+      "simplifiedText": "Today is Tuesday, January 13, 2026....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Monday, December 22, 2025...",
+      "simplifiedText": "December 22, 2025 is a Monday....",
+      "elementTag": "time"
+    },
+    {
+      "originalText": "The Silent Shift: When AI Stopped Talking and Started Doing...",
+      "simplifiedText": "The Silent Shift: A Big Change for AI\n\n* AI used to talk a lot.\n* Now it does things instead.\n* It doesn't talk as much anymore....",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "As 2025 comes to a close, we look back at the defining trend of the year: the transition from chatty assistants to autonomous agents. From OpenAI's o3 to the specialized Llama 4 Scout, this was the ye...",
+      "simplifiedText": "As 2025 ends, we look back at the big change of the year:\n\n* AI assistants became more independent.\n* They can think and work alone.\n\nThis was the year AI models learned to:\n\n* Stop talking and think\n...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The \"Chatbot Era\" is officially over....",
+      "simplifiedText": "The chatbot time is finished.\n\nIt's no longer the main way to talk to computers....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Looking back from December 2025, the most striking realization isn't just how much smarter artificial intelligence has become—it's how much quieter it is. For years, we measured progress by how fluidl...",
+      "simplifiedText": "Looking back from 2025, you might notice:\n\n* AI is much better.\n* It is also much quieter.\n \nFor a long time, we thought AI was good if it could talk well.\nWe wanted it to be funny, creative, and quic...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "From the release of OpenAI's o3 in April to the rollout of Google's agentic tools, the industry collectively decided that talking is cheap. The real value lies in doing....",
+      "simplifiedText": "The industry made a decision.\n\n* They said talking is not important.\n* What matters is taking action.\n\nThe real value is in doing things....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Rise of \"Thinking\" Models...",
+      "simplifiedText": "The Rise of New Computer Models\n\nThey are called \"thinking\" models. \n\nThese models are special computers. \nThey can understand and learn like people.\n\nThey use big data and math to work. \nThis helps t...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "If 2024 was about speed, 2025 was about the pause. The release of OpenAI o3 on April 16 marked a pivotal moment where we accepted that better answers require \"thinking time.\" Unlike its predecessors t...",
+      "simplifiedText": "2024 was about being fast.\n2025 was about stopping.\n\nA big change happened on April 16.\nOpenAI o3 came out and showed us:\nBetter answers need time to think.\n\nOld models were too quick to answer.\nThey ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "This shift wasn't just technical; it was psychological. Users learned to wait 10 or 20 seconds for a response, knowing that the model wasn't just retrieving data but simulating multiple paths to a sol...",
+      "simplifiedText": "When you wait for a response:\n\n* Wait 10 or 20 seconds.\n* The model is thinking hard.\n* It finds many ways to solve the problem.\n\nThis helps the model solve problems, not just answer questions....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Agentic Web Takes Shape...",
+      "simplifiedText": "The web is becoming more active.\n\n* It's not just a place to look at things.\n* It's a place where things can happen.\n\nThe web is becoming more like a person.\n* It can make choices and take actions.\n* ...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "Google's aggressive push with Gemini 2.0 Flash, which hit general availability in February, laid the groundwork for the \"Agentic Era.\" It wasn't just a model update; it was an infrastructure play. By ...",
+      "simplifiedText": "Google made a big change with Gemini 2.0.\n\n* It came out in February.\n* It was not just a small update.\n* It was a big change in how things work.\n\nGemini can now:\n\n* Use tools in a smart way.\n* Contro...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "We saw this trend accelerate with the \"DeepSeek Shock\" early in the year. When the Chinese lab released DeepSeek-V3 (and later the reasoning-heavy updates), it didn't just undercut the market on price...",
+      "simplifiedText": "We saw this trend get stronger.\n\n* It happened early in the year.\n* A Chinese lab released a new version called DeepSeek-V3.\n* It was cheaper than others.\n* It showed that smart thinking can be used b...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Open Weight Split: Scout vs. Behemoth...",
+      "simplifiedText": "The Open Weight Split: Scout vs. Behemoth\n\nThe Open Weight Split is a type of weight split.\n\nThere are two kinds of Open Weight Splits:\n\n* Scout\n* Behemoth\n\nWe will explain each one below.\n\n**Scout**\n...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "Meta's roadmap for 2025 offered a fascinating case study in specialization. While the industry waited for the massive Llama 4 Behemoth (which saw delays into late 2025), Meta quietly released Llama 4 ...",
+      "simplifiedText": "Meta's plan for 2025 showed us something new.\n\n* Meta has a big project called Llama 4 Behemoth.\n* But Meta released two smaller projects first.\n* They are called Llama 4 Scout and Llama 4 Maverick.\n*...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "These weren't just smaller versions of a big model; they were purpose-built experts. Scout was optimized for reasoning and data extraction, while Maverick focused on multimodal interaction. This signa...",
+      "simplifiedText": "These models were not smaller versions of a big model. \n\nThey were made for one job. \nScout was made for:\n- Reasoning\n- Finding data\n\nMaverick was made for:\n- Talking to people\n- Understanding picture...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Why 2026 Will Be the Year of Collaboration...",
+      "simplifiedText": "2026 Will Be a Year of Working Together\n\nMany people will help each other.\n\n* They will share ideas.\n* They will work as a team.\n* This will make things better.\n\nCollaboration is when people work toge...",
+      "elementTag": "h3"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "As we head into 2026, the standalone AI model is becoming an artifact. The buzzword now is Multi-Agent Systems. We aren't building single bots anymore; we're orchestrating teams of them....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499971, Requested 592. Please try again in 1m37.2864s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Imagine a \"Researcher\" agent (powered by o3) passing data to a \"Coder\" agent (running on DeepSeek V3) which hands off the UI design to a \"Vision\" agent (Gemini 2.0). The interface for the human is no ...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499970, Requested 623. Please try again in 1m42.4704s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The interface apocalypse we predicted last year has arrived, but it wasn't a bang. It was a gradual logging off. We stopped chatting with our computers, and for the first time, they started doing the ...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499969, Requested 591. Please try again in 1m36.767999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "AI-generated content for educational purposes...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499968, Requested 550. Please try again in 1m29.5104s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    }
+  ]
+}
