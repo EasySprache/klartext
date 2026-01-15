@@ -375,11 +375,13 @@ def simplify_via_api(
         return "❌ API Error: Could not connect to API at http://localhost:8000. Make sure the API server is running.", ""
     except requests.exceptions.Timeout:
         return "❌ API Error: Request timed out after 30 seconds.", ""
-    except requests.exceptions.HTTPError as e:
+    except requests.exceptions.HTTPError as http_err:
+        # Try to extract error detail from JSON response, but preserve HTTPError if parsing fails
         try:
-            error_detail = response.json().get("detail", str(e))
-        except:
-            error_detail = str(e)
+            error_detail = response.json().get("detail", str(http_err))
+        except Exception:
+            # Any error during JSON parsing or extraction, use the original HTTP error message
+            error_detail = str(http_err)
         return f"❌ API Error: {error_detail}", ""
     except requests.exceptions.RequestException as e:
         return f"❌ API Error: {str(e)}", ""
@@ -630,4 +632,3 @@ if __name__ == "__main__":
         theme=gr.themes.Soft(primary_hue="blue", secondary_hue="cyan"),
         css=custom_css,
     )
-

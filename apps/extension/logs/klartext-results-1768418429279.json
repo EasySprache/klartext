@@ -1,0 +1,1097 @@
+{
+  "metadata": {
+    "totalChunks": 144,
+    "successCount": 63,
+    "failCount": 81,
+    "totalTime": "833.4s",
+    "apiTime": "833.3s",
+    "timestamp": "2026-01-14T19:20:29.134Z",
+    "url": "https://www.w3.org/WAI/fundamentals/accessibility-intro/?utm_source=chatgpt.com",
+    "title": "Introduction to Web Accessibility | Web Accessibility Initiative (WAI) | W3C",
+    "successfulCount": 63,
+    "failedCount": 81,
+    "errorCount": 89
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T19:07:36.320Z",
+      "message": "[KlarText] Batch 1 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:08:37.330Z",
+      "message": "[KlarText] Batch 2 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:09:38.317Z",
+      "message": "[KlarText] Batch 3 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:10:39.332Z",
+      "message": "[KlarText] Batch 4 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:11:39.369Z",
+      "message": "[KlarText] Batch 5 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:12:39.373Z",
+      "message": "[KlarText] Batch 6 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:13:39.377Z",
+      "message": "[KlarText] Batch 7 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:18:23.209Z",
+      "message": "[KlarText] Batch 12 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.112Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.115Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.115Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.115Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.115Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.115Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.116Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.117Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.117Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.117Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.117Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.118Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.119Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.119Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.119Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.120Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.120Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.120Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.120Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.120Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.120Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.121Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.121Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.121Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.121Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.121Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.121Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.122Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.123Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.124Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.125Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.126Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.129Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.129Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.129Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.129Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:20:29.130Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5459, Requested 548. Please try again in 70ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "There is also a strong business case for accessibility....",
+      "simplifiedText": "There is a good reason to make things accessible.\n\n* It makes sense for business.\n* Many people want to use your product or service.\n* They will be happy and come back.\n* This helps your business grow...",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "There is also a strong business case for accessibility. As shown in the previous section, accessible design improves overall user experience and satisfaction, especially in a variety of situations, ac...",
+      "simplifiedText": "You want a strong business case for making things easy to use.\n\n• Easy to use things make people happy.\n• People are happy when they can use things on many devices.\n• Older people are happy when thing...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Web accessibility is required by law in many situations....",
+      "simplifiedText": "You must make the website accessible to everyone.\n\n* This is a law in many places.\n* It helps people with disabilities use the website....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "More Info on Accessibility is Important...",
+      "simplifiedText": "Knowing more about making things easy to use is helpful....",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "General information on business benefits is in The Business Case for Digital Accessibility.\n    \n      Examples of the benefits of making audio and video media accessible is in the section Benefits to...",
+      "simplifiedText": "To learn about business benefits:\n\n* Read a document called The Business Case for Digital Accessibility.\n* Look at the section called Benefits to Organizations.\n* It shows examples of benefits from ma...",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "The Business Case for Digital Accessibility...",
+      "simplifiedText": "Making Websites and Apps Easy to Use\n\nYou want people to visit your website or use your app.\nBut some people have trouble using them.\n\nWhy is that?\nSome people have disabilities.\nThey need help using ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Examples of the benefits of making audio and video media accessible is in the section Benefits to Organizations....",
+      "simplifiedText": "Benefits of making media accessible are many.\n\n* You can reach more people.\n* They can use your media better.\n* This helps your organization....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "making audio and video media accessible...",
+      "simplifiedText": "Making audio and video media accessible:\n\n* Make audio and video easy to use.\n* So everyone can see and hear.\n* No matter their ability.\n* Or where they are....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Benefits to Organizations...",
+      "simplifiedText": "Benefits to Organizations\n\nYou get these benefits:\n\n* Better work\n* More money\n* Happy employees\n* Good reputation\n* Increased sales...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Guidance on figuring out legal requirements is in the archived Legal and Policy Factors....",
+      "simplifiedText": "To find out what the law says:\n\n* Look for the Legal and Policy Factors.\n* It's in the archived section.\n* This will help you know the rules....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Legal and Policy Factors...",
+      "simplifiedText": "Legal and Policy Factors\n\nYou need to know about laws and rules.\n\n* Laws are like rules for everyone.\n* Governments make these laws.\n* Laws help keep people safe.\n\nPolicy is like a plan.\n* Policies ar...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Making the Web Accessible...",
+      "simplifiedText": "Making the Web Easy to Use\n\nYou want to visit websites but have trouble.\n\n* Some websites are hard to read.\n* Some websites are hard to use.\n* You need help to make them better.\n\nWe can make the web e...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Web accessibility depends on several components working together, including web technologies, web browsers and other \"user agents\", authoring tools, and websites....",
+      "simplifiedText": "Making websites easy to use is important. \n\nIt needs many things to work together. These things are:\n\n* Web technologies (special computer codes)\n* Web browsers (like Google Chrome)\n* Other tools that...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The W3C Web Accessibility Initiative (WAI) develops technical specifications, guidelines, techniques, and supporting resources that describe accessibility solutions. These are considered international...",
+      "simplifiedText": "When you want to make websites accessible:\n\n* W3C WAI makes rules for websites.\n* These rules help people with disabilities use websites.\n* They are used all around the world.\n* WCAG 2.0 is one of the...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "More Info on Making the Web Accessible...",
+      "simplifiedText": "Making the Web Accessible\n\nYou want to make the web easy to use.\n\n* What does that mean?\n* It means everyone can use it.\n* People with disabilities can use it too.\n\nThe web should be easy to read and ...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "More about these aspects of accessibility working together is in Essential Components of Web Accessibility....",
+      "simplifiedText": "To learn more about accessibility:\n\n* Read a document called Essential Components of Web Accessibility.\n* It explains how different things work together....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Essential Components of Web Accessibility...",
+      "simplifiedText": "Web Accessibility is important.\n\nYou need to make your website:\n\n* Easy to see\n* Easy to hear\n* Easy to use\n\n\nEasy to see:\n\n* Use big text\n* Use high contrast colors\n* Avoid flashing lights\n\nEasy to h...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web Content Accessibility Guidelines (WCAG), Authoring Tool Accessibility Guidelines (ATAG), ARIA for Accessible Rich Internet Applications, and other important resources are introduced in W3C Accessi...",
+      "simplifiedText": "When you want to make websites and apps better:\n\n* Look at W3C Accessibility Standards Overview.\n* Learn about these important tools:\n  • WCAG (helps make websites better)\n  • ATAG (helps make tools f...",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "W3C Accessibility Standards Overview...",
+      "simplifiedText": "W3C Accessibility Standards\n\nThese standards help make websites and apps easy to use.\n\n* They make sure everyone can use them.\n* People with disabilities can use them too.\n\nThe standards are about:\n\n*...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "To learn more about how W3C WAI develops material through multi-stakeholder, international participation and how you can contribute, see About W3C WAI and Participating in WAI....",
+      "simplifiedText": "To learn more:\n\n* Go to About W3C WAI.\n* Learn about W3C WAI's work.\n* See how you can help....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Participating in WAI...",
+      "simplifiedText": "Participating in WAI\n\nWAI is short for Web Accessibility Initiative. \n\n* It is a group that helps make the web better for everyone.\n* They work on making websites and apps easy to use.\n* This includes...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Making Your Website Accessible...",
+      "simplifiedText": "Making Your Website Accessible\n\nYou want people to visit your website. But some people have trouble using it. They might be blind, deaf, or have other problems. You can make your website better for th...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "Many aspects of accessibility are fairly easy to understand and implement. Some accessibility solutions are more complex and take more knowledge to implement....",
+      "simplifiedText": "Some things are easy to make accessible. Others are harder.\n\n* Easy things include:\n  - Making signs clear\n  - Using simple language\n\nHarder things need more knowledge....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It is most efficient and effective to incorporate accessibility from the very beginning of projects, so you don’t need go back and to re-do work....",
+      "simplifiedText": "Make projects accessible from the start.\n\n* This helps a lot.\n* You won't have to fix things later.\n* You'll save time and effort....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "More Info on Making Your Website Accessible...",
+      "simplifiedText": "Making Your Website Accessible\n\nYou want your website to be easy to use. \n\n* What does that mean?\n* It means people with disabilities can use your website.\n\nWhy is this important?\n\n* Many people have ...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "For an introduction to accessibility requirements and international standards, see Accessibility Principles....",
+      "simplifiedText": "To learn about making things accessible:\n\n* See the Accessibility Principles page....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Accessibility Principles...",
+      "simplifiedText": "Accessibility Principles\n\nYou want to make things easy to use for everyone.\n\n* Make things clear and simple.\n* Use words people understand.\n* Explain new words the first time you use them.\n* Use pictu...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "To understand some common accessibility barriers from the perspective of testing, see Easy Checks – A First Review of Web Accessibility....",
+      "simplifiedText": "To understand some common problems:\n\n* Look at Easy Checks – A First Review of Web Accessibility.\n* This helps you see some common problems....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Easy Checks – A First Review of Web Accessibility...",
+      "simplifiedText": "Easy Checks\n\nWe will look at some basic things to check web accessibility.\n\n1. Is the website easy to use?\n   - Can you find what you need?\n   - Can you use the website on a phone?\n\n2. Are images and ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "For some basic considerations on designing, writing, and developing for accessibility, see Tips for Getting Started....",
+      "simplifiedText": "To make things more accessible:\n\n* Read Tips for Getting Started.\n* Learn about designing, writing, and developing for accessibility....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Tips for Getting Started...",
+      "simplifiedText": "Getting Started\n\nYou want to start. That's great!\n\n* Take a deep breath.\n* Read this text slowly.\n* Ask a friend for help if you need it....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "When you’re ready to know more about developing and designing, you’ll probably use resources such as:\n    \n      How to Meet WCAG (Quick Reference)\n      Web Accessibility Tutorials...",
+      "simplifiedText": "When you want to learn more:\n\n* Look for resources online.\n* Use these resources to help you:\n  • Learn about making websites accessible.\n  • Follow the rules in \"How to Meet WCAG\" (a guide to making ...",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "How to Meet WCAG (Quick Reference)...",
+      "simplifiedText": "WCAG is a rule for making websites easy to use.\n\nWCAG stands for Web Content Accessibility Guidelines. \n\nWCAG helps people with disabilities use the internet.\n\nWCAG has four main rules:\n\n* Perceivable...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web Accessibility Tutorials...",
+      "simplifiedText": "Making Websites Accessible\n\nYou want to make your website easy to use for everyone.\n \n• What is web accessibility?\n \nWeb accessibility means your website can be used by people with disabilities.\n \n• W...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "For project management and organizational considerations, see Planning and Managing Web Accessibility.\nIf you need to make quick fixes now, see Web Accessibility First Aid: Approaches for Interim Repa...",
+      "simplifiedText": "For project management and organization, see:\n\n* Planning and Managing Web Accessibility\n\nIf you need to fix things quickly, see:\n\n* Web Accessibility First Aid: Approaches for Interim Repairs...",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Planning and Managing Web Accessibility...",
+      "simplifiedText": "Making Websites Accessible\n\nYou want to make your website easy to use.\n\n* Websites should be easy for everyone to use.\n* This includes people with disabilities.\n* It also includes people who use phone...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web Accessibility First Aid: Approaches for Interim Repairs...",
+      "simplifiedText": "Making Websites Accessible: Quick Fixes\n\nWhen you find a problem on a website:\n\n* Check the website's rules (accessibility guidelines).\n* Fix the problem right away.\n* Make sure it's easy to use for e...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Evaluating Accessibility...",
+      "simplifiedText": "Evaluating Accessibility\n\nYou want to know if something is easy to use.\n \nYou need to check if it is:\n\n* Easy to understand\n* Easy to use\n* Works well with different devices\n* Works well with differen...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "When developing or redesigning a website, evaluate accessibility early and throughout the development process to identify accessibility problems early, when it is easier to address them. Simple steps,...",
+      "simplifiedText": "When you make a website:\n\n* Evaluate accessibility early.\n* Check it often during development.\n\nThis helps you find problems early.\nIt's easier to fix them then.\n\nSome steps are simple, like:\n\n* Chang...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "There are evaluation tools that help with evaluation. However, no tool alone can determine if a site meets accessibility guidelines. Knowledgeable human evaluation is required to determine if a site i...",
+      "simplifiedText": "We have tools to help us check websites.\n\n* These tools are not enough.\n* They can't say if a site is truly accessible.\n* A person with knowledge is needed to check this....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "assistive technologies...",
+      "simplifiedText": "Tools that help people with disabilities....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Just as images aren’t available to people who can’t see, audio files aren’t available to people who can’t hear. Providing a text transcript makes the audio information accessible to people who are dea...",
+      "simplifiedText": "People who can't hear can't use audio files. \n\nA text transcript helps people who are deaf or hard of hearing. \n\nIt also helps search engines and other machines....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It’s easy and relatively inexpensive for websites to provide transcripts. There are also transcription services that create text transcripts in HTML format....",
+      "simplifiedText": "Websites can add transcripts easily and cheaply.\n\n* Transcripts are text versions of audio or video.\n* Some services make transcripts in HTML format.\n* This helps people understand websites better....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "transcription services...",
+      "simplifiedText": "Transcription services:\n\n* Write down what someone says.\n* Listen to audio or video.\n* Type what is being said.\n* Create a written copy....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Tips for Getting Started...",
+      "simplifiedText": "Getting Started\n\nYou want to start. That's good.\n\nHere are some tips:\n\n* Take small steps.\n* Don't be afraid to ask for help.\n* Practice every day.\n* Be patient with yourself....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Easy Checks – A First Review of Web Accessibility...",
+      "simplifiedText": "We will make a website easy to use.\n\nEasy Checks is a first look at web accessibility.\n\nIt helps you see if a website is easy to use.\n\nYou can check these things:\n\n* Can you see the text on the websit...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web Accessibility Perspectives — videos and descriptions...",
+      "simplifiedText": "Here are some videos and descriptions about web accessibility:\n\n*   Videos explain how to make websites easy to use.\n*   Descriptions help people with disabilities use websites.\n*   You can watch vide...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "For More Information...",
+      "simplifiedText": "For More Information\n\nIf you want to know more:\n\n* Look at the website.\n* Ask someone for help.\n* Call a phone number.\n* Read a document....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "W3C WAI provides a wide range of resources on different aspects of web accessibility standards, education, testing/evaluation, project management, and policy. We encourage you to explore this website,...",
+      "simplifiedText": "We have many helpful resources here.\n\n* Look at our website.\n* Learn about web accessibility.\n* Find tools to test your website.\n* Get help with project management.\n* Read about web accessibility laws...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "project management, and policy...",
+      "simplifiedText": "Project management is planning and controlling work.\n\n* Plan what you need to do.\n* Control how you do it.\n\nPolicy is a set of rules to follow.\n\n* It helps you make good choices.\n* It keeps everyone s...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Digital Accessibility Foundations - Free Online Course...",
+      "simplifiedText": "Here is the text rewritten in simple language:\n\nMaking Websites Accessible for Everyone\n\n* This is a free online course.\n* It teaches about digital accessibility.\n* Digital accessibility means making ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Digital Accessibility Foundations - Free Online Course provides the foundation you need to make your digital technology accessible....",
+      "simplifiedText": "Make your digital things easy to use:\n\n* Learn about digital accessibility.\n* This course helps you start.\n* Make your digital things accessible....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Help improve this page...",
+      "simplifiedText": "Make this page better\n\n* Click the \"Help\" button.\n* Tell us what to change.\n* We will make it better....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Please share your ideas, suggestions, or comments via e-mail to the publicly-archived list wai@w3.org or via GitHub....",
+      "simplifiedText": "Share your ideas by email or GitHub.\n\n* Send an email to wai@w3.org.\n* This list is public and saved.\n* Or use GitHub to share your ideas....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fork & Edit on GitHub...",
+      "simplifiedText": "To make changes:\n\n* Go to GitHub.\n* Click \"Fork\" to copy the project.\n* Click \"Edit\" to change the project.\n* Save your changes....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Updated:  7 March 2024.\n          Latest changes.\n          First published February 2005....",
+      "simplifiedText": "Updated: 7 March 2024.\n\n* This is the latest version.\n* It was first published in February 2005....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Developed by the Education and Outreach Working Group (EOWG)....",
+      "simplifiedText": "This was made by a group called EOWG.\n\n* EOWG stands for Education and Outreach Working Group.\n* It is a group that helps with education and sharing information....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "W3C Web Accessibility Initiative (WAI)...",
+      "simplifiedText": "The W3C Web Accessibility Initiative is a group.\n\n* It helps make websites easy to use.\n* For everyone, including people with disabilities....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Strategies, standards, resources to make the Web accessible to people with disabilities...",
+      "simplifiedText": "Making the Web Accessible\n\nYou want the Web to be for everyone.\n\n* Strategies: plans to make the Web better\n* Standards: rules to follow for accessibility\n* Resources: tools and help to make it happen...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Accessibility statement...",
+      "simplifiedText": "We want to help everyone use our website.\n\n* We follow rules to make our website easy to use.\n* These rules are called the Web Content Accessibility Guidelines (WCAG).\n* WCAG helps people with disabil...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "World Wide Web\tConsortium...",
+      "simplifiedText": "The group that helps the web work well is called:\n\n* World Wide Web Consortium...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Copyright © 2026  World Wide Web\tConsortium.\n      W3C®\n      liability,\n      trademark and\n      permissive license\n      rules apply unless otherwise noted. See Permission to Use WAI Material....",
+      "simplifiedText": "You have permission to use this text.\n\n* It is owned by the World Wide Web Consortium (W3C).\n* They made it to help people use the web.\n* You can use it, but you must follow their rules.\n\nThe W3C has ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Permission to Use WAI Material...",
+      "simplifiedText": "You want to use WAI material.\n\n* What is WAI material?\n * WAI stands for Web Accessibility Initiative.\n * It's information about making websites easy to use.\n\nYou can use WAI material for free.\n\n* But...",
+      "elementTag": "a"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "Change Text Size or Colors...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web Accessibility Initiative (WAI) homepage...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "title"
+    },
+    {
+      "originalText": "Strategies, standards, resources to make the Web accessible to people with disabilities...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility Fundamentals...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility Fundamentals...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Introduction to Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility Fundamentals...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Introduction to Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility is About People...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Keyboard Compatibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Colors with Good Contrast...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Clear Layout and Design...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Large Links, Buttons, and Controls...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Understandable Content...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Notifications and Feedback...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "How People with Disabilities Use the Web...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Stories of Web Users...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Diverse Abilities and Barriers...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Cognitive and Learning...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Tools and Techniques...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Older Users and Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility, Usability, Inclusion...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Components of Web Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility Principles...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "AI and Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Digital Accessibility Courses...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "W3C Foundations Online Course...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Translating WAI Resources...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Introduction to Web Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "When websites and web tools are properly designed and coded, people with disabilities can use them. However, currently many sites and tools are developed with accessibility barriers that make them dif...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Making the web accessible benefits individuals, businesses, and society. International web standards define what is needed for accessibility....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Accessibility in Context...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "What is Web Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Accessibility is Important for Individuals, Businesses, Society...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Making the Web Accessible...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Evaluating Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "For More Information...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Video Introduction to Web Accessibility and W3C Standards (4 minutes)...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Accessibility in Context...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "The power of the Web is in its universality.\n    Access by everyone regardless of disability is an essential aspect....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Tim Berners-Lee, W3C Director and inventor of the World Wide Web...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "cite"
+    },
+    {
+      "originalText": "The Web is fundamentally designed to work for all people, whatever their hardware, software, language, location, or ability. When the Web meets this goal, it is accessible to people with a diverse ran...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Thus the impact of disability is radically changed on the Web because the Web removes barriers to communication and interaction that many people face in the physical world. However, when websites, app...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Accessibility is essential for developers and organizations that want to create high-quality websites and web tools, and not exclude people from using their products and services....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "What is Web Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Web accessibility means that websites, tools, and technologies are designed and developed so that people with disabilities can use them. More specifically, people can:...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "perceive, understand, navigate, and interact with the Web...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "contribute to the Web...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Web accessibility encompasses all disabilities that affect access to the Web, including:...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Web accessibility also benefits people without disabilities, for example:...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "people using mobile phones, smart watches, smart TVs, and other devices with small screens, different input modes, etc....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "older people with changing abilities due to ageing...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "people with “temporary disabilities” such as a broken arm or lost glasses...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "people with “situational limitations” such as in bright sunlight or in an environment where they cannot listen to audio...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "people using a slow Internet connection, or who have limited or expensive bandwidth...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "For a 7-minute video with examples of how accessibility is essential for people with disabilities and useful for everyone in a variety of situations, see:\n\n  \n  Web Accessibility Perspectives Video (Y...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Web Accessibility Perspectives Video (YouTube)...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "More Info on What is Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "When you want to learn more about how different disabilities affect Web use, and read about scenarios of people with disabilities using the Web, see How People with Disabilities Use the Web....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "How People with Disabilities Use the Web...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "If you want more examples of benefits for others, see the multimedia resource Used by People With and Without Disabilities, the archived resource Web Accessibility Benefits People With and Without Dis...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Used by People With and Without Disabilities...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web Accessibility Benefits People With and Without Disabilities...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Shared Web Experiences: Barriers Common to Mobile Device Users and People with Disabilities...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Accessibility is Important for Individuals, Businesses, Society...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "The Web is an increasingly important resource in many aspects of life: education, employment, government, commerce, health care, recreation, and more. It is essential that the Web be accessible in ord...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Web offers the possibility of unprecedented access to information and interaction for many people with disabilities. That is, the accessibility barriers to print, audio, and visual media can be mu...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Accessibility supports social inclusion for people with disabilities as well as others, such as:...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "people in rural areas...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "people in developing countries...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "More Info on Evaluating Accessibility...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "Resources to help with accessibility evaluation are described in Evaluating Web Accessibility Overview....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "Evaluating Web Accessibility Overview...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Alternative Text for Images...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "Images should include equivalent alternative text (alt text) in the markup/code....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "equivalent alternative text...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "If alt text isn’t provided for images, the image information is inaccessible, for example, to people who cannot see and use a screen reader that reads aloud the information on a page, including the al...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "When equivalent alt text is provided, the information is available to people who are blind, as well as to people who turn off images (for example, in areas with expensive or low bandwidth). It’s also ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Some people cannot use a mouse, including many older users with limited fine motor control. An accessible website does not rely on the mouse; it makes all functionality available from a keyboard. Then...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "all functionality available from a keyboard...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Transcripts for Audio...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5459, Requested 548. Please try again in 70ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "h3"
+    }
+  ]
+}

@@ -21,8 +21,7 @@ Key files:
 1. Open Chrome and go to `chrome://extensions`
 2. Enable **Developer mode** (top right)
 3. Click **Load unpacked**
-4. Select this folder:
-	- `/Users/alhussainmurad/Documents/Weiterbildung-KI/extension/extension` (the folder that contains `manifest.json`)
+4. Select the `apps/extension` folder (the folder that contains `manifest.json`)
 5. Open any normal website (example: a news article)
 6. Click the extension icon → **Simplify page text**
 
@@ -50,9 +49,10 @@ Tip: If you want per-site permission prompts, keep `host_permissions` empty and 
 
 Chrome Web Store accepts a `.zip` containing your extension source (including `manifest.json`).
 
-```zsh
-cd /Users/alhussainmurad/Documents/Weiterbildung-KI/extension/extension
-zip -r easy-language-extension.zip . -x "*.DS_Store" -x "easy-language-extension.zip"
+```bash
+# From the project root, navigate to the extension folder
+cd apps/extension
+zip -r klartext-extension.zip . -x "*.DS_Store" -x "*.zip" -x "logs/*"
 ```
 
 ## Publish to Chrome Web Store

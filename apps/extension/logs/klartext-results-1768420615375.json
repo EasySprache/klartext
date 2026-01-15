@@ -1,0 +1,514 @@
+{
+  "metadata": {
+    "totalChunks": 89,
+    "successCount": 78,
+    "failCount": 11,
+    "totalTime": "385.7s",
+    "apiTime": "385.7s",
+    "timestamp": "2026-01-14T19:56:55.360Z",
+    "url": "https://www.gov.uk/apply-renew-passport",
+    "title": "Apply online for a UK passport - GOV.UK",
+    "successfulCount": 78,
+    "failedCount": 11,
+    "errorCount": 12
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T19:56:03.971Z",
+      "message": "[KlarText] Batch 8 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.354Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.354Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T19:56:55.355Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5476, Requested 547. Please try again in 229.999999ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "We use some essential cookies to make this website work....",
+      "simplifiedText": "We use some cookies to make this website work.\n\n* Cookies are small pieces of text.\n* They help our website run smoothly.\n* We need them to work properly....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "We’d like to set additional cookies to understand how you use GOV.UK, remember your settings and improve government services....",
+      "simplifiedText": "When you use GOV.UK:\n\n* We want to learn how you use it.\n* We want to remember your choices.\n* We want to make government services better....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "We also use cookies set by other sites to help us deliver content from their services....",
+      "simplifiedText": "We also use cookies from other sites.\n\n* These cookies help us show you content from other websites.\n* They are set by those websites, not by us....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "change your cookie settings...",
+      "simplifiedText": "Change Your Cookie Settings\n\nYou want to change cookie settings. Here's how:\n\n* Go to the website's home page.\n* Click on \"Settings\" or \"Preferences\".\n* Look for \"Cookies\" or \"Privacy\".\n* Choose what ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "You have rejected additional cookies. You can change your cookie settings at any time....",
+      "simplifiedText": "You can change your cookie settings:\n\n* Go to your cookie settings.\n* Change them if you want....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "change your cookie settings...",
+      "simplifiedText": "Change Your Cookie Settings\n\nYou want to change your cookie settings. \n\n* Go to the website's settings.\n* Look for the cookie settings.\n* Choose what you want to do.\n* Save your changes....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Skip to main content...",
+      "simplifiedText": "Go to the main part of the page....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Services and information...",
+      "simplifiedText": "Services and information\n\nYou need help with something. \n\n* What do you want to know?\n* What help do you need?...",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "Births, death, marriages and care...",
+      "simplifiedText": "Life events\n\n* Births: a new baby is born.\n* Deaths: someone dies.\n* Marriages: two people get married.\n* Care: helping people who need it....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Business and self-employed...",
+      "simplifiedText": "Business and self-employed\n\nYou are a business owner or work for yourself. \n\n* You own a business.\n* You work for yourself.\n* You are not an employee.\n\nYou need to follow special rules. \n\n* You pay ta...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Childcare and parenting...",
+      "simplifiedText": "You take care of children.\n\n* This is called childcare.\n* It's also called parenting.\n\nYou help children grow and learn.\n\n* You feed them.\n* You play with them.\n* You teach them things.\n\nYou keep chil...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Citizenship and living in the UK...",
+      "simplifiedText": "Being a citizen in the UK\n\n* What does it mean to be a citizen?\n * You have the right to live and work in the UK.\n * You can vote in elections.\n * You can get help from the UK government if you need i...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Crime, justice and the law...",
+      "simplifiedText": "Crime, law, and justice\n\nCrime is when someone breaks the rules.\n \nThere are laws to help keep us safe.\n \nJustice is when people are treated fairly.\n \nThe law helps keep us safe and fair....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Driving and transport...",
+      "simplifiedText": "Driving and Transport\n\nYou drive a car to move around.\n\nTypes of transport:\n\n* Car\n* Bus\n* Train\n* Bike\n* Walk\n\nYou need a license to drive a car.\n\nSteps to drive a car:\n\n* Get a license\n* Buy a car\n*...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Education and learning...",
+      "simplifiedText": "Learning is important. \n\nYou learn new things every day. \n\n* Reading books helps you learn.\n* Talking to people helps you learn.\n* Trying new things helps you learn.\n\nEducation is a way to learn. \n\n* ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Environment and countryside...",
+      "simplifiedText": "You are in a natural place outside a city. \n\nThis place has:\n\n* Trees\n* Grass\n* Animals\n* A big sky...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Housing and local services...",
+      "simplifiedText": "Housing and local services\n\nYou need a place to live. \nYou also need help with things like food and water.\n\n* Housing: \n  - A place to live\n  - Rent or own a house or apartment\n  - Find a place to liv...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Passports, travel and living abroad...",
+      "simplifiedText": "Passports, travel, and living abroad\n\nWhen you travel:\n\n* You need a passport.\n* A passport helps you travel safely.\n\nWhat is a passport?\nA passport is a special book.\nIt has your name and photo.\nIt p...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Visas and immigration...",
+      "simplifiedText": "Visas and Immigration\n\nYou want to travel to another country. \nYou need a special paper called a visa.\n\nWhat is a visa? \nA visa is a document that says you can enter a country.\n\nTypes of visas:\n\n* Tou...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Working, jobs and pensions...",
+      "simplifiedText": "Working, jobs, and pensions\n\n* Working means doing a job.\n* A job is something you do to earn money.\n* A pension is money you get when you retire.\n* It's like a long payment for all your hard work....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Departments, agencies and public bodies...",
+      "simplifiedText": "Government groups\n\n* Departments\n* Agencies\n* Public bodies...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "News stories, speeches, letters and notices...",
+      "simplifiedText": "News articles, talks, letters, and announcements...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Guidance and regulation...",
+      "simplifiedText": "Guidance and regulation\n\nGuidance is advice or instructions to help you do something.\n\nRegulation is a rule that says what you can and cannot do.\n\nThink of it like this:\n\n* Guidance is a map to help y...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Detailed guidance, regulations and rules...",
+      "simplifiedText": "Detailed guidance, regulations, and rules\n\n*   Detailed plans\n*   Rules to follow\n*   Laws to obey...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Research and statistics...",
+      "simplifiedText": "Research and statistics\n\nResearch is finding out facts. \nYou look at data to learn more.\n\nStatistics are numbers that show facts. \nThey help you understand what's happening.\n\nTypes of statistics:\n\n* N...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Reports, analysis and official statistics...",
+      "simplifiedText": "Reports, analysis, and statistics:\n\n* Written information about things\n* Looking at data to understand it\n* Official numbers and facts...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Policy papers and consultations...",
+      "simplifiedText": "Policy papers and consultations\n\nThese are documents and meetings to help make decisions.\n\n* They are written by experts and officials.\n* They discuss ideas and solutions for problems.\n* People with d...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Consultations and strategy...",
+      "simplifiedText": "Meetings and planning\n\n* Talk about a problem or goal.\n* Think about how to solve it or reach it.\n* Decide what to do next....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Data, Freedom of Information releases and corporate reports...",
+      "simplifiedText": "Information, public records, and company reports...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Passports, travel and living abroad...",
+      "simplifiedText": "Passports, travel, and living abroad\n\nYou need a special paper to travel to other countries.\nThis paper is called a passport.\n\nA passport shows who you are and where you are from.\nIt helps you travel ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Apply online for a UK passport...",
+      "simplifiedText": "Apply for a UK passport online:\n\n* Go to the government website.\n* Click on 'Apply for a passport'.\n* Fill in the form.\n* Pay the fee.\n* Upload your documents.\n* Send your application.\n* Wait for your...",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Use this service to apply for, renew, replace or update your passport and pay for it online....",
+      "simplifiedText": "Apply for your passport online:\n\n* Use this service.\n* Get a new passport.\n* Renew your old one.\n* Replace a lost one.\n* Update your information.\n\nPay for your passport online....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "This service is also available in Welsh (Cymraeg)....",
+      "simplifiedText": "This service is also available in Welsh.\n\n* Welsh is also known as Cymraeg.\n* It's a language spoken in Wales....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "If your passport is burgundy or has ‘European Union’ on the cover, you can continue to use it until it expires....",
+      "simplifiedText": "If your passport is red or says 'European Union':\n\n* Keep using it until it runs out.\n* It's still good until it expires....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Check how long it will take to get a passport...",
+      "simplifiedText": "How long does it take to get a passport?\n\n* Check the government website.\n* Look for the passport page.\n* See how long it takes to get one....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "If you need a passport urgently, you can find out more about the Online Premium or 1 week Fast Track services....",
+      "simplifiedText": "If you need a passport fast:\n\n* Look for Online Premium or 1 week Fast Track services.\n* They can help you get a passport quickly....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "find out more about the Online Premium or 1 week Fast Track services...",
+      "simplifiedText": "Want to learn more?\n\n* Look at the Online Premium service.\n* Look at the 1 week Fast Track service....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Do not book travel until you have a valid passport - your new passport will not have the same number as your old one....",
+      "simplifiedText": "Before you book a trip:\n\n* Get a new passport.\n* Make sure it's valid.\n* Your new passport will have a new number.\n* Do not book travel until you have it....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You’ll need a debit or credit card to use this service....",
+      "simplifiedText": "You need a debit card or credit card.\n\n* This card helps you pay.\n* You need it to use this service....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It’s £12.50 cheaper to apply for a passport online than by post....",
+      "simplifiedText": "Applying online is cheaper.\n\n* It costs £12.50 less.\n* Apply online for your passport....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You can get help making an online passport application with the digital Check and Send service at a Post Office....",
+      "simplifiedText": "You can get help with your online passport application.\n\n* Go to a Post Office.\n* Use the digital Check and Send service.\n* They can help you with your application....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Check and Send service...",
+      "simplifiedText": "Check and Send service\n\nYou need this service:\n \n* To send money to someone\n* When you don't have a bank account...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Help applying online...",
+      "simplifiedText": "Applying online can be hard.\n\nHere are some steps:\n\n* Go to the website.\n* Click the \"Apply\" button.\n* Fill out the form.\n* Upload your documents.\n* Click \"Submit\"....",
+      "elementTag": "h3"
+    },
+    {
+      "originalText": "You can get help with your online application at a Post Office. Staff can:...",
+      "simplifiedText": "You can get help with your online application at a Post Office. \n\nStaff can:\n\n* Answer your questions.\n* Help you with your application.\n* Give you information....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "take your digital photo...",
+      "simplifiedText": "Take your picture.\n\n* Use your phone or camera.\n* Take a photo of yourself....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "help you fill in the application online...",
+      "simplifiedText": "We can help you fill out the form online.\n\n* Go to the website.\n* Fill in the answers.\n* Click 'submit' when you're done....",
+      "elementTag": "li"
+    },
+    {
+      "originalText": "This service costs extra. Find out more about the digital Check and Send service....",
+      "simplifiedText": "This service costs extra.\n\n* Find out more about it.\n* Look for \"Check and Send\" online.\n* It's a digital service....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Check and Send service...",
+      "simplifiedText": "Check and Send service\n\nYou need to send money to someone.\nThis service helps you do that.\n\nHere's how it works:\n\n* You give us money.\n* We send it to the person you want.\n* They get the money....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "You can pay by cash, or debit or credit card....",
+      "simplifiedText": "You can pay in several ways:\n\n* Cash\n* Debit card\n* Credit card...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You can pick up a paper passport application form from your local Post Office and apply by post. It takes longer to apply by post than online....",
+      "simplifiedText": "To get a passport:\n\n* Go to your local Post Office.\n* Get a paper form.\n* Fill it out.\n* Send it by mail.\n\nIt takes longer to do this than applying online....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "If you need help, Post Office staff can check you’ve filled in the form correctly - but you’ll need to provide your own photos. This service costs extra. Find out more about the paper Check and Send s...",
+      "simplifiedText": "If you need help:\n\n* Go to the Post Office.\n* Staff will check your form.\n* You need to bring your own photos.\n\nThis service costs extra money....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Check and Send service...",
+      "simplifiedText": "Check and Send service\n\nYou can use this service. It helps you:\n\n* Send money to someone\n* Check if they got it...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "You can pay by cash, or debit or credit card....",
+      "simplifiedText": "You can pay in these ways:\n\n* Cash\n* Debit card\n* Credit card...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Get a passport photo...",
+      "simplifiedText": "Get a photo for your passport. \n\n* Go to a photo store or pharmacy.\n* Take a photo of yourself.\n* Make sure it's a good picture.\n* Get the photo printed....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Change your name or personal details on your passport...",
+      "simplifiedText": "Change your name or details on your passport:\n\n* Go to a passport office.\n* Bring your old passport.\n* Bring proof of your new name or details.\n* Fill out a form.\n* Sign the form.\n* Give the form to t...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Getting your first adult passport...",
+      "simplifiedText": "Getting a passport as an adult\n\nYou need a passport to travel to other countries. \n\nHere's what you need to do:\n\n* Be 16 or older\n* Be a U.S. citizen\n* Apply for a passport book or card\n* Fill out a f...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Get a passport for your child...",
+      "simplifiedText": "Get a passport for your child.\n\n* You need a passport for your child to travel.\n* A passport is a special book with your child's name and picture.\n* You can get a passport at a government office or on...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Is this page useful?...",
+      "simplifiedText": "Is this page helpful?\n\nIs it easy to find what you need?\n\nDo you like this page?...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "this page is not useful...",
+      "simplifiedText": "This page is not helpful.\n\n \nYou might think this page is not useful....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Help us improve GOV.UK...",
+      "simplifiedText": "We want to make GOV.UK better.\n\n* Tell us what you think.\n* Give us your ideas.\n* Help us make it better....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Don’t include personal or financial information like your National Insurance number or credit card details....",
+      "simplifiedText": "When you give information:\n\n* Don't give your:\n  - National Insurance number\n  - Credit card details...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "This field is for robots only. Please leave blank...",
+      "simplifiedText": "For robots only. \n\n* Leave this space blank.\n* Do not fill it in....",
+      "elementTag": "label"
+    },
+    {
+      "originalText": "What were you doing?...",
+      "simplifiedText": "What do you want to know?\n\n* What were you doing?\n * Tell me your answer....",
+      "elementTag": "label"
+    },
+    {
+      "originalText": "Help us improve GOV.UK...",
+      "simplifiedText": "We want your help.\n\n* Tell us what you think.\n* Give us your ideas.\n* Make GOV.UK better....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "To help us improve GOV.UK, we’d like to know more about your visit today.\n        Please fill in this survey (opens in a new tab and requires JavaScript)....",
+      "simplifiedText": "We want to make GOV.UK better.\n\n* Fill out this survey online.\n* It will open in a new window.\n* You need JavaScript to use it....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Please fill in this survey (opens in a new tab and requires JavaScript)...",
+      "simplifiedText": "Fill out the survey:\n\n* Click the link.\n* It will open in a new window.\n* You need JavaScript to use it....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Services and information...",
+      "simplifiedText": "You want to know about services and information. \n\nServices are things that help you. \nInformation is knowledge that you need....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Births, death, marriages and care...",
+      "simplifiedText": "Life events:\n\n* Births\n* Deaths\n* Marriages\n* Taking care of others...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Business and self-employed...",
+      "simplifiedText": "People who work for themselves or own a business....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Childcare and parenting...",
+      "simplifiedText": "Taking care of children\n\nYou have a big job. You take care of little kids. \n\nThis job is called childcare or parenting. \n\nSome people call it raising children. \n\nYou help them grow and learn. \n\nYou te...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Policy papers and consultations...",
+      "simplifiedText": "Policy papers and consultations\n\nThese are documents and meetings about important decisions.\n\n* Policy papers are written reports.\n* Consultations are meetings to talk about ideas....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "How government works...",
+      "simplifiedText": "Government is a group of people who make rules.\n\nThey are called leaders or officials.\n\nTheir job is to help everyone in the country.\n\nThey do this by making laws and rules.\n\nLaws are like rules that ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Accessibility statement...",
+      "simplifiedText": "We want you to know about our website.\n\nOur website is for everyone.\n\nWe want to help you use it.\n\nHere's how we do it:\n\n* We make our website easy to use.\n* We use clear language.\n* We make sure our ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Terms and conditions...",
+      "simplifiedText": "Rules for Using Our Service\n\n* Read this page carefully.\n* Understand what you agree to.\n* Agree to these rules to use our service.\n\nWhat You Agree To\n\n* Follow our rules and instructions.\n* Respect o...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Rhestr o Wasanaethau Cymraeg...",
+      "simplifiedText": "List of Welsh Services\n\n* What services do you need?\n* Here are some services in Welsh:\n \n* Ymgeisio i swydd (Job application)\n* Iechyd a gofal (Health care)\n* Arian a thaliadau (Money and benefits)\n*...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Government Digital Service...",
+      "simplifiedText": "The Government Digital Service is a group that helps the government use technology better....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "All content is available under the Open Government Licence v3.0, except where otherwise stated...",
+      "simplifiedText": "This text is free to use.\n\n* It's called the Open Government Licence.\n* Version 3.0 is the one we're using.\n* But check the text for any other rules....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Open Government Licence v3.0...",
+      "simplifiedText": "This is a license. It lets you use government information freely.\n\n* You can copy it.\n* You can share it.\n* You can change it.\n* You must say it's from the government.\n* You must say how you changed i...",
+      "elementTag": "a"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "Citizenship and living in the UK...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Crime, justice and the law...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Driving and transport...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Education and learning...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Environment and countryside...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Housing and local services...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Passports, travel and living abroad...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Visas and immigration...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Working, jobs and pensions...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Guidance and regulation...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Research and statistics...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5476, Requested 547. Please try again in 229.999999ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    }
+  ]
+}
