@@ -1,0 +1,1306 @@
+{
+  "metadata": {
+    "totalChunks": 177,
+    "successCount": 86,
+    "failCount": 91,
+    "totalTime": "901.6s",
+    "apiTime": "901.6s",
+    "timestamp": "2026-01-14T13:00:08.753Z",
+    "url": "https://www.vanityfair.com/hollywood/story/dorothy-stratten-hollywood-horror-story",
+    "title": "Forgotten Star Dorothy Stratten Almost Lived the Hollywood Fairy Tale. It Ended as a Horror Story. | Vanity Fair",
+    "successfulCount": 86,
+    "failedCount": 91,
+    "errorCount": 100
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T12:48:03.933Z",
+      "message": "[KlarText] Batch 5 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:49:03.941Z",
+      "message": "[KlarText] Batch 6 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:50:03.943Z",
+      "message": "[KlarText] Batch 7 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:51:03.952Z",
+      "message": "[KlarText] Batch 8 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:52:03.957Z",
+      "message": "[KlarText] Batch 9 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:53:03.962Z",
+      "message": "[KlarText] Batch 10 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:54:03.971Z",
+      "message": "[KlarText] Batch 11 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:55:03.980Z",
+      "message": "[KlarText] Batch 12 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T12:56:03.989Z",
+      "message": "[KlarText] Batch 13 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.740Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.741Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.742Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.742Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.742Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.742Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.742Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.743Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.744Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.746Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.747Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.748Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.749Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T13:00:08.749Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5317, Requested 724. Please try again in 410ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "We process your data to deliver content or advertisements and measure the delivery of such content or advertisements to extract insights about our website. We share this information with our partners ...",
+      "simplifiedText": "We use your data to:\n\n* Show you content and ads.\n* See if you like the content and ads.\n* Share this info with our partners.\n\nWe share this info because:\n\n* You said it's okay.\n* It's good for our bu...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Below, you will find a list of the purposes and special features for which your data is being processed. You may exercise your rights for specific purposes, based on consent or legitimate interest, us...",
+      "simplifiedText": "Here is the list of reasons for using your data:\n\n* We use your data for these reasons:\n \n* To help you with your requests\n* To send you information you asked for\n* To make our service better for you\n...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Targeted Advertising...",
+      "simplifiedText": "Advertising just for you.\n\n* We see what you like.\n* We show you ads about it.\n* This is called targeted advertising....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Social Media Cookies...",
+      "simplifiedText": "Cookies on Social Media\n\nCookies are small files on your phone or computer. \nThey help websites remember you.\n\nWhen you use social media, cookies are used:\n\n* To show you ads\n* To remember your passwo...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Audience Measurement...",
+      "simplifiedText": "Measuring people who watch or listen to something.\n\n* What is it?\n * Measuring how many people see or hear something.\n* Why do it?\n * To know how many people are interested.\n\n \nTypes of Measurement:\n\n...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Store and/or access information on a device...",
+      "simplifiedText": "Store and/or access information on a device\n\nStore data on a computer or phone.\n \n* This means saving files and pictures.\n* Or, you can look at them later....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use limited data to select advertising...",
+      "simplifiedText": "When you choose ads:\n\n* Use a little data.\n* This helps you pick ads.\n* It keeps things simple....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Create profiles for personalised advertising...",
+      "simplifiedText": "Make a profile for ads:\n\n* Create a special page for you.\n* This helps show you ads you like.\n* They are just for you....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use profiles to select personalised advertising...",
+      "simplifiedText": "When you use profiles:\n\n* Choose ads that are just for you....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Create profiles to personalise content...",
+      "simplifiedText": "Create your own profile:\n\n* Make a special page for yourself.\n* This helps show you the right content.\n* You can see things that interest you.\n* It's like a special box for you....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use profiles to select personalised content...",
+      "simplifiedText": "When you use profiles:\n\n* Choose what you like.\n* See content that's just for you....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Measure advertising performance...",
+      "simplifiedText": "Measure how well ads work.\n\n* Look at how many people see ads.\n* See how many people click on ads.\n* Check if people buy things after seeing ads....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Measure content performance...",
+      "simplifiedText": "Measure how well content works:\n\n* Check its results.\n* See if it's doing its job.\n* Make it better if it's not working well....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Understand audiences through statistics or combinations of data from different sources...",
+      "simplifiedText": "When you want to understand your audience:\n\n* Look at numbers and facts.\n* Use data from different places.\n* This helps you know your audience better....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Develop and improve services...",
+      "simplifiedText": "Make services better\n\n* Develop new ideas\n* Improve what we have...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use limited data to select content...",
+      "simplifiedText": "When you use limited data:\n\n* Select some content.\n* Use only that content....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Below, you will find a list of the features for which your data is being processed. You may exercise your rights for special features using the toggles below....",
+      "simplifiedText": "Here is the list of things we do with your data:\n\n* We use these features:\n \n  • Feature 1\n  • Feature 2\n  • Feature 3\n  • Feature 4\n  • Feature 5\n\nYou can turn some features on or off using the butto...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Match and combine data from other data sources...",
+      "simplifiedText": "When you need data:\n\n* Find other data sources.\n* Match the data with yours.\n* Combine the data together....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Link different devices...",
+      "simplifiedText": "To connect devices:\n\n* Find the devices you want to link.\n* Make sure they are turned on.\n* Look for a button to connect them.\n* Press the button to link the devices.\n* Wait for a few seconds.\n* Check...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Identify devices based on information transmitted automatically...",
+      "simplifiedText": "Identify devices:\n\n* Look for information sent by devices.\n* This information helps you find the devices....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use precise geolocation data...",
+      "simplifiedText": "To use your exact location:\n\n* Find your location on a map.\n* Use a device that knows where you are.\n* This helps with many things....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Actively scan device characteristics for identification...",
+      "simplifiedText": "When you use a device:\n\n* Look at its details.\n* Find its name and number.\n* This helps identify the device....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Below, you will find a list of vendors processing your data and the purposes or features of processing they declare. You may exercise your rights for each vendor based on the legal basis they assert....",
+      "simplifiedText": "Here is the list of vendors:\n\n* They process your data.\n* Here are the reasons why:\n + Vendor 1: They say they need it for this.\n + Vendor 2: They say they need it for that.\n\nYou can ask them to stop....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Active Agent (Virtual Minds)...",
+      "simplifiedText": "Active Agent (Virtual Minds)\n\nYou are using a computer program called Active Agent.\nIt is made by Virtual Minds.\nThis program helps you with tasks....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "AdElement Media Solutions...",
+      "simplifiedText": "AdElement Media Solutions\n\n \nYou are looking at a company name. \n\n \nThe name is: \nAdElement Media Solutions...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Skip to main content...",
+      "simplifiedText": "Go to the main part of the page....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Forgotten Star Dorothy Stratten Almost Lived the Hollywood Fairy Tale. It Ended as a Horror Story....",
+      "simplifiedText": "Dorothy Stratten was a famous actress.\n\nShe almost lived a happy life in Hollywood.\n\nBut her life ended in a sad way....",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Peter Bogdanovich, Bob Fosse, and Hugh Hefner all loved her, in their own ways—for better and worse. This reexamination of Stratten’s life, rape, and murder casts a new light on the angel who was a ce...",
+      "simplifiedText": "Peter Bogdanovich, Bob Fosse, and Hugh Hefner liked her.\n\n* They liked her in different ways.\n* Some liked her for good reasons.\n* Some liked her for bad reasons.\n\nThis story looks at her life again.\n...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "PICTURE PERFECT Dorothy Stratten was still in high school when she entered the Great Playmate Hunt....",
+      "simplifiedText": "Dorothy Stratten was a high school student.\n\n* She entered a contest called the Great Playmate Hunt.\n* This contest was for a magazine called Playboy....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Steve Schapiro/Getty Images....",
+      "simplifiedText": "Steve Schapiro is a photographer....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Before it was a horror story, it was a fairy tale....",
+      "simplifiedText": "It was once a happy story.\n\nBut it was not happy.\nIt was scary.\nIt was a horror story.\n\nNow it is a happy story again.\nIt is a fairy tale....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Once upon a time (in 1978) in a Podunk town (Coquitlam, on the outskirts of Vancouver) lived a young girl named Dorothy Hoogstraten. Dorothy, 17, a high school senior, was working her usual shift at a...",
+      "simplifiedText": "In 1978, a girl named Dorothy lived in a town called Coquitlam.\n\n* She was 17 years old.\n* She was a high school student.\n* She worked at a Dairy Queen.\n\nOne day, a man named Paul Snider came in. \n\n* ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider didn’t tell Dorothy he was a pimp; told Dorothy he was a promoter, which he also was. In LA, he’d put on the California Truckin’ & Cycle Show at the Convention Center. Photographer Howard Koby ...",
+      "simplifiedText": "When you read this story:\n\n* Meet Snider, a man with many jobs.\n* He told people he was a promoter, which is true.\n* He put on a big car show in LA.\n\nA photographer named Howard met Snider in a specia...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider wooed Dorothy: bought her flowers, sang to her, took her to prom. He was always trying to get her clothes off. So he could have sex with her, naturally; but really so he could photograph her. P...",
+      "simplifiedText": "Dorothy's boyfriend, Snider, tried to get her to do things she didn't want to do.\n\n* He gave her flowers and sang to her.\n* He took her to the prom.\n\nBut Snider wanted more. He wanted to take pictures...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "If Dorothy was ambivalent about the camera, the camera was not ambivalent about Dorothy. It was gaga for her. In her test shots, she conveyed a mixture of innocence and eroticism; purity but with inti...",
+      "simplifiedText": "Dorothy was not sure about the camera. But the camera loved her.\n\n* The camera took pictures of Dorothy.\n* She looked very innocent in the pictures.\n* But there was something that made you want to kno...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider worked hard to persuade her mother, Nelly (her father, Simon, had long been out of the picture), to sign a release. When he failed, he signed it for Nelly—a forgery—sent it to Playboy. Hugh Hef...",
+      "simplifiedText": "Snider tried to get his mom to sign a paper.\n\n* He wanted her to sign it so he could send it to Playboy.\n* But she wouldn't sign it.\n\nSnider signed the paper for his mom anyway.\nHe sent it to Playboy....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Though Dorothy wasn’t the winner of the contest, she was the runner-up. And Snider saw to it that her star only rose from there. A recollection of Louise’s: “We were watching The Sonny & Cher Show at ...",
+      "simplifiedText": "Dorothy was not the winner of the contest. \nShe was the second best. \n\nPaul Snider helped her become famous. \nHe controlled many things in her life. \n\nHer name was changed to Stratten. \nPaul liked the...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider’s methods were dubious; his results were not. In short succession, Dorothy landed Playmate of the Month (August 1979); a lead role in the BDSM thriller Autumn Born (she played a spoiled-rotten ...",
+      "simplifiedText": "Dorothy's methods were not good. But her results were great.\n\nShe did many things:\n\n* She was Playmate of the Month in August 1979.\n* She was in a movie called Autumn Born. \n  - She played a rich girl...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In March 1980, Dorothy, now 20, headed to New York to begin filming with Peter Bogdanovich, 40. She’d met the celebrated director at the Playboy Mansion. He was immediately struck by her refinement, h...",
+      "simplifiedText": "Dorothy went to New York in March 1980.\n\n* She was 20 years old.\n* She was working with a famous director named Peter Bogdanovich.\n* He was 40 years old.\n\nDorothy met Peter at a big house called the P...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Dorothy checked into her hotel, the Wyndham, though only to keep up appearances. She was staying with Bogdanovich at his hotel, the Plaza, a “Do not disturb” on the phone. Snider was already spiraling...",
+      "simplifiedText": "Dorothy went to a hotel to pretend she was staying there.\n\n* She was really staying with Bogdanovich at another hotel.\n* Bogdanovich didn't want to be bothered.\n\nSnider was in trouble:\n\n* He was worki...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "One of the few grace notes in Dorothy’s story, and the only apology Hollywood ever gave her....",
+      "simplifiedText": "One small good thing in Dorothy's story:\n\n* It's a kind note.\n* It's the only time Hollywood said sorry to her....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "More Great Stories From Vanity Fair...",
+      "simplifiedText": "More Great Stories\n\nWe have more great stories for you....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Cover Star Teyana Taylor on Her Breakout Year...",
+      "simplifiedText": "Teyana Taylor is the cover star.\n\nShe had a big year.\n\n* She made music.\n* She acted in movies.\n* She worked with famous people.\n\nThis made her very popular....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "See All the Fashion From the 2026 Golden Globes Red Carpet...",
+      "simplifiedText": "Look at the Fashion from the 2026 Golden Globes\n\n* The Golden Globes is a big event.\n* People wear nice clothes to the event.\n* The red carpet is where they walk.\n* We can see what they are wearing....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "2026 Golden Globes Red Carpet...",
+      "simplifiedText": "The Golden Globes is a big event.\n\n* It is on the red carpet.\n* The red carpet is where famous people walk.\n* They walk to show off their clothes....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "See the Full List of Winners From the 2026 Golden Globes...",
+      "simplifiedText": "Here are the winners:\n\n* See the list of winners.\n* The list is from the 2026 Golden Globes....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "11 Best-Dressed Stars...",
+      "simplifiedText": "Here is the rewritten text:\n\nThe 11 stars who look great.\n\n* They wear nice clothes.\n* People notice them....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The 11 Best-Dressed Stars at the 2026 Golden Globes...",
+      "simplifiedText": "Here are the best-dressed stars at the 2026 Golden Globes:\n\n* They wore beautiful clothes.\n* Some wore bright colors.\n* Others wore fancy patterns.\n* They all looked great....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The MAGA Dive Bar That’s Also a Church...",
+      "simplifiedText": "Here is the text rewritten in simple language:\n\nThere is a special place. \nIt's a bar where people go to have fun. \nBut it's also a church....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "All the Highlights From the 2026 Golden Globes...",
+      "simplifiedText": "Here is the rewritten text:\n\nThe Golden Globes are a big event.\nThey happen every year.\nIn 2026, the Golden Globes took place.\n\nWhat happened at the Golden Globes?\n\n* Many famous people were there.\n* ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Belle Burden On Her Family’s “Legacy of Infidelity”...",
+      "simplifiedText": "Belle Burden's Problem\n\nBelle Burden has a big problem.\nHer family has a bad history.\nThey have cheated on each other many times.\nThis is called a \"legacy of infidelity\".\n\nWhat is infidelity? \nInfidel...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Susie Wiles, JD Vance, and the “Junkyard Dogs”: The White House Chief of Staff On Trump’s Second Term...",
+      "simplifiedText": "Meet Susie Wiles and JD Vance:\n\n* They are important people.\n* They work with the President.\n\nThe \"Junkyard Dogs\" is a group they are part of.\n\nThe White House Chief of Staff is a big job....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hitler’s Doomed Angel...",
+      "simplifiedText": "Hitler's Doomed Angel\n\nThis is a book title....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Lili Anolik is a contributing editor at Vanity Fair. Her work has also appeared in Harper’s, Esquire, and The Paris Review, among other publications. She is the creator of the podcast Once Upon a Time...",
+      "simplifiedText": "Lili Anolik writes for many magazines.\n\n* She works at Vanity Fair.\n* Her work is also in Harper's and Esquire.\n* She made a podcast called Once Upon a Time...\n\nHer new book is called Didion & Babitz....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Once Upon a Time… at Bennington College...",
+      "simplifiedText": "Here is the rewritten text:\n\nA long time ago, at Bennington College.\n\n* A long time ago\n* This happened at Bennington College...",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Diane Keaton’s Memoirs Show She Had That Special Something...",
+      "simplifiedText": "Diane Keaton's life story shows she had something special.\n\nShe had a unique spirit that made her stand out.\n\n* She was different from others.\n* She had a special way of thinking.\n* She made people no...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "All three books are infused with her signature style—and filled with candid thoughts about everything from her personal insecurities to her tumultuous relationship with Al Pacino....",
+      "simplifiedText": "She wrote three books. \n\n* They have her special way of writing.\n* She shares her honest thoughts in these books.\n* She talks about her worries and fears.\n* She also talks about her complicated relati...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Brigitte Bardot, French Star and Sex Symbol, Dies at 91...",
+      "simplifiedText": "Brigitte Bardot is dead.\n\nShe was a famous French actress.\nShe was also a famous sex symbol.\nShe was 91 years old....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "At the height of her fame, Bardot’s last name was as indelible as Marilyn Monroe’s first....",
+      "simplifiedText": "Bardot was a famous person.\n\n* Her last name was well-known.\n* It was like Marilyn Monroe's first name.\n* People remembered it easily....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "The Family Stone, Without Diane Keaton: “So Much of the Sequel Is About Her Absence”...",
+      "simplifiedText": "The movie \"The Family Stone\" has a new version.\n\n* This version does not have Diane Keaton.\n* The movie is about her not being there.\n* The story is about how her absence affects everyone.\n* The movie...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "On the film’s 20th anniversary, writer-director Thomas Bezucha talks to Vanity Fair about the divisive dinner table scene, getting political in a Christmas movie, and his plans for a follow-up after K...",
+      "simplifiedText": "Thomas Bezucha talks about his film.\n\n* It's 20 years old now.\n* He talks to Vanity Fair.\n* They talk about a big dinner scene.\n* This scene makes people disagree.\n* Thomas made a Christmas movie that...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Laura Dern and Carol Burnett On the Inspiration Behind That Emotional Palm Royale Twist...",
+      "simplifiedText": "Laura Dern and Carol Burnett talk about their movie.\n\nThey talk about a special part in the movie.\nIt's a sad and emotional part.\nThey call it the Palm Royale Twist....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "After the loss of Dern’s mother Diane Ladd in November, two Hollywood giants reflect on their unbreakable bond: “I do feel that it’s kind of like a mother-daughter thing. Not even kind of like. It is ...",
+      "simplifiedText": "They talk about their special bond.\n\n* They feel like mother and daughter.\n* They are very grateful for this.\n* It's a special feeling for them....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Rob Reiner and His Son Nick Reiner Collaborated on a Semi-Autobiographical Movie Called Being Charlie...",
+      "simplifiedText": "Rob Reiner and his son Nick worked together.\n\n* They made a movie called Being Charlie.\n* It is based on their own lives....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "In 2015, Rob Reiner directed his son Nick Reiner’s screenplay, based in part on Nick’s struggles as a young man. The experience “only brought us closer together,” the elder Reiner said at the time....",
+      "simplifiedText": "Rob Reiner directed a movie in 2015.\n\n* The movie was based on his son's life.\n* His son, Nick, wrote the screenplay.\n* Nick had hard times when he was young.\n\nRob said working on the movie made them ...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Belle Burden Wrote a Viral “Modern Love” About Her Husband’s Betrayal. Now You Can Read the Book....",
+      "simplifiedText": "Belle Burden wrote a popular story.\n\nIt was about her husband's bad behavior.\n\nNow you can read a book about it....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "In 2023, her New York Times column devastated readers. In her new memoir, Strangers, the granddaughter of Babe Paley offers a deeper personal history....",
+      "simplifiedText": "Her New York Times column was very sad in 2023.\n\nShe wrote a new book called Strangers.\n\nThis book tells her personal story....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "How Mothers on the Brink Became the Main Characters of 2025...",
+      "simplifiedText": "Here is the text rewritten in simple language:\n\nHow mothers are now the main characters:\n\n* They are in a difficult place.\n* They are the main people in a story.\n* The story is about 2025....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "The minds behind some of the year’s buzziest maternal dysphoria stories, such as All Her Fault and If I Had Legs I’d Kick You, on bringing mommy’s secrets out of the shadows—and why more women are ret...",
+      "simplifiedText": "People who tell stories about motherhood are talking about:\n\n* Secrets women keep about being mothers.\n* Why some women are thinking differently about motherhood.\n\nThey made stories like \"All Her Faul...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "If I Had Legs I’d Kick You,...",
+      "simplifiedText": "If you had legs, you would kick me,\n\n* You would kick with your legs.\n* You would kick someone or something.\n* This is what you would do.\n \nYou are angry at me....",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "It’s a Wonderful Life,...",
+      "simplifiedText": "It's a great movie.\n\n* It's called \"It's a Wonderful Life\".\n* This movie is very good.\n* Many people like it.\n* You might like it too.\n* It's a story about a man.\n* He lives in a small town.\n* He help...",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "In It’s a Wonderful Life, There’s Something About Mary...",
+      "simplifiedText": "This is two movie titles.\n\n* Movie 1: It's a Wonderful Life\n* Movie 2: There's Something About Mary...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Every year around this time, we like to revisit this indisputable holiday classic and ask…does anyone really believe Donna Reed’s force of nature would be reduced to nothing without George Bailey? Als...",
+      "simplifiedText": "We like to watch this movie every year.\n\n* It's a classic holiday movie.\n* We ask some questions about it.\n* Does Donna Reed's character need George Bailey?\n* Would being a librarian be bad?...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "What Ever Happened to Mr. and Miss Golden Globe?...",
+      "simplifiedText": "Let's find out what happened to Mr. and Miss Golden Globe.\n\nThey are awards given to actors and actresses who do a great job in movies.\n\n* The awards are given at a big party called the Golden Globe A...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Here’s why the title that helped introduce Dakota Johnson and Laura Dern no longer exists and how the organization could revive the tradition for a new generation....",
+      "simplifiedText": "Here's why the title is gone:\n\nThe title is no longer used.\nIt helped introduce Dakota Johnson and Laura Dern.\n\nHow to bring it back:\n\n* Use the title again.\n* Introduce new people with the title.\n* M...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "The 25 Best Movies on Netflix to Watch in January 2026...",
+      "simplifiedText": "Here are the best movies on Netflix:\n\n* You can watch these movies in January 2026.\n* Netflix has many great movies to choose from.\n\nWe will tell you about 25 of them....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "From comedy classics to recent Oscar winners, these are the titles you don’t want to miss....",
+      "simplifiedText": "You want to watch these movies:\n\n* They are funny and old.\n* They also won big awards.\n* You won't want to miss them....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Ethan Hawke Needs to Know Where Gwyneth Paltrow Kissed “Timmy Chalamet”...",
+      "simplifiedText": "Here are the steps:\n\n* Read the story about Ethan Hawke.\n* Find the part about Gwyneth Paltrow.\n* Look for the name \"Timmy Chalamet\".\n* Find out where Gwyneth Paltrow kissed Timmy Chalamet....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "“Did you kiss him in the same place you kissed me?” the Blue Moon star jokingly asks the star of Marty Supreme as the two discuss their long friendship, making Great Expectations, the “wonderful lunat...",
+      "simplifiedText": "The Blue Moon star asks the Marty Supreme star a question.\n\n* What did you kiss him with your mouth?\n* Where did you kiss him?\n* You kissed him in the same place you kissed me?\n\nThe two stars talk abo...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "When Paris Hilton Partied Like Marie Antoinette...",
+      "simplifiedText": "Here is the text rewritten in simple language:\n\nWhen Paris Hilton Partied Like Marie Antoinette\n\nParis Hilton is a famous person.\nShe likes to have fun and party.\n\nMarie Antoinette was a queen a long ...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Journey back to 2002, when Hilton celebrated her 21st with six lavish celebrations in six different cities—and the 1770s, when the doomed final queen of France frittered away her final years at Petit ...",
+      "simplifiedText": "Let's go back in time.\n\n* Go back to 2002.\n* Hilton was 21 years old.\n* She had 6 big parties in 6 cities.\n\nGo back even further, to the 1770s.\n* There was a queen of France.\n* She lived in a place ca...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "More from Vanity Fair...",
+      "simplifiedText": "More from our magazine.\n\n* Look at our other pages.\n* Read more stories and articles.\n* Find new things to learn....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Your California Privacy Rights...",
+      "simplifiedText": "Your Rights in California\n\nYou have special rights in California about your personal info.\n\n* Do you live in California?\n* Do you want to know about your rights?\n\nIf yes, keep reading.\n\nYou have the r...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Your Privacy Choices...",
+      "simplifiedText": "We care about your privacy.\n\nYou have choices about your personal info.\n\n* What you share with us\n* Who sees it\n* How we use it...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "© 2026 Condé Nast. All rights reserved. Vanity Fair may earn a portion of sales from products that are purchased through our site as part of our Affiliate Partnerships with retailers. The material on ...",
+      "simplifiedText": "You can use this website.\n\n* We own the rights to this website.\n* We get money from some ads.\n* You can't copy or use our stuff without asking us first....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Select international site...",
+      "simplifiedText": "Choose a country\n\n* Click on \"Select international site\".\n* Pick your country from the list....",
+      "elementTag": "h6"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "Snider hired a private detective to spy on Dorothy, find out if she was cheating on him with Bogdanovich. (A doleful irony: They All Laughed is about a trio of private detectives, one played by Ritter...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "On August 13, Dorothy visited a lawyer, and, while declaring her intention to end the marriage to Snider, declared, too, her intention to take care of Snider financially. (“I’d like to remain his frie...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It’d been exactly two years and one day since Dorothy left Canada....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Like I said, a fairy tale. But a fairy tale for grown-ups and a fairy tale at odds with itself. There’s a tension between the fairy tale’s tellers (of which there are a profusion) and the fairy tale’s...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The All-American Pornographer...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "The first teller is journalist Teresa Carpenter. Carpenter’s piece, “Death of a Playmate,” appears not quite three months after the rape-murder-rape-suicide, in the November 5, 1980, issue of The Vill...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "“In the end Dorothy Stratten was less memorable for herself than for the yearnings she evoked,” Carpenter concludes. (See what I mean? Carpenter is shitcanning Dorothy as the star of her own story.) “...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner as a pornographer...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "That someone viewed Hefner as a pornographer shouldn’t have come as a shock to him, and yet I suspect it did. Pornographers, after all, were furtive little men, guilt-ridden and bound by loneliness. A...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Sexual emancipator was how Hefner viewed Hefner. “I played some significant part in changing the social-sexual values of our time,” he said, and on more than one occasion. Hefner also viewed Hefner as...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Moreover, Hefner’s pornography wasn’t. “Hef made pornography nice,” says Miki Garcia, Miss January 1973 and director of Playmate Promotions from 1976 to 1982. “He made pornography that you could put o...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Pornography, art; tomato, tomahto. Only, at the end of the day, tomato. Garcia: “It was pornography. Soft pornography, but pornography.”...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "“Dorothy was important because Hefner is regarded by Hollywood as an interloper,” said one Playboy employee. “They’ll come to his parties and play his games. But they won’t give him respect. One of th...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "So, Carpenter could make the pornography charge stick. What about the pimp? Yes, if indirectly. “Hef had all these beautiful women, and he controlled them,” says Garcia. “He controlled them through th...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "So, to a degree, was Hefner. A beggar as well, no matter that he was a king everywhere else. Hollywood turned him into a beggar. Worse, Hollywood turned him into a host. That’s what he was at the Mans...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner’s professional power in Hollywood was even more limited than his social. Hollywood was a company town, and he wasn’t a company man, much as he tried to be. “He was in love with the idea of Holl...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Crazy World of Julius Vrooder...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Was The Last Picture Show a smash because of its emotional intelligence, its atmospheric nuance, or because it featured a number of young women topless?...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "What’s surprising, though, is that his forays into movie star making went nowhere too. The maiden issue of Playboy, December 1953, had on its cover Marilyn Monroe and the words: “FIRST TIME in any mag...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner understood that Dorothy was in possession of the elusive It. “Some people have the quality,” he said. “That magic she had.” As Snider used Dorothy as an open sesame to the closed world of Playb...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last (Dirty) Picture Show...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "In the 1970s, a particular type of director—the auteur director—became as big a star as the movie stars he directed. These directors weren’t craftsmen (how directors in previous generations thought of...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Francis Ford Coppola...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Bogdanovich’s breakthrough came in 1971 with The Last Picture Show, an ensemble drama about growing up in a small Texas town, sensitively told and luminously shot. The lead actors, Jeff Bridges and Ti...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Nobody in his right mind would call Bogdanovich a pornographer. Except he made movies, and movies were a keyhole through which voyeurs could peep. (Was The Last Picture Show a smash because of its emo...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Nobody in his right mind would call Bogdanovich a pimp. He was good with women and good to women, his treatment of Platt notwithstanding. Actually, his treatment of Platt semiwithstanding. Their perso...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show,...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "So, to repeat: Nobody in his right mind would call Bogdanovich a pimp. Except, also to repeat: He made movies. Was, in fact, a director of movies, and inherent in that word—director—is power, authorit...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "When Bogdanovich got together with Dorothy in early 1980, he’d hit the skids. There’d been four flops in a row, two of which starred Shepherd, who’d dumped him for a parts manager at a car dealership ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Carpenter’s piece was highly influential. Because it was first. Because it won a Pulitzer. (By default, after Janet Cooke’s sob-story story about an eight-year-old Black dope fiend—“Don’t nobody here ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The supporting players in the fairy tale were about to become the tellers of the fairy tale....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner commissioned an article for the May 1981 issue of his magazine. “Richard Rhodes and the editors of Playboy,” read the byline. “The deal was Hefner wanted to edit and contribute to the story,” s...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A few months later, in the fall of ’81, Bogdanovich sold a proposal for a memoir about his time with Dorothy. “It’s a story which must be told,” he said to a reporter, “and I’ll tell it.”...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "But Carpenter wasn’t passing the microphone just yet. She’d sold the rights to “Death of a Playmate” to Hollywood. (Perhaps not the only Dorothy-related rights sold to Hollywood. The private detective...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Death of a Centerfold....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The adaption would be called Star 80, a reference to the vanity plate on the Mercedes Snider bought Dorothy with her money. (According to Louise, Snider’s family harassed Dorothy’s mother, insisting s...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse, a supporting player, even if he was entering the fairy tale when it was already over. Fosse, yet another complicated and contradictory man. Fosse, the final teller....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse was a Hollywood figure via Broadway. A dancer and choreographer by training, he’d been the dominant—domineering too—force in American stage musicals starting in the mid-’50s, his influence so pe...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show,...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "In terms of rank, scope, and scale, Fosse was every bit the equal of Hefner and Bogdanovich. And he had an enormous aesthetic advantage over both: Canny self-loathing was his bread and butter. You cou...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "GIRL NEXT DOOR In “Death of a Playmate,” the story adapted by Bob Fosse into the film Star 80, Teresa Carpenter blames not only Paul Snider but Hugh Hefner and Peter Bogdanovich for Stratten’s tragic ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Fosse’s subjects ranged, only not really. Really he had a single subject, and that subject was an idea: Life’s a cabaret, old chum, and a crummy one. That’s what Lenny, a biopic of comedian Lenny Bruc...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse saw everything through the smeared lens of gutter showbiz, which is what he grew up in. He started dancing professionally as a kid. Was, by 13, working the vaudeville circuit, and that meant the...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse understood that for Star 80 to work required performers who grasped instinctively the tawdry-corrupt milieu in which Dorothy and Snider moved, who knew that milieu in their bones because they’d ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "As Dorothy, Fosse cast Mariel Hemingway, granddaughter of Ernest Hemingway, who’d shot himself the year she was born. Ernest Hemingway was, of course, a literary figure, not a show business figure, on...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Only Hemingway wasn’t who Fosse had in mind initially. His first thought was another show business baby, Melanie Griffith, daughter of Tippi Hedren, the last of the cool Hitchcock blondes. The one Hit...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Death of a Centerfold,...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Hemingway and Griffith had something else in common. Both first came to public notice playing nymphets. In Woody Allen’s 1979 comedy Manhattan, Hemingway is Tracy, the girlfriend of Allen’s character ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Griffith’s breakthrough would come a year after Star 80, when she played a variation on Dorothy—Holly Body, an adult actress—in Body Double, directed by a variation on Hitchcock, Brian De Palma, the s...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "To secure the role of Dorothy, Hemingway would agree to breast implants. She would not, however, agree to sex with Fosse. “I said to him, ‘I can’t. I can’t. I can’t be naked every day, and also then g...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "De Niro out, Fosse cast Eric Roberts as Snider. Roberts was also a show business baby: His parents ran an acting school; his sister was (or soon would be) Julia Roberts, the biggest female movie star ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "To suggest that Star 80 is about anyone other than Dorothy would be madness—she is Star 80—yet somehow Star 80 is about someone other than Dorothy. A pull quote from a profile of Fosse in the November...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I was making a movie about Paul Snider....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "I was making a movie about Paul Snider. A startling enough admission. But what Fosse was really admitting was even more startling: I was making a movie about Bob Fosse....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I was making a movie about Bob Fosse....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Roberts, on the moment the light bulb went off: “I was having trouble with a scene and said, ‘Cut.’ You don’t say, ‘Cut,’ on a Fosse movie unless you’re Fosse. He said, ‘What are you doing?’ I said, ‘...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Roberts is right: Star 80 is another version of All That Jazz; is another Fosse autobiography. “I think the manipulative Machiavellian side of Paul resonated with Bob because I think Bob recognized th...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Because Fosse made her character the less interesting character in the movie. The real Dorothy was creative too. She was a compulsive writer of poetry. And when Snider was cooking up ideas for Chippen...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Maybe the real question is why was Fosse so hell-bent on identifying with Snider in the first place? Sam Wasson, writer of Fosse, the definitive Fosse biography, says this: “I think what Fosse’s sayin...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "There Fosse goes again: blabbing his dirty secrets....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "During filming, Fosse became fixated on getting the minutiae right, the nitty-gritty particulars. He hired as a technical adviser Cis Rundle, Hefner’s social secretary. (It was Rundle who took the cal...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "And Fosse would sit in a screening room with a 14-year-old Louise. He wanted notes from someone in Dorothy’s family. “My mom couldn’t do it, it was too upsetting for her,” says Louise. “So I did it. T...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The shoot was agony, largely because everyone knew where the story was going. “Bob shot in order,” says Roberts. “He wanted to have death be the end because you can’t really come back and do earlier s...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse insisted, too, on filming at the real locations whenever he could. “Every place in that movie is where it happened in reality,” says Roberts. “It’s like a docudrama.”...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse wasn’t trying to re-create the past—docudrama’s goal—so much as resurrect the past. “Bob had a chair on set with Dorothy’s name on it,” says Rundle. “It’s like she was there. It was like a séanc...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Of course Fosse couldn’t stop Snider, but that he imagined he could means he’d accomplished what he set out to accomplish: make the past present. In his mind, Dorothy’s rape and murder wasn’t fading i...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Star 80 is the ultimate Hollywood movie in another sense. Hollywood’s most cherished belief about itself is that it’s a magical place, a place where a regular (if fabulously good-looking) person might...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Star 80 was grueling to make, grueling to watch. No one could question the integrity of Fosse’s vision. The show business world he depicted was pure slime, and viewers—the few there were—dripped by th...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In Hollywood, Star 80 wasn’t treated as a failure; was treated as an atrocity. To be associated with it was to be contaminated. And the effect it had on its principals was nothing short of ruinous. Fo...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Rats Spelled Backward...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "More tellings told, more tellers ruined:...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In 1984, Bogdanovich published The Killing of the Unicorn: Dorothy Stratten 1960–1980. In his version of the fairy tale, he’s the courtly lover; Dorothy the courtly lovee (“an angel in the shape of Ap...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Killing of the Unicorn: Dorothy Stratten 1960–1980....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The book was an act of tribute to Dorothy but also an act of revenge on Hefner. Hefner’s response was what you’d imagine. “Hefner and Bogdanovich, they went to war,” says Garcia. “Bogdanovich indicted...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "On April 1, 1985, Hefner held a press conference at the Mansion, where he accused Bogdanovich of seducing Dorothy’s mother, Nelly, breaking up Nelly’s marriage; of seducing Dorothy’s sister, Louise, a...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Colleen Camp pooh-poohs the accusations: “Peter thought that because Dorothy had died tragically, he was responsible for her whole family. He had Nelly and Louise living with him in Bel-Air. He was ge...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A few days after Hefner’s press conference, Louise filed a lawsuit against Hefner for slander, libel, and invasion of privacy. Six months later, she dropped the suit. Around the same time, Bogdanovich...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner was the winner of the war, but he was the loser too. Because to achieve victory he’d trashed the reputation of a grieving mother and a teenage girl, not a good look, as he well knew. (“Just so ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "And what, finally, of Dorothy?...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "She is the object of desire who is the subject of all these articles and books and films but is, in the end, a mystery. Not one of the portraits captures her, and that’s because her portraitists, thou...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "What might someone with unimpaired vision see when looking at Dorothy? Quentin Tarantino, in his podcast, The Video Archives, talks about watching footage of Dorothy taken at the Playboy Playmate of t...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In telling after telling, Dorothy is presented as the docile marionette of whatever man’s pulling her strings at the moment. Except that reading of Dorothy doesn’t square with the evidence. Dorothy al...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A detail that could be filed under “romantic,” could be filed under “creepy”: Dorothy’s final resting place is the Pierce Brothers Westwood Village Memorial Park and Mortuary; resting alongside her, P...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A detail that could only be filed under “creepy”: Marilyn Monroe’s final resting place is also the Pierce Brothers Westwood Village Memorial Park and Mortuary; resting alongside her, Hefner, who died ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hollywood won’t leave these women alone. Snuff isn’t enough. Necrophilia isn’t enough. They’re hounded into the hereafter....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Only Roberts seemed to understand what had been done to Dorothy and what Dorothy was due. “Fosse knew how to get a performance out of an actor, and he got it out of Eric,” says Cis Rundle. “I helped E...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Used 5317, Requested 724. Please try again in 410ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    }
+  ]
+}

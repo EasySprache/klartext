@@ -1,0 +1,1685 @@
+{
+  "metadata": {
+    "totalChunks": 177,
+    "successCount": 0,
+    "failCount": 177,
+    "totalTime": "6.9s",
+    "apiTime": "6.8s",
+    "timestamp": "2026-01-14T12:17:17.621Z",
+    "url": "https://www.vanityfair.com/hollywood/story/dorothy-stratten-hollywood-horror-story",
+    "title": "Forgotten Star Dorothy Stratten Almost Lived the Hollywood Fairy Tale. It Ended as a Horror Story. | Vanity Fair",
+    "successfulCount": 0,
+    "failedCount": 177,
+    "errorCount": 195
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T12:17:17.344Z",
+      "message": "[KlarText] Batch 1 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.357Z",
+      "message": "[KlarText] Batch 2 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.372Z",
+      "message": "[KlarText] Batch 3 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.396Z",
+      "message": "[KlarText] Batch 4 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.404Z",
+      "message": "[KlarText] Batch 5 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.409Z",
+      "message": "[KlarText] Batch 6 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.423Z",
+      "message": "[KlarText] Batch 7 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.431Z",
+      "message": "[KlarText] Batch 8 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.436Z",
+      "message": "[KlarText] Batch 9 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.453Z",
+      "message": "[KlarText] Batch 10 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.472Z",
+      "message": "[KlarText] Batch 11 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.545Z",
+      "message": "[KlarText] Batch 12 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.559Z",
+      "message": "[KlarText] Batch 13 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.568Z",
+      "message": "[KlarText] Batch 14 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.592Z",
+      "message": "[KlarText] Batch 15 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.600Z",
+      "message": "[KlarText] Batch 16 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.605Z",
+      "message": "[KlarText] Batch 17 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.610Z",
+      "message": "[KlarText] Batch 18 failed: TypeError: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.610Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.611Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.612Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.613Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.614Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.615Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.616Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.617Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.618Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.619Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.620Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.621Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.621Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.621Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    },
+    {
+      "timestamp": "2026-01-14T12:17:17.621Z",
+      "message": "[KlarText] Chunk failed: Failed to fetch"
+    }
+  ],
+  "successfulResults": [],
+  "failedResults": [
+    {
+      "originalText": "We process your data to deliver content or advertisements and measure the delivery of such content or advertisements to extract insights about our website. We share this information with our partners ...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Below, you will find a list of the purposes and special features for which your data is being processed. You may exercise your rights for specific purposes, based on consent or legitimate interest, us...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Targeted Advertising...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Social Media Cookies...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Audience Measurement...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Store and/or access information on a device...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use limited data to select advertising...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Create profiles for personalised advertising...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use profiles to select personalised advertising...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Create profiles to personalise content...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use profiles to select personalised content...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Measure advertising performance...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Measure content performance...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Understand audiences through statistics or combinations of data from different sources...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Develop and improve services...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use limited data to select content...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Below, you will find a list of the features for which your data is being processed. You may exercise your rights for special features using the toggles below....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Match and combine data from other data sources...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Link different devices...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Identify devices based on information transmitted automatically...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Use precise geolocation data...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Actively scan device characteristics for identification...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Below, you will find a list of vendors processing your data and the purposes or features of processing they declare. You may exercise your rights for each vendor based on the legal basis they assert....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Active Agent (Virtual Minds)...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "AdElement Media Solutions...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Skip to main content...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Forgotten Star Dorothy Stratten Almost Lived the Hollywood Fairy Tale. It Ended as a Horror Story....",
+      "error": "Failed to fetch",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Peter Bogdanovich, Bob Fosse, and Hugh Hefner all loved her, in their own ways—for better and worse. This reexamination of Stratten’s life, rape, and murder casts a new light on the angel who was a ce...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "PICTURE PERFECT Dorothy Stratten was still in high school when she entered the Great Playmate Hunt....",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Steve Schapiro/Getty Images....",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Before it was a horror story, it was a fairy tale....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Once upon a time (in 1978) in a Podunk town (Coquitlam, on the outskirts of Vancouver) lived a young girl named Dorothy Hoogstraten. Dorothy, 17, a high school senior, was working her usual shift at a...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider didn’t tell Dorothy he was a pimp; told Dorothy he was a promoter, which he also was. In LA, he’d put on the California Truckin’ & Cycle Show at the Convention Center. Photographer Howard Koby ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider wooed Dorothy: bought her flowers, sang to her, took her to prom. He was always trying to get her clothes off. So he could have sex with her, naturally; but really so he could photograph her. P...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "If Dorothy was ambivalent about the camera, the camera was not ambivalent about Dorothy. It was gaga for her. In her test shots, she conveyed a mixture of innocence and eroticism; purity but with inti...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider worked hard to persuade her mother, Nelly (her father, Simon, had long been out of the picture), to sign a release. When he failed, he signed it for Nelly—a forgery—sent it to Playboy. Hugh Hef...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Though Dorothy wasn’t the winner of the contest, she was the runner-up. And Snider saw to it that her star only rose from there. A recollection of Louise’s: “We were watching The Sonny & Cher Show at ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider’s methods were dubious; his results were not. In short succession, Dorothy landed Playmate of the Month (August 1979); a lead role in the BDSM thriller Autumn Born (she played a spoiled-rotten ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In March 1980, Dorothy, now 20, headed to New York to begin filming with Peter Bogdanovich, 40. She’d met the celebrated director at the Playboy Mansion. He was immediately struck by her refinement, h...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Dorothy checked into her hotel, the Wyndham, though only to keep up appearances. She was staying with Bogdanovich at his hotel, the Plaza, a “Do not disturb” on the phone. Snider was already spiraling...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Snider hired a private detective to spy on Dorothy, find out if she was cheating on him with Bogdanovich. (A doleful irony: They All Laughed is about a trio of private detectives, one played by Ritter...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "On August 13, Dorothy visited a lawyer, and, while declaring her intention to end the marriage to Snider, declared, too, her intention to take care of Snider financially. (“I’d like to remain his frie...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It’d been exactly two years and one day since Dorothy left Canada....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Like I said, a fairy tale. But a fairy tale for grown-ups and a fairy tale at odds with itself. There’s a tension between the fairy tale’s tellers (of which there are a profusion) and the fairy tale’s...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The All-American Pornographer...",
+      "error": "Failed to fetch",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "The first teller is journalist Teresa Carpenter. Carpenter’s piece, “Death of a Playmate,” appears not quite three months after the rape-murder-rape-suicide, in the November 5, 1980, issue of The Vill...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "“In the end Dorothy Stratten was less memorable for herself than for the yearnings she evoked,” Carpenter concludes. (See what I mean? Carpenter is shitcanning Dorothy as the star of her own story.) “...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner as a pornographer...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "That someone viewed Hefner as a pornographer shouldn’t have come as a shock to him, and yet I suspect it did. Pornographers, after all, were furtive little men, guilt-ridden and bound by loneliness. A...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Sexual emancipator was how Hefner viewed Hefner. “I played some significant part in changing the social-sexual values of our time,” he said, and on more than one occasion. Hefner also viewed Hefner as...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Moreover, Hefner’s pornography wasn’t. “Hef made pornography nice,” says Miki Garcia, Miss January 1973 and director of Playmate Promotions from 1976 to 1982. “He made pornography that you could put o...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Pornography, art; tomato, tomahto. Only, at the end of the day, tomato. Garcia: “It was pornography. Soft pornography, but pornography.”...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "“Dorothy was important because Hefner is regarded by Hollywood as an interloper,” said one Playboy employee. “They’ll come to his parties and play his games. But they won’t give him respect. One of th...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "So, Carpenter could make the pornography charge stick. What about the pimp? Yes, if indirectly. “Hef had all these beautiful women, and he controlled them,” says Garcia. “He controlled them through th...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "So, to a degree, was Hefner. A beggar as well, no matter that he was a king everywhere else. Hollywood turned him into a beggar. Worse, Hollywood turned him into a host. That’s what he was at the Mans...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner’s professional power in Hollywood was even more limited than his social. Hollywood was a company town, and he wasn’t a company man, much as he tried to be. “He was in love with the idea of Holl...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Crazy World of Julius Vrooder...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Was The Last Picture Show a smash because of its emotional intelligence, its atmospheric nuance, or because it featured a number of young women topless?...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "What’s surprising, though, is that his forays into movie star making went nowhere too. The maiden issue of Playboy, December 1953, had on its cover Marilyn Monroe and the words: “FIRST TIME in any mag...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner understood that Dorothy was in possession of the elusive It. “Some people have the quality,” he said. “That magic she had.” As Snider used Dorothy as an open sesame to the closed world of Playb...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last (Dirty) Picture Show...",
+      "error": "Failed to fetch",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "In the 1970s, a particular type of director—the auteur director—became as big a star as the movie stars he directed. These directors weren’t craftsmen (how directors in previous generations thought of...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Francis Ford Coppola...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Bogdanovich’s breakthrough came in 1971 with The Last Picture Show, an ensemble drama about growing up in a small Texas town, sensitively told and luminously shot. The lead actors, Jeff Bridges and Ti...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Nobody in his right mind would call Bogdanovich a pornographer. Except he made movies, and movies were a keyhole through which voyeurs could peep. (Was The Last Picture Show a smash because of its emo...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Nobody in his right mind would call Bogdanovich a pimp. He was good with women and good to women, his treatment of Platt notwithstanding. Actually, his treatment of Platt semiwithstanding. Their perso...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show,...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The Last Picture Show...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "So, to repeat: Nobody in his right mind would call Bogdanovich a pimp. Except, also to repeat: He made movies. Was, in fact, a director of movies, and inherent in that word—director—is power, authorit...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "When Bogdanovich got together with Dorothy in early 1980, he’d hit the skids. There’d been four flops in a row, two of which starred Shepherd, who’d dumped him for a parts manager at a car dealership ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Carpenter’s piece was highly influential. Because it was first. Because it won a Pulitzer. (By default, after Janet Cooke’s sob-story story about an eight-year-old Black dope fiend—“Don’t nobody here ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The supporting players in the fairy tale were about to become the tellers of the fairy tale....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner commissioned an article for the May 1981 issue of his magazine. “Richard Rhodes and the editors of Playboy,” read the byline. “The deal was Hefner wanted to edit and contribute to the story,” s...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A few months later, in the fall of ’81, Bogdanovich sold a proposal for a memoir about his time with Dorothy. “It’s a story which must be told,” he said to a reporter, “and I’ll tell it.”...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "But Carpenter wasn’t passing the microphone just yet. She’d sold the rights to “Death of a Playmate” to Hollywood. (Perhaps not the only Dorothy-related rights sold to Hollywood. The private detective...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Death of a Centerfold....",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The adaption would be called Star 80, a reference to the vanity plate on the Mercedes Snider bought Dorothy with her money. (According to Louise, Snider’s family harassed Dorothy’s mother, insisting s...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse, a supporting player, even if he was entering the fairy tale when it was already over. Fosse, yet another complicated and contradictory man. Fosse, the final teller....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse was a Hollywood figure via Broadway. A dancer and choreographer by training, he’d been the dominant—domineering too—force in American stage musicals starting in the mid-’50s, his influence so pe...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Last Picture Show,...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "In terms of rank, scope, and scale, Fosse was every bit the equal of Hefner and Bogdanovich. And he had an enormous aesthetic advantage over both: Canny self-loathing was his bread and butter. You cou...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "GIRL NEXT DOOR In “Death of a Playmate,” the story adapted by Bob Fosse into the film Star 80, Teresa Carpenter blames not only Paul Snider but Hugh Hefner and Peter Bogdanovich for Stratten’s tragic ...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Fosse’s subjects ranged, only not really. Really he had a single subject, and that subject was an idea: Life’s a cabaret, old chum, and a crummy one. That’s what Lenny, a biopic of comedian Lenny Bruc...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse saw everything through the smeared lens of gutter showbiz, which is what he grew up in. He started dancing professionally as a kid. Was, by 13, working the vaudeville circuit, and that meant the...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse understood that for Star 80 to work required performers who grasped instinctively the tawdry-corrupt milieu in which Dorothy and Snider moved, who knew that milieu in their bones because they’d ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "As Dorothy, Fosse cast Mariel Hemingway, granddaughter of Ernest Hemingway, who’d shot himself the year she was born. Ernest Hemingway was, of course, a literary figure, not a show business figure, on...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Only Hemingway wasn’t who Fosse had in mind initially. His first thought was another show business baby, Melanie Griffith, daughter of Tippi Hedren, the last of the cool Hitchcock blondes. The one Hit...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Death of a Centerfold,...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Hemingway and Griffith had something else in common. Both first came to public notice playing nymphets. In Woody Allen’s 1979 comedy Manhattan, Hemingway is Tracy, the girlfriend of Allen’s character ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Griffith’s breakthrough would come a year after Star 80, when she played a variation on Dorothy—Holly Body, an adult actress—in Body Double, directed by a variation on Hitchcock, Brian De Palma, the s...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "To secure the role of Dorothy, Hemingway would agree to breast implants. She would not, however, agree to sex with Fosse. “I said to him, ‘I can’t. I can’t. I can’t be naked every day, and also then g...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "De Niro out, Fosse cast Eric Roberts as Snider. Roberts was also a show business baby: His parents ran an acting school; his sister was (or soon would be) Julia Roberts, the biggest female movie star ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "To suggest that Star 80 is about anyone other than Dorothy would be madness—she is Star 80—yet somehow Star 80 is about someone other than Dorothy. A pull quote from a profile of Fosse in the November...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I was making a movie about Paul Snider....",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "I was making a movie about Paul Snider. A startling enough admission. But what Fosse was really admitting was even more startling: I was making a movie about Bob Fosse....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I was making a movie about Bob Fosse....",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Roberts, on the moment the light bulb went off: “I was having trouble with a scene and said, ‘Cut.’ You don’t say, ‘Cut,’ on a Fosse movie unless you’re Fosse. He said, ‘What are you doing?’ I said, ‘...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Roberts is right: Star 80 is another version of All That Jazz; is another Fosse autobiography. “I think the manipulative Machiavellian side of Paul resonated with Bob because I think Bob recognized th...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Because Fosse made her character the less interesting character in the movie. The real Dorothy was creative too. She was a compulsive writer of poetry. And when Snider was cooking up ideas for Chippen...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Maybe the real question is why was Fosse so hell-bent on identifying with Snider in the first place? Sam Wasson, writer of Fosse, the definitive Fosse biography, says this: “I think what Fosse’s sayin...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "There Fosse goes again: blabbing his dirty secrets....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "During filming, Fosse became fixated on getting the minutiae right, the nitty-gritty particulars. He hired as a technical adviser Cis Rundle, Hefner’s social secretary. (It was Rundle who took the cal...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "And Fosse would sit in a screening room with a 14-year-old Louise. He wanted notes from someone in Dorothy’s family. “My mom couldn’t do it, it was too upsetting for her,” says Louise. “So I did it. T...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The shoot was agony, largely because everyone knew where the story was going. “Bob shot in order,” says Roberts. “He wanted to have death be the end because you can’t really come back and do earlier s...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse insisted, too, on filming at the real locations whenever he could. “Every place in that movie is where it happened in reality,” says Roberts. “It’s like a docudrama.”...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fosse wasn’t trying to re-create the past—docudrama’s goal—so much as resurrect the past. “Bob had a chair on set with Dorothy’s name on it,” says Rundle. “It’s like she was there. It was like a séanc...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Of course Fosse couldn’t stop Snider, but that he imagined he could means he’d accomplished what he set out to accomplish: make the past present. In his mind, Dorothy’s rape and murder wasn’t fading i...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Star 80 is the ultimate Hollywood movie in another sense. Hollywood’s most cherished belief about itself is that it’s a magical place, a place where a regular (if fabulously good-looking) person might...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Star 80 was grueling to make, grueling to watch. No one could question the integrity of Fosse’s vision. The show business world he depicted was pure slime, and viewers—the few there were—dripped by th...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In Hollywood, Star 80 wasn’t treated as a failure; was treated as an atrocity. To be associated with it was to be contaminated. And the effect it had on its principals was nothing short of ruinous. Fo...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Rats Spelled Backward...",
+      "error": "Failed to fetch",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "More tellings told, more tellers ruined:...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In 1984, Bogdanovich published The Killing of the Unicorn: Dorothy Stratten 1960–1980. In his version of the fairy tale, he’s the courtly lover; Dorothy the courtly lovee (“an angel in the shape of Ap...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Killing of the Unicorn: Dorothy Stratten 1960–1980....",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "The book was an act of tribute to Dorothy but also an act of revenge on Hefner. Hefner’s response was what you’d imagine. “Hefner and Bogdanovich, they went to war,” says Garcia. “Bogdanovich indicted...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "On April 1, 1985, Hefner held a press conference at the Mansion, where he accused Bogdanovich of seducing Dorothy’s mother, Nelly, breaking up Nelly’s marriage; of seducing Dorothy’s sister, Louise, a...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Colleen Camp pooh-poohs the accusations: “Peter thought that because Dorothy had died tragically, he was responsible for her whole family. He had Nelly and Louise living with him in Bel-Air. He was ge...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A few days after Hefner’s press conference, Louise filed a lawsuit against Hefner for slander, libel, and invasion of privacy. Six months later, she dropped the suit. Around the same time, Bogdanovich...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hefner was the winner of the war, but he was the loser too. Because to achieve victory he’d trashed the reputation of a grieving mother and a teenage girl, not a good look, as he well knew. (“Just so ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "And what, finally, of Dorothy?...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "She is the object of desire who is the subject of all these articles and books and films but is, in the end, a mystery. Not one of the portraits captures her, and that’s because her portraitists, thou...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "What might someone with unimpaired vision see when looking at Dorothy? Quentin Tarantino, in his podcast, The Video Archives, talks about watching footage of Dorothy taken at the Playboy Playmate of t...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In telling after telling, Dorothy is presented as the docile marionette of whatever man’s pulling her strings at the moment. Except that reading of Dorothy doesn’t square with the evidence. Dorothy al...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A detail that could be filed under “romantic,” could be filed under “creepy”: Dorothy’s final resting place is the Pierce Brothers Westwood Village Memorial Park and Mortuary; resting alongside her, P...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A detail that could only be filed under “creepy”: Marilyn Monroe’s final resting place is also the Pierce Brothers Westwood Village Memorial Park and Mortuary; resting alongside her, Hefner, who died ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hollywood won’t leave these women alone. Snuff isn’t enough. Necrophilia isn’t enough. They’re hounded into the hereafter....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Only Roberts seemed to understand what had been done to Dorothy and what Dorothy was due. “Fosse knew how to get a performance out of an actor, and he got it out of Eric,” says Cis Rundle. “I helped E...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "One of the few grace notes in Dorothy’s story, and the only apology Hollywood ever gave her....",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "More Great Stories From Vanity Fair...",
+      "error": "Failed to fetch",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Cover Star Teyana Taylor on Her Breakout Year...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "See All the Fashion From the 2026 Golden Globes Red Carpet...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "2026 Golden Globes Red Carpet...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "See the Full List of Winners From the 2026 Golden Globes...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "11 Best-Dressed Stars...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The 11 Best-Dressed Stars at the 2026 Golden Globes...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The MAGA Dive Bar That’s Also a Church...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "All the Highlights From the 2026 Golden Globes...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Belle Burden On Her Family’s “Legacy of Infidelity”...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Susie Wiles, JD Vance, and the “Junkyard Dogs”: The White House Chief of Staff On Trump’s Second Term...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Hitler’s Doomed Angel...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Lili Anolik is a contributing editor at Vanity Fair. Her work has also appeared in Harper’s, Esquire, and The Paris Review, among other publications. She is the creator of the podcast Once Upon a Time...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Once Upon a Time… at Bennington College...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "Diane Keaton’s Memoirs Show She Had That Special Something...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "All three books are infused with her signature style—and filled with candid thoughts about everything from her personal insecurities to her tumultuous relationship with Al Pacino....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Brigitte Bardot, French Star and Sex Symbol, Dies at 91...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "At the height of her fame, Bardot’s last name was as indelible as Marilyn Monroe’s first....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "The Family Stone, Without Diane Keaton: “So Much of the Sequel Is About Her Absence”...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "On the film’s 20th anniversary, writer-director Thomas Bezucha talks to Vanity Fair about the divisive dinner table scene, getting political in a Christmas movie, and his plans for a follow-up after K...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Laura Dern and Carol Burnett On the Inspiration Behind That Emotional Palm Royale Twist...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "After the loss of Dern’s mother Diane Ladd in November, two Hollywood giants reflect on their unbreakable bond: “I do feel that it’s kind of like a mother-daughter thing. Not even kind of like. It is ...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Rob Reiner and His Son Nick Reiner Collaborated on a Semi-Autobiographical Movie Called Being Charlie...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "In 2015, Rob Reiner directed his son Nick Reiner’s screenplay, based in part on Nick’s struggles as a young man. The experience “only brought us closer together,” the elder Reiner said at the time....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Belle Burden Wrote a Viral “Modern Love” About Her Husband’s Betrayal. Now You Can Read the Book....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "In 2023, her New York Times column devastated readers. In her new memoir, Strangers, the granddaughter of Babe Paley offers a deeper personal history....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "How Mothers on the Brink Became the Main Characters of 2025...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "The minds behind some of the year’s buzziest maternal dysphoria stories, such as All Her Fault and If I Had Legs I’d Kick You, on bringing mommy’s secrets out of the shadows—and why more women are ret...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "If I Had Legs I’d Kick You,...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "It’s a Wonderful Life,...",
+      "error": "Failed to fetch",
+      "elementTag": "em"
+    },
+    {
+      "originalText": "In It’s a Wonderful Life, There’s Something About Mary...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Every year around this time, we like to revisit this indisputable holiday classic and ask…does anyone really believe Donna Reed’s force of nature would be reduced to nothing without George Bailey? Als...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "What Ever Happened to Mr. and Miss Golden Globe?...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Here’s why the title that helped introduce Dakota Johnson and Laura Dern no longer exists and how the organization could revive the tradition for a new generation....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "The 25 Best Movies on Netflix to Watch in January 2026...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "From comedy classics to recent Oscar winners, these are the titles you don’t want to miss....",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Ethan Hawke Needs to Know Where Gwyneth Paltrow Kissed “Timmy Chalamet”...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "“Did you kiss him in the same place you kissed me?” the Blue Moon star jokingly asks the star of Marty Supreme as the two discuss their long friendship, making Great Expectations, the “wonderful lunat...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "When Paris Hilton Partied Like Marie Antoinette...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Journey back to 2002, when Hilton celebrated her 21st with six lavish celebrations in six different cities—and the 1770s, when the doomed final queen of France frittered away her final years at Petit ...",
+      "error": "Failed to fetch",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "More from Vanity Fair...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Your California Privacy Rights...",
+      "error": "Failed to fetch",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Your Privacy Choices...",
+      "error": "Failed to fetch",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "© 2026 Condé Nast. All rights reserved. Vanity Fair may earn a portion of sales from products that are purchased through our site as part of our Affiliate Partnerships with retailers. The material on ...",
+      "error": "Failed to fetch",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Select international site...",
+      "error": "Failed to fetch",
+      "elementTag": "h6"
+    }
+  ]
+}

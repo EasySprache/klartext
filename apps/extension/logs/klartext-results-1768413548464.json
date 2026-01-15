@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "totalChunks": 28,
+    "successCount": 28,
+    "failCount": 0,
+    "totalTime": "84.9s",
+    "apiTime": "84.9s",
+    "timestamp": "2026-01-14T17:59:08.455Z",
+    "url": "https://www.iana.org/domains/reserved",
+    "title": "IANA-managed Reserved Domains",
+    "successfulCount": 28,
+    "failedCount": 0,
+    "errorCount": 0
+  },
+  "errors": [],
+  "successfulResults": [
+    {
+      "originalText": "IANA-managed Reserved Domains...",
+      "simplifiedText": "IANA-managed Reserved Domains\n\nThese are special domains.\nThey are managed by IANA (Internet Assigned Numbers Authority).\nIANA is a group that helps keep the internet safe.\n\nThey are reserved for spec...",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Certain domains are set aside, and nominally registered to “IANA”, for specific\n\t\tpolicy or technical purposes....",
+      "simplifiedText": "Some areas are set aside for special reasons.\n\n* They are named after \"IANA\".\n* IANA is a special group.\n* These areas are used for specific rules or technology.\n* They help with certain tasks or deci...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "As described in RFC 2606 and RFC 6761,\n\ta number of domains such as example.com and example.org\n\tare maintained for documentation purposes. These domains may be used as illustrative\n\texamples in docum...",
+      "simplifiedText": "We have special domains.\n\n* example.com\n* example.org\n\nThese domains are for learning.\nThey help us show examples in documents.\nYou can use them in your work.\nBut you cannot register or sell them....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Test IDN top-level domains...",
+      "simplifiedText": "Test internet names\n\n* What are top-level domains?\n* They are the last part of a website's name.\n* Examples: .com, .org, .net...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "These domains were temporarily delegated by IANA for the IDN Evaluation being conducted by ICANN....",
+      "simplifiedText": "When you read this:\n\n* These domains were given to IANA.\n* IANA gave them for a short time.\n* They were for an ICANN test.\n* ICANN is the group doing the test.\n* The test is called IDN Evaluation....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Han (Simplified variant)...",
+      "simplifiedText": "Who is Han?\n\nHan is a person's name....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Han (Traditional variant)...",
+      "simplifiedText": "Han\n\n* This is a Chinese name.\n* It is also known as Hàn in some places.\n* The character for Han is (Hàn) in Chinese....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Greek, Modern (1453-)...",
+      "simplifiedText": "Modern Greek\n\n* This is the language spoken in Greece.\n* It started in 1453.\n* It is still used today....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Hangul (Hangŭl, Hangeul)...",
+      "simplifiedText": "Hangul is a writing system used in Korea. \n\nIt is called Hangul....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Policy-reserved domains...",
+      "simplifiedText": "Domains reserved by policy:\n\n* These are special domains.\n* They are set aside for special use.\n* Rules control how they are used....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "We act as both the registrant and registrar for a select number of domains\n\t\twhich have been reserved under policy grounds. These exclusions are\n\t\ttypically indicated in either technical standards (RF...",
+      "simplifiedText": "We help some domain owners.\n\n* We do two jobs: \n  - We are the owner (registrant).\n  - We are the person in charge (registrar).\n\nWe help with special domains. \nThese domains are set aside for a reason...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "contractual limitations...",
+      "simplifiedText": "Limitations in a contract mean:\n\n* You agree to follow rules.\n* These rules are written in the contract.\n* You cannot break these rules....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Domains which are described as registered to IANA or ICANN on policy\n\t\tgrounds are not available for registration or transfer, with the exception\n\t\tof country-name.info domains. These domains are avai...",
+      "simplifiedText": "When you want to register a domain:\n\n* Look for domains that say \"IANA\" or \"ICANN\".\n* These domains are not for sale.\n* They are only for special groups.\n\nSome exceptions:\n\n* Country-name.info domains...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Other Special-Use Domains...",
+      "simplifiedText": "Other Special-Use Domains\n\nThese domains are special. They have special rules.\n\n* They are not for regular use.\n* They have special meanings.\n* They help the internet work better.\n\nExamples:\n\n* .onion...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "There is additionally a Special-Use Domain Names registry documenting special-use domains designated by technical standards. For further information, see Special-Use Domain Names (RFC 6761)....",
+      "simplifiedText": "There is a list of special domains.\n\n* It shows domains with special rules.\n* These rules come from technical standards.\n* For more info, see RFC 6761 (Special-Use Domain Names)....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Special-Use Domain Names...",
+      "simplifiedText": "Special Names for Special Websites\n\nSpecial-use domain names are special names. They are used for special things.\n\n* They are not used for regular websites.\n* They are used for special purposes.\n\nExam...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Special-Use Domain Names...",
+      "simplifiedText": "Special-Use Domain Names\n\nThese are domain names with special meanings. \n\nThey are not used for websites. \n\nExamples include:\n\n* local\n* example\n* invalid\n* localhost\n* test\n* intranet\n* private\n* res...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Root Zone Management...",
+      "simplifiedText": "Root Zone Management\n\nYou want to manage the root zone.\n\nThe root zone is the top level of the internet.\n\nIt is like the main street of the internet.\n\nHere are the main things to manage:\n\n* Domain nam...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Instructions & Guides...",
+      "simplifiedText": "When you need help:\n\n* Look for instructions.\n* Read guides.\n* Follow the steps....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Register/modify an .INT domain...",
+      "simplifiedText": "To register or change an .INT domain:\n\n* Go to a website that sells domain names.\n* Choose .INT as your domain name.\n* Fill out the form with your information.\n* Pay for the domain name.\n* Wait for it...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "IDN Practices Repository...",
+      "simplifiedText": "IDN Practices Repository\n\nYou want to know about IDN Practices Repository.\n\nIDN stands for Internationalized Domain Names. \n\nIDN Practices Repository is a place for storing information.\n\nIt helps peop...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Root Key Signing Key (DNSSEC)...",
+      "simplifiedText": "A special key helps keep DNS safe.\n\n* DNS is like a phonebook for the internet.\n* A bad person might try to change it.\n* This special key helps keep it correct.\n* It's called a Root Key Signing Key (R...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Trust Anchors and Rollovers...",
+      "simplifiedText": "Trust Anchors and Rollovers\n\nYou need to know about trust anchors and rollovers.\n\nTrust anchors are like safe places.\nThey help you know if a website is real or not.\nThey are like a special lock that ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Key Signing Ceremonies...",
+      "simplifiedText": "Key Signing Ceremonies\n\nWhen you sign a key:\n\n* You get a special key.\n* This key opens a safe place.\n* You promise to keep it safe....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Policies & Procedures...",
+      "simplifiedText": "Policies and Procedures\n\n* Rules and steps\n* How we do things...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Community Representatives...",
+      "simplifiedText": "Community Representatives\n\nYou are a person who helps a community. \n\n* You talk to people in the community.\n* You listen to their ideas and problems.\n* You help the community make good choices....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The IANA functions coordinate the Internet’s globally unique identifiers, and\n                are provided by Public Technical Identifiers, an affiliate of\n                ICANN....",
+      "simplifiedText": "When you use the Internet:\n\n* There are special names for everything.\n* These names are unique and special.\n* They are managed by a group called IANA.\n* IANA works with a company called Public Technic...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Public Technical Identifiers...",
+      "simplifiedText": "Public Technical Identifiers\n\nThese are special codes. They help us identify things.\n\n* They are like names for things.\n* They make it easy to talk about things.\n* They are used by computers and peopl...",
+      "elementTag": "a"
+    }
+  ],
+  "failedResults": []
+}

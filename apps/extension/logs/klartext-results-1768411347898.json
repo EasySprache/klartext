@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "totalChunks": 1,
+    "successCount": 1,
+    "failCount": 0,
+    "totalTime": "39.0s",
+    "apiTime": "39.0s",
+    "timestamp": "2026-01-14T17:22:27.895Z",
+    "url": "https://example.com/?utm_source=chatgpt.com",
+    "title": "Example Domain",
+    "successfulCount": 1,
+    "failedCount": 0,
+    "errorCount": 0
+  },
+  "errors": [],
+  "successfulResults": [
+    {
+      "originalText": "This domain is for use in documentation examples without needing permission. Avoid use in operations....",
+      "simplifiedText": "This area is for examples only. Do not use it in real work....",
+      "elementTag": "p"
+    }
+  ],
+  "failedResults": []
+}
