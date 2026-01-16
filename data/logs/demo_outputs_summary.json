@@ -1,0 +1,201 @@
+{
+  "summary": {
+    "total_entries": 10,
+    "avg_metrics": {
+      "avg_avg_sentence_len_words": 6.49,
+      "avg_pct_sentences_gt20": 0.0,
+      "avg_ari_score": 5.68,
+      "avg_meaning_cosine": 0.56
+    },
+    "guardrails_summary": {
+      "total_passed": 35,
+      "total_checks": 40,
+      "pass_rate": 87.5,
+      "failure_counts": {
+        "Preserves Meaning": 4,
+        "Readable (ARI)": 1
+      }
+    }
+  },
+  "entries": [
+    {
+      "timestamp": "2026-01-13T15:44:41.008819Z",
+      "source_text": "Die Versicherungsnehmer sind verpflichtet, unverzüglich nach Kenntniserlangung \neines Versicherungsfalls diesen dem Versicherer anzuzeigen und alle für die \nFeststellung des Versicherungsfalls oder des Umfangs der Leistungspflicht des \nVersicherers erheblichen Umstände schriftlich mitzuteilen.",
+      "output_text": "Sie haben eine Versicherung.\nEs passiert ein Schaden.\nDas nennt man Versicherungsfall.\n\nDas müssen Sie tun:\n- Melden Sie den Schaden sofort.\n- Schreiben Sie alles auf.\n- Sagen Sie der Versicherung alle wichtigen Infos.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 5.3,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 6.7,
+        "meaning_cosine": 0.021
+      },
+      "guardrails_passed": 3,
+      "guardrails_total": 4,
+      "guardrails_failed": [
+        "Preserves Meaning"
+      ]
+    },
+    {
+      "timestamp": "2026-01-13T16:12:05.123456Z",
+      "source_text": "Die Antragstellung auf Gewährung von Leistungen zur Rehabilitation muss unter Verwendung der hierfür vorgesehenen amtlichen Vordrucke erfolgen.",
+      "output_text": "Sie möchten Hilfe für Ihre Gesundheit?\nDann müssen Sie einen Antrag stellen.\nBenutzen Sie das offizielle Formular.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 6.0,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 5.8,
+        "meaning_cosine": 0.87
+      },
+      "guardrails_passed": 4,
+      "guardrails_total": 4,
+      "guardrails_failed": []
+    },
+    {
+      "timestamp": "2026-01-13T16:35:22.987654Z",
+      "source_text": "Gemäß § 14 Abs. 2 SGB IX haben Rehabilitationsträger unverzüglich, spätestens jedoch innerhalb von zwei Wochen nach Eingang des Antrags, zu entscheiden.",
+      "output_text": "Die Behörde muss schnell entscheiden.\nSie hat 2 Wochen Zeit.\nDas steht im Gesetz.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 4.7,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 4.2,
+        "meaning_cosine": 0.82
+      },
+      "guardrails_passed": 4,
+      "guardrails_total": 4,
+      "guardrails_failed": []
+    },
+    {
+      "timestamp": "2026-01-13T17:01:44.555555Z",
+      "source_text": "Die Voraussetzungen für den Bezug von Arbeitslosengeld I umfassen eine Anwartschaftszeit von mindestens 12 Monaten innerhalb der letzten 30 Monate vor der Arbeitslosmeldung.",
+      "output_text": "Sie wollen Arbeitslosengeld bekommen?\nDafür müssen Sie vorher gearbeitet haben.\nSie brauchen 12 Monate Arbeit in den letzten 30 Monaten.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 7.3,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 7.5,
+        "meaning_cosine": 0.91
+      },
+      "guardrails_passed": 4,
+      "guardrails_total": 4,
+      "guardrails_failed": []
+    },
+    {
+      "timestamp": "2026-01-13T17:28:11.333333Z",
+      "source_text": "Bei der Berechnung des Elterngeldes werden die im Bemessungszeitraum erzielten Einkünfte aus nichtselbständiger Arbeit sowie aus selbständiger Tätigkeit berücksichtigt.",
+      "output_text": "Das Elterngeld wird berechnet.\nDabei zählt Ihr Lohn.\nAuch Geld aus einer eigenen Firma zählt.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 5.0,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 5.1,
+        "meaning_cosine": 0.78
+      },
+      "guardrails_passed": 4,
+      "guardrails_total": 4,
+      "guardrails_failed": []
+    },
+    {
+      "timestamp": "2026-01-13T17:55:33.777777Z",
+      "source_text": "Die Gewährung von Wohngeld setzt voraus, dass der Antragsteller über ausreichende finanzielle Mittel zur Deckung des Lebensunterhalts verfügt, jedoch nicht in der Lage ist, die Kosten der Unterkunft vollständig selbst zu tragen.",
+      "output_text": "Sie können Wohngeld bekommen.\nDafür müssen Sie Geld haben für das tägliche Leben.\nAber Sie können die Miete nicht alleine bezahlen.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 8.0,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 6.9,
+        "meaning_cosine": 0.89
+      },
+      "guardrails_passed": 4,
+      "guardrails_total": 4,
+      "guardrails_failed": []
+    },
+    {
+      "timestamp": "2026-01-13T18:22:59.111111Z",
+      "source_text": "Im Falle einer Kündigung des Arbeitsverhältnisses durch den Arbeitgeber ist dieser verpflichtet, dem Arbeitnehmer auf dessen Verlangen eine schriftliche Begründung der Kündigung auszustellen.",
+      "output_text": "Ihr Chef kündigt Ihnen?\nDann können Sie fragen: Warum?\nIhr Chef muss es Ihnen schriftlich erklären.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 5.3,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 4.8,
+        "meaning_cosine": 0.84
+      },
+      "guardrails_passed": 4,
+      "guardrails_total": 4,
+      "guardrails_failed": []
+    },
+    {
+      "timestamp": "2026-01-15T09:21:35.175109Z",
+      "source_text": "das ist ein test text ich möchte eine Übersetzung in einfacher Sprache ",
+      "output_text": "Ich helfe Ihnen gerne.\n\nSie möchten einen Text in einfacher Sprache übersetzen.\n\n* Ich mache den Text einfach.\n* Ich verwende kurze Sätze.\n* Ich verwende nur bekannte Wörter.\n\nHier ist der Text in einfacher Sprache:\n\nIch mache einen Test. Ich möchte den Text in einfacher Sprache übersetzen.\n\n* Ich helfe Ihnen gerne.\n* Ich mache den Text einfach.\n* Ich verwende kurze Sätze.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 5.8,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 5.02,
+        "meaning_cosine": 0.399
+      },
+      "guardrails_passed": 3,
+      "guardrails_total": 4,
+      "guardrails_failed": [
+        "Preserves Meaning"
+      ]
+    },
+    {
+      "timestamp": "2026-01-15T09:23:47.561373Z",
+      "source_text": "das ist ein test text ich möchte eine Übersetzung in einfacher Sprache ",
+      "output_text": "This is a test text. I want a translation in simple language.\n\n* I want to make this text easy to understand.\n* I will use simple words and short sentences.\n\nYou need to read this text carefully.\n \n* I will change the words to make it easy to understand.\n* I will use simple language, not complicated words.\n\nHere is the simple text:\n\nI want to make this text easy to read.\n \n* I will use short sentences.\n* I will use simple words.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_en.txt",
+      "language": "en",
+      "metrics": {
+        "avg_sentence_len_words": 7.9,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 1.72,
+        "meaning_cosine": 0.073
+      },
+      "guardrails_passed": 3,
+      "guardrails_total": 4,
+      "guardrails_failed": [
+        "Preserves Meaning"
+      ]
+    },
+    {
+      "timestamp": "2026-01-15T09:24:24.508401Z",
+      "source_text": "Presentation Format & Duration\nPresentation Time: 15 minutes per team (teams of 3–4 members)\nDiscussion & Q&A: 10 minutes following the presentation\nAudience: Present to a non-technical stakeholder audience\nAudience & Content Focus\nThe primary presentation should be non-technical, emphasizing business value, problem-solving, and product impact.\nTechnical slides may be included as backup and used only during the Q&A if needed.\nAvoid technical jargon unless specifically requested during discussion.\nTeam Participation\nBegin by introducing all team members.\nEvery team member must speak during the presentation.\nEnsure smooth handoffs between speakers to maintain clarity and flow.\nPresentation Structure & Emphasis\nStart with a live demo or frontend/product walkthrough to immediately capture audience attention.\nKeep minimal focus on:\nTeam introductions\nData collection and datasets\nLow-level technical implementation\n",
+      "output_text": "Sie müssen folgende Punkte beachten:\n\n*   Ihre Präsentation dauert 15 Minuten.\n*   Danach haben Sie 10 Minuten Zeit für Fragen und Antworten.\n*   Sie sprechen vor Leuten, die nicht viel über Technik wissen.\n\n**Was Sie sagen sollten**\n\n*   Sprechen Sie über das Geschäftswert.\n*   Erklären Sie, wie Sie Probleme lösen.\n*   Erwähnen Sie, wie Ihr Produkt hilft.\n\n**Technische Informationen**\n\n*   Sie können technische Informationen haben, aber nur als Hintergrundinformation.\n*   Sie werden sie nur verwenden, wenn jemand fragt.\n*   Vermeiden Sie Fachbegriffe, es sei denn, jemand fragt danach.\n\n**Wie Sie präsentieren**\n\n*   Beginnen Sie mit einer Live-Demo oder einer Vorstellung Ihres Produkts.\n*   Halten Sie sich an die folgenden Punkte:\n *   Sprechen Sie nicht zu lange über sich selbst.\n *   Sprechen Sie nicht zu viel über Daten und Statistiken.\n *   Sprechen Sie nicht zu viel über die Details der Technik.",
+      "model": "llama-3.1-8b-instant",
+      "template": "system_prompt_de.txt",
+      "language": "de",
+      "metrics": {
+        "avg_sentence_len_words": 9.6,
+        "pct_sentences_gt20": 0.0,
+        "ari_score": 9.11,
+        "meaning_cosine": 0.006
+      },
+      "guardrails_passed": 2,
+      "guardrails_total": 4,
+      "guardrails_failed": [
+        "Readable (ARI)",
+        "Preserves Meaning"
+      ]
+    }
+  ]
+}
