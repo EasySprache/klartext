@@ -29,6 +29,16 @@ from pybars import Compiler
 
 from pdf_utils import extract_pdf_text
 
+# Optional: structured JSONL logging for demo outputs
+try:
+    # When running `python demo/app.py`, the `demo/` folder is on sys.path
+    from demo_logger import log_simplification as log_demo_simplification
+
+    DEMO_LOGGER_AVAILABLE = True
+except Exception:
+    log_demo_simplification = None
+    DEMO_LOGGER_AVAILABLE = False
+
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
@@ -327,6 +337,25 @@ def simplify_text(
         # Compute and format scores
         scores = compute_simple_scores(output)
         scores_display = format_scores_markdown(scores)
+
+        # Structured logging (best-effort; never fail the request if logging fails)
+        if DEMO_LOGGER_AVAILABLE and log_demo_simplification is not None:
+            try:
+                template_config = TEMPLATE_FILES.get(target_lang, {})
+                template_name = template_config.get("system", "unknown")
+                log_demo_simplification(
+                    source_text=text,
+                    output_text=output,
+                    model=GROQ_MODEL,
+                    template=template_name,
+                    language=target_lang,
+                )
+            except Exception as e:
+                # Keep message free of raw user text
+                print(
+                    f"Warning: demo output logging failed ({type(e).__name__}): {e}. "
+                    f"source_len={len(text)} output_len={len(output)}"
+                )
         
         return output, scores_display
         
@@ -375,11 +404,13 @@ def simplify_via_api(
         return "❌ API Error: Could not connect to API at http://localhost:8000. Make sure the API server is running.", ""
     except requests.exceptions.Timeout:
         return "❌ API Error: Request timed out after 30 seconds.", ""
-    except requests.exceptions.HTTPError as e:
+    except requests.exceptions.HTTPError as http_err:
+        # Try to extract error detail from JSON response, but preserve HTTPError if parsing fails
         try:
-            error_detail = response.json().get("detail", str(e))
-        except:
-            error_detail = str(e)
+            error_detail = response.json().get("detail", str(http_err))
+        except Exception:
+            # Any error during JSON parsing or extraction, use the original HTTP error message
+            error_detail = str(http_err)
         return f"❌ API Error: {error_detail}", ""
     except requests.exceptions.RequestException as e:
         return f"❌ API Error: {str(e)}", ""
@@ -630,4 +661,3 @@ if __name__ == "__main__":
         theme=gr.themes.Soft(primary_hue="blue", secondary_hue="cyan"),
         css=custom_css,
     )
-

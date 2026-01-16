@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "totalChunks": 28,
+    "successCount": 18,
+    "failCount": 10,
+    "totalTime": "68.4s",
+    "apiTime": "68.4s",
+    "timestamp": "2026-01-14T17:30:17.242Z",
+    "url": "https://www.iana.org/domains/reserved",
+    "title": "IANA-managed Reserved Domains",
+    "successfulCount": 18,
+    "failedCount": 10,
+    "errorCount": 11
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T17:30:08.857Z",
+      "message": "[KlarText] Batch 1 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.240Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.240Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.240Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.240Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.240Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.240Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.241Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.241Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.241Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T17:30:17.241Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "We act as both the registrant and registrar for a select number of domains\n\t\twhich have been reserved under policy grounds. These exclusions are\n\t\ttypically indicated in either technical standards (RF...",
+      "simplifiedText": "We manage some special domain names.\n\n* These domains are set aside for special reasons.\n* We act as both the person who owns the domain and the person who keeps track of it.\n* These special domains a...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "contractual limitations...",
+      "simplifiedText": "When you sign a contract:\n\n* Limits are put on what you can do.\n* These limits are in the contract.\n* They help keep everyone safe....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Domains which are described as registered to IANA or ICANN on policy\n\t\tgrounds are not available for registration or transfer, with the exception\n\t\tof country-name.info domains. These domains are avai...",
+      "simplifiedText": "Some domains are not for sale or transfer. \n\n* They are special because of rules.\n* These domains are:\n  - IANA\n  - ICANN (International group that helps with domain names)\n* But one type of domain is...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Other Special-Use Domains...",
+      "simplifiedText": "Other Special-Use Domains\n\nYou are looking at special domains. These domains have special rules.\n\n* They are not for regular use.\n* They have special meanings.\n* They help the internet work better.\n\nS...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "There is additionally a Special-Use Domain Names registry documenting special-use domains designated by technical standards. For further information, see Special-Use Domain Names (RFC 6761)....",
+      "simplifiedText": "There is a list of special domains.\n\n* It shows domains with special meanings.\n* These meanings come from technical rules.\n* For more info, see RFC 6761 (Special-Use Domain Names)....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Special-Use Domain Names...",
+      "simplifiedText": "Special Domain Names\n\nThese are names that are not used for websites. They are special.\n\nExamples:\n\n* .museum\n* .gov (government)\n* .edu (school)\n* .mil (military)\n\nThese names are not for regular web...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Special-Use Domain Names...",
+      "simplifiedText": "Domain Names for Special Use\n\nYou can use special domain names for special things. \n\n* They are not for regular websites.\n* They are for special uses only.\n\nExamples:\n\n* .onion (for secret websites)\n*...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Root Zone Management...",
+      "simplifiedText": "Root Zone Management\n\nYou want to manage the root zone.\n\n* What is the root zone? \n  It is the top level of the internet.\n\n* The root zone has many nameservers.\n  Nameservers help find websites.\n\n* Yo...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Instructions & Guides...",
+      "simplifiedText": "Instructions and Guides\n\nInstructions are steps to follow. They help you do something.\n\nGuides are helpful tips. They show you how to do something.\n\nTypes of Instructions:\n\n* Written instructions (rea...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Register/modify an .INT domain...",
+      "simplifiedText": "Register or change an .INT domain\n\nYou want to:\n\n* Register a new .INT domain\n* Change information about an existing .INT domain\n\nTo register or modify an .INT domain:\n\n* Go to the .INT domain website...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "IDN Practices Repository...",
+      "simplifiedText": "IDN Practices Repository\n\nYou want to read about IDN practices.\n\nIDN stands for Internationalized Domain Names. (Internationalized means many languages.)\n\nIDN practices are rules for using IDNs.\n\nHere...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Root Key Signing Key (DNSSEC)...",
+      "simplifiedText": "Root Key Signing Key (DNSSEC)\n\nA special key helps keep the internet safe.\nIt is called the Root Key Signing Key.\nThis key is part of DNSSEC (Domain Name System Security Extensions).\n\nDNSSEC is a way ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Trust Anchors and Rollovers...",
+      "simplifiedText": "Trust Anchors and Rollovers\n\nYou need to know about trust anchors and rollovers.\n\nWhat are trust anchors?\n \n* A trust anchor is a safe place to start.\n* It's like a strong foundation for your computer...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Key Signing Ceremonies...",
+      "simplifiedText": "Key Signing Ceremonies\n\nWhen you get new keys:\n\n* Go to a special meeting.\n* Meet the person who gave you the keys.\n* They will sign the keys to say they belong to you.\n* You will sign to say you got ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Policies & Procedures...",
+      "simplifiedText": "Policies and procedures are rules to follow.\n\nThey help things run smoothly and safely.\n\n* They tell you what to do.\n* They tell you what not to do.\n* They help you make good choices....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Community Representatives...",
+      "simplifiedText": "Community Representatives\n\nYou are a person who helps a community. \n\n* You talk to people in the community.\n* You listen to their ideas and problems.\n* You help the community make good choices....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The IANA functions coordinate the Internet’s globally unique identifiers, and\n                are provided by Public Technical Identifiers, an affiliate of\n                ICANN....",
+      "simplifiedText": "When you use the Internet:\n\n* You need a special name for your device.\n* This name is unique and helps find your device.\n* The IANA helps make these names.\n* The IANA works with Public Technical Ident...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Public Technical Identifiers...",
+      "simplifiedText": "Public Technical Identifiers\n\nThese are names for things on the internet. They are like labels.\n\n* They help people find things online.\n* They are used by computers to talk to each other.\n* They are l...",
+      "elementTag": "a"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "IANA-managed Reserved Domains...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Certain domains are set aside, and nominally registered to “IANA”, for specific\n\t\tpolicy or technical purposes....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "As described in RFC 2606 and RFC 6761,\n\ta number of domains such as example.com and example.org\n\tare maintained for documentation purposes. These domains may be used as illustrative\n\texamples in docum...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Test IDN top-level domains...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "These domains were temporarily delegated by IANA for the IDN Evaluation being conducted by ICANN....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Han (Simplified variant)...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Han (Traditional variant)...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Greek, Modern (1453-)...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Hangul (Hangŭl, Hangeul)...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Policy-reserved domains...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    }
+  ]
+}

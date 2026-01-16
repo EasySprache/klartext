@@ -1,0 +1,1250 @@
+{
+  "metadata": {
+    "totalChunks": 193,
+    "successCount": 133,
+    "failCount": 60,
+    "totalTime": "1054.5s",
+    "apiTime": "1054.4s",
+    "timestamp": "2026-01-14T14:13:26.756Z",
+    "url": "https://www.reddit.com/r/AskTheWorld/comments/1qcjly4/whats_the_quickest_way_someone_could_accidentally/",
+    "title": "What’s the quickest way someone could accidentally expose themselves as a foreigner in your country like the ‘three fingers’ scene in Inglourious Basterds? : r/AskTheWorld",
+    "successfulCount": 133,
+    "failedCount": 60,
+    "errorCount": 66
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T13:57:53.285Z",
+      "message": "[KlarText] Batch 3 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:01:43.882Z",
+      "message": "[KlarText] Batch 7 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:03:44.835Z",
+      "message": "[KlarText] Batch 9 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:04:45.822Z",
+      "message": "[KlarText] Batch 10 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:07:41.824Z",
+      "message": "[KlarText] Batch 13 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:12:15.753Z",
+      "message": "[KlarText] Batch 18 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.723Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.724Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.724Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.724Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.724Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.724Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.725Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.725Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.725Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.725Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.733Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.734Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.735Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.737Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.737Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.737Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.738Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.739Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.744Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.744Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.744Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.744Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.744Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.745Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T14:13:26.752Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "Skip to main content...",
+      "simplifiedText": "Go to the main part of the page....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "What’s the quickest way someone could accidentally expose themselves as a foreigner in your country like the ‘three fingers’ scene in Inglourious Basterds? : r/AskTheWorld...",
+      "simplifiedText": "Here's how you might act like a foreigner:\n\n* Use the wrong money.\n* Don't know the local time.\n* Use the wrong side of the road.\n* Don't understand local customs.\n* Don't know basic words like 'hello...",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "🇮🇳 in 🇩🇪 Deutschland...",
+      "simplifiedText": "India is in Germany....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Español (Latinoamérica)...",
+      "simplifiedText": "Spanish (Latin America)...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "What’s the quickest way someone could accidentally expose themselves as a foreigner in your country like the ‘three fingers’ scene in Inglourious Basterds?...",
+      "simplifiedText": "To look like a foreigner, you might:\n\n* Wear clothes that are not common here.\n* Use a map or ask for directions in a way that shows you don't know the area.\n* Talk to locals in a language they don't ...",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Open comment sort options...",
+      "simplifiedText": "Sort comments:\n\n* Click on \"Open comment sort options\"\n* Choose how you want to sort comments....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Wearing a t-shirt or cap with a cannabis leaf...",
+      "simplifiedText": "Wearing a t-shirt or cap with a cannabis leaf \n\n* What is a cannabis leaf?\n  A cannabis leaf is a symbol for cannabis (a plant with medicine).\n* You might see it on clothes or accessories.\n* It is not...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Alarmed_Pineapple_35...",
+      "simplifiedText": "You see a name.\n\n* It has three parts: \n  - Alarmed \n  - Pineapple \n  - 35...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "How else am I to blend in with my fellow dudes?...",
+      "simplifiedText": "How do I fit in with other guys?\n\n* Be like them.\n* Wear clothes they wear.\n* Talk like they talk.\n* Do things they do....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "By being 2 meters tall. Maybe wear stilts, idk....",
+      "simplifiedText": "You are very tall.\n\n* You are 2 meters tall.\n* You might wear stilts to help you walk.\n* Stilts are long legs that you wear....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fucking bizarre I only just now connected the facts that my sister's boyfriend is a) the tallest person I know, like seriously fucking tall and b) dutch (although that's easy to forget as he grew up i...",
+      "simplifiedText": "Your sister's boyfriend is very tall. He is from the Netherlands. \n\nHe grew up in Spain and now speaks English well....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I am above 1.90m tall. Once I found myself among Dutch people. It felt like I found my long-lost people, lol. I’ve never felt as “normal” before....",
+      "simplifiedText": "You are tall. You are over 1.90 meters.\n\nYou went to the Netherlands. You met Dutch people.\n\nYou felt happy. You felt like you found friends....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I am 1.85 and one of the smallest in a friend Group of 8. My wife is polish and small. The first time she met my friend Group she got a stiff neck from looking up all the time....",
+      "simplifiedText": "You are 1.85 meters tall.\n\n* You are one of the shortest in your group.\n* Your group has 8 people.\n* Your wife is from Poland.\n* She is not very tall.\n* When she met your friends for the first time, s...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "My wife is polish and small. The first time she met my friend Group she got a stiff neck from looking up all the time....",
+      "simplifiedText": "My wife is from Poland. She is short.\n\nWhen she met your friend, she looked up a lot. \nThis made her neck hurt....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Not being able to ride a bicycle....",
+      "simplifiedText": "You can't ride a bike.\n\n* Riding a bike is hard for you.\n* You might fall off.\n* You need to practice to ride a bike....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "If they can ride one, riding it responsibly without jumping half of all red lights....",
+      "simplifiedText": "When you ride a bike:\n\n* Be careful and follow the rules.\n* Don't jump red lights.\n* Ride safely....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "But if you are from Münster or Copenhagen you can also cycle but you wear a helmet what is a huge sign that you are foreign....",
+      "simplifiedText": "If you are from Münster or Copenhagen:\n\n* You can ride a bike.\n* Wear a helmet.\n* This shows you are not from here....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Not congratulating people with the birthday of another person....",
+      "simplifiedText": "Don't congratulate others on someone's birthday.\n\n* You don't say \"Happy Birthday\" to someone else.\n* It's about the person who is having a birthday....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Chatting with strangers for no reason. Either you're a foreigner or a violent criminal....",
+      "simplifiedText": "Talking to strangers you don't know:\n\n* This can be bad.\n* You might be a foreigner who doesn't know the rules.\n* Or you might be someone who hurts people....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Reminds me when I moved to Sweden 10+ years ago. I asked a guy sitting next to me in the train how did he like the book he was reading....",
+      "simplifiedText": "When you move to a new place:\n\n* You meet new people.\n* You talk to them.\n* You ask them questions.\n\nI moved to Sweden a long time ago. \nI met a man on the train. \nI asked him about a book....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I worked for a UK company, and they wanted us, in the Nordics, to start our calls by asking \"How are you doing today?\".....",
+      "simplifiedText": "You worked for a UK company.\n\n* They told you what to do.\n* You had to ask this in the Nordics.\n* Ask people: \"How are you today?\"...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Swedes and Norwegians: 😨😨...",
+      "simplifiedText": "People from Sweden and Norway: \n\nThey look worried....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Sweden and Ireland would not interact well I think...",
+      "simplifiedText": "When you think about it:\n\n* Sweden and Ireland are two different countries.\n* They might not get along very well.\n* This is just a thought, not a fact....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "From Ireland and lived in Norway for a while and had to learn to tone it down. I remember chatting to a girl in a bar once and offered to get the next round, as you do. She got freaked out and left. W...",
+      "simplifiedText": "I lived in Norway for a while. \n\n* I'm from Ireland.\n* We drink differently in Norway.\n\nI remember a girl in a bar. I offered to buy her a drink. She got upset and left.\n\n* I didn't mean to be rude.\n*...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Little do they know, irish people just love buying drinks for people :')...",
+      "simplifiedText": "You might be surprised. \n\n* Irish people like buying drinks for others.\n* They often do this as a friendly gesture....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "But how are you supposed to make friends then when you're new 😭...",
+      "simplifiedText": "Making friends is hard when you're new.\n\n* You feel sad and alone.\n* You want friends to talk to.\n* Here are some ideas:\n\n* Join a club or group that interests you.\n* Talk to people around you.\n* Be f...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "That's the neat part, you don't...",
+      "simplifiedText": "Here is the rewritten text:\n\nThe good part is:\n\n* You don't have to do anything....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Autistic paradise, no looking in the eyes, no chit chat, i'd be happy there lol, instead of being called an asshole here lol...",
+      "simplifiedText": "You might feel happy in a place like this:\n\n* No one looks at your eyes.\n* No small talk happens.\n* You can just be yourself....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Friends? You mean the people you meet in school and decide to hang out with do the rest of your life even though you have nothing left in common once you graduated?...",
+      "simplifiedText": "You think about friends like this:\n\n* Friends are people you meet in school.\n* You hang out with them.\n* But, after school, you may not have much in common.\n\nYou don't have to be friends with people f...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Rip to my dreams of living in Sweden for a bit 🙏...",
+      "simplifiedText": "You want to live in Sweden for a while.\n\n* You have a dream about living in Sweden.\n* You want to visit or live there for a short time....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "A stranger smiling at me? Must be some scammer or a psychopath....",
+      "simplifiedText": "A person smiling at you?\n\n* They might be friendly.\n* But be careful.\n* Some people smile to trick others.\n* You don't know this person.\n* Keep your distance....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Honestly, pronouncing out cities. People can be native English speakers or have studied English their whole life but no one can say “Melbourne”, “Brisbane” or “Cairns” quite the way an Australian can....",
+      "simplifiedText": "People have trouble saying city names.\n\n* You might be a native English speaker.\n* You might have studied English your whole life.\n* But you still might say city names wrong.\n\nFor example: Melbourne, ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You mean Mellbin, Brisbin and Cans?...",
+      "simplifiedText": "You are talking about Mellbin, Brisbin, and Cans.\n\n* These are names.\n* Maybe you are asking about people or places with these names?...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You mean Melbn' brisbn' and chaanz...",
+      "simplifiedText": "You mean Melbourne and Canberra....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Top of the morning to you! No one says that here...",
+      "simplifiedText": "Good morning to you!\n\n* This is a friendly way to say hello.\n* People don't usually say this in this place....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "🇮🇳 in 🇩🇪 Deutschland...",
+      "simplifiedText": "You are reading about India in Germany.\n\nIndia is a country in Asia.\nGermany is a country in Europe.\n\nHere are some key facts:\n\n* India is a big country.\n* Germany is a country in Europe.\n* They are t...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Just the words are enough for me to get the feeling of accent...",
+      "simplifiedText": "Words can give you a feeling about someone's accent....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Looking for a good spot to watch St Patty’s parade....",
+      "simplifiedText": "You want to find a good place to watch the parade.\n\n* Look for a spot with a good view.\n* Find a place that is safe and fun.\n* You can ask people for help if you need it....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Not thanking the bus driver...",
+      "simplifiedText": "You don't need to say thank you to the bus driver.\n\n* Just get off the bus.\n* You don't need to say anything....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Absolutely criminal stuff there...",
+      "simplifiedText": "That's very bad.\n\n* It's not right.\n* It's wrong to do that....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "OriginalComputer5077...",
+      "simplifiedText": "You want me to rewrite the text. \n\nThere is no text to rewrite....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "calling Ireland Eire...",
+      "simplifiedText": "What is Eire?\n\n* Eire is another name for Ireland.\n* Some people use Eire, but Ireland is more common.\n* They both mean the same country....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The most northerly point in Ireland is in \"southern Ireland\"....",
+      "simplifiedText": "The northernmost point in Ireland is in the south.\n\n* Ireland is a big island.\n* It has a north and a south.\n* The northernmost point is in the south part....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Using the articles „der, die,das“ wrong on obvious words, like saying „die Auto“ instead of „das auto“. There are some words where even Germans are disputed on wich article to choose but for most word...",
+      "simplifiedText": "When you speak German:\n\n* Use the right word for \"car\".\n* Say \"das Auto\", not \"die Auto\".\n\nSome words are tricky. Even Germans disagree on which article to use.\n \nBut most words have only one correct ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I've been learning German the last few years and I reached the conclusion that you learn which article to use on a per word basis. There's no grammar rule that can indicate it....",
+      "simplifiedText": "You learn German:\n\n* You learn which word to use (article) with each word.\n* There is no rule to help you decide.\n* You learn it one word at a time....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "And then you get Genitiv and Dativ. Fun....",
+      "simplifiedText": "You learn two new words: Genitiv and Dativ.\n\n* Genitiv is a word form.\n* Dativ is another word form.\n\nThese words are fun to learn!...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It's really funny, because it's something that just sounds right. For most words there is no rule on what article was commonly agreed upon, so you can't even properly explain it to a foreigner. \"Das A...",
+      "simplifiedText": "It sounds funny because it sounds right. \n\n* Some words have no rules for articles.\n* This makes it hard to explain them.\n* \"Das Auto\" just sounds right....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "It sounds right because we heard it that way all our lives though....",
+      "simplifiedText": "It sounds right because we heard it that way.\n\n* We heard it many times.\n* We heard it since we were young.\n* It feels normal to us....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Bet I’d never be wrong particularly on “das auto”, thanks to Volkswagen....",
+      "simplifiedText": "I'm sure I'm right about \"das auto\"....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "🇮🇹 + 🇩🇪 (dual citizenship)...",
+      "simplifiedText": "You have two countries. \n\n* Italy (🇮🇹)\n* Germany (🇩🇪)\n\nYou are a citizen in both countries....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "calling it “Oz” or us “ozzies” instead of aus or aussie...",
+      "simplifiedText": "You can call Australia:\n\n* Oz\n* Ozzies\n\nDo not call it:\n \n* Aus\n* Aussie...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Also, using Aussie as a noun instead of an adjective. Like \"I'm going to Aussie for a holiday\"...",
+      "simplifiedText": "You can say:\n\n* Use Aussie as a noun.\n* It's a place, not a description.\n\nExample:\n\n* I'm going to Australia for a holiday.\n* Australia is a country, not a feeling.\n* You can visit Australia or be fro...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Or calling Australia the place ‘Aussie’. Mostly looking at the kiwis for this one...",
+      "simplifiedText": "Let's rewrite it:\n\nWe can call Australia 'Aussie'....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "If someone hails a cab like this :...",
+      "simplifiedText": "When you want a taxi:\n\n* Look for a taxi on the street.\n* Wave your hand to signal the taxi.\n* Go to the taxi and get in....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "That's how you heil a cab....",
+      "simplifiedText": "To hail a cab:\n\n* Look for a taxi.\n* Raise your hand.\n* Say \"Taxi!\"...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Stand too close to the person in front of you, when queuing for something....",
+      "simplifiedText": "When you're waiting in line:\n\n* Keep some space between you and the person in front.\n* Don't stand right next to them....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "🇮🇳 in 🇩🇪 Deutschland...",
+      "simplifiedText": "India is in Germany....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "You people are famous for maintaining social distance even before covid...",
+      "simplifiedText": "You are known for keeping space from others.\n\n* This is true even before COVID-19.\n* You kept a safe distance from others....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "There was a popular joke going around durning covid with 2 meter social distancing and hoping that it ends so we can go back to the usual 5 meters...",
+      "simplifiedText": "During COVID, people joked about social distancing.\n\n* There was a rule to stay 2 meters apart.\n* People wanted COVID to end so they could go back to their normal distance.\n\nThey were joking about goi...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "🇮🇳 in 🇩🇪 Deutschland...",
+      "simplifiedText": "India is in Germany....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "The country is called the United States of America.\n\nIt is a place where many people live together....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "we like make long word short...",
+      "simplifiedText": "We like short words.\n\n* Make words shorter.\n* Use simple words.\n* Fewer letters are better....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "You are in the United States of America.\n\nThis is a country in North America....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "I second this. I work with people from around the world, many who speak fluent English with a standard American accent and it’s how they use or don’t use articles that usually tips me off they’re not ...",
+      "simplifiedText": "When you talk to people from other countries:\n\n* They might speak English very well.\n* But they might use words differently.\n* They might not use \"the\" and \"a\" like Americans do....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Saying \"kiwi\" instead of \"kiwifruit\". You don't eat the bird or the person...well possibly you do, but you don't advertise it....",
+      "simplifiedText": "When you say \"kiwi\", you mean the fruit.\n\n* You don't mean the bird.\n* You don't mean a person from New Zealand (called a Kiwi).\n* You mean the green or brown fruit with fuzzy skin....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Expert-Fisherman-332...",
+      "simplifiedText": "You are reading a name.\n\n* The name is \"Expert-Fisherman-332\".\n* It's a special name for someone.\n* We don't know who this person is yet....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Prestigious-Job-9825...",
+      "simplifiedText": "Here is the rewritten text:\n\nA very important job....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "They smile too much on the street...",
+      "simplifiedText": "People smile too much on the street.\n\nThey look happy all the time.\n\nYou might think they are being fake....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Trying to order Fosters. This is grounds for deportation....",
+      "simplifiedText": "You want to order Fosters. \n\nThis is not a reason to leave the country....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "tY-c8rJDb8_1b4__yD5r...",
+      "simplifiedText": "I cannot fulfill your request. Is there anything else I can help you with?...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Funny you say that, I used to work at a major distribution centre that distributed alcohol, pretty sure we had the entire Asahi contract for Victoria. I actually had to google Fosters to make sure I w...",
+      "simplifiedText": "You worked at a big place that sent out alcohol.\n\n* They had a big contract with Asahi.\n* You worked there for a while.\n* You never saw Fosters beer in the warehouse.\n\nYou had to look it up to remembe...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Wasn't there a Russia (might be wrong about the country of origin) who was caught while being followed by counter intelligence because he purchased some flowers from a florist and walked out of the sh...",
+      "simplifiedText": "Someone was followed by secret police in another country.\n\n* They bought flowers from a shop.\n* They held the flowers wrong.\n* They walked out of the shop like this....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Kinda similar to the three fingers thing....",
+      "simplifiedText": "It looks like this:\n\nSimilar to the three fingers sign....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Yes, this is a story told by Joe Navarro, an FBI agent who wrote a book about body language with anecdotes about how tiny behavioral differences like this provided clues during Cold War investigations...",
+      "simplifiedText": "When Joe Navarro was an FBI agent, he learned about body language.\n\nHe wrote a book about it and shared some stories.\n\nOne story is about how people stand when waiting.\n\n* Eastern Europeans stand stra...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "eat a waffle with more toppings than a light sugar coat....",
+      "simplifiedText": "Eat a waffle with lots of toppings.\n\n* Add many toppings to your waffle.\n* Use a little bit of sugar on top.\n* That's a yummy waffle!...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Someone calling you \"mate\" in England in the wrong context....",
+      "simplifiedText": "You are in England.\n\n* You hear someone call you \"mate\".\n* This is not a friend.\n* It might be a stranger.\n\nThis is not a friendly word in this situation....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The word \"mate\" comes in many forms but a non brit will never get it right....",
+      "simplifiedText": "The word \"mate\" is tricky.\n\n* It has many different forms.\n* People from other countries might not use it correctly.\n\n(Note: \"Brit\" is short for British person.)...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Aussies/kiwis/South Africans are an exception to the rule....",
+      "simplifiedText": "People from Australia, New Zealand, and South Africa are different....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Not saying sorry for like anything. You bump into someone? Sorry! Someone bumps into you? Sorry! Need to get past? Sorry can I just squeeze through. You're the person in the way? Sorry! Someone says s...",
+      "simplifiedText": "When you meet someone:\n\n* Say sorry if you bump into them.\n* Say sorry if they bump into you.\n* Say sorry if you need to get past them.\n\nIf you're in the way:\n\n* Say sorry and ask to squeeze through.\n...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "This is called a shibboleth - something like this that indicates your belonging to a certain group versus another one....",
+      "simplifiedText": "You are part of a group. \n\n* A shibboleth is a sign of this.\n* It shows you belong to one group, not another....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Coming over now now, when you were asked to be there just now....",
+      "simplifiedText": "You are expected now.\n\n* Come at this time.\n* You were told to be here.\n* It is now your turn....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Sitting beside me on the bus when there is empty seats elsewhere...",
+      "simplifiedText": "You are on a bus. \n\n* There are empty seats.\n* You sit next to someone.\n* You could sit somewhere else....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "The country is called the United States of America....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "\"ANYONE HERE SPEAK ENGLISH?\"...",
+      "simplifiedText": "Do you speak English?...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Just speak lolol, most people, 95+% learns Brazilian Portuguese, which is completelly different of EU Portuguese, both the accent and the grammar, and even if you learned EU Portuguese lol, thats clos...",
+      "simplifiedText": "When you speak:\n\n* Talk normally.\n* Most people learn Brazilian Portuguese.\n* It's very different from EU Portuguese.\n* The accent and grammar are different too.\n\nBrazilian Portuguese has many words.\n...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "你好吗？ This is not \"how are you\", this is \"are you ok?\"....",
+      "simplifiedText": "How are you feeling?\n\n* Are you okay?\n* This is not the same as \"how are you?\"\n* \"How are you?\" is a more general question.\n* \"Are you okay?\" is a more serious question.\n\nYou ask \"are you okay?\" when ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Created Jul 22, 2011...",
+      "simplifiedText": "This text was made on July 22, 2011....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Anyone can view, post, and comment to this community...",
+      "simplifiedText": "You can:\n\n* See what others post\n* Share your own thoughts\n* Leave comments on posts...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Select your community flair...",
+      "simplifiedText": "Choose your community icon...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Multiple Countries (click to edit)...",
+      "simplifiedText": "When you see \"Multiple Countries\":\n\n* It means more than one country.\n* This is a group of countries....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Bosnia And Herzegovina...",
+      "simplifiedText": "Bosnia And Herzegovina is a country.\n\nIt is located in Europe....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Central African Republic...",
+      "simplifiedText": "A country in Africa.\n\nIt is called the Central African Republic....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Democratic Republic Of The Congo...",
+      "simplifiedText": "What is the Democratic Republic of the Congo?\n\nThe Democratic Republic of the Congo is a country in Africa.\n\nIt is a big country with many people.\n\nHere are some facts about the Democratic Republic of...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Northern Mariana Islands...",
+      "simplifiedText": "The Northern Mariana Islands are a group of islands.\n\nThey are located in the Pacific Ocean.\n\nThis group of islands is part of the United States....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Palestinian Territory...",
+      "simplifiedText": "The area called the Palestinian Territory is a place....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Republic Of The Congo...",
+      "simplifiedText": "The country is called the Republic of the Congo....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Saint Kitts And Nevis...",
+      "simplifiedText": "You are looking at a country.\n\nThis country is called Saint Kitts And Nevis....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Saint Pierre And Miquelon...",
+      "simplifiedText": "This is a small island.\n\n* It is in the ocean.\n* The island's name is Saint Pierre And Miquelon.\n* It is not very big....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Saint Vincent And The Grenadines...",
+      "simplifiedText": "Here is the rewritten text:\n\nSaint Vincent is a country.\nIt is in the Caribbean Sea.\nThe Grenadines are islands near Saint Vincent....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "São Tomé and Príncipe...",
+      "simplifiedText": "This is a country.\n\nIt is called São Tomé and Príncipe.\n\nIt is an island country in Africa....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "South Georgia And The South Sandwich...",
+      "simplifiedText": "You are looking at a place called South Georgia And The South Sandwich.\n\nThis place is:\n\n* An island\n* Located in the ocean\n* Far from the main land...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Svalbard And Jan Mayen...",
+      "simplifiedText": "Svalbard And Jan Mayen\n\nThis is a group of islands.\n\n* Svalbard is in the Arctic Ocean.\n* Jan Mayen is also in the Arctic Ocean.\n* They are far north....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Turks And Caicos Islands...",
+      "simplifiedText": "The place is called the Turks And Caicos Islands....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "United Arab Emirates...",
+      "simplifiedText": "This country is called the United Arab Emirates....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "The country is called the United States of America....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Virgin Islands British...",
+      "simplifiedText": "You are looking at:\n\nBritish Virgin Islands...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Show my user flair on this community...",
+      "simplifiedText": "To show your user flair:\n\n* Go to your community.\n* Click on your name.\n* Find your user flair.\n* Click on it to show it....",
+      "elementTag": "faceplate-checkbox-input"
+    },
+    {
+      "originalText": "Questions should be relevant to multiple countries or cultures...",
+      "simplifiedText": "When you ask a question:\n\n* Think about many countries.\n* Think about many cultures.\n* Ask something that matters to them all....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Questions posted should apply to multiple countries or cultures. For questions about a particular country or culture, first check if you find a more relevant subreddit in our network. For other genera...",
+      "simplifiedText": "When you ask a question:\n\n* It should be for many countries or cultures.\n* If it's about one country or culture, \n  check if there's a better subreddit.\n* If it's not about culture, try r/AskReddit....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Set your community flair according to nationality and territory of residence...",
+      "simplifiedText": "Set your community flair:\n\n* Choose your country.\n* Choose your area.\n* This shows your home....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Everyone setting their user flair according to their nationality and territory of residence is a key point of this community. It provides more context to questions or answers while keeping them releva...",
+      "simplifiedText": "When you join this community:\n\n* You show your country and where you live.\n* This helps others understand your questions and answers.\n* It keeps the conversation relevant....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Be polite and respectful...",
+      "simplifiedText": "Be kind and respectful to others.\n\n* Use nice words.\n* Listen to them.\n* Be gentle with their feelings....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Please be respectful when asking or answering questions, do not insult or be aggressive. There is room for everyone in this community....",
+      "simplifiedText": "Be kind when asking or answering questions.\n\n* Don't insult others.\n* Don't be mean or aggressive.\n\nEveryone is welcome here....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "No hate speech or bullying...",
+      "simplifiedText": "You must not say mean things to others.\n\n* Do not say hurtful words.\n* Be kind to everyone....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Make sure everyone feels safe. Bullying of any kind isn't allowed, and degrading comments about things like race, religion, culture, sexual orientation, gender or identity will not be tolerated....",
+      "simplifiedText": "We want you to feel safe.\n\n* Everyone must be kind to each other.\n* No bullying is allowed.\n* Don't say mean things about:\n  • Race\n  • Religion\n  • Culture\n  • Sex\n  • Gender\n  • Who you are...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "No low effort questions...",
+      "simplifiedText": "Don't ask easy questions....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Avoid low effort questions, this includes yes/no questions, joke questions or questions that could be simply answered by looking up on Google....",
+      "simplifiedText": "Don't ask easy questions. \n\n* Ask questions that need thought.\n* Don't ask just yes or no questions.\n* Don't ask jokes.\n* Don't ask questions you can find answers to online....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "No spam or self-promotion...",
+      "simplifiedText": "Don't post spam or ads about yourself.\n\n* Don't post messages that are not helpful.\n* Don't talk about your own business or website....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Spam or self-promotion will not be allowed....",
+      "simplifiedText": "We do not allow:\n\n* Spam messages\n* Messages that promote yourself...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "AskTheWorld is a neutral place. Do not push your ideologies on others....",
+      "simplifiedText": "AskTheWorld is a fair place. \n\n* We do not want you to force your ideas on others.\n* Everyone should be free to think for themselves....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "We do not tolerate antisemitism in any form. This includes slurs, conspiracy theories, stereotypes, Holocaust denial, or any hateful content targeting Jewish people or communities. Violations will res...",
+      "simplifiedText": "We do not allow hate towards Jewish people.\n\n* Hate includes:\n  - Bad words\n  - False stories\n  - Stereotypes\n  - Denying the Holocaust\n  - Any hurtful content\n\nIf you break this rule, \n* We will remo...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "AMA only allowed on Tuesdays...",
+      "simplifiedText": "You can ask questions on Tuesdays.\n\n* We allow AMA on Tuesdays.\n* This is the only day for AMA....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "\"Ask Me Anything\" (AMA) posts are only allowed on Tuesdays....",
+      "simplifiedText": "You can ask questions on Tuesdays.\n\n* We call this an \"AMA\".\n* AMA stands for \"Ask Me Anything\".\n* It's only on Tuesdays....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Thank you for reading this far. Thank you for being part of our community....",
+      "simplifiedText": "You're welcome for reading this.\n\nYou're part of our community....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Want to ask a specific group of people? Try the subs below:...",
+      "simplifiedText": "Want to ask a group of people? \n\n* Try these options:\n  1. Subgroups...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "You are in the United States of America.\n\nThis country is also called the USA.\n\nIt is a big country in North America....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "You are in the United States.\n\nThis is a country in North America.\n\nIt is made up of 50 states.\n\nThese states are:\n\n* Alabama\n* Alaska\n* Arizona\n* And many more....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "United States Of America...",
+      "simplifiedText": "The country is called the United States of America....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "u/Flimsy_Rhythm_4473...",
+      "simplifiedText": "I don't see any text to rewrite....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Reddit, Inc. © 2026. All rights reserved....",
+      "simplifiedText": "Reddit owns this....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Best of Reddit in Portuguese...",
+      "simplifiedText": "Best of Reddit in Portuguese\n\nYou want to see the best things on Reddit in Portuguese.\n\n* Go to the Reddit website.\n* Click on the Portuguese option.\n* Look at the best posts and comments....",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Best of Reddit in German...",
+      "simplifiedText": "Best of Reddit in German\n\nYou want to see the best things on Reddit in German.\n\n* What is Reddit?\n  - It's a website where people share things they like.\n* Best of Reddit\n  - This is a list of the bes...",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "Reddit, Inc. © 2026. All rights reserved....",
+      "simplifiedText": "Reddit owns this website. \n\n* They made it in 2026.\n* They keep all their rights....",
+      "elementTag": "a"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "He looked at me as if I was asking for a kidney 😄...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "LOL!  When I moved to London, I was on the train up to Cannon Street with my wife one morning, and the bloke across the aisle (directly to my right) sneezed.  I plucked a paper handkerchief from a pac...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "My wife was fucking mortified.  'Stop being so northern!'....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I love northern England people. In general politeness mostly fake is a thing in whole Britain but in the north it feels... genuine. Small country divided into small worlds, it's incredible....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "TheRoleplayThrowaway...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Honestly I think this a London vs everywhere else thing. In the rest of the south this interaction would be pretty normal too...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I think this too. Don't lump the whole of the south in with London behaviour....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Few months ago I was in Italy. It was clear that this old couple was struggling with bus system and needed help. I stepped in, helped and asked where they from. They were from Norway. After few very l...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Specialist-Opening69...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "I remember doing training some lads from Sweden/Finland and being from Scotland I thought they were awfully quiet. They tell me small talk is not a thing over there. We Scots just don’t know when to s...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "After 11 years in germany and even the citizenship I learned that no matter how good your exposure is, no matter how correct and high level your words are, as a non-native speaker der, die, das (and t...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You could talk for half an hour and then, in the very last sentence, use a wrong article for a word you have never spoken before and because every child learned that in elemtary school - everyone know...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Learning articles sucks, to be fair......",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "By giving a response to \"all right?\" other than \"all right\" or \"yeah, you?\" when asked....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "All right is a greeting here, not a question. The person saying it does not want you to start telling them why you are not all right....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "This used to confuse me so much. I took it to mean \"Are you ok\" and for the first few months in the UK, I'd just be puzzled and ask, \"Yes... why?\" and run to check if I had something on my face....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Is it not exactly the same as ça va in French?...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Is \"not too bad, you?\" acceptable? I'm a foreigner living in the UK and it's my go-to answer...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Puzzleheaded-Lynx-89...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Yeah, that's fine. The response should be short, vague, and not negative. Don't want the other person to actually feel obliged to enquire further into your health....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Yeah been there for a week on solo trip i often go to solo trips but that's the first real solo trip i feel like i experienced...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Unless you are in the Sauna, basically also the only place Finnish people talke with strangers....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In Italy, you have to close ranks or risk being cut....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "One time, I was at a supermarket and a little old lady just wiggled in front of me like I didn't exist....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "I have a coworker from China who is still queueing in the Chinese manner, which is basically turning yourself into human wallpaper on the back of the person before you. She does this in Sweden, where ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "This works wonders for her because people tend to leave the queues she's in because she's weirding them out....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Mixing up the words for \"citizens\" (građani) and \"buildings\" (građevine)....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Our previous PM, Canadian in all ways except on paper, did that while ceremonially accepting the job....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Fantastic-Corner-605...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Why was your previous PM Canadian?...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "He managed the Croatian subsidiary of Teva. The elections of 2015 produced a hung parliament, so he, Tihomir Orešković, was brought in as a neutral, non-partisan person with the support of HDZ that ha...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Ironically he turned out to be one of the better PM's we've had. And precisely because of that, because he was good enough that he wasn't just a HDZ puppet, they turned their back on him, brought the ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Ask them to pronounce \"Worcestershire Sauce\" properly. It trips most pretenders up almost instantly....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Wash ya sister sauce...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Replying “Yes” or “No” to the question “Can you do this?”...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Singaporean grammatically correct answer is “Can” or “Cannot”....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Edit: It’ll make more sense when you realise a lot of Singlish is English with Chinese grammar. “Can 可以” is grammatically correct in Chinese where “Yes 是” would not be...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "United States Of America...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "div"
+    },
+    {
+      "originalText": "In real life it would usually (but not always) be obvious because of the accent, but I have seen people trying to pose as Americans on Reddit and caught them saying \"In USA\" or \"USA education\" The lac...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In the US. US education....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The only one I can think of is pain au chocolat versus chocolatine in France - most of the country calls it pain au chocolat, but the south-west likes to call it chocolatine... It's a huge debate! You...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "pain au chocolat versus chocolatine...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Ordering an \"espresso\" in italy...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "“Top of the morning to you”...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Saying “to-rhon-to” instead of “toh-ro-no” when referring to the city of Toronto...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Twitter is full of Indian accounts posing as far-right polish accounts, and they're almost always recognizable by their distinctive linguistic errors. The same is true for Russian and Belarusian troll...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Also, in a more funny way - we can recognize a foreigner irl when he asking us things like \"How are you\" and then he is suprised that we always respond to this with our life story or complaining about...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Visual_Journalist_20...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "They do not have social anxiety...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "In addition, if you are not saying sorry for existing while walking around...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "No medical advice questions...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Questions about access to services is allowed, as well as general discussions around these topics....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "We are not a support subreddit and cannot help or diagnose any illnesses, biological or otherwise....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Moderator Discretion...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Unfortunately, there will always be some things that our rules do not currently or perfectly cover, in those cases we reserve the right to take action and remove anything that we think could potential...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Discussing your ban outside of mod mail is forbidden...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Discussing your ban outside of the mod mail thread may result in a permanent ban. Mods are volunteers, donating their time and effort to improve the community. When users discuss their ban elsewhere i...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "All posts and comments must be in English, or include an English translation....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "To ensure accessibility and understanding for everyone in the community, please write in English. If you include text in another language, you must provide an English translation alongside it....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "No antisemitism or hate speech...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "h2"
+    }
+  ]
+}

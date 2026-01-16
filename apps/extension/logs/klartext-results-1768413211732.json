@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "totalChunks": 10,
+    "successCount": 10,
+    "failCount": 0,
+    "totalTime": "4.4s",
+    "apiTime": "4.4s",
+    "timestamp": "2026-01-14T17:53:31.730Z",
+    "url": "https://www.iana.org/domains/reserved",
+    "title": "IANA-managed Reserved Domains",
+    "successfulCount": 10,
+    "failedCount": 0,
+    "errorCount": 0
+  },
+  "errors": [],
+  "successfulResults": [
+    {
+      "originalText": "IANA-managed Reserved Domains...",
+      "simplifiedText": "IANA-managed Reserved Domains\n\nThese are special domain names. \n\n* They are managed by IANA (Internet Assigned Numbers Authority).\n* IANA is a group that helps keep the internet safe.\n* These domains ...",
+      "elementTag": "h1"
+    },
+    {
+      "originalText": "Certain domains are set aside, and nominally registered to “IANA”, for specific\n\t\tpolicy or technical purposes....",
+      "simplifiedText": "When you look at the internet:\n\n* Some areas are set aside.\n* They are registered to IANA.\n* IANA is like a manager.\n* These areas are for special reasons....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "As described in RFC 2606 and RFC 6761,\n\ta number of domains such as example.com and example.org\n\tare maintained for documentation purposes. These domains may be used as illustrative\n\texamples in docum...",
+      "simplifiedText": "We use special domains for examples.\n\n* These domains are example.com and example.org.\n* We use them to show things in documents.\n* You don't need to ask us before using them.\n* You can't register or ...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Test IDN top-level domains...",
+      "simplifiedText": "Test top-level domains:\n\n* Top-level domains are names like .com or .org.\n* They are at the end of a website's address.\n* Examples: \n  - google.com\n  - wikipedia.org...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "These domains were temporarily delegated by IANA for the IDN Evaluation being conducted by ICANN....",
+      "simplifiedText": "These domains were given by IANA for a test.\n\n* IANA is a group that helps with domain names.\n* ICANN is the group doing the test.\n* The test is called the IDN Evaluation....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Han (Simplified variant)...",
+      "simplifiedText": "When you say 'Han', you mean:\n\n* A Chinese name (a name from China)\n* A type of Chinese person (from a long time ago)\n* A character in a movie (Star Wars)...",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Han (Traditional variant)...",
+      "simplifiedText": "Han\n\n* This is a Chinese name.\n* It is a surname.\n* It means 'harmonious' or 'peaceful'....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Greek, Modern (1453-)...",
+      "simplifiedText": "Modern Greek\n\n* This is the Greek language spoken today.\n* It started in 1453.\n* People in Greece and Cyprus speak it.\n* It is the official language of Greece....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Hangul (Hangŭl, Hangeul)...",
+      "simplifiedText": "Hangul is a writing system.\n\n* It is used in Korea.\n* It is made up of letters and symbols.\n* Hangul is easy to learn and use....",
+      "elementTag": "td"
+    },
+    {
+      "originalText": "Policy-reserved domains...",
+      "simplifiedText": "Domains that are saved for special use.\n\n \nThese domains are not available for public use....",
+      "elementTag": "h2"
+    }
+  ],
+  "failedResults": []
+}

@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "totalChunks": 36,
+    "successCount": 36,
+    "failCount": 0,
+    "totalTime": "80.2s",
+    "apiTime": "80.2s",
+    "timestamp": "2026-01-14T19:09:30.109Z",
+    "url": "https://digital.gov/guides/plain-language",
+    "title": "Plain Language Guide Series – Digital.gov",
+    "successfulCount": 36,
+    "failedCount": 0,
+    "errorCount": 0
+  },
+  "errors": [],
+  "successfulResults": [
+    {
+      "originalText": "Skip to main content...",
+      "simplifiedText": "Go to the main part of the page....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Skip to main content...",
+      "simplifiedText": "Go to the main part of the page....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "An official website of the United States government...",
+      "simplifiedText": "This is a government website.\n\nIt belongs to the United States....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Official websites use .gov...",
+      "simplifiedText": "Websites of official groups use .gov.\n\n* They are trusted websites.\n* You can trust them.\n* They belong to the government....",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "Official websites use .gov\n              \n              A .gov website belongs to an official government\n              organization in the United States....",
+      "simplifiedText": "Government websites have a special name.\n\n* It starts with .gov.\n* This means it belongs to the government.\n* The government in the United States owns it.\n\nA .gov website is like a house.\n* The govern...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Secure .gov websites use HTTPS...",
+      "simplifiedText": "Websites with .gov end:\n\n* Use a special kind of security.\n* It's called HTTPS.\n* It keeps your data safe....",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "Secure .gov websites use HTTPSA\n              lock (\n              \n                \n                  Lock\n                  \n                    Locked padlock\n                  \n                  \n...",
+      "simplifiedText": "When you visit a .gov website:\n\n* Look for a lock symbol.\n* It should be locked.\n* This means you're safe.\n\nA locked lock (\n  Lock\n  Locked padlock\n) or https:// shows you're connected to a safe websi...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Plain Language Guide Series...",
+      "simplifiedText": "This guide helps you write in simple language.\n\nIt makes hard information easy to understand....",
+      "elementTag": "span"
+    },
+    {
+      "originalText": "Plain language – content that is clear and easy to understand – is critical to helping the public to make sense of their obligations and benefits. These guides are designed to help web managers and co...",
+      "simplifiedText": "You need clear language to understand rules and help.\n\n* Clear language is easy to understand.\n* It helps people know what to do and what they get.\n\nThese guides help web managers and content makers.\n...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Plain Writing Act of 2010 established the requirement that content for the public is written for its specific audience. These guides help you to understand how to create, design and test content s...",
+      "simplifiedText": "When you write for the public:\n\n* Know who your audience is.\n* Write for them, not for everyone.\n\nThese guides help you:\n\n* Create content that your audience can understand.\n* Design content that work...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Ready to get started? Check out the guides below!...",
+      "simplifiedText": "Let's begin. \n\n* Go to the guides below.\n* Start reading them now....",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "Principles of plain language...",
+      "simplifiedText": "You want to write in simple language. \n\nAddress the reader directly. \nUse 'you' instead of 'the reader'.\n\nAvoid big words and jargon. \nUse simple words everyone knows.\n\nUse short sentences. \nNo more t...",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Overview of plain language principles, writing for your audience, and the Plain Writing Act of 2010....",
+      "simplifiedText": "You want to write clearly. \n\n* Know your readers.\n* Write for them.\n* Use simple words.\n\nThe Plain Writing Act is a law. \nIt helps us write clearly....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Explore principles of plain language...",
+      "simplifiedText": "You want to learn about plain language. \n\nPlain language is easy to understand. \n\nIt uses simple words and short sentences. \n\nYou can read it quickly and easily. \n\nHere's how to use plain language:\n\n*...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Writing for understanding...",
+      "simplifiedText": "Writing for understanding\n\nYou want to write in a way that people can easily understand. \n\n* Write short sentences.\n* Use simple words.\n* Explain new words.\n* Avoid big ideas.\n* Keep it clear....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Overview of how to write clear content that follows plain language guidelines....",
+      "simplifiedText": "Write clear content:\n\n* Use simple words.\n* Short sentences.\n* No big words.\n\nMake it easy to read:\n\n* Use friendly words.\n* Avoid complex ideas.\n* Use active voice.\n\nFollow the rules:\n\n* Use 'you' to...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Explore writing for understanding...",
+      "simplifiedText": "Write to help people understand....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Design for understanding...",
+      "simplifiedText": "Make it easy to understand\n\n* Think about your reader.\n* Use simple words and short sentences.\n* Explain things clearly....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "How content design can support plain language....",
+      "simplifiedText": "Content design helps make language easy to understand.\n\n* Use clear words and short sentences.\n* Avoid complicated ideas and jargon.\n* Use simple, everyday words.\n* Explain new terms when you use them...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Explore design for understanding...",
+      "simplifiedText": "Let's explore design:\n\n* What do you want to understand?\n* Think about your goals.\n* Design helps you learn....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Test for understanding...",
+      "simplifiedText": "We want to check if you understand.\n\n* Read the question carefully.\n* Think about the answer.\n* Write your answer down....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Learn how to test that your content is easily understandable....",
+      "simplifiedText": "Check if your text is easy to understand:\n\n* Read your text out loud.\n* Ask someone else to read it.\n* See if they understand it easily....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Explore test for understanding...",
+      "simplifiedText": "Test your understanding\n\n* What do you know about this topic?\n* What questions do you have?\n* Let's find out together!...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "This content is adapted from Plainlanguage.gov...",
+      "simplifiedText": "This text is from a special website....",
+      "elementTag": "h2"
+    },
+    {
+      "originalText": "Selections of PlainLanguage.gov content–especially those most relevant for digital teams–have been carried forward in this set of plain language guides. All of the original content from the PlainLangu...",
+      "simplifiedText": "Here is the rewritten text:\n\nWe kept some important content from PlainLanguage.gov.\nThis content is helpful for digital teams.\nAll old content is saved in a special place.\nYou can see old pages in the...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "PlainLanguage.gov GitHub repository...",
+      "simplifiedText": "Here is the text rewritten in simple language:\n\nPlain Language website on GitHub\n\n* It's a special place on the internet.\n* Called a repository.\n* Where people share and work together....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Guidelines section of the repository...",
+      "simplifiedText": "Guidelines section:\n\n* This is the rules part.\n* It tells you how to use the repository.\n* It helps you understand what to do and what not to do....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Header image credit: Andrew Ridley/unsplash.com/@aridley88...",
+      "simplifiedText": "The picture at the top comes from Andrew Ridley.\n\n \nHe took it on Unsplash.com....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Contribute to Digital.gov...",
+      "simplifiedText": "Help us:\n\n* Share your ideas.\n* Write articles.\n* Make our website better....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Submit a GitHub issue...",
+      "simplifiedText": "When you need help:\n\n* Go to GitHub.\n* Click on \"Issues\".\n* Write your problem.\n* Click \"Submit\"....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "X (Formerly Twitter)...",
+      "simplifiedText": "X is a social media app.\n\nIt used to be called Twitter....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "An official website of the\n              U.S. General Services Administration...",
+      "simplifiedText": "This is a government website....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "U.S. General Services Administration...",
+      "simplifiedText": "The U.S. General Services Administration is:\n\n* A government group.\n* In charge of helping other government groups.\n* Doing things like buying things and fixing buildings....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Accessibility statement...",
+      "simplifiedText": "We want to help you.\n\nOur website is for everyone.\n\nWe follow rules to make it easy to use.\n\n* We use clear language.\n* We make images and videos clear.\n* We make our website work with different devic...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Office of the Inspector General...",
+      "simplifiedText": "Office of the Inspector General\n\n* This is a group of people.\n* They check if things are done correctly.\n* They make sure people follow the rules....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Looking for U.S. government information and services?...",
+      "simplifiedText": "Looking for U.S. government info?\n\n* Go to the government website.\n* Find what you need....",
+      "elementTag": "div"
+    }
+  ],
+  "failedResults": []
+}

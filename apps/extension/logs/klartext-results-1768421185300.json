@@ -1,0 +1,445 @@
+{
+  "metadata": {
+    "totalChunks": 60,
+    "successCount": 30,
+    "failCount": 30,
+    "totalTime": "154.5s",
+    "apiTime": "154.4s",
+    "timestamp": "2026-01-14T20:06:25.270Z",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+    "title": "Fetch API - Web APIs | MDN",
+    "successfulCount": 30,
+    "failedCount": 30,
+    "errorCount": 31
+  },
+  "errors": [
+    {
+      "timestamp": "2026-01-14T20:06:08.967Z",
+      "message": "[KlarText] Batch 4 failed: Error: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.265Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.265Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.265Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.265Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Request timed out. The page may be too large."
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499996, Requested 553. Please try again in 1m34.8672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.266Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499995, Requested 563. Please try again in 1m36.4224s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.267Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 500000, Requested 549. Please try again in 1m34.8672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.267Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499999, Requested 551. Please try again in 1m35.04s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.267Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499998, Requested 550. Please try again in 1m34.6944s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.267Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499997, Requested 546. Please try again in 1m33.8304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.267Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499997, Requested 548. Please try again in 1m34.176s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499996, Requested 550. Please try again in 1m34.3488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499995, Requested 548. Please try again in 1m33.8304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499994, Requested 565. Please try again in 1m36.5952s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499993, Requested 549. Please try again in 1m33.657599999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499992, Requested 550. Please try again in 1m33.657599999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499991, Requested 547. Please try again in 1m32.9664s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499990, Requested 550. Please try again in 1m33.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499990, Requested 547. Please try again in 1m32.7936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499989, Requested 547. Please try again in 1m32.6208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.268Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499988, Requested 547. Please try again in 1m32.448s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.269Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499987, Requested 547. Please try again in 1m32.2752s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.269Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499986, Requested 586. Please try again in 1m38.8416s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    },
+    {
+      "timestamp": "2026-01-14T20:06:25.269Z",
+      "message": "[KlarText] Chunk failed: Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499985, Requested 548. Please try again in 1m32.1024s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    }
+  ],
+  "successfulResults": [
+    {
+      "originalText": "Skip to main content...",
+      "simplifiedText": "Go to the main part of the page....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "HTML: Markup language...",
+      "simplifiedText": "HTML is a special way to write code.\n\n* It helps make websites and apps look nice.\n* It uses symbols and words to tell computers what to do....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "CSS: Styling language...",
+      "simplifiedText": "CSS is a language for styling.\n\nIt helps make websites look nice....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Centering an element...",
+      "simplifiedText": "Centering an element\n\nYou want to put something in the middle of a page.\n\nTo do this:\n\n* Use a special code (CSS) to tell the computer what to do.\n* Add the code to the element you want to center.\n* T...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "JavaScript: Scripting language...",
+      "simplifiedText": "JavaScript is a special kind of computer language.\n\n* It helps computers do tasks.\n* You write instructions for the computer.\n* The computer follows your instructions....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Standard built-in objects...",
+      "simplifiedText": "Standard things in Python\n\n* Things that come with Python\n* You don't need to install them\n* Examples: numbers, words, lists...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Expressions & operators...",
+      "simplifiedText": "Expressions and operators are used in math and coding. They help you solve problems.\n\nTypes of expressions:\n\n* Numbers (like 5 or 3.14)\n* Words (like \"hello\" or \"true\")\n* Symbols (like +, -, x, or /)\n...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Statements & declarations...",
+      "simplifiedText": "What is a statement?\n\n* A statement is a sentence or phrase.\n* It says something or makes a claim.\n\nWhat is a declaration?\n\n* A declaration is a statement that says something officially.\n* It is often...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Control flow & error handing...",
+      "simplifiedText": "Control flow and error handling\n\nControl flow is like a road map for your program. It shows what to do next.\n\n* Follow the map to do things in order.\n* If you make a mistake, stop and fix it.\n\nError h...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Working with objects...",
+      "simplifiedText": "Working with objects\n\nYou are working with things. \n\nThese things are called objects. \nThey can be:\n- A chair\n- A book\n- A car\n\nYou can:\n- Touch them\n- Move them\n- Use them...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Web APIs: Programming interfaces...",
+      "simplifiedText": "Web APIs:\n\n* They help computers talk to each other.\n* They are like special messengers.\n* They send and receive information....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Using the Web animation API...",
+      "simplifiedText": "Using the Web animation API:\n\n* It is a tool for web developers.\n* It helps create animations on websites.\n* Animations can be fun and interactive....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Working with the History API...",
+      "simplifiedText": "Working with the History API\n\nThe History API is a tool.\nIt helps with web pages.\n\nHere's how it works:\n\n* It keeps track of pages you visit.\n* It helps you go back to pages you visited.\n* It remember...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Using the Web speech API...",
+      "simplifiedText": "To use the Web speech API:\n\n* Go to a website that uses this API.\n* It helps your computer talk to you.\n* You can give it voice commands.\n* It can also read text to you....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Progressive web apps...",
+      "simplifiedText": "Progressive web apps are special websites.\n\nThey look and work like apps on your phone.\n\nHere are some features:\n\n* You can save them on your phone.\n* They work even when you are not connected to the ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Learn web development...",
+      "simplifiedText": "Learn web development\n\nYou want to learn web development. \n\n* What is web development?\n * It's making websites and apps.\n* You need to know:\n  • HTML (a way to write website code)\n  • CSS (a way to ma...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Frontend developer course...",
+      "simplifiedText": "Here is the text rewritten in simple language:\n\nFrontend developer course\n\n* This is a course about building websites.\n* It teaches you how to make websites look good.\n* You will learn to make website...",
+      "elementTag": "dt"
+    },
+    {
+      "originalText": "Getting started modules...",
+      "simplifiedText": "Let's start.\n\n* Go to the \"Getting started\" section.\n* Look for modules to help you begin....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Structuring content with HTML module...",
+      "simplifiedText": "Structuring content with HTML module\n\nHTML is a way to add structure to content. \n\n* HTML stands for HyperText Markup Language.\n* It helps your content look good on the web.\n* You can use HTML to add ...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "CSS styling basics module...",
+      "simplifiedText": "CSS styling basics module\n\nYou want to make your website look nice.\n\n* Use CSS (Cascading Style Sheets) to do this.\n* CSS is like a recipe book for your website.\n* It tells your website how to look an...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Dynamic scripting with JavaScript module...",
+      "simplifiedText": "Writing scripts with JavaScript\n\n* You use a special part called a module.\n* A module helps you write scripts easily....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Border-image generator...",
+      "simplifiedText": "Border-image generator\n\nA tool that makes borders for things.\n\nIt helps you create a special picture around something.\n\nYou can use it to make borders for:\n\n* Websites\n* Pictures\n* Documents\n* More!...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Border-radius generator...",
+      "simplifiedText": "Border-radius maker\n\n* What is it?\n * A tool to make rounded corners\n* How does it work?\n * It helps you create a code\n* Use it for:\n * Web design\n * Making websites look nice...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Box-shadow generator...",
+      "simplifiedText": "Box-shadow maker\n\nWhat is a box-shadow?\n \nA box-shadow is a shadow on a box (like a picture frame).\n\nTypes of box-shadows:\n\n* Inner shadow\n* Outer shadow\n* Double shadow\n\nHow to use a box-shadow:\n\n* C...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Color format converter...",
+      "simplifiedText": "You need a tool to change colors.\n\n* It's called a color format converter.\n* This tool helps you change how colors are shown....",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Get to know MDN better...",
+      "simplifiedText": "Get to know MDN better\n\n* Go to the MDN website.\n* Look around and explore.\n* Learn what MDN is and does....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The Fetch API provides an interface for fetching resources (including across the network). It is a more powerful and flexible replacement for XMLHttpRequest....",
+      "simplifiedText": "When you want to get something from the internet:\n\n* The Fetch API is a tool to help you.\n* It lets you get things from the internet.\n* It's better and more flexible than another tool called XMLHttpRe...",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Browser compatibility...",
+      "simplifiedText": "Browser compatibility\n\nYour browser works with websites.\n\n* It shows you the website.\n* It lets you use the website.\n\nSome browsers work better than others.\n\n* They show websites correctly.\n* They wor...",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The Fetch API uses Request and Response objects (and other things involved with network requests), as well as related concepts such as CORS and the HTTP Origin header semantics....",
+      "simplifiedText": "When you use Fetch API:\n\n* It uses special objects for requests and answers.\n* It also uses other things for network requests.\n* It includes CORS and the HTTP Origin header rules....",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "For making a request and fetching a resource, use the fetch() method. It is a global method in both Window and Worker contexts. This makes it available in pretty much any context you might want to fet...",
+      "simplifiedText": "When you want data:\n\n* Use the fetch() method.\n* It works in many places.\n* This includes windows and workers....",
+      "elementTag": "p"
+    }
+  ],
+  "failedResults": [
+    {
+      "originalText": "The fetch() method takes one mandatory argument, the path to the resource you want to fetch. It returns a Promise that resolves to the Response to that request — as soon as the server responds with he...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "even if the server response is an HTTP error status...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "strong"
+    },
+    {
+      "originalText": "Once a Response is retrieved, there are a number of methods available to define what the body content is and how it should be handled....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "You can create a request and response directly using the Request() and Response() constructors, but it's uncommon to do this directly. Instead, these are more likely to be created as results of other ...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Find out more about using the Fetch API features in Using Fetch....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "The fetchLater() API enables a developer to request a deferred fetch, that can be sent after a specified period of time, or when the page is closed or navigated away from. See Using Deferred Fetch....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Using Deferred Fetch...",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "The fetch() method used to fetch a resource....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Used to make a deferred fetch request....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Represents the set of options that can be used to configure a deferred fetch request....",
+      "error": "Request timed out. The page may be too large.",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Represents the result of requesting a deferred fetch....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499996, Requested 553. Please try again in 1m34.8672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Represents response/request headers, allowing you to query them and take different actions depending on the results....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499995, Requested 563. Please try again in 1m36.4224s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Represents a resource request....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 500000, Requested 549. Please try again in 1m34.8672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Represents the response to a request....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499999, Requested 551. Please try again in 1m35.04s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "shared cross-origin subframe quota...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499998, Requested 550. Please try again in 1m34.6944s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Browser compatibility...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499997, Requested 546. Please try again in 1m33.8304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "api.Window.fetchLater...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499997, Requested 548. Please try again in 1m34.176s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "HTTP access control (CORS)...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499996, Requested 550. Please try again in 1m34.3488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Learn how to contribute...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499995, Requested 548. Please try again in 1m33.8304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "This page was last modified on ⁨Jan 8, 2026⁩ by MDN contributors....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499994, Requested 565. Please try again in 1m36.5952s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "View this page on GitHub...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499993, Requested 549. Please try again in 1m33.657599999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Report a problem with this content...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499992, Requested 550. Please try again in 1m33.657599999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Using Deferred Fetch...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499991, Requested 547. Please try again in 1m32.9664s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Your blueprint for a better internet....",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499990, Requested 550. Please try again in 1m33.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "Learn web development...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499990, Requested 547. Please try again in 1m32.7936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Website Privacy Notice...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499989, Requested 547. Please try again in 1m32.6208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Community Participation Guidelines...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499988, Requested 547. Please try again in 1m32.448s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Mozilla Corporation’s...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499987, Requested 547. Please try again in 1m32.2752s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    },
+    {
+      "originalText": "Visit Mozilla Corporation’s not-for-profit parent, the Mozilla Foundation.\n            Portions of this content are ©1998–⁨2026⁩ by individual mozilla.org contributors. Content available under a Creat...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499986, Requested 586. Please try again in 1m38.8416s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "p"
+    },
+    {
+      "originalText": "a Creative Commons license...",
+      "error": "Simplification failed: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.1-8b-instant` in organization `org_01kbmc0kzcekrtca9z2n6f0r1e` service tier `on_demand` on tokens per day (TPD): Limit 500000, Used 499985, Requested 548. Please try again in 1m32.1024s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "elementTag": "a"
+    }
+  ]
+}
