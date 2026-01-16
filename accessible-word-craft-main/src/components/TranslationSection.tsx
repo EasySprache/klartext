@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sparkles, Loader2, Copy, Check, Volume2 } from 'lucide-react';
+import { Sparkles, Loader2, Copy, Check, Volume2, Upload, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -14,6 +14,7 @@ export default function TranslationSection() {
   const [difficulty, setDifficulty] = useState('easy');
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const { t, language } = useLanguage();
 
   const difficultyLevels = [
@@ -21,6 +22,58 @@ export default function TranslationSection() {
     { value: 'easy', label: t('easy'), description: t('easyDesc') },
     { value: 'medium', label: t('medium'), description: t('mediumDesc') },
   ];
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.type !== 'application/pdf') {
+      toast({
+        title: "Invalid file",
+        description: "Please upload a PDF file.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      // Connect to the PDF Ingestion Endpoint
+      const response = await fetch('http://localhost:8000/v1/ingest/pdf', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Upload failed: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Update the input text box with the extracted text from the PDF
+      setInputText(data.extracted_text);
+
+      toast({
+        title: "PDF Uploaded",
+        description: `Extracted ${data.pages} pages successfully.`
+      });
+
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast({
+        title: "Upload Failed",
+        description: "Could not extract text from the PDF.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploading(false);
+      // Reset the file input so the same file can be selected again if needed
+      e.target.value = '';
+    }
+  };
 
   const handleTranslate = async () => {
     if (!inputText.trim()) {
@@ -94,9 +147,35 @@ export default function TranslationSection() {
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <Card className="p-6">
-              <Label htmlFor="input-text" className="text-lg font-medium mb-3 block">
-                {t('originalText')}
-              </Label>
+              <div className="flex justify-between items-center mb-3">
+                <Label htmlFor="input-text" className="text-lg font-medium">
+                  {t('originalText')}
+                </Label>
+
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="pdf-upload"
+                    className="hidden"
+                    accept=".pdf"
+                    onChange={handleFileUpload}
+                    disabled={isUploading}
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => document.getElementById('pdf-upload')?.click()}
+                    disabled={isUploading}
+                  >
+                    {isUploading ? (
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    ) : (
+                      <Upload className="w-4 h-4 mr-2" />
+                    )}
+                    {isUploading ? "Extracting..." : "Upload PDF"}
+                  </Button>
+                </div>
+              </div>
               <Textarea
                 id="input-text"
                 value={inputText}
@@ -150,8 +229,8 @@ export default function TranslationSection() {
                   key={level.value}
                   htmlFor={level.value}
                   className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${difficulty === level.value
-                      ? 'border-secondary bg-secondary/10'
-                      : 'border-border hover:border-secondary/50'
+                    ? 'border-secondary bg-secondary/10'
+                    : 'border-border hover:border-secondary/50'
                     }`}
                 >
                   <RadioGroupItem value={level.value} id={level.value} className="mt-1" />
