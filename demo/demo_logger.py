@@ -3,6 +3,9 @@ KlarText Demo Output Logger
 ===========================
 Logs each simplification output to a JSONL file with metrics and guardrails.
 
+Privacy: Raw user text is NOT stored. Only text lengths and computed metrics
+are persisted to comply with the rule "Never log raw user text in production paths."
+
 Usage in demo/app.py:
     from demo_logger import log_simplification
 
@@ -166,15 +169,20 @@ def create_log_entry(
     template: str,
     language: str = "de"
 ) -> dict:
-    """Create a complete log entry."""
+    """Create a complete log entry.
+    
+    Note: Raw text is NOT stored to comply with privacy rules.
+    Only length metadata and computed metrics are persisted.
+    """
     timestamp = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     metrics = compute_metrics(source_text, output_text)
     passed, total, failed = evaluate_guardrails(metrics)
 
+    # Privacy: Store only text lengths, not raw content
     return {
         "timestamp": timestamp,
-        "source_text": source_text,
-        "output_text": output_text,
+        "source_text_len": len(source_text),
+        "output_text_len": len(output_text),
         "model": model,
         "template": template,
         "language": language,
