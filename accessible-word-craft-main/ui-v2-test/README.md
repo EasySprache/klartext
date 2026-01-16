@@ -1,0 +1,79 @@
+# Focus Mode UI (Experimental)
+
+A cognitive accessibility prototype for text simplification — a single-page progressive flow designed for users with cognitive disabilities.
+
+## What This Is
+
+This is an **experimental UI variant** that transforms the standard dashboard into a guided conversation:
+
+- **Single page, no routing** — Users never leave the page
+- **Progressive disclosure** — Sections reveal one at a time
+- **Clear action language** — Buttons say exactly what they do
+- **Input always visible** — Users can scroll up to see what they wrote
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js (v18+)
+- The backend API running on port 8000 (see main project README)
+
+### Run the UI
+
+```bash
+# 1. Install dependencies (first time only)
+npm install
+
+# 2. Start the development server
+npm run dev
+```
+
+Open **http://localhost:5174/** in your browser.
+
+### Run the Backend (required for simplification)
+
+In a **separate terminal**:
+
+```bash
+cd ../../services/api
+source ../../.venv/bin/activate
+uvicorn app.main:app --reload --port 8000
+```
+
+## Features
+
+| Feature | Status |
+|---------|--------|
+| Language selection (EN/DE) | ✅ |
+| PDF upload | ✅ |
+| Text paste input | ✅ |
+| Text simplification | ✅ |
+| Copy to clipboard | ✅ |
+| Read aloud (TTS) | ✅ |
+| Accessibility panel | ✅ |
+| Progress indicator | ✅ |
+
+## Design Decisions
+
+1. **No difficulty selector** — Hardcoded to "easy" level for simplicity
+2. **Large buttons** — Minimum 180px wide with icons + text labels
+3. **Soft colors** — Cream background, navy/teal accents
+4. **Accessible fonts** — Atkinson Hyperlegible (body), Lexend (headings)
+
+## File Structure
+
+```
+src/
+├── App.tsx                    # Main progressive flow
+├── main.tsx                   # Entry point with providers
+├── index.css                  # Design tokens (copied from main app)
+├── components/
+│   ├── AccessibilityPanel.tsx # Font size, spacing, contrast settings
+│   ├── ProgressIndicator.tsx  # Step 1-2-3-4 indicator
+│   └── ui/                    # shadcn-style components
+├── contexts/
+│   ├── LanguageContext.tsx    # EN/DE translations
+│   └── AccessibilityContext.tsx
+└── lib/
+    └── utils.ts               # Tailwind class helper
+```

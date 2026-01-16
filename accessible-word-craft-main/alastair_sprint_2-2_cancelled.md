@@ -2,6 +2,11 @@
 
 **Goal:** Professionalize the MVP by containerizing the application for easy deployment (Docker) and restoring the PDF import functionality in the Frontend.
 
+**Why Docker?** Think of Docker as a "shipping container" for your code.
+1. Consistency: Currently, you have to install specific versions of Python and Node on your Mac. If we move to a server (or another developer's Windows machine), we have to do it all again manually, and it breaks often. Docker packages everything (the OS, Python, Node, your code) into a single standard block.
+2. Simplicity to Run: Instead of opening 2 terminals and running source venv/bin/activate and npm run dev, you literally just run one command: docker compose up. It starts the database, backend, and frontend all together, connected perfectly.
+3. Deployment: When we deploy to the cloud (AWS, Azure, etc.), we just send them this "container". We don't have to SSH in and install Python manually.
+
 ## Epic 1: Containerized Deployment (Docker)
 **Objective:** Enable the entire application (Frontend + Backend) to run with a single command (`docker compose up`) and be ready for cloud deployment.
 
