@@ -97,21 +97,22 @@ app = FastAPI(
     },
 )
 
-# CORS middleware for frontend and extension
-# Note: In development, we allow all origins for Chrome extension testing
-# Content scripts run in webpage context, so they use webpage's origin (not chrome-extension://)
-# TODO: In production, restrict to specific domains only
+# =============================================================================
+# API Key Authentication & CORS
+# =============================================================================
 import os
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import JSONResponse
 
 # Get environment
 environment = os.getenv("ENVIRONMENT", "development")
 
+# API key for production authentication
+api_key = os.getenv("API_KEY")
+
 if environment == "development":
-    # Development: Allow ALL origins for Chrome extension testing
-    # Content scripts make requests from the webpage's origin (e.g., https://wikipedia.org)
-    # So we need to accept requests from any webpage
+    # Development: Allow ALL origins for local testing
     allowed_origins = ["*"]
-    allow_origin_regex = None
 else:
     # Production: Only allow specific origins
     allowed_origins_str = os.getenv(
@@ -119,12 +120,74 @@ else:
         "http://localhost:3000,http://localhost:5173,http://localhost:7860"
     )
     allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",")]
-    allow_origin_regex = None
 
+
+class APIKeyMiddleware(BaseHTTPMiddleware):
+    """
+    API key authentication middleware.
+    
+    In production, requires valid X-API-Key header on all requests.
+    
+    Exceptions:
+    - /healthz endpoint (for monitoring)
+    - /v1/auth/verify (authentication endpoint - returns the API key)
+    - /docs, /redoc, /openapi.json (API documentation)
+    - OPTIONS requests (CORS preflight)
+    - Development mode (no key required)
+    """
+    
+    async def dispatch(self, request: Request, call_next):
+        # Skip validation in development
+        if environment == "development":
+            return await call_next(request)
+        
+        # Skip if no API_KEY configured (allows gradual rollout)
+        if not api_key:
+            return await call_next(request)
+        
+        # Skip validation for health check (needed for Fly.io monitoring)
+        if request.url.path == "/healthz":
+            return await call_next(request)
+        
+        # Skip validation for auth endpoint (returns the API key on success)
+        if request.url.path == "/v1/auth/verify":
+            return await call_next(request)
+        
+        # Skip validation for API docs
+        if request.url.path in ["/docs", "/redoc", "/openapi.json"]:
+            return await call_next(request)
+        
+        # Skip validation for OPTIONS (CORS preflight)
+        if request.method == "OPTIONS":
+            return await call_next(request)
+        
+        # Get API key from header
+        request_api_key = request.headers.get("x-api-key")
+        
+        # Reject if no API key
+        if not request_api_key:
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "API key required"}
+            )
+        
+        # Reject if API key doesn't match
+        if request_api_key != api_key:
+            return JSONResponse(
+                status_code=401,
+                content={"detail": "Invalid API key"}
+            )
+        
+        return await call_next(request)
+
+
+# Add API key middleware (runs before CORS)
+app.add_middleware(APIKeyMiddleware)
+
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
-    allow_origin_regex=allow_origin_regex,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -452,6 +515,10 @@ class AuthResponse(BaseModel):
     authenticated: bool = Field(
         description="Whether the password was valid"
     )
+    api_key: Optional[str] = Field(
+        default=None,
+        description="API key for subsequent requests (only returned on successful auth in production)"
+    )
 
 
 @app.post(
@@ -468,8 +535,7 @@ def verify_password(req: AuthRequest):
     This endpoint is used by the web frontend to gate access.
     The password is configured via the `APP_PASSWORD` environment variable.
     
-    Note: This is a simple shared-secret mechanism for basic access control.
-    The Chrome extension bypasses this check.
+    On successful authentication, returns the API key needed for subsequent requests.
     """
     app_password = os.getenv("APP_PASSWORD")
     
@@ -485,7 +551,11 @@ def verify_password(req: AuthRequest):
             detail="Invalid password"
         )
     
-    return AuthResponse(authenticated=True)
+    # Return API key on successful auth (for use in subsequent requests)
+    return AuthResponse(
+        authenticated=True,
+        api_key=api_key  # api_key from environment, may be None in dev
+    )
 
 
 # =============================================================================
