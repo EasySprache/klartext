@@ -7,9 +7,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-// API URL from environment variable, with localhost fallback for development
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+import { API_URL, getApiHeaders, apiJsonRequest } from '@/lib/api';
 
 export default function TranslationSection() {
   const [inputText, setInputText] = useState('');
@@ -47,6 +45,7 @@ export default function TranslationSection() {
       // Connect to the PDF Ingestion Endpoint
       const response = await fetch(`${API_URL}/v1/ingest/pdf`, {
         method: 'POST',
+        headers: getApiHeaders(),  // Include API key if configured
         body: formData,
       });
 
@@ -87,16 +86,10 @@ export default function TranslationSection() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/v1/simplify`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: inputText,
-          target_lang: language, // 'de' or 'en'
-          level: 'easy' // currently hardcoded, or use {difficulty} state variable
-        }),
+      const response = await apiJsonRequest('/v1/simplify', {
+        text: inputText,
+        target_lang: language, // 'de' or 'en'
+        level: 'easy' // currently hardcoded, or use {difficulty} state variable
       });
 
       if (!response.ok) {
