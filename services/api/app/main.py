@@ -130,6 +130,7 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
     
     Exceptions:
     - /healthz endpoint (for monitoring)
+    - /v1/auth/verify (authentication endpoint - returns the API key)
     - /docs, /redoc, /openapi.json (API documentation)
     - OPTIONS requests (CORS preflight)
     - Development mode (no key required)
@@ -146,6 +147,10 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
         
         # Skip validation for health check (needed for Fly.io monitoring)
         if request.url.path == "/healthz":
+            return await call_next(request)
+        
+        # Skip validation for auth endpoint (returns the API key on success)
+        if request.url.path == "/v1/auth/verify":
             return await call_next(request)
         
         # Skip validation for API docs
@@ -510,6 +515,10 @@ class AuthResponse(BaseModel):
     authenticated: bool = Field(
         description="Whether the password was valid"
     )
+    api_key: Optional[str] = Field(
+        default=None,
+        description="API key for subsequent requests (only returned on successful auth in production)"
+    )
 
 
 @app.post(
@@ -526,8 +535,7 @@ def verify_password(req: AuthRequest):
     This endpoint is used by the web frontend to gate access.
     The password is configured via the `APP_PASSWORD` environment variable.
     
-    Note: This is a simple shared-secret mechanism for basic access control.
-    The Chrome extension bypasses this check.
+    On successful authentication, returns the API key needed for subsequent requests.
     """
     app_password = os.getenv("APP_PASSWORD")
     
@@ -543,7 +551,11 @@ def verify_password(req: AuthRequest):
             detail="Invalid password"
         )
     
-    return AuthResponse(authenticated=True)
+    # Return API key on successful auth (for use in subsequent requests)
+    return AuthResponse(
+        authenticated=True,
+        api_key=api_key  # api_key from environment, may be None in dev
+    )
 
 
 # =============================================================================

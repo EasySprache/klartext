@@ -1,11 +1,36 @@
 // API configuration and helpers
 
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-export const API_KEY = import.meta.env.VITE_API_KEY || '';
+
+const API_KEY_STORAGE_KEY = 'klartext_api_key';
+
+/**
+ * Get the API key from session storage.
+ * The key is obtained after successful password authentication.
+ */
+export function getApiKey(): string | null {
+  return sessionStorage.getItem(API_KEY_STORAGE_KEY);
+}
+
+/**
+ * Store the API key in session storage.
+ * Called after successful authentication.
+ */
+export function setApiKey(key: string): void {
+  sessionStorage.setItem(API_KEY_STORAGE_KEY, key);
+}
+
+/**
+ * Clear the API key from session storage.
+ * Called on logout or auth failure.
+ */
+export function clearApiKey(): void {
+  sessionStorage.removeItem(API_KEY_STORAGE_KEY);
+}
 
 /**
  * Get headers for API requests.
- * Includes API key if configured (production only).
+ * Includes API key if available (after authentication).
  */
 export function getApiHeaders(contentType?: string): HeadersInit {
   const headers: HeadersInit = {};
@@ -14,9 +39,10 @@ export function getApiHeaders(contentType?: string): HeadersInit {
     headers['Content-Type'] = contentType;
   }
   
-  // Only include API key if it's configured (production)
-  if (API_KEY) {
-    headers['X-API-Key'] = API_KEY;
+  // Include API key if available (from session storage after auth)
+  const apiKey = getApiKey();
+  if (apiKey) {
+    headers['X-API-Key'] = apiKey;
   }
   
   return headers;

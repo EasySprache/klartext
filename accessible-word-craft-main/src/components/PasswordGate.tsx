@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { apiJsonRequest } from '@/lib/api';
+import { apiJsonRequest, setApiKey, getApiKey } from '@/lib/api';
 
 const SESSION_KEY = 'klartext_authenticated';
 
@@ -23,6 +23,7 @@ export default function PasswordGate({ children }: PasswordGateProps) {
   // Check session storage on mount
   useEffect(() => {
     const authenticated = sessionStorage.getItem(SESSION_KEY);
+    // In production, API key is required; in dev, just the session flag is enough
     setIsAuthenticated(authenticated === 'true');
   }, []);
 
@@ -35,6 +36,11 @@ export default function PasswordGate({ children }: PasswordGateProps) {
       const response = await apiJsonRequest('/v1/auth/verify', { password });
 
       if (response.ok) {
+        const data = await response.json();
+        // Store API key if provided (production)
+        if (data.api_key) {
+          setApiKey(data.api_key);
+        }
         sessionStorage.setItem(SESSION_KEY, 'true');
         setIsAuthenticated(true);
       } else {
