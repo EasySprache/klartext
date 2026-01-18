@@ -101,6 +101,8 @@ app = FastAPI(
 # API Key Authentication & CORS
 # =============================================================================
 import os
+import time
+from collections import defaultdict
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
@@ -122,6 +124,48 @@ else:
     allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",")]
 
 
+# =============================================================================
+# Rate Limiter (in-memory, per IP)
+# =============================================================================
+class RateLimiter:
+    """
+    Simple in-memory rate limiter for auth endpoint.
+    Limits requests per IP address within a time window.
+    """
+    
+    def __init__(self, max_requests: int = 5, window_seconds: int = 60):
+        self.max_requests = max_requests
+        self.window_seconds = window_seconds
+        self.requests: dict[str, list[float]] = defaultdict(list)
+    
+    def is_allowed(self, ip: str) -> bool:
+        """Check if request from IP is allowed."""
+        now = time.time()
+        window_start = now - self.window_seconds
+        
+        # Clean old requests
+        self.requests[ip] = [t for t in self.requests[ip] if t > window_start]
+        
+        # Check limit
+        if len(self.requests[ip]) >= self.max_requests:
+            return False
+        
+        # Record this request
+        self.requests[ip].append(now)
+        return True
+    
+    def get_retry_after(self, ip: str) -> int:
+        """Get seconds until next request is allowed."""
+        if not self.requests[ip]:
+            return 0
+        oldest = min(self.requests[ip])
+        return max(0, int(oldest + self.window_seconds - time.time()))
+
+
+# Rate limiter for auth endpoint: 5 attempts per 60 seconds per IP
+auth_rate_limiter = RateLimiter(max_requests=5, window_seconds=60)
+
+
 class APIKeyMiddleware(BaseHTTPMiddleware):
     """
     API key authentication middleware.
@@ -130,16 +174,24 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
     
     Exceptions:
     - /healthz endpoint (for monitoring)
-    - /v1/auth/verify (authentication endpoint - returns the API key)
-    - /docs, /redoc, /openapi.json (API documentation)
+    - /v1/auth/verify (authentication endpoint - returns the API key, rate limited)
     - OPTIONS requests (CORS preflight)
     - Development mode (no key required)
+    
+    Note: API docs are hidden in production for security.
     """
     
     async def dispatch(self, request: Request, call_next):
         # Skip validation in development
         if environment == "development":
             return await call_next(request)
+        
+        # Block API docs in production (hide API structure from attackers)
+        if request.url.path in ["/docs", "/redoc", "/openapi.json"]:
+            return JSONResponse(
+                status_code=404,
+                content={"detail": "Not found"}
+            )
         
         # Skip if no API_KEY configured (allows gradual rollout)
         if not api_key:
@@ -149,12 +201,21 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
         if request.url.path == "/healthz":
             return await call_next(request)
         
-        # Skip validation for auth endpoint (returns the API key on success)
+        # Auth endpoint: rate limited but no API key required
         if request.url.path == "/v1/auth/verify":
-            return await call_next(request)
-        
-        # Skip validation for API docs
-        if request.url.path in ["/docs", "/redoc", "/openapi.json"]:
+            # Get client IP (check X-Forwarded-For for reverse proxy)
+            client_ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+            if not client_ip:
+                client_ip = request.client.host if request.client else "unknown"
+            
+            # Check rate limit
+            if not auth_rate_limiter.is_allowed(client_ip):
+                retry_after = auth_rate_limiter.get_retry_after(client_ip)
+                return JSONResponse(
+                    status_code=429,
+                    content={"detail": f"Too many login attempts. Try again in {retry_after} seconds."},
+                    headers={"Retry-After": str(retry_after)}
+                )
             return await call_next(request)
         
         # Skip validation for OPTIONS (CORS preflight)
