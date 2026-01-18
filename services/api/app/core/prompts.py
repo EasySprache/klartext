@@ -1,16 +1,18 @@
 """Prompt template loading (ported from demo/app.py)"""
+import os
 from pathlib import Path
 from pybars import Compiler
 
 # Path to prompt templates
+# For containerized deployment: templates are in services/api/prompts/templates/
 # __file__ = services/api/app/core/prompts.py
 # .parent (1) -> services/api/app/core
 # .parent (2) -> services/api/app
 # .parent (3) -> services/api
-# .parent (4) -> services
-# .parent (5) -> klartext (project root)
-PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
-TEMPLATES_DIR = PROJECT_ROOT / "prompts" / "templates"
+API_ROOT = Path(__file__).parent.parent.parent
+
+# Allow override via environment variable for flexibility
+TEMPLATES_DIR = Path(os.getenv("TEMPLATES_DIR", str(API_ROOT / "prompts" / "templates")))
 
 TEMPLATE_FILES = {
     "de": {
