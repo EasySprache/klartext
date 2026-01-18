@@ -8,6 +8,9 @@ import { Card } from '@/components/ui/card';
 import { toast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// API URL from environment variable, with localhost fallback for development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 export default function TranslationSection() {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
@@ -42,7 +45,7 @@ export default function TranslationSection() {
 
     try {
       // Connect to the PDF Ingestion Endpoint
-      const response = await fetch('http://localhost:8000/v1/ingest/pdf', {
+      const response = await fetch(`${API_URL}/v1/ingest/pdf`, {
         method: 'POST',
         body: formData,
       });
@@ -84,7 +87,7 @@ export default function TranslationSection() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/v1/simplify', {
+      const response = await fetch(`${API_URL}/v1/simplify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

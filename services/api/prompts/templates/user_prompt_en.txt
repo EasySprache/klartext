@@ -1,0 +1,7 @@
+# User Prompt: Intentionally minimal - only the task instruction
+# All rules, identity, and examples are in system_prompt_en.txt
+# This matches the evaluation setup in notebooks/05_easy_language_evaluation.ipynb
+
+Rewrite the following text in simple language:
+
+{{text}}
