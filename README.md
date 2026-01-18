@@ -106,24 +106,67 @@ OpenAPI JSON: **http://localhost:8000/openapi.json**
 
 ## Quick start (local dev)
 ### 1) Prereqs
-- Docker + Docker Compose
+- Python 3.11+
+- Node.js 18+
+- [Groq API key](https://console.groq.com/keys)
 
-### 2) Configure env
-Copy the example env file:
+### 2) Backend Setup
 ```bash
-cp .env.example .env
+cd services/api
+cp env.example .env
+# Edit .env and add your GROQ_API_KEY
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run API server
+uvicorn app.main:app --reload --port 8000
 ```
-Then set your LLM/TTS provider keys (see comments inside `.env.example`).
 
-### 3) Run
+### 3) Frontend Setup
 ```bash
-docker compose up --build
+cd accessible-word-craft-main
+npm install
+npm run dev
 ```
 
 ### 4) Open
-- Web: http://localhost:3000
+- Web: http://localhost:8080
 - API: http://localhost:8000
 - API docs: http://localhost:8000/docs
+
+## Environment Variables
+
+### Backend (`services/api/.env`)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GROQ_API_KEY` | Yes | Groq API key for LLM calls |
+| `APP_PASSWORD` | No | Password for frontend access control |
+| `ALLOWED_ORIGINS` | No | CORS origins (defaults to localhost) |
+| `ENVIRONMENT` | No | `development` or `production` |
+
+### Frontend (`accessible-word-craft-main/.env.local`)
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `VITE_API_URL` | No | `http://localhost:8000` | Backend API URL |
+
+## Deployment
+
+See **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for full deployment instructions.
+
+**Quick overview:**
+- **Frontend**: Deploy to [Vercel](https://vercel.com) (set root to `accessible-word-craft-main`)
+- **Backend**: Deploy to [Fly.io](https://fly.io) (uses existing Dockerfile)
+
+```bash
+# Deploy backend to Fly.io
+cd services/api
+fly launch --no-deploy
+fly secrets set GROQ_API_KEY=your_key ALLOWED_ORIGINS=https://your-app.vercel.app
+fly deploy
+```
 
 ## Repo layout
 - `apps/web` – Web UI
