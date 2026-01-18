@@ -436,6 +436,59 @@ def healthz():
 
 
 # =============================================================================
+# Authentication
+# =============================================================================
+
+class AuthRequest(BaseModel):
+    """Request body for password verification."""
+    password: str = Field(
+        min_length=1,
+        description="The password to verify for frontend access"
+    )
+
+
+class AuthResponse(BaseModel):
+    """Response from password verification."""
+    authenticated: bool = Field(
+        description="Whether the password was valid"
+    )
+
+
+@app.post(
+    "/v1/auth/verify",
+    response_model=AuthResponse,
+    tags=["Health"],
+    summary="Verify frontend access password",
+    response_description="Authentication result",
+)
+def verify_password(req: AuthRequest):
+    """
+    **Verify the frontend access password.**
+    
+    This endpoint is used by the web frontend to gate access.
+    The password is configured via the `APP_PASSWORD` environment variable.
+    
+    Note: This is a simple shared-secret mechanism for basic access control.
+    The Chrome extension bypasses this check.
+    """
+    app_password = os.getenv("APP_PASSWORD")
+    
+    if not app_password:
+        raise HTTPException(
+            status_code=500,
+            detail="APP_PASSWORD not configured on server"
+        )
+    
+    if req.password != app_password:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid password"
+        )
+    
+    return AuthResponse(authenticated=True)
+
+
+# =============================================================================
 # Simplify Endpoint
 # =============================================================================
 
