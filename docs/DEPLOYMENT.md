@@ -94,6 +94,25 @@ Your API should be running at `https://klartext-api.fly.dev` (or your custom app
 | `ENVIRONMENT` | No | Set in fly.toml as `production` |
 | `PORT` | No | Set in fly.toml as `8080` |
 
+### 1.6 GitHub Actions (Optional)
+
+The repo includes a GitHub Actions workflow to deploy the API automatically on push to `main`.
+
+Workflow file: `.github/workflows/deploy-api.yml`
+
+**Setup:**
+1. Go to GitHub → **Settings → Secrets and variables → Actions**
+2. Add a repository secret:
+   - `FLY_API_TOKEN` = your Fly.io API token
+
+You can create a token from your local machine:
+
+```bash
+fly auth token
+```
+
+Once set, pushes to `main` that modify `services/api/**` will trigger a deploy.
+
 ## Part 2: Deploy Frontend to Vercel
 
 ### 2.1 Connect Repository
