@@ -1,29 +1,31 @@
-# Fly.io configuration for KlarText API
-# See https://fly.io/docs/reference/configuration/
+# fly.toml app configuration file generated for klartext-api on 2026-01-18T21:11:23+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "klartext-api"
-primary_region = "fra"  # Frankfurt - good for German users
+app = 'klartext-api'
+primary_region = 'fra'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  ENVIRONMENT = "production"
-  PORT = "8080"
+  ENVIRONMENT = 'production'
+  PORT = '8080'
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = true
+  auto_stop_machines = 'stop'
   auto_start_machines = true
   min_machines_running = 0
 
   [http_service.concurrency]
-    type = "requests"
+    type = 'requests'
     hard_limit = 250
     soft_limit = 200
 
 [[vm]]
-  cpu_kind = "shared"
+  cpu_kind = 'shared'
   cpus = 1
   memory_mb = 512
