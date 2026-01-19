@@ -111,7 +111,8 @@ import pandas as pd
 # Load v1 benchmark
 benchmark_v1 = []
 with open("../data/benchmarks/v1/klartext_benchmark_v1.json") as f:
-    benchmark_v1 = [json.loads(line) for line in f if json.loads(line)['status'] == 'success']
+    all_items = (json.loads(line) for line in f)
+    benchmark_v1 = [item for item in all_items if item['status'] == 'success']
 
 # Run new prompt on same source texts
 new_results = []
