@@ -159,7 +159,8 @@ def run_scheduled_report(
             # Also append to the consolidated overview file (text format only)
             if not console_only and not json_format:
                 # Generate a clean text report for the overview file
-                from scripts.metrics_reporter import generate_text_report, load_all_logs, compute_aggregate_stats
+                from scripts.metrics_reporter import generate_text_report
+                from demo.demo_logger import load_all_logs
                 logs = load_all_logs(log_file)
                 overview_report = generate_text_report(
                     stats, logs, 
