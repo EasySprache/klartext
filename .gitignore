@@ -117,8 +117,8 @@ runs/
 *.pem
 
 # Benchmark outputs (can be regenerated from benchmark JSON files)
-data/benchmarks/*/outputs/
-data/benchmarks/v*/outputs/
+data/benchmarks/*/outputs/**
+data/benchmarks/v*/outputs/**
 
 # Demo logs (generated at runtime, not reproducible)
 data/logs/*.jsonl
