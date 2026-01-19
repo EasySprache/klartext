@@ -11,7 +11,10 @@ data/
 ├── samples/       # Small samples for testing (committed)
 ├── easy/          # Easy Language calibration texts (for evaluation)
 ├── hard/          # Complex/bureaucratic texts (for evaluation)
-├── benchmark.jsonl # Benchmark items for model evaluation
+├── benchmarks/    # Canonical benchmark datasets (see benchmarks/README.md)
+│   └── v1/        # Version 1: 300 real-world web simplifications
+├── logs/          # Output logs from demo and experiments
+├── benchmark.jsonl # Legacy benchmark items (15 items)
 └── README.md
 ```
 

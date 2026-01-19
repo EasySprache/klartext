@@ -1,7 +1,6 @@
-# KlarText Extension - Color Palette
+# KlarText Extension - style guide
 
-## Updated Color Scheme
-The extension has been updated to match the accessible UI prototype's color palette.
+The extension has been designed to match the accessible UI's color palette.
 
 ### Color Variables
 
@@ -54,57 +53,21 @@ The extension has been updated to match the accessible UI prototype's color pale
 --loading-light: hsl(174 50% 95%);
 ```
 
-## Before & After Comparison
+#### Details
 
-### Header
-- **Before:** `linear-gradient(135deg, #2962ff 0%, #1e88e5 100%)` (Bright blue)
-- **After:** `linear-gradient(135deg, hsl(220 45% 25%) 0%, hsl(174 50% 35%) 100%)` (Navy to teal)
+- **Header:** `linear-gradient(135deg, hsl(220 45% 25%) 0%, hsl(174 50% 35%) 100%)` (Navy to teal)
+- **Primary Button:** `background: hsl(220 45% 25%)` (Dark navy)
+- **Button Hover:** `background: hsl(174 50% 35%)` (Teal)
+- **Focus Outline:** `outline: 3px solid hsl(16 80% 60%)` (Coral)
+- **Loading Spinner:** `border-top-color: hsl(174 50% 35%)` (Teal)
+- **Background:** `background: hsl(45 30% 96%)` (Warm cream)
+- **Text:** `color: hsl(220 40% 13%)` (Dark blue-gray)
+- **Base Font Size:** `18px` (for better accessibility)
 
-### Primary Button
-- **Before:** `background: #2962ff` (Bright blue)
-- **After:** `background: hsl(220 45% 25%)` (Dark navy)
+## Accessibility Features:
 
-### Button Hover
-- **Before:** `background: #1e88e5` (Medium blue)
-- **After:** `background: hsl(174 50% 35%)` (Teal)
-
-### Focus Outline
-- **Before:** `outline: 3px solid #ffd600` (Yellow)
-- **After:** `outline: 3px solid hsl(16 80% 60%)` (Coral)
-
-### Loading Spinner
-- **Before:** `border-top-color: #2962ff` (Bright blue)
-- **After:** `border-top-color: hsl(174 50% 35%)` (Teal)
-
-### Background
-- **Before:** `background: #fafafa` (Cool gray)
-- **After:** `background: hsl(45 30% 96%)` (Warm cream)
-
-### Text
-- **Before:** `color: #212121` (Almost black)
-- **After:** `color: hsl(220 40% 13%)` (Dark blue-gray)
-
-### Base Font Size
-- **Before:** `16px`
-- **After:** `18px` (for better accessibility)
-
-## Accessibility Features Maintained
-
-✅ **High Contrast Mode** - Adjusted for new palette  
-✅ **Reduced Motion Support** - Preserved  
-✅ **Focus Indicators** - Updated to coral accent color  
-✅ **WCAG AA Contrast** - All color combinations meet standards  
-✅ **Touch Target Sizes** - Minimum 48px maintained
-
-## Files Updated
-
-1. `/apps/extension/popup/popup.css` - Main popup styling
-2. `/apps/extension/content/styles.css` - Content script styling
-3. `/apps/extension/content/simplify.js` - Inline styles updated
-
-## Next Steps
-
-To complete visual alignment:
-1. Add accessibility-focused fonts (Atkinson Hyperlegible + Lexend)
-2. Consider adding CSS custom properties for easier theme management
-3. Test extension in different color modes (light/dark/high-contrast)
+- **High Contrast Mode**
+- **Reduced Motion Support** - Preserved  
+- **Focus Indicators** - Updated to coral accent color  
+- **WCAG AA Contrast** - All color combinations meet standards  
+- **Touch Target Sizes** - Minimum 48px maintained

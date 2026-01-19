@@ -23,7 +23,12 @@ import random
 import re
 from pathlib import Path
 
+from dotenv import load_dotenv
 import gradio as gr
+
+# Load environment variables from .env file in project root
+PROJECT_ROOT = Path(__file__).parent.parent
+load_dotenv(PROJECT_ROOT / ".env")
 from groq import Groq
 from pybars import Compiler
 
@@ -45,40 +50,40 @@ except Exception:
 
 GROQ_MODEL = "llama-3.1-8b-instant"  # Recommended from evaluation (best LIX score, good structure)
 
-# Project root (demo is in /demo, templates are in /prompts/templates)
-PROJECT_ROOT = Path(__file__).parent.parent
+# Templates and samples directories
 TEMPLATES_DIR = PROJECT_ROOT / "prompts" / "templates"
 SAMPLES_DIR = PROJECT_ROOT / "data" / "samples"
 
-# Prompt template files (few-shot with examples, Level I / Very Easy)
-# Split into system (identity, rules, examples) and user (task) prompts
+# Prompt template files (versioned, split system/user prompts)
+# Uses prompts/templates/current/ -> symlink to latest version
 TEMPLATE_FILES = {
     "de": {
-        "system": "system_prompt_de.txt",
-        "user": "user_prompt_de.txt",
+        "system": "current/system_prompt_de.txt",
+        "user": "current/user_prompt_de.txt",
     },
     "en": {
-        "system": "system_prompt_en.txt",
-        "user": "user_prompt_en.txt",
+        "system": "current/system_prompt_en.txt",
+        "user": "current/user_prompt_en.txt",
     },
 }
 
-# Sample text files by language (filename prefix -> display name)
+# Sample text categories by language (category folder -> display name)
+# Each category folder contains multiple sample files (sample_001.txt, sample_002.txt, etc.)
 SAMPLE_CATEGORIES = {
     "de": {
-        "de_legal.txt": "Legal / Rechtlich",
-        "de_medical.txt": "Medical / Medizinisch",
-        "de_insurance.txt": "Insurance / Versicherung",
-        "de_technical.txt": "Technical / Technisch",
-        "de_government.txt": "Government / Behörde",
+        "legal": "Legal / Rechtlich",
+        "medical": "Medical / Medizinisch",
+        "insurance": "Insurance / Versicherung",
+        "technical": "Technical / Technisch",
+        "government": "Government / Behörde",
     },
     "en": {
-        "en_academic.txt": "Academic",
-        "en_medical.txt": "Medical",
-        "en_legal.txt": "Legal",
-        "en_insurance.txt": "Insurance",
-        "en_technical.txt": "Technical",
-        "en_government.txt": "Government",
+        "academic": "Academic",
+        "medical": "Medical",
+        "legal": "Legal",
+        "insurance": "Insurance",
+        "technical": "Technical",
+        "government": "Government",
     },
 }
 
@@ -142,24 +147,34 @@ def render_user_prompt(user_template: str, text: str) -> str:
 def load_random_sample(lang: str) -> tuple[str, str]:
     """
     Load a random sample text for the given language.
+    Picks a random category, then a random file from that category.
     
     Returns:
         tuple of (sample_text, category_label)
     """
-    samples = SAMPLE_CATEGORIES.get(lang, {})
-    if not samples:
+    categories = SAMPLE_CATEGORIES.get(lang, {})
+    if not categories:
         return f"No samples available for language: {lang}", "Unknown"
     
+    # Pick a random category
+    category_id = random.choice(list(categories.keys()))
+    category_label = categories[category_id]
+    
+    # Get all sample files in that category folder
+    category_dir = SAMPLES_DIR / lang / category_id
+    if not category_dir.exists() or not category_dir.is_dir():
+        return f"Category folder not found: {category_dir}", category_label
+    
+    # Get all .txt files in the category
+    sample_files = list(category_dir.glob("*.txt"))
+    if not sample_files:
+        return f"No sample files found in: {category_dir}", category_label
+    
     # Pick a random sample file
-    filename = random.choice(list(samples.keys()))
-    category = samples[filename]
-    
-    sample_file = SAMPLES_DIR / filename
-    if not sample_file.exists():
-        return f"Sample file not found: {filename}", category
-    
+    sample_file = random.choice(sample_files)
     text = sample_file.read_text(encoding="utf-8").strip()
-    return text, category
+    
+    return text, category_label
 
 
 def get_all_samples(lang: str) -> list[tuple[str, str, str]]:
@@ -167,16 +182,21 @@ def get_all_samples(lang: str) -> list[tuple[str, str, str]]:
     Get all sample texts for a language.
     
     Returns:
-        list of (filename, category_label, text)
+        list of (relative_path, category_label, text)
     """
-    samples = SAMPLE_CATEGORIES.get(lang, {})
+    categories = SAMPLE_CATEGORIES.get(lang, {})
     result = []
     
-    for filename, category in samples.items():
-        sample_file = SAMPLES_DIR / filename
-        if sample_file.exists():
-            text = sample_file.read_text(encoding="utf-8").strip()
-            result.append((filename, category, text))
+    for category_id, category_label in categories.items():
+        category_dir = SAMPLES_DIR / lang / category_id
+        if category_dir.exists() and category_dir.is_dir():
+            # Get all .txt files in the category
+            sample_files = sorted(category_dir.glob("*.txt"))
+            for sample_file in sample_files:
+                text = sample_file.read_text(encoding="utf-8").strip()
+                # Create a relative path for display (e.g., "de/legal/sample_001.txt")
+                relative_path = f"{lang}/{category_id}/{sample_file.name}"
+                result.append((relative_path, category_label, text))
     
     return result
 

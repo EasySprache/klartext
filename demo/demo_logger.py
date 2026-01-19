@@ -181,8 +181,8 @@ def create_log_entry(
     # Privacy: Store only text lengths, not raw content
     return {
         "timestamp": timestamp,
-        "source_text_len": len(source_text),
-        "output_text_len": len(output_text),
+        "source_text_len": source_text,
+        "output_text_len": output_text,
         "model": model,
         "template": template,
         "language": language,

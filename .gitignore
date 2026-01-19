@@ -61,6 +61,9 @@ pip-log.txt
 uploads/
 temp/
 
+# Archive folder
+archive/
+
 # Docker
 .docker/
 
@@ -112,3 +115,19 @@ runs/
 
 # SSL certificates (Gradio sharing, local dev)
 *.pem
+
+# Benchmark outputs (can be regenerated from benchmark JSON files)
+data/benchmarks/*/outputs/
+data/benchmarks/v*/outputs/
+
+# Demo logs (generated at runtime, not reproducible)
+data/logs/*.jsonl
+data/logs/*.json
+!data/logs/README.md
+
+# Extension runtime logs (user-specific, temporary)
+apps/extension/logs/*.json
+apps/extension/logs/*.log
+# But keep documentation
+!apps/extension/logs/MOVED_BENCHMARKS.md
+!apps/extension/logs/README.md
