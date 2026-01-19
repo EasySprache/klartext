@@ -6,7 +6,7 @@ This document describes the structured JSONL logging system for the KlarText Dem
 
 The logging system automatically records each simplification request processed by the demo app. It computes readability metrics and evaluates guardrails to track output quality over time.
 
-**Privacy Note:** Raw user text is NOT stored. Only text lengths and computed metrics are persisted to comply with the rule "Never log raw user text in production paths."
+**Demo Mode:** For development and quality review purposes, raw source and output texts are stored alongside computed metrics. This allows reviewing actual simplifications to understand metric scores and guardrail failures.
 
 ## Architecture
 
@@ -25,8 +25,8 @@ Each log entry contains the following fields:
 ```json
 {
     "timestamp": "2026-01-08T14:30:00Z",
-    "source_text_len": 294,
-    "output_text_len": 218,
+    "source_text": "Die Versicherungsnehmer sind verpflichtet...",
+    "output_text": "Sie haben eine Versicherung...",
     "model": "llama-3.1-8b-instant",
     "template": "system_prompt_de.txt",
     "language": "de",
@@ -47,8 +47,8 @@ Each log entry contains the following fields:
 | Field | Type | Description |
 |-------|------|-------------|
 | `timestamp` | string | ISO 8601 UTC timestamp |
-| `source_text_len` | int | Character count of input text |
-| `output_text_len` | int | Character count of simplified output |
+| `source_text` | string | Original input text |
+| `output_text` | string | Simplified output text |
 | `model` | string | Model identifier (e.g., "llama-3.1-8b-instant") |
 | `template` | string | Prompt template filename |
 | `language` | string | Language code ("de" or "en") |
