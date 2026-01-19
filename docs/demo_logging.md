@@ -239,6 +239,79 @@ Or use Step 10 in the notebook.
 
 If `scikit-learn` is not installed, `meaning_cosine` will always return 0.0.
 
+## Scheduled Metrics Reports
+
+The metrics reporter can run automatically every 48 hours to provide ongoing visibility into simplification quality.
+
+### One-Time Report
+
+Generate an immediate metrics overview:
+
+```bash
+# Print to console
+python scripts/metrics_reporter.py
+
+# Save to file
+python scripts/metrics_reporter.py --output data/logs/reports/report.txt
+
+# JSON format with breakdown by model/language
+python scripts/metrics_reporter.py --json --breakdown
+```
+
+### Scheduled Reports (Every 48 Hours)
+
+Run the scheduler for continuous monitoring:
+
+```bash
+# Run in foreground (for testing)
+python scripts/run_scheduled_metrics.py
+
+# Run in background (production)
+nohup python scripts/run_scheduled_metrics.py > metrics_scheduler.log 2>&1 &
+
+# Custom interval (e.g., every 24 hours)
+python scripts/run_scheduled_metrics.py --interval 24
+
+# Run once and exit (for cron jobs)
+python scripts/run_scheduled_metrics.py --run-once
+```
+
+### Using with Cron
+
+For persistent scheduling on Linux/macOS, add to crontab:
+
+```bash
+# Edit crontab
+crontab -e
+
+# Add line (runs every 48 hours at midnight)
+0 0 */2 * * cd /path/to/klartext && python scripts/run_scheduled_metrics.py --run-once >> data/logs/metrics_cron.log 2>&1
+```
+
+### Report Output Format
+
+```
+============================================================
+📈 DEMO METRICS OVERVIEW
+============================================================
+Generated: 2026-01-19 10:30:00 UTC
+Total Entries: 28
+
+📊 AVERAGES (Running Statistics)
+----------------------------------------
+   avg_sentence_len_words: 5.94
+   pct_sentences_gt20: 0.00
+   ari_score: 5.86
+   meaning_cosine: 0.73
+
+✅ Guardrails Pass Rate: 96.4%
+   (27/28 checks passed)
+
+   Failed guardrails breakdown:
+     - Preserves Meaning: 1 failures
+============================================================
+```
+
 ## Troubleshooting
 
 ### Logs not appearing
