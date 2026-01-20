@@ -1,0 +1,72 @@
+
+######################################################################
+#  48-HOUR METRICS REPORT
+#  Generated: 2026-01-19 08:24:15 UTC
+#  Interval: Every 48 hours
+######################################################################
+
+============================================================
+📈 48-HOUR METRICS REPORT (Run #1)
+============================================================
+Generated: 2026-01-19 08:24:15 UTC
+Total Entries: 11
+
+📊 AVERAGES (Running Statistics)
+----------------------------------------
+   avg_sentence_len_words: 7.05 ✓
+   pct_sentences_gt20: 0.54 ✓
+   ari_score: 6.68 ✓
+   meaning_cosine: 0.51 ⚠
+
+⚠️ Guardrails Pass Rate: 84.1%
+   (37/44 checks passed)
+
+   Failed guardrails breakdown:
+     - Preserves Meaning: 5 failures
+     - Readable (ARI): 2 failures
+
+----------------------------------------
+📋 BREAKDOWN BY MODEL
+   llama-3.1-8b-instant: 11 entries, 84.1% pass rate
+
+📋 BREAKDOWN BY LANGUAGE
+   de: 10 entries, 85.0% pass rate
+   en: 1 entries, 75.0% pass rate
+============================================================
+
+
+######################################################################
+#  48-HOUR METRICS REPORT
+#  Generated: 2026-01-19 08:24:25 UTC
+#  Interval: Every 48 hours
+######################################################################
+
+============================================================
+📈 48-HOUR METRICS REPORT (Run #1)
+============================================================
+Generated: 2026-01-19 08:24:25 UTC
+Total Entries: 11
+
+📊 AVERAGES (Running Statistics)
+----------------------------------------
+   avg_sentence_len_words: 7.05 ✓
+   pct_sentences_gt20: 0.54 ✓
+   ari_score: 6.68 ✓
+   meaning_cosine: 0.51 ⚠
+
+⚠️ Guardrails Pass Rate: 84.1%
+   (37/44 checks passed)
+
+   Failed guardrails breakdown:
+     - Preserves Meaning: 5 failures
+     - Readable (ARI): 2 failures
+
+----------------------------------------
+📋 BREAKDOWN BY MODEL
+   llama-3.1-8b-instant: 11 entries, 84.1% pass rate
+
+📋 BREAKDOWN BY LANGUAGE
+   de: 10 entries, 85.0% pass rate
+   en: 1 entries, 75.0% pass rate
+============================================================
+
