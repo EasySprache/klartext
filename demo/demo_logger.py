@@ -183,8 +183,8 @@ def create_log_entry(
     # Store both raw texts (for demo review) and lengths (for stats)
     return {
         "timestamp": timestamp,
-        "source_text": source_text,
-        "output_text": output_text,
+        "source_text_len": source_text,
+        "output_text_len": output_text,
         "model": model,
         "template": template,
         "language": language,

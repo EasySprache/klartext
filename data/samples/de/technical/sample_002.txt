@@ -1,0 +1,1 @@
+Die Installation der Softwarekomponenten erfordert administrative Berechtigungen auf dem Zielsystem. Vor der Implementierung ist eine Kompatibilitätsprüfung mit den bestehenden Systemarchitekturen durchzuführen. Bei Auftreten von Fehlermeldungen während des Installationsprozesses sollte zunächst die Integrität der Installationsdateien verifiziert werden.
