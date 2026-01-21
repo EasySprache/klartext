@@ -197,35 +197,33 @@ function App() {
 
       <main id="main" className="container mx-auto px-4 py-8 space-y-12">
 
-        {/* Section 1: Language Selection */}
         <section
           className="section-reveal visible"
           aria-labelledby="section1-title"
         >
-          <Card className="max-w-2xl mx-auto">
-            <CardHeader className="text-center">
-              <CardTitle id="section1-title" className="text-2xl md:text-3xl font-display">
-                {t('languageQuestion')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Card className="max-w-4xl mx-auto border-0 shadow-none sm:border sm:shadow-sm">
+            <CardContent className="flex flex-col md:flex-row gap-6 justify-center p-0 sm:p-6">
               <Button
                 size="xl"
                 variant={language === 'en' && currentStep > 1 ? 'default' : 'outline'}
                 onClick={() => handleLanguageSelect('en')}
-                className="min-w-[180px] flex-col h-auto py-6 gap-2"
+                className="flex-1 py-12 h-auto flex flex-col items-center text-center gap-6 hover:bg-accent hover:text-accent-foreground rounded-2xl border-2 transition-all hover:scale-[1.02]"
               >
-                <span className="text-4xl">🇬🇧</span>
-                <span className="text-xl font-medium">{t('english')}</span>
+                <span className="text-6xl filter drop-shadow-sm" role="img" aria-label="United Kingdom Flag">🇬🇧</span>
+                <span className="text-2xl font-display font-medium leading-normal whitespace-normal max-w-[280px]">
+                  {t('optionEnglishSentence')}
+                </span>
               </Button>
               <Button
                 size="xl"
                 variant={language === 'de' && currentStep > 1 ? 'default' : 'outline'}
                 onClick={() => handleLanguageSelect('de')}
-                className="min-w-[180px] flex-col h-auto py-6 gap-2"
+                className="flex-1 py-12 h-auto flex flex-col items-center text-center gap-6 hover:bg-accent hover:text-accent-foreground rounded-2xl border-2 transition-all hover:scale-[1.02]"
               >
-                <span className="text-4xl">🇩🇪</span>
-                <span className="text-xl font-medium">{t('german')}</span>
+                <span className="text-6xl filter drop-shadow-sm" role="img" aria-label="German Flag">🇩🇪</span>
+                <span className="text-2xl font-display font-medium leading-normal whitespace-normal max-w-[280px]">
+                  {t('optionGermanSentence')}
+                </span>
               </Button>
             </CardContent>
           </Card>

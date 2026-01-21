@@ -21,6 +21,8 @@ This UI transforms the standard dashboard into a guided conversation:
 ### Run the UI
 
 ```bash
+cd apps/web-mvp
+
 # 1. Install dependencies (first time only)
 npm install
 
@@ -35,8 +37,8 @@ Open **http://localhost:5174/** in your browser.
 In a **separate terminal**:
 
 ```bash
-cd ../../../services/api
-source ../../.venv/bin/activate
+cd services/api
+source .venv/bin/activate
 uvicorn app.main:app --reload --port 8000
 ```
 

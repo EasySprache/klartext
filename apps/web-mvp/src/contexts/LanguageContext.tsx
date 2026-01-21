@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 
 type Language = 'en' | 'de';
 
@@ -13,6 +13,10 @@ const translations: Translations = {
     // Focus Mode - Language Selection
     welcomeTitle: { en: 'Welcome', de: 'Willkommen' },
     languageQuestion: { en: 'What language do you want to read?', de: 'In welcher Sprache möchtest du lesen?' },
+    // New Bilingual Guided Selection
+    optionEnglishSentence: { en: 'I want to use Klartext in English', de: 'I want to use Klartext in English' },
+    optionGermanSentence: { en: 'Ich möchte Klartext auf Deutsch nutzen', de: 'Ich möchte Klartext auf Deutsch nutzen' },
+
     english: { en: 'English', de: 'Englisch' },
     german: { en: 'German', de: 'Deutsch' },
 
