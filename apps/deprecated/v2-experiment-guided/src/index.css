@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 30% 96%;
+    --foreground: 220 40% 13%;
+
+    --card: 45 25% 98%;
+    --card-foreground: 220 40% 13%;
+
+    --popover: 45 25% 98%;
+    --popover-foreground: 220 40% 13%;
+
+    --primary: 220 45% 25%;
+    --primary-foreground: 45 30% 96%;
+
+    --secondary: 174 50% 35%;
+    --secondary-foreground: 45 30% 96%;
+
+    --accent: 16 80% 60%;
+    --accent-foreground: 220 40% 13%;
+
+    --muted: 45 20% 90%;
+    --muted-foreground: 220 20% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 80%;
+    --input: 220 20% 80%;
+    --ring: 220 45% 25%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 40% 10%;
+    --foreground: 45 30% 96%;
+
+    --card: 220 35% 15%;
+    --card-foreground: 45 30% 96%;
+
+    --popover: 220 35% 15%;
+    --popover-foreground: 45 30% 96%;
+
+    --primary: 174 50% 45%;
+    --primary-foreground: 220 40% 10%;
+
+    --secondary: 45 40% 70%;
+    --secondary-foreground: 220 40% 10%;
+
+    --accent: 16 80% 65%;
+    --accent-foreground: 220 40% 10%;
+
+    --muted: 220 30% 20%;
+    --muted-foreground: 45 20% 70%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 174 50% 45%;
+  }
+
+  .high-contrast {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 0%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 0%;
+    --border: 0 0% 0%;
+  }
+
+  .dyslexia-font {
+    font-family: 'Lexend', sans-serif !important;
+    letter-spacing: 0.05em;
+    word-spacing: 0.1em;
+  }
+
+  .increased-spacing {
+    line-height: 2 !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-size: 18px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Lexend', sans-serif;
+  }
+}
+
+.skip-link {
+  @apply absolute left-0 top-0 -translate-y-full bg-primary text-primary-foreground px-4 py-2 z-50 focus:translate-y-0 transition-transform;
+}
+
+/* Focus Mode specific styles */
+.section-reveal {
+  @apply opacity-0 translate-y-8 transition-all duration-500 ease-out;
+}
+
+.section-reveal.visible {
+  @apply opacity-100 translate-y-0;
+}

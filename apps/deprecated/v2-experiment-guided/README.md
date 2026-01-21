@@ -1,4 +1,4 @@
-# Focus Mode UI (Experimental)
+# Focus Mode UI (Experimental) [Deprecated]
 
 A cognitive accessibility prototype for text simplification — a single-page progressive flow designed for users with cognitive disabilities.
 
@@ -35,7 +35,7 @@ Open **http://localhost:5174/** in your browser.
 In a **separate terminal**:
 
 ```bash
-cd ../../services/api
+cd ../../../services/api
 source ../../.venv/bin/activate
 uvicorn app.main:app --reload --port 8000
 ```
