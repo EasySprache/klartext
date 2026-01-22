@@ -915,14 +915,24 @@ def text_to_speech(req: TTSRequest):
     audio.play();
     ```
     """
-    # TODO: Implement TTS with configurable provider
-    # Options: OpenAI TTS API, Google Cloud TTS, or gTTS (best option TBD)
-    # Placeholder: return empty audio with warning
-    return TTSResponse(
-        audio_base64=None,
-        audio_url=None,
-        format="mp3",
-    )
+    from .core.tts_adapter import text_to_speech as tts_generate
+    
+    try:
+        result = tts_generate(text=req.text, lang=req.lang)
+        return TTSResponse(
+            audio_base64=result["audio_base64"],
+            audio_url=None,  # No URL storage
+            format=result["format"]
+        )
+    except ValueError as e:
+        # Input validation errors (empty text, unsupported language)
+        raise HTTPException(status_code=400, detail=str(e))
+    except RuntimeError as e:
+        # gTTS not installed
+        raise HTTPException(status_code=500, detail=str(e))
+    except Exception as e:
+        # Network errors or other gTTS failures
+        raise HTTPException(status_code=503, detail=f"TTS generation failed: {str(e)}")
 
 
 # =============================================================================
