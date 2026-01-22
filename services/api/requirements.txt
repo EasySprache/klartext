@@ -29,6 +29,9 @@ slowapi>=0.1.9
 # Template rendering (for loading prompt templates)
 pybars3>=0.9.7
 
+# Text-to-Speech
+gTTS>=2.5.0
+
 # Utilities
 python-dotenv>=1.0.1
 
