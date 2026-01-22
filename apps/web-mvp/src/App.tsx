@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { FileText, Loader2, Copy, Check, Volume2, Wand2, BookOpen, Settings } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { FileText, Loader2, Copy, Check, Volume2, VolumeX, Wand2, BookOpen, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -26,11 +26,21 @@ function App() {
   const [copied, setCopied] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSpeaking, setIsSpeaking] = useState(false);
 
   // Refs for scrolling
   const welcomeRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
+
+  // Ref for audio element to allow stopping
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Ref to track the current request ID (prevents race conditions with multiple requests)
+  const currentRequestIdRef = useRef<number>(0);
+
+  // Ref for AbortController to cancel pending fetch requests
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   // Sections config for navigation
   const sections = [
@@ -150,13 +160,166 @@ function App() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSpeak = () => {
-    if ('speechSynthesis' in window && outputText) {
+  // Stop all audio playback
+  const stopSpeaking = useCallback(() => {
+    // Increment request ID to invalidate any pending API responses
+    currentRequestIdRef.current += 1;
+
+    // Abort any pending fetch request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+
+    // Stop API audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+    // Stop browser TTS
+    if ('speechSynthesis' in window) {
       speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(outputText);
-      utterance.rate = 0.9;
-      utterance.lang = language === 'de' ? 'de-DE' : 'en-US';
-      speechSynthesis.speak(utterance);
+    }
+    setIsSpeaking(false);
+  }, []);
+
+  // Cleanup on unmount or page refresh
+  useEffect(() => {
+    // Stop audio when component unmounts
+    return () => {
+      stopSpeaking();
+    };
+  }, [stopSpeaking]);
+
+  // Also stop on page visibility change (e.g., tab switch) or before unload
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      stopSpeaking();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [stopSpeaking]);
+
+  // Handle read aloud - uses API TTS with browser fallback
+  const handleSpeak = async () => {
+    // If already speaking, stop instead
+    if (isSpeaking) {
+      stopSpeaking();
+      return;
+    }
+
+    if (!outputText) return;
+
+    // SAFETY: Always stop any existing audio before starting new playback
+    // This prevents multiple audio loops even if state gets out of sync
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+    }
+
+    // Abort any pending request from previous attempt
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    // Generate unique request ID to prevent race conditions
+    const requestId = currentRequestIdRef.current + 1;
+    currentRequestIdRef.current = requestId;
+
+    setIsSpeaking(true);
+
+    // Create AbortController with 30 second timeout
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+    try {
+      // Try API TTS first for consistent voice quality
+      const response = await fetch('http://localhost:8000/v1/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: outputText, lang: language }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`TTS API error: ${response.statusText}`);
+      }
+
+      const { audio_base64 } = await response.json();
+
+      // SAFETY: Check if this request is still the current one
+      // Prevents race condition where old request plays after new one started
+      if (currentRequestIdRef.current !== requestId) {
+        return; // A newer request was started, discard this response
+      }
+
+      const audio = new Audio(`data:audio/mp3;base64,${audio_base64}`);
+      audioRef.current = audio;
+
+      // Reset speaking state when audio ends
+      audio.onended = () => {
+        setIsSpeaking(false);
+        audioRef.current = null;
+      };
+
+      audio.onerror = () => {
+        setIsSpeaking(false);
+        audioRef.current = null;
+      };
+
+      audio.play();
+    } catch (err) {
+      clearTimeout(timeoutId);
+
+      // Check if this was an abort (user stopped or timeout)
+      if (err instanceof Error && err.name === 'AbortError') {
+        // Check if this was a timeout vs user-initiated abort
+        if (currentRequestIdRef.current === requestId) {
+          console.warn('TTS API request timed out after 30 seconds');
+          // Fall through to browser TTS fallback
+        } else {
+          // User initiated a new request, don't fall back
+          return;
+        }
+      } else {
+        console.warn('API TTS failed, falling back to browser TTS:', err);
+      }
+
+      // SAFETY: Check if this request is still current before fallback
+      if (currentRequestIdRef.current !== requestId) {
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(outputText);
+        utterance.rate = 0.9;
+        utterance.lang = language === 'de' ? 'de-DE' : 'en-US';
+
+        // Reset speaking state when utterance ends
+        utterance.onend = () => {
+          setIsSpeaking(false);
+        };
+
+        utterance.onerror = () => {
+          setIsSpeaking(false);
+        };
+
+        speechSynthesis.speak(utterance);
+      } else {
+        setIsSpeaking(false);
+      }
     }
   };
 
@@ -372,66 +535,80 @@ function App() {
                       t('simplifyButton')
                     )}
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
+
+                </div >
+              </CardContent >
+            </Card >
+          </section >
 
           {/* Section 3: Output */}
-          <section id="output" ref={outputRef} className="scroll-mt-24 min-h-[400px]">
-            {outputText ? (
-              <Card className="border-2 border-primary/20 bg-primary/5 shadow-sm animate-in fade-in slide-in-from-bottom-8 duration-700">
-                <CardHeader className="text-center pb-2">
-                  <CardTitle className="text-2xl font-display text-primary">
-                    {t('resultTitle')}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-8 p-8">
-                  <div className="bg-background rounded-xl p-8 shadow-sm border border-primary/10">
-                    <p className="text-xl leading-relaxed whitespace-pre-wrap font-medium text-foreground">
-                      {outputText}
-                    </p>
-                  </div>
+          < section id="output" ref={outputRef} className="scroll-mt-24 min-h-[400px]" >
+            {
+              outputText ? (
+                <Card className="border-2 border-primary/20 bg-primary/5 shadow-sm animate-in fade-in slide-in-from-bottom-8 duration-700" >
+                  <CardHeader className="text-center pb-2">
+                    <CardTitle className="text-2xl font-display text-primary">
+                      {t('resultTitle')}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-8 p-8">
+                    <div className="bg-background rounded-xl p-8 shadow-sm border border-primary/10">
+                      <p className="text-xl leading-relaxed whitespace-pre-wrap font-medium text-foreground">
+                        {outputText}
+                      </p>
+                    </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button variant="outline" size="lg" onClick={handleCopy} className="gap-2">
-                      {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                      {copied ? t('copied') : t('copyText')}
-                    </Button>
-                    <Button variant="outline" size="lg" onClick={handleSpeak} className="gap-2">
-                      <Volume2 className="w-5 h-5" />
-                      {t('readAloud')}
-                    </Button>
-                  </div>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button variant="outline" size="lg" onClick={handleCopy} className="gap-2">
+                        {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                        {copied ? t('copied') : t('copyText')}
+                      </Button>
+                      <Button variant={isSpeaking ? "default" : "outline"} size="lg" onClick={handleSpeak} className="gap-2"
+                      >
+                        {isSpeaking ? (
+                          <>
+                            <VolumeX className="w-5 h-5" />
+                            {t('stopReading')}
+                          </>
+                        ) : (
+                          <>
+                            <Volume2 className="w-5 h-5" />
+                            {t('readAloud')}
+                          </>
+                        )}
+                      </Button>
 
-                  <div className="border-t pt-8 mt-8 text-center">
-                    <Button
-                      variant="ghost"
-                      onClick={handleStartAgain}
-                      className="text-muted-foreground hover:text-foreground hover:bg-slate-100"
-                    >
-                      {t('startAgain')}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-[300px] border-2 border-dashed border-slate-200 rounded-xl text-slate-400">
-                <BookOpen className="w-16 h-16 mb-4 opacity-20" />
-                <p>{t('chapterOutput')}</p>
-                <span className="text-sm mt-2 opacity-50">(Waiting for text)</span>
-              </div>
-            )}
-          </section>
+                    </div>
 
-        </main>
-      </div>
+                    <div className="border-t pt-8 mt-8 text-center">
+                      <Button
+                        variant="ghost"
+                        onClick={handleStartAgain}
+                        className="text-muted-foreground hover:text-foreground hover:bg-slate-100"
+                      >
+                        {t('startAgain')}
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-[300px] border-2 border-dashed border-slate-200 rounded-xl text-slate-400">
+                  <BookOpen className="w-16 h-16 mb-4 opacity-20" />
+                  <p>{t('chapterOutput')}</p>
+                  <span className="text-sm mt-2 opacity-50">(Waiting for text)</span>
+                </div>
+              )
+            }
+          </section >
+
+        </main >
+      </div >
 
       <AccessibilityPanel
         open={accessibilityOpen}
         onOpenChange={setAccessibilityOpen}
       />
-    </div>
+    </div >
   );
 }
 

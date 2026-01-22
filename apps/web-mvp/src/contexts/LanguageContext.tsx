@@ -44,6 +44,7 @@ const translations: Translations = {
     resultTitle: { en: 'Here is your simplified text', de: 'Hier ist dein vereinfachter Text' },
     copyText: { en: 'Copy this text', de: 'Diesen Text kopieren' },
     readAloud: { en: 'Read this text aloud', de: 'Diesen Text vorlesen' },
+    stopReading: { en: 'Stop reading', de: 'Vorlesen stoppen' },
     copied: { en: 'Text copied!', de: 'Text kopiert!' },
     startAgain: { en: 'Start again', de: 'Neu starten' },
     scrollUpHint: { en: 'Scroll up to see what you wrote', de: 'Nach oben scrollen um deinen Original-Text zu sehen' },
