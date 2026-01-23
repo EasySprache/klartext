@@ -9,7 +9,8 @@ You are working in the KlarText repo. Optimize for correctness, accessibility, a
 - Never log raw user text in production paths.
 
 ## Project constraints (MVP)
-- No login/accounts.
+- No user accounts/profiles (registration, user management, etc).
+- Security authentication for API/webapp access is allowed.
 - No payment/subscription code.
 - No crawling entire domains.
 - No fine-tuning/training.

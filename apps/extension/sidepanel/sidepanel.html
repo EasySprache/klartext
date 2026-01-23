@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KlarText - Easy Language</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+    <script src="../config.js"></script>
+  </head>
+  <body>
+    <div class="sidepanel-container">
+      <!-- Header with close button -->
+      <header class="header">
+        <div class="header-content">
+          <img src="../icons/klartextlogo2.png" alt="KlarText" class="logo">
+          <p class="tagline">Easy Language for Everyone</p>
+        </div>
+        <button id="close-panel" class="close-button" aria-label="Close panel">×</button>
+      </header>
+      
+      <!-- Main content -->
+      <main class="content">
+        <p class="description">
+          Transform complex text on this page into easy-to-understand language.
+        </p>
+        
+        <!-- Language detection -->
+        <div class="language-info">
+          <p class="detected-language">
+            Page language: <strong id="detected-lang">English</strong>
+          </p>
+          <button id="change-lang" class="text-button">Wrong? Click to change</button>
+        </div>
+        
+        <select id="language-override" class="language-select" style="display: none;">
+          <option value="en">English</option>
+          <option value="de">Deutsch (German)</option>
+        </select>
+        
+        <!-- Action buttons with in-button progress -->
+        <button id="simplify-page" class="primary-button">
+          <span class="button-content">
+            <img src="../icons/tornado.png" alt="" class="button-icon" aria-hidden="true">
+            <span class="button-text">Simplify Entire Page</span>
+          </span>
+          <span class="button-spinner" style="display: none;"></span>
+        </button>
+        
+        <button id="simplify-selection" class="secondary-button">
+          <span class="button-content">
+            <img src="../icons/Klartext.png" alt="" class="button-icon" aria-hidden="true">
+            <span class="button-text">Simplify Selection</span>
+          </span>
+        </button>
+        
+        <p class="hint-text">Highlight text on the page to simplify specific sections</p>
+        
+        <!-- Status messages -->
+        <div id="status" class="status-message" role="status" aria-live="polite"></div>
+        
+        <!-- Cancel button (shown during page processing) -->
+        <button id="cancel-button" class="cancel-button" style="display: none;">
+          Cancel Simplification
+        </button>
+      </main>
+      
+      <!-- Webapp Features Section -->
+      <section class="webapp-features">
+        <h2 class="section-title">MORE FEATURES ON THE WEBAPP</h2>
+        
+        <a href="#" id="feature-input-text" class="feature-card" target="_blank">
+          <img src="../icons/Klartexticon1.png" alt="" class="feature-icon" aria-hidden="true">
+          <div class="feature-content">
+            <h3 class="feature-title">Input Text</h3>
+            <p class="feature-description">Paste or type text to simplify</p>
+          </div>
+          <span class="external-link-icon">↗</span>
+        </a>
+        
+        <a href="#" id="feature-upload-pdf" class="feature-card" target="_blank">
+          <img src="../icons/Klartext.png" alt="" class="feature-icon" aria-hidden="true">
+          <div class="feature-content">
+            <h3 class="feature-title">Upload PDF</h3>
+            <p class="feature-description">Simplify documents and files</p>
+          </div>
+          <span class="external-link-icon">↗</span>
+        </a>
+        
+        <a href="#" id="feature-text-to-speech" class="feature-card" target="_blank">
+          <img src="../icons/Klartextsound.png" alt="" class="feature-icon" aria-hidden="true">
+          <div class="feature-content">
+            <h3 class="feature-title">Text to Speech</h3>
+            <p class="feature-description">Listen to simplified content</p>
+          </div>
+          <span class="external-link-icon">↗</span>
+        </a>
+        
+        <a href="#" id="powered-by-link" class="powered-by" target="_blank">
+          Powered by Klartext
+        </a>
+      </section>
+    </div>
+    <script type="module" src="sidepanel.js"></script>
+  </body>
+</html>

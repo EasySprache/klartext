@@ -1,0 +1,461 @@
+/**
+ * KlarText Chrome Extension - Sidepanel Styles
+ * Accessible design: 18px base font, high contrast, visible focus
+ */
+
+/* Import accessible fonts matching web-mvp */
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  color: hsl(220 40% 13%);
+  background: hsl(45 30% 96%);
+}
+
+/* Sidepanel Container */
+.sidepanel-container {
+  width: 100%;
+  /* Remove min/max-width - Chrome sidepanel has fixed width */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header - Light Teal with Close Button */
+.header {
+  background: hsl(174 50% 35%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header-content {
+  flex: 1;
+}
+
+h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.logo {
+  width: auto;
+  height: 32px;
+  margin: 0 0 4px;
+  object-fit: contain;
+}
+
+.tagline {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.95;
+  color: white;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.close-button:hover {
+  opacity: 0.8;
+}
+
+.close-button:focus {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Main Content */
+.content {
+  padding: 20px;
+  flex: 1;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  color: hsl(220 20% 40%);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Language Info - Minimal (no background box) */
+.language-info {
+  margin-bottom: 16px;
+}
+
+.detected-language {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: hsl(220 40% 13%);
+}
+
+.text-button {
+  background: none;
+  border: none;
+  color: hsl(184 60% 38%);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  font-family: inherit;
+}
+
+.text-button:hover {
+  color: hsl(184 70% 30%);
+}
+
+.text-button:focus {
+  outline: 2px solid hsl(184 60% 38%);
+  outline-offset: 2px;
+}
+
+/* Language override dropdown (hidden by default) */
+#language-override {
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: hsl(220 40% 13%);
+  background: hsl(0 0% 100%);
+  border: 2px solid hsl(220 20% 80%);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+#language-override:hover {
+  border-color: hsl(184 60% 38%);
+}
+
+#language-override:focus {
+  outline: none;
+  border-color: hsl(174 50% 35%);
+  box-shadow: 0 0 0 3px hsl(174 50% 90%);
+}
+
+/* Buttons */
+.primary-button,
+.secondary-button {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 12px;
+  font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Primary Button - Dark Navy */
+.primary-button {
+  color: white;
+  background: hsl(220 45% 25%);
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+}
+
+.primary-button:hover {
+  background: hsl(174 50% 35%);
+}
+
+/* Secondary Button - Dark Navy (matches primary) */
+.secondary-button {
+  color: white;
+  background: hsl(220 45% 25%);
+  border: none;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-button:hover {
+  background: hsl(174 50% 35%);
+}
+
+.primary-button:active,
+.secondary-button:active {
+  transform: scale(0.98);
+}
+
+/* Button Loading State */
+.primary-button.processing {
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.primary-button.processing .button-icon,
+.secondary-button.processing .button-icon {
+  display: none;
+}
+
+.primary-button.processing .button-spinner {
+  display: inline-block !important;
+}
+
+/* Button Spinner */
+.button-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Focus visible for keyboard navigation */
+.primary-button:focus,
+.secondary-button:focus {
+  outline: none;
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible {
+  outline: 3px solid hsl(16 80% 60%);
+  outline-offset: 2px;
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  background: hsl(220 20% 80%);
+  color: hsl(220 20% 40%);
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.6;
+}
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Make icons white for buttons */
+}
+
+.secondary-button .button-icon {
+  filter: none; /* Keep original colors for secondary button */
+}
+
+/* Hint Text */
+.hint-text {
+  font-size: 14px;
+  color: hsl(220 20% 50%);
+  margin: 0 0 16px;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Status Message */
+.status-message {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  text-align: center;
+  min-height: 20px;
+}
+
+/* Cancel button */
+.cancel-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 20px;
+  background: hsl(0 70% 50%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cancel-button:hover {
+  background: hsl(0 70% 45%);
+}
+
+.cancel-button:active {
+  background: hsl(0 70% 40%);
+}
+
+.status-message.loading {
+  background: hsl(174 50% 95%);
+  color: hsl(174 50% 25%);
+  border: 1px solid hsl(174 50% 60%);
+}
+
+.status-message.success {
+  background: hsl(120 50% 95%);
+  color: hsl(120 50% 25%);
+  border: 1px solid hsl(120 50% 60%);
+}
+
+.status-message.error {
+  background: hsl(0 70% 95%);
+  color: hsl(0 70% 35%);
+  border: 1px solid hsl(0 70% 60%);
+}
+
+/* Webapp Features Section */
+.webapp-features {
+  padding: 20px;
+  background: hsl(210 20% 98%);
+  border-top: 1px solid hsl(220 20% 90%);
+  margin-top: auto;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: hsl(220 20% 50%);
+  letter-spacing: 0.5px;
+  margin: 0 0 16px;
+  text-transform: uppercase;
+}
+
+/* Feature Cards - Minimal Style (no heavy borders) */
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+.feature-card:hover {
+  background: hsl(174 50% 95%);
+}
+
+.feature-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.feature-content {
+  flex: 1;
+}
+
+.feature-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: hsl(220 40% 13%);
+}
+
+.feature-description {
+  font-size: 14px;
+  margin: 0;
+  color: hsl(220 20% 50%);
+}
+
+.external-link-icon {
+  color: hsl(220 20% 60%);
+  font-size: 16px;
+}
+
+.powered-by {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: hsl(220 20% 50%);
+  margin-top: 16px;
+  text-decoration: none;
+}
+
+.powered-by:hover {
+  color: hsl(184 60% 38%);
+  text-decoration: underline;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  body {
+    background: hsl(0 0% 100%);
+    color: hsl(0 0% 0%);
+  }
+  
+  .header {
+    background: hsl(184 100% 30%);
+    border-bottom: 3px solid hsl(0 0% 0%);
+  }
+  
+  .primary-button {
+    background: hsl(184 100% 30%);
+    border: 2px solid hsl(0 0% 0%);
+  }
+  
+  .primary-button:focus-visible {
+    outline: 4px solid hsl(16 100% 50%);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .primary-button,
+  .secondary-button {
+    transition: none;
+  }
+  
+  .primary-button:active,
+  .secondary-button:active {
+    transform: none;
+  }
+  
+  .button-spinner {
+    animation: none;
+  }
+}

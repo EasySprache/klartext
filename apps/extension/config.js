@@ -68,6 +68,32 @@ const CONFIG = {
    * Set to false in production
    */
   DEBUG: true,
+
+  /**
+   * Webapp URL for feature links in sidepanel
+   * Development: http://localhost:5174
+   * Production: Update this when deploying
+   */
+  WEBAPP_URL: 'http://localhost:5174',
+
+  /**
+   * Webapp feature links configuration
+   * Used in sidepanel to link to full webapp features
+   */
+  WEBAPP_FEATURES: [
+    {
+      id: 'input-text',
+      url: '/',
+    },
+    {
+      id: 'upload-pdf',
+      url: '/',
+    },
+    {
+      id: 'text-to-speech',
+      url: '/',
+    },
+  ],
 };
 
 // Note: This config file is injected into the content script context by the service worker.

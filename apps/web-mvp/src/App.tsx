@@ -6,13 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useLanguage } from '@/contexts/LanguageContext';
 import AccessibilityPanel from '@/components/AccessibilityPanel';
+import PasswordGate from '@/components/PasswordGate';
+import { apiJsonRequest, apiRequest } from '@/lib/api';
 import { SidebarNav } from '@/components/SidebarNav';
 import { LanguageToggle } from '@/components/LanguageToggle';
 
 type InputMethod = 'pdf' | 'paste';
-
-// API base URL - uses environment variable in production, localhost in development
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 function App() {
   const { language, t } = useLanguage();
@@ -97,7 +96,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const response = await fetch(`${API_URL}/v1/ingest/pdf`, {
+      const response = await apiRequest('/v1/ingest/pdf', {
         method: 'POST',
         body: formData,
       });
@@ -127,16 +126,10 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch(`${API_URL}/v1/simplify`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: inputText,
-          target_lang: language,
-          level: 'easy'
-        }),
+      const response = await apiJsonRequest('/v1/simplify', {
+        text: inputText,
+        target_lang: language,
+        level: 'easy'
       });
 
       if (!response.ok) {
@@ -246,13 +239,11 @@ function App() {
 
     try {
       // Try API TTS first for consistent voice quality
-      const response = await fetch(`${API_URL}/v1/tts`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: outputText, lang: language }),
-        signal: controller.signal
-      });
-
+      const response = await apiJsonRequest('/v1/tts', { 
+        text: outputText, 
+        lang: language 
+      }, 'POST', controller.signal);
+      
       clearTimeout(timeoutId);
 
       if (!response.ok) {
@@ -340,7 +331,8 @@ function App() {
   if (outputText.length > 0) completedSections.push('output');
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <PasswordGate>
+      <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b h-16">
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
@@ -611,7 +603,8 @@ function App() {
         open={accessibilityOpen}
         onOpenChange={setAccessibilityOpen}
       />
-    </div >
+    </div>
+    </PasswordGate>
   );
 }
 
