@@ -489,6 +489,74 @@ function showSuccess(message) {
 }
 
 /**
+ * Show "Restore Original" button in lower right corner
+ */
+function showRestoreButton() {
+  // Check if button already exists
+  if (document.getElementById('klartext-restore-button')) {
+    return;
+  }
+  
+  const restoreBtn = document.createElement('button');
+  restoreBtn.id = 'klartext-restore-button';
+  restoreBtn.innerHTML = '🔄 Restore Original';
+  restoreBtn.style.cssText = `
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: hsl(174 50% 35%);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 1000000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+  `;
+  
+  // Hover effect
+  restoreBtn.addEventListener('mouseenter', () => {
+    restoreBtn.style.background = 'hsl(174 50% 30%)';
+    restoreBtn.style.transform = 'translateY(-2px)';
+    restoreBtn.style.boxShadow = '0 6px 16px rgba(0,0,0,0.4)';
+  });
+  
+  restoreBtn.addEventListener('mouseleave', () => {
+    restoreBtn.style.background = 'hsl(174 50% 35%)';
+    restoreBtn.style.transform = 'translateY(0)';
+    restoreBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+  });
+  
+  // Click handler - reload page to restore original
+  restoreBtn.addEventListener('click', () => {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Restoring original content by reloading page');
+    }
+    window.location.reload();
+  });
+  
+  document.body.appendChild(restoreBtn);
+  
+  if (CONFIG.DEBUG) {
+    console.log('[KlarText] Restore button added');
+  }
+}
+
+/**
+ * Hide "Restore Original" button
+ */
+function hideRestoreButton() {
+  const restoreBtn = document.getElementById('klartext-restore-button');
+  if (restoreBtn) {
+    restoreBtn.remove();
+  }
+}
+
+/**
  * Save results and logs to downloadable JSON file
  */
 function saveResultsToFile(results, metadata, errorLog = []) {
@@ -589,7 +657,57 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
   };
   
   try {
-    // Show loading
+    // Handle selection mode
+    if (mode === 'selection') {
+      const selection = window.getSelection();
+      const selectedText = selection?.toString()?.trim() || '';
+      
+      if (!selectedText || selectedText.length < CONFIG.MIN_SELECTION_LENGTH) {
+        hideLoading();
+        showError(`Please select at least ${CONFIG.MIN_SELECTION_LENGTH} characters of text to simplify.`);
+        return;
+      }
+      
+      if (CONFIG.DEBUG) {
+        console.log('[KlarText] Selected text:', selectedText.substring(0, 100) + '...');
+        console.log('[KlarText] Selected text length:', selectedText.length);
+      }
+      
+      // Simplify the selected text
+      showLoading('Simplifying selected text...');
+      
+      try {
+        const apiResult = await callAPI([selectedText], targetLanguage);
+        const simplified = apiResult[0]?.simplified_text;
+        
+        if (simplified) {
+          // Replace selected text with simplified version
+          const range = selection.getRangeAt(0);
+          range.deleteContents();
+          const textNode = document.createTextNode(simplified);
+          range.insertNode(textNode);
+          
+          hideLoading();
+          showSuccess(`✓ Simplified selected text. Refresh to restore.`);
+          showRestoreButton();
+          
+          if (CONFIG.DEBUG) {
+            console.log('[KlarText] Selection simplified successfully');
+          }
+        } else {
+          hideLoading();
+          showError('Failed to simplify selected text.');
+        }
+      } catch (error) {
+        hideLoading();
+        console.error('[KlarText] Selection simplification failed:', error);
+        showError('Failed to simplify selected text: ' + error.message);
+      }
+      
+      return; // Exit early for selection mode
+    }
+    
+    // Page mode: Show loading
     showLoading('Analyzing page...');
     
     // Collect text chunks
@@ -632,6 +750,8 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     // Show result first
     if (successCount > 0) {
       showSuccess(`✓ Simplified ${successCount} text section(s) in ${totalTime.toFixed(0)}s. Refresh to restore.`);
+      // Show "Restore Original" button in lower right corner
+      showRestoreButton();
     } else {
       showError(`Failed to simplify text. ${failCount} section(s) failed.`);
     }

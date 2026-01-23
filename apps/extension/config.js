@@ -68,7 +68,7 @@ const CONFIG = {
    * Minimum text length to consider for simplification (characters)
    * Shorter texts are likely UI elements, not content
    */
-  MIN_TEXT_LENGTH: 100,
+  MIN_TEXT_LENGTH: 20,
 
   /**
    * Minimum selection length for manual text selection (characters)
