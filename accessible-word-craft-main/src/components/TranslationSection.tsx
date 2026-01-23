@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Sparkles, Loader2, Copy, Check, Volume2, Upload, FileText } from 'lucide-react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { Sparkles, Loader2, Copy, Check, Volume2, VolumeX, Upload, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -16,7 +16,43 @@ export default function TranslationSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const { t, language } = useLanguage();
+
+  // Refs for TTS audio management
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const currentRequestIdRef = useRef<number>(0);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Stop all audio playback
+  const stopSpeaking = useCallback(() => {
+    currentRequestIdRef.current += 1;
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+    if ('speechSynthesis' in window) {
+      speechSynthesis.cancel();
+    }
+    setIsSpeaking(false);
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => stopSpeaking();
+  }, [stopSpeaking]);
+
+  // Stop on page unload
+  useEffect(() => {
+    const handleBeforeUnload = () => stopSpeaking();
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [stopSpeaking]);
 
   const difficultyLevels = [
     { value: 'very-easy', label: t('veryEasy'), description: t('veryEasyDesc') },
@@ -121,12 +157,75 @@ export default function TranslationSection() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSpeak = () => {
-    if ('speechSynthesis' in window && outputText) {
-      const utterance = new SpeechSynthesisUtterance(outputText);
-      utterance.rate = 0.9;
-      utterance.lang = language === 'de' ? 'de-DE' : 'en-US';
-      speechSynthesis.speak(utterance);
+  const handleSpeak = async () => {
+    // Toggle off if already speaking
+    if (isSpeaking) {
+      stopSpeaking();
+      return;
+    }
+    if (!outputText) return;
+
+    // Stop any existing playback
+    stopSpeaking();
+    
+    const requestId = currentRequestIdRef.current + 1;
+    currentRequestIdRef.current = requestId;
+    setIsSpeaking(true);
+
+    // Create AbortController with 30s timeout
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+    try {
+      // Try API TTS first
+      const response = await fetch(`${API_URL}/v1/tts`, {
+        method: 'POST',
+        headers: { ...getApiHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: outputText, lang: language }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) throw new Error(`TTS API error: ${response.statusText}`);
+
+      const { audio_base64 } = await response.json();
+
+      // Check if this request is still current
+      if (currentRequestIdRef.current !== requestId) return;
+
+      const audio = new Audio(`data:audio/mp3;base64,${audio_base64}`);
+      audioRef.current = audio;
+      audio.onended = () => { setIsSpeaking(false); audioRef.current = null; };
+      audio.onerror = () => { setIsSpeaking(false); audioRef.current = null; };
+      audio.play();
+    } catch (err) {
+      clearTimeout(timeoutId);
+      
+      // Check for abort
+      if (err instanceof Error && err.name === 'AbortError') {
+        if (currentRequestIdRef.current !== requestId) return;
+        console.warn('TTS API request timed out');
+      } else {
+        console.warn('API TTS failed, falling back to browser TTS:', err);
+      }
+
+      // Check if still current
+      if (currentRequestIdRef.current !== requestId) return;
+
+      // Fallback to browser TTS
+      if ('speechSynthesis' in window) {
+        speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(outputText);
+        utterance.rate = 0.9;
+        utterance.lang = language === 'de' ? 'de-DE' : 'en-US';
+        utterance.onend = () => setIsSpeaking(false);
+        utterance.onerror = () => setIsSpeaking(false);
+        speechSynthesis.speak(utterance);
+      } else {
+        setIsSpeaking(false);
+      }
     }
   };
 
@@ -202,9 +301,18 @@ export default function TranslationSection() {
                     {copied ? <Check className="w-4 h-4 mr-1" /> : <Copy className="w-4 h-4 mr-1" />}
                     {copied ? t('textCopied') : t('copyText')}
                   </Button>
-                  <Button variant="outline" size="sm" onClick={handleSpeak}>
-                    <Volume2 className="w-4 h-4 mr-1" />
-                    {t('readAloud')}
+                  <Button variant={isSpeaking ? "default" : "outline"} size="sm" onClick={handleSpeak}>
+                    {isSpeaking ? (
+                      <>
+                        <VolumeX className="w-4 h-4 mr-1" />
+                        {t('stopReading')}
+                      </>
+                    ) : (
+                      <>
+                        <Volume2 className="w-4 h-4 mr-1" />
+                        {t('readAloud')}
+                      </>
+                    )}
                   </Button>
                 </div>
               )}

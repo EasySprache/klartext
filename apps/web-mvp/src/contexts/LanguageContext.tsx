@@ -1,5 +1,4 @@
-import { createContext, useContext, useState } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 
 type Language = 'en' | 'de';
 
@@ -11,37 +10,44 @@ interface Translations {
 }
 
 const translations: Translations = {
-    // Focus Mode - Language Selection
-    welcomeTitle: { en: 'Welcome', de: 'Willkommen' },
+    // Navigation & General
     languageQuestion: { en: 'What language do you want to read?', de: 'In welcher Sprache möchtest du lesen?' },
-    english: { en: 'English', de: 'Englisch' },
-    german: { en: 'German', de: 'Deutsch' },
+    toggleEnglish: { en: 'I speak English', de: 'I speak English' },
+    toggleGerman: { en: 'Ich spreche Deutsch', de: 'Ich spreche Deutsch' },
 
-    // Focus Mode - Input Section
+    // Chapters
+    chapterWelcome: { en: 'What is Klartext?', de: 'Was ist Klartext?' },
+    chapterInput: { en: 'Enter the text you don’t understand', de: 'Geben Sie den Text ein, den Sie nicht verstehen' },
+    chapterOutput: { en: 'Read or hear what the text says in easy language', de: 'Lesen oder hören Sie, was der Text in einfacher Sprache sagt' },
+
+    // Welcome Step (PRESERVED)
+    welcomeIntro: { en: 'Klartext helps you understand texts that are hard to read or confusing.', de: 'Klartext hilft Ihnen, Texte zu verstehen, die schwer zu lesen oder verwirrend sind.' },
+    welcomeUseFor: { en: 'You can use it for letters, documents, or any text you don’t fully understand.', de: 'Sie können es für Briefe, Dokumente oder jeden Text verwenden, den Sie nicht vollständig verstehen.' },
+    welcomeStep1Title: { en: '1. Add your text', de: '1. Text hinzufügen' },
+    welcomeStep1Desc: { en: 'Paste text or upload a document that is difficult to understand.', de: 'Fügen Sie Text ein oder laden Sie ein Dokument hoch, das schwer verständlich ist.' },
+    welcomeStep2Title: { en: '2. Klartext makes it easier', de: '2. Klartext macht es einfacher' },
+    welcomeStep2Desc: { en: 'We rewrite the text in clear, simple language while keeping the meaning.', de: 'Wir schreiben den Text in klarer, einfacher Sprache neu, während die Bedeutung erhalten bleibt.' },
+    welcomeStep3Title: { en: '3. Read or listen', de: '3. Lesen oder hören' },
+    welcomeStep3Desc: { en: 'Read the easier version or listen to it being read aloud.', de: 'Lesen Sie die einfachere Version oder lassen Sie sich den Text vorlesen.' },
+    startAction: { en: 'OK, let’s start', de: 'OK, lass uns anfangen' },
+
+    // Input Section
     inputQuestion: { en: 'How do you want to add your text?', de: 'Wie möchtest du deinen Text hinzufügen?' },
     uploadPdf: { en: 'I have a PDF file', de: 'Ich habe eine PDF-Datei' },
-    pasteText: { en: 'I will paste text', de: 'Ich füge Text ein' },
+    pasteTextOption: { en: 'I will paste text', de: 'Ich werde Text einfügen' },
     pasteHere: { en: 'Paste your text here', de: 'Füge deinen Text hier ein' },
     characterCount: { en: 'characters', de: 'Zeichen' },
-
-    // Focus Mode - Action Section
-    actionTitle: { en: 'Ready to simplify', de: 'Bereit zum Vereinfachen' },
     simplifyButton: { en: 'Simplify this text now', de: 'Diesen Text jetzt vereinfachen' },
     processing: { en: 'Working on it...', de: 'Wird verarbeitet...' },
 
-    // Focus Mode - Result Section
+    // Result Section
     resultTitle: { en: 'Here is your simplified text', de: 'Hier ist dein vereinfachter Text' },
-    scrollUpHint: { en: 'Scroll up to see what you wrote', de: 'Nach oben scrollen um deinen Original-Text zu sehen' },
     copyText: { en: 'Copy this text', de: 'Diesen Text kopieren' },
     readAloud: { en: 'Read this text aloud', de: 'Diesen Text vorlesen' },
     stopReading: { en: 'Stop reading', de: 'Vorlesen stoppen' },
     copied: { en: 'Text copied!', de: 'Text kopiert!' },
-
-    // Progress indicators
-    step1: { en: 'Choose language', de: 'Sprache wählen' },
-    step2: { en: 'Add text', de: 'Text hinzufügen' },
-    step3: { en: 'Simplify', de: 'Vereinfachen' },
-    step4: { en: 'Read result', de: 'Ergebnis lesen' },
+    startAgain: { en: 'Start again', de: 'Neu starten' },
+    scrollUpHint: { en: 'Scroll up to see what you wrote', de: 'Nach oben scrollen um deinen Original-Text zu sehen' },
 
     // Accessibility Panel
     accessibilitySettings: { en: 'Accessibility Settings', de: 'Barrierefreiheit-Einstellungen' },
