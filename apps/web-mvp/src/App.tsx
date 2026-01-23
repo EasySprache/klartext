@@ -8,7 +8,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import AccessibilityPanel from '@/components/AccessibilityPanel';
 import ProgressIndicator from '@/components/ProgressIndicator';
 import PasswordGate from '@/components/PasswordGate';
-import { API_URL, apiJsonRequest, apiRequest } from '@/lib/api';
+import { apiJsonRequest, apiRequest } from '@/lib/api';
 
 type InputMethod = 'pdf' | 'paste' | null;
 type FlowStep = 1 | 2 | 3 | 4;
