@@ -30,6 +30,24 @@ npm run dev
 
 Open **http://localhost:5174/** in your browser.
 
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_API_URL` | `http://localhost:8000` | Backend API URL. Set this to point to a different backend (e.g., production, staging). |
+
+**Example: Connect to production API**
+
+```bash
+VITE_API_URL=https://klartext-api.fly.dev npm run dev
+```
+
+Or create a `.env` file:
+
+```env
+VITE_API_URL=https://klartext-api.fly.dev
+```
+
 ### Run the Backend (required for simplification)
 
 In a **separate terminal**:

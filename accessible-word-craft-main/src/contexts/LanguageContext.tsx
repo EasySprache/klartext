@@ -40,6 +40,7 @@ const translations: Translations = {
   processing: { en: 'Processing...', de: 'Wird verarbeitet...' },
   copyText: { en: 'Copy text', de: 'Text kopieren' },
   readAloud: { en: 'Read aloud', de: 'Vorlesen' },
+  stopReading: { en: 'Stop reading', de: 'Vorlesen stoppen' },
   textCopied: { en: 'Text copied!', de: 'Text kopiert!' },
   
   // How It Works
