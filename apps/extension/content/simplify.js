@@ -14,6 +14,9 @@ if (typeof CONFIG === 'undefined') {
   throw new Error('KlarText configuration not loaded');
 }
 
+// Global AbortController for cancellation
+let globalAbortController = null;
+
 /**
  * Check if an element should be skipped during text collection
  */
@@ -154,8 +157,16 @@ async function callAPI(texts, targetLanguage) {
   }
   
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), CONFIG.REQUEST_TIMEOUT);
+    // Use global abort controller for cancellation support
+    if (!globalAbortController) {
+      globalAbortController = new AbortController();
+    }
+    
+    const timeoutId = setTimeout(() => {
+      if (globalAbortController) {
+        globalAbortController.abort();
+      }
+    }, CONFIG.REQUEST_TIMEOUT);
     
     const response = await fetch(url, {
       method: 'POST',
@@ -167,7 +178,7 @@ async function callAPI(texts, targetLanguage) {
         target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
         level: CONFIG.DEFAULT_LEVEL,
       }),
-      signal: controller.signal,
+      signal: globalAbortController?.signal,
     });
     
     clearTimeout(timeoutId);
@@ -349,6 +360,114 @@ function updateTextNodes(results) {
   }
   
   return { successCount, failCount };
+}
+
+/**
+ * Show selection dialog prompting user to select text
+ */
+function showSelectionDialog() {
+  // Check if dialog already exists
+  if (document.getElementById('klartext-selection-dialog')) {
+    return;
+  }
+  
+  const dialog = document.createElement('div');
+  dialog.id = 'klartext-selection-dialog';
+  dialog.innerHTML = `
+    <div class="klartext-dialog-content">
+      <div class="klartext-dialog-icon">✨</div>
+      <div class="klartext-dialog-title">Please select text on the page to simplify</div>
+      <div class="klartext-dialog-subtitle">Highlight any text and it will be simplified automatically</div>
+      <button class="klartext-dialog-cancel">Cancel</button>
+    </div>
+  `;
+  
+  dialog.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    font-family: system-ui, -apple-system, sans-serif;
+  `;
+  
+  const content = dialog.querySelector('.klartext-dialog-content');
+  content.style.cssText = `
+    background: white;
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  `;
+  
+  const icon = dialog.querySelector('.klartext-dialog-icon');
+  icon.style.cssText = `
+    font-size: 48px;
+    margin-bottom: 16px;
+  `;
+  
+  const title = dialog.querySelector('.klartext-dialog-title');
+  title.style.cssText = `
+    font-size: 18px;
+    font-weight: 600;
+    color: hsl(220 20% 20%);
+    margin-bottom: 8px;
+  `;
+  
+  const subtitle = dialog.querySelector('.klartext-dialog-subtitle');
+  subtitle.style.cssText = `
+    font-size: 14px;
+    color: hsl(220 20% 50%);
+    margin-bottom: 24px;
+  `;
+  
+  const cancelBtn = dialog.querySelector('.klartext-dialog-cancel');
+  cancelBtn.style.cssText = `
+    background: hsl(220 20% 90%);
+    color: hsl(220 20% 30%);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  `;
+  
+  cancelBtn.addEventListener('click', () => {
+    dialog.remove();
+    // Notify sidepanel that selection was cancelled
+    try {
+      chrome.runtime.sendMessage({
+        type: 'PROGRESS_UPDATE',
+        status: 'idle',
+        message: ''
+      });
+    } catch (e) {
+      // Ignore
+    }
+  });
+  
+  document.body.appendChild(dialog);
+  
+  if (CONFIG.DEBUG) {
+    console.log('[KlarText] Selection dialog shown');
+  }
+}
+
+/**
+ * Hide selection dialog
+ */
+function hideSelectionDialog() {
+  const dialog = document.getElementById('klartext-selection-dialog');
+  if (dialog) {
+    dialog.remove();
+  }
 }
 
 /**
@@ -639,6 +758,9 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
   const startTime = Date.now();
   const errorLog = [];
   
+  // Reset global abort controller for this new simplification run
+  globalAbortController = new AbortController();
+  
   if (CONFIG.DEBUG) {
     console.log('[KlarText] Starting page simplification...');
     console.log('[KlarText] Mode:', mode, 'Source:', sourceLanguage, 'Target:', targetLanguage);
@@ -766,6 +888,18 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     
   } catch (error) {
     hideLoading();
+    
+    // Check if it was cancelled (user clicked cancel button)
+    if (error.name === 'AbortError') {
+      if (CONFIG.DEBUG) {
+        console.log('[KlarText] Simplification was cancelled by user');
+      }
+      showError('Simplification cancelled.');
+      // Reset controller
+      globalAbortController = null;
+      return;
+    }
+    
     console.error('[KlarText] Simplification failed:', error);
     
     // User-friendly error messages
@@ -782,6 +916,9 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
   } finally {
     // CRITICAL: Restore original console.error to avoid polluting the page's global scope
     console.error = originalConsoleError;
+    
+    // Clean up abort controller
+    globalAbortController = null;
   }
 }
 
@@ -795,8 +932,60 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log('[KlarText] Mode:', mode, 'Source:', sourceLanguage, 'Target:', targetLanguage);
     }
     
-    // Start simplification with language parameters
-    simplifyPage(mode, sourceLanguage, targetLanguage);
+    // Handle selection mode differently
+    if (mode === 'selection') {
+      // Show dialog prompting user to select text
+      showSelectionDialog();
+      
+      // Set up one-time listener for text selection
+      const handleSelection = () => {
+        const selection = window.getSelection();
+        const selectedText = selection?.toString()?.trim() || '';
+        
+        if (selectedText && selectedText.length >= CONFIG.MIN_SELECTION_LENGTH) {
+          // Hide dialog
+          hideSelectionDialog();
+          
+          // Remove this listener
+          document.removeEventListener('mouseup', handleSelection);
+          
+          // Start simplification
+          simplifyPage(mode, sourceLanguage, targetLanguage);
+        }
+      };
+      
+      // Listen for mouse up (text selection complete)
+      document.addEventListener('mouseup', handleSelection);
+      
+      // Clean up listener after 60 seconds
+      setTimeout(() => {
+        document.removeEventListener('mouseup', handleSelection);
+      }, 60000);
+      
+      sendResponse({ ok: true });
+    } else {
+      // Page mode: start immediately
+      simplifyPage(mode, sourceLanguage, targetLanguage);
+      sendResponse({ ok: true });
+    }
+  }
+  
+  // Handle cancellation
+  if (message.type === 'CANCEL_SIMPLIFICATION') {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Cancellation requested');
+    }
+    
+    // Abort any ongoing API requests
+    if (globalAbortController) {
+      globalAbortController.abort();
+      globalAbortController = null;
+    }
+    
+    // Hide any dialogs
+    hideSelectionDialog();
+    hideLoading();
+    hideRestoreButton();
     
     sendResponse({ ok: true });
   }
