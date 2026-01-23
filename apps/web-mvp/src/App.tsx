@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { useLanguage } from '@/contexts/LanguageContext';
 import AccessibilityPanel from '@/components/AccessibilityPanel';
 import ProgressIndicator from '@/components/ProgressIndicator';
+import PasswordGate from '@/components/PasswordGate';
+import { API_URL, apiJsonRequest, apiRequest } from '@/lib/api';
 
 type InputMethod = 'pdf' | 'paste' | null;
 type FlowStep = 1 | 2 | 3 | 4;
@@ -80,7 +82,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/v1/ingest/pdf', {
+      const response = await apiRequest('/v1/ingest/pdf', {
         method: 'POST',
         body: formData,
       });
@@ -118,16 +120,10 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8000/v1/simplify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: inputText,
-          target_lang: language,
-          level: 'easy'
-        }),
+      const response = await apiJsonRequest('/v1/simplify', {
+        text: inputText,
+        target_lang: language,
+        level: 'easy'
       });
 
       if (!response.ok) {
@@ -236,12 +232,10 @@ function App() {
     
     try {
       // Try API TTS first for consistent voice quality
-      const response = await fetch('http://localhost:8000/v1/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: outputText, lang: language }),
-        signal: controller.signal
-      });
+      const response = await apiJsonRequest('/v1/tts', { 
+        text: outputText, 
+        lang: language 
+      }, 'POST', controller.signal);
       
       clearTimeout(timeoutId);
       
@@ -317,11 +311,12 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Skip link */}
-      <a href="#main" className="skip-link">
-        {language === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}
-      </a>
+    <PasswordGate>
+      <div className="min-h-screen bg-background">
+        {/* Skip link */}
+        <a href="#main" className="skip-link">
+          {language === 'de' ? 'Zum Inhalt springen' : 'Skip to content'}
+        </a>
 
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b pb-2">
@@ -581,6 +576,7 @@ function App() {
         onOpenChange={setAccessibilityOpen}
       />
     </div>
+    </PasswordGate>
   );
 }
 
