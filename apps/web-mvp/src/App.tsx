@@ -11,6 +11,9 @@ import ProgressIndicator from '@/components/ProgressIndicator';
 type InputMethod = 'pdf' | 'paste' | null;
 type FlowStep = 1 | 2 | 3 | 4;
 
+// API base URL - uses environment variable in production, localhost in development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
 function App() {
   const { language, setLanguage, t } = useLanguage();
 
@@ -80,7 +83,7 @@ function App() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/v1/ingest/pdf', {
+      const response = await fetch(`${API_URL}/v1/ingest/pdf`, {
         method: 'POST',
         body: formData,
       });
@@ -118,7 +121,7 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8000/v1/simplify', {
+      const response = await fetch(`${API_URL}/v1/simplify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -236,7 +239,7 @@ function App() {
     
     try {
       // Try API TTS first for consistent voice quality
-      const response = await fetch('http://localhost:8000/v1/tts', {
+      const response = await fetch(`${API_URL}/v1/tts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: outputText, lang: language }),
