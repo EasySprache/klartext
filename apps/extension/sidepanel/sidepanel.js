@@ -175,21 +175,47 @@ async function handleSimplify(mode = 'page') {
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'PROGRESS_UPDATE') {
-    const { progress, buttonId } = message;
+    const { status, message: progressMessage, progress, buttonId } = message;
     
-    if (progress) {
-      // Show progress in button
-      setButtonLoading(buttonId || 'simplify-page', true, progress);
+    // New format: status + message
+    if (status === 'processing') {
+      // Show progress in button and status
+      setButtonLoading('simplify-page', true, progressMessage || 'Processing...');
       updateStatus("", "info"); // Clear any previous status
-    } else {
-      // Empty progress = done
-      setButtonLoading(buttonId || 'simplify-page', false);
-      updateStatus("✓ Complete!", "success");
+      isPageProcessing = true;
+    } else if (status === 'complete') {
+      // Processing complete
+      setButtonLoading('simplify-page', false);
+      updateStatus(progressMessage || "✓ Complete!", "success");
+      isPageProcessing = false;
       
       // Clear success message after 3 seconds
       setTimeout(() => {
         updateStatus("", "info");
       }, 3000);
+    } else if (status === 'error') {
+      // Processing error
+      setButtonLoading('simplify-page', false);
+      updateStatus(progressMessage || "Error occurred", "error");
+      isPageProcessing = false;
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        updateStatus("", "info");
+      }, 5000);
+    } else if (status === 'idle') {
+      // Reset to idle state
+      setButtonLoading('simplify-page', false);
+      isPageProcessing = false;
+    }
+    // Legacy format: progress field (for backwards compatibility)
+    else if (progress) {
+      setButtonLoading(buttonId || 'simplify-page', true, progress);
+      updateStatus("", "info");
+    } else if (progress === '' || progress === null) {
+      setButtonLoading(buttonId || 'simplify-page', false);
+      updateStatus("✓ Complete!", "success");
+      setTimeout(() => updateStatus("", "info"), 3000);
     }
     
     sendResponse({ ok: true });

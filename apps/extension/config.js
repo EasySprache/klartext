@@ -28,14 +28,27 @@ const CONFIG = {
   /**
    * Default language for simplification
    * Options: 'de' (German), 'en' (English)
-   * Future: Will be selectable in popup UI
+   * User can select in sidepanel UI
    */
   DEFAULT_LANG: 'en',
 
   /**
+   * Supported languages with display labels
+   */
+  SUPPORTED_LANGUAGES: {
+    'de': 'Deutsch (German)',
+    'en': 'English'
+  },
+
+  /**
+   * Current template version for logging and A/B testing
+   */
+  CURRENT_TEMPLATE_VERSION: 'v2',
+
+  /**
    * Default simplification level
    * Options: 'very_easy', 'easy', 'medium'
-   * Future: Will be selectable in popup UI
+   * Future: Will be selectable in sidepanel UI
    */
   DEFAULT_LEVEL: 'easy',
 
@@ -55,7 +68,13 @@ const CONFIG = {
    * Minimum text length to consider for simplification (characters)
    * Shorter texts are likely UI elements, not content
    */
-  MIN_TEXT_LENGTH: 20,
+  MIN_TEXT_LENGTH: 100,
+
+  /**
+   * Minimum selection length for manual text selection (characters)
+   * Lower threshold for user-selected text vs automatic page chunking
+   */
+  MIN_SELECTION_LENGTH: 20,
 
   /**
    * Request timeout in milliseconds
@@ -74,7 +93,7 @@ const CONFIG = {
    * Development: http://localhost:5174
    * Production: Update this when deploying
    */
-  WEBAPP_URL: 'http://localhost:5174',
+  WEBAPP_URL: 'https://klartext-rho.vercel.app/', // TODO: Update with actual URL
 
   /**
    * Webapp feature links configuration

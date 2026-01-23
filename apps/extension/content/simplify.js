@@ -144,12 +144,13 @@ function collectTextChunks() {
  * Call the KlarText API to simplify text(s)
  * Uses batch endpoint if available, falls back to single endpoint
  */
-async function callAPI(texts) {
+async function callAPI(texts, targetLanguage) {
   const url = `${CONFIG.API_ENDPOINT}${CONFIG.API_ROUTES.SIMPLIFY_BATCH}`;
   
   if (CONFIG.DEBUG) {
     console.log(`[KlarText] Calling API: ${url}`);
     console.log(`[KlarText] Texts to simplify: ${texts.length}`);
+    console.log(`[KlarText] Target language: ${targetLanguage}`);
   }
   
   try {
@@ -163,7 +164,7 @@ async function callAPI(texts) {
       },
       body: JSON.stringify({
         texts: texts,
-        target_lang: CONFIG.DEFAULT_LANG,
+        target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
         level: CONFIG.DEFAULT_LEVEL,
       }),
       signal: controller.signal,
@@ -219,21 +220,43 @@ async function callAPI(texts) {
 }
 
 /**
- * Process chunks in batches and call API
+ * Process chunks in batches and call API with detailed progress tracking
  */
-async function simplifyInBatches(chunks) {
+async function simplifyInBatches(chunks, targetLanguage) {
   const results = [];
   const totalBatches = Math.ceil(chunks.length / CONFIG.MAX_BATCH_SIZE);
+  const totalChunks = chunks.length;
+  let completedChunks = 0;
   let successfulBatches = 0;
   let failedBatches = 0;
+  let batchTimes = [];
+  
+  // Extract domain for progress messages
+  let domain = 'this page';
+  try {
+    domain = new URL(window.location.href).hostname;
+  } catch (e) {
+    // Use fallback
+  }
   
   for (let i = 0; i < chunks.length; i += CONFIG.MAX_BATCH_SIZE) {
     const batch = chunks.slice(i, i + CONFIG.MAX_BATCH_SIZE);
     const batchNum = Math.floor(i / CONFIG.MAX_BATCH_SIZE) + 1;
     
-    // Update progress with more detail
-    const progressPercent = Math.round((batchNum / totalBatches) * 100);
-    updateProgress(`Processing batch ${batchNum}/${totalBatches} (${progressPercent}%)...`);
+    // Calculate progress percentage based on completed chunks
+    const progressPercent = Math.round((completedChunks / totalChunks) * 100);
+    
+    // Estimate remaining time based on average batch time
+    let etaText = '';
+    if (batchTimes.length > 0 && batchNum < totalBatches) {
+      const avgBatchTime = batchTimes.reduce((a, b) => a + b, 0) / batchTimes.length;
+      const remainingBatches = totalBatches - batchNum + 1;
+      const estimatedSeconds = Math.ceil(avgBatchTime * remainingBatches);
+      etaText = ` ~${estimatedSeconds}s remaining`;
+    }
+    
+    // Show detailed progress
+    updateProgress(`[${domain}] Batch ${batchNum}/${totalBatches} (${progressPercent}% - ${completedChunks}/${totalChunks} chunks)${etaText}...`);
     
     // Extract texts from chunks
     const texts = batch.map(chunk => chunk.originalText);
@@ -241,14 +264,15 @@ async function simplifyInBatches(chunks) {
     const batchStartTime = Date.now();
     
     try {
-      // Call API
-      const apiResults = await callAPI(texts);
+      // Call API with target language
+      const apiResults = await callAPI(texts, targetLanguage);
       successfulBatches++;
       
-      const batchTime = ((Date.now() - batchStartTime) / 1000).toFixed(1);
+      const batchTime = (Date.now() - batchStartTime) / 1000;
+      batchTimes.push(batchTime);
       
       if (CONFIG.DEBUG) {
-        console.log(`[KlarText] Batch ${batchNum}/${totalBatches} completed in ${batchTime}s`);
+        console.log(`[KlarText] Batch ${batchNum}/${totalBatches} completed in ${batchTime.toFixed(1)}s`);
       }
       
       // Match results back to chunks
@@ -261,7 +285,16 @@ async function simplifyInBatches(chunks) {
           simplified: simplified,
           error: error,
         });
+        
+        if (simplified && !error) {
+          completedChunks++;
+        }
       }
+      
+      // Show progress after batch completion
+      const newProgressPercent = Math.round((completedChunks / totalChunks) * 100);
+      updateProgress(`[${domain}] Batch ${batchNum}/${totalBatches} complete (${newProgressPercent}% - ${completedChunks}/${totalChunks} chunks)`);
+      
     } catch (error) {
       failedBatches++;
       console.error(`[KlarText] Batch ${batchNum} failed:`, error);
@@ -319,100 +352,70 @@ function updateTextNodes(results) {
 }
 
 /**
- * Show loading overlay
+ * Send progress message to sidepanel (non-blocking)
  */
 function showLoading(message = 'Simplifying page text...') {
-  // Check if overlay already exists
-  let overlay = document.getElementById('klartext-loading-overlay');
-  if (overlay) {
-    // Update message
-    const msgEl = overlay.querySelector('.klartext-loading-message');
-    if (msgEl) msgEl.textContent = message;
-    return;
+  // Send message to sidepanel to update status
+  try {
+    chrome.runtime.sendMessage({
+      type: 'PROGRESS_UPDATE',
+      status: 'processing',
+      message: message
+    });
+  } catch (error) {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Could not send progress to sidepanel:', error);
+    }
   }
   
-  // Create overlay
-  overlay = document.createElement('div');
-  overlay.id = 'klartext-loading-overlay';
-  overlay.innerHTML = `
-    <div class="klartext-loading-content">
-      <div class="klartext-loading-spinner"></div>
-      <div class="klartext-loading-message">${message}</div>
-    </div>
-  `;
-  
-  // Add styles inline (fallback if CSS file fails to load)
-  overlay.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999999;
-    font-family: system-ui, -apple-system, sans-serif;
-  `;
-  
-  const content = overlay.querySelector('.klartext-loading-content');
-  content.style.cssText = `
-    background: hsl(45 30% 96%);
-    padding: 32px;
-    border-radius: 8px;
-    text-align: center;
-    max-width: 400px;
-  `;
-  
-  const spinner = overlay.querySelector('.klartext-loading-spinner');
-  spinner.style.cssText = `
-    width: 48px;
-    height: 48px;
-    border: 4px solid hsl(220 20% 80%);
-    border-top-color: hsl(174 50% 35%);
-    border-radius: 50%;
-    animation: klartext-spin 1s linear infinite;
-    margin: 0 auto 16px;
-  `;
-  
-  // Add animation
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes klartext-spin {
-      to { transform: rotate(360deg); }
-    }
-  `;
-  document.head.appendChild(style);
-  
-  document.body.appendChild(overlay);
+  if (CONFIG.DEBUG) {
+    console.log('[KlarText Progress]', message);
+  }
 }
 
 /**
- * Update loading progress message
+ * Update progress message in sidepanel
  */
 function updateProgress(message) {
-  const overlay = document.getElementById('klartext-loading-overlay');
-  if (overlay) {
-    const msgEl = overlay.querySelector('.klartext-loading-message');
-    if (msgEl) msgEl.textContent = message;
-  }
+  showLoading(message);
 }
 
 /**
- * Hide loading overlay
+ * Send completion message to sidepanel
  */
 function hideLoading() {
-  const overlay = document.getElementById('klartext-loading-overlay');
-  if (overlay) {
-    overlay.remove();
+  // Notify sidepanel that processing is complete
+  try {
+    chrome.runtime.sendMessage({
+      type: 'PROGRESS_UPDATE',
+      status: 'idle',
+      message: ''
+    });
+  } catch (error) {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Could not send completion to sidepanel:', error);
+    }
   }
 }
 
 /**
- * Show error message
+ * Show error message (non-blocking banner + sidepanel notification)
  */
 function showError(message) {
+  // Send error to sidepanel
+  try {
+    chrome.runtime.sendMessage({
+      type: 'PROGRESS_UPDATE',
+      status: 'error',
+      message: message
+    });
+  } catch (error) {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Could not send error to sidepanel:', error);
+    }
+  }
+  
+  // Show non-blocking error banner on page
   const errorDiv = document.createElement('div');
   errorDiv.id = 'klartext-error-banner';
   errorDiv.textContent = message;
@@ -441,9 +444,23 @@ function showError(message) {
 }
 
 /**
- * Show success message
+ * Show success message (non-blocking banner + sidepanel notification)
  */
 function showSuccess(message) {
+  // Send success to sidepanel
+  try {
+    chrome.runtime.sendMessage({
+      type: 'PROGRESS_UPDATE',
+      status: 'complete',
+      message: message
+    });
+  } catch (error) {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Could not send success to sidepanel:', error);
+    }
+  }
+  
+  // Show non-blocking success banner on page
   const successDiv = document.createElement('div');
   successDiv.id = 'klartext-success-banner';
   successDiv.textContent = message;
@@ -546,13 +563,17 @@ function saveResultsToFile(results, metadata, errorLog = []) {
 
 /**
  * Main function - simplify all text on the page
+ * @param {string} mode - 'page' or 'selection'
+ * @param {string} sourceLanguage - Source language code (e.g. 'en', 'de')
+ * @param {string} targetLanguage - Target language code (e.g. 'en', 'de')
  */
-async function simplifyPage() {
+async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage = 'en') {
   const startTime = Date.now();
   const errorLog = [];
   
   if (CONFIG.DEBUG) {
     console.log('[KlarText] Starting page simplification...');
+    console.log('[KlarText] Mode:', mode, 'Source:', sourceLanguage, 'Target:', targetLanguage);
   }
   
   // Capture errors - save original console.error to restore later
@@ -583,7 +604,7 @@ async function simplifyPage() {
     // Simplify in batches
     showLoading(`Simplifying ${chunks.length} text sections...`);
     const batchStartTime = Date.now();
-    const results = await simplifyInBatches(chunks);
+    const results = await simplifyInBatches(chunks, targetLanguage);
     const batchEndTime = Date.now();
     
     // Update page
@@ -644,5 +665,58 @@ async function simplifyPage() {
   }
 }
 
-// Run simplification
-simplifyPage();
+// Listen for simplification start message from service worker
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'START_SIMPLIFICATION') {
+    const { mode, sourceLanguage, targetLanguage } = message;
+    
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Received START_SIMPLIFICATION message');
+      console.log('[KlarText] Mode:', mode, 'Source:', sourceLanguage, 'Target:', targetLanguage);
+    }
+    
+    // Start simplification with language parameters
+    simplifyPage(mode, sourceLanguage, targetLanguage);
+    
+    sendResponse({ ok: true });
+  }
+  
+  return true;
+});
+
+// Navigation detection - cleanup UI when navigating away
+try {
+  // Detect page unload
+  window.addEventListener('beforeunload', () => {
+    hideLoading();
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Page unloading, cleaning up UI');
+    }
+  });
+  
+  // Detect SPA navigation (history.pushState/replaceState)
+  const originalPushState = history.pushState;
+  const originalReplaceState = history.replaceState;
+  
+  history.pushState = function(...args) {
+    hideLoading();
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] SPA navigation detected (pushState), cleaning up UI');
+    }
+    return originalPushState.apply(this, args);
+  };
+  
+  history.replaceState = function(...args) {
+    hideLoading();
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] SPA navigation detected (replaceState), cleaning up UI');
+    }
+    return originalReplaceState.apply(this, args);
+  };
+  
+  if (CONFIG.DEBUG) {
+    console.log('[KlarText] Navigation detection initialized');
+  }
+} catch (error) {
+  console.error('[KlarText] Failed to initialize navigation detection:', error);
+}
