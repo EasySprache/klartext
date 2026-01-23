@@ -13,6 +13,7 @@ export default function ProgressIndicator({ currentStep }: ProgressIndicatorProp
         { key: 'step2', number: 2 },
         { key: 'step3', number: 3 },
         { key: 'step4', number: 4 },
+        { key: 'step5', number: 5 },
     ];
 
     return (
