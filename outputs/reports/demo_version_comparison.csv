@@ -1,0 +1,6 @@
+,ari_score,ari_score,avg_sentence_len_words,avg_sentence_len_words,pct_sentences_gt20,pct_sentences_gt20,meaning_cosine,meaning_cosine,guardrails_passed,guardrails_total,pass_rate,n_samples
+,mean,std,mean,std,mean,std,mean,std,sum,sum,,
+version,,,,,,,,,,,,
+Current,7.54,2.31,12.81,3.64,2.78,9.61,0.16,0.15,29,48,60.4,12
+V1 (Baseline),6.11,3.54,8.96,3.07,2.42,6.87,0.3,0.34,87,120,72.5,30
+V2,6.52,2.62,11.97,2.86,4.7,8.11,0.32,0.31,32,48,66.7,12
