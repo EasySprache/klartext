@@ -14,8 +14,15 @@ if (typeof CONFIG === 'undefined') {
   throw new Error('KlarText configuration not loaded');
 }
 
-// Global AbortController for cancellation
-let globalAbortController = null;
+// Global AbortController for user-initiated cancellation
+// Separate from per-batch timeout controllers to prevent cascading failures
+// 
+// To implement user cancellation:
+// 1. Add "Cancel" button in sidepanel UI during processing
+// 2. Send message from sidepanel: chrome.tabs.sendMessage(tabId, { type: 'CANCEL_SIMPLIFICATION' })
+// 3. In content script message listener, call: userCancellationController?.abort()
+// 4. All in-flight and pending batches will stop gracefully
+let userCancellationController = null;
 
 /**
  * Check if an element should be skipped during text collection
@@ -157,15 +164,17 @@ async function callAPI(texts, targetLanguage) {
   }
   
   try {
-    // Use global abort controller for cancellation support
-    if (!globalAbortController) {
-      globalAbortController = new AbortController();
+    // Check if user has cancelled before making request
+    if (userCancellationController?.signal.aborted) {
+      throw new Error('Simplification cancelled by user');
     }
     
+    // Create a fresh timeout controller for THIS batch only
+    // This prevents one timeout from affecting subsequent batches
+    const batchTimeoutController = new AbortController();
+    
     const timeoutId = setTimeout(() => {
-      if (globalAbortController) {
-        globalAbortController.abort();
-      }
+      batchTimeoutController.abort();
     }, CONFIG.REQUEST_TIMEOUT);
     
     const response = await fetch(url, {
@@ -178,7 +187,7 @@ async function callAPI(texts, targetLanguage) {
         target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
         level: CONFIG.DEFAULT_LEVEL,
       }),
-      signal: globalAbortController?.signal,
+      signal: batchTimeoutController.signal,
     });
     
     clearTimeout(timeoutId);
@@ -251,6 +260,11 @@ async function simplifyInBatches(chunks, targetLanguage) {
   }
   
   for (let i = 0; i < chunks.length; i += CONFIG.MAX_BATCH_SIZE) {
+    // Check if user has cancelled before processing next batch
+    if (userCancellationController?.signal.aborted) {
+      throw new Error('Simplification cancelled by user');
+    }
+    
     const batch = chunks.slice(i, i + CONFIG.MAX_BATCH_SIZE);
     const batchNum = Math.floor(i / CONFIG.MAX_BATCH_SIZE) + 1;
     
@@ -758,8 +772,9 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
   const startTime = Date.now();
   const errorLog = [];
   
-  // Reset global abort controller for this new simplification run
-  globalAbortController = new AbortController();
+  // Create fresh cancellation controller for this simplification run
+  // This allows user to cancel via sidepanel in future implementation
+  userCancellationController = new AbortController();
   
   if (CONFIG.DEBUG) {
     console.log('[KlarText] Starting page simplification...');
@@ -896,7 +911,7 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
       }
       showError('Simplification cancelled.');
       // Reset controller
-      globalAbortController = null;
+      userCancellationController = null;
       return;
     }
     
@@ -917,8 +932,8 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     // CRITICAL: Restore original console.error to avoid polluting the page's global scope
     console.error = originalConsoleError;
     
-    // Clean up abort controller
-    globalAbortController = null;
+    // Clean up cancellation controller
+    userCancellationController = null;
   }
 }
 
@@ -977,9 +992,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     
     // Abort any ongoing API requests
-    if (globalAbortController) {
-      globalAbortController.abort();
-      globalAbortController = null;
+    if (userCancellationController) {
+      userCancellationController.abort();
+      userCancellationController = null;
     }
     
     // Hide any dialogs
