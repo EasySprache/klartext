@@ -171,51 +171,183 @@ async function handleSimplify(mode = 'page') {
 }
 
 /**
+ * Show/hide progress container and update progress bar
+ */
+function updateProgressBar(progress) {
+  const progressContainer = document.getElementById('progress-container');
+  const progressBarFill = document.getElementById('progress-bar-fill');
+  const progressText = document.getElementById('progress-text');
+  const progressDetails = document.getElementById('progress-details');
+  
+  if (!progress) {
+    // Hide progress container
+    if (progressContainer) progressContainer.style.display = 'none';
+    return;
+  }
+  
+  // Show progress container
+  if (progressContainer) progressContainer.style.display = 'block';
+  
+  // Update progress bar
+  if (progressBarFill) progressBarFill.style.width = `${progress.percent || 0}%`;
+  if (progressText) progressText.textContent = `${progress.percent || 0}%`;
+  
+  // Update details (batch info + ETA)
+  if (progressDetails) {
+    let detailsText = '';
+    if (progress.current && progress.total) {
+      detailsText = `Batch ${progress.current} of ${progress.total}`;
+    }
+    if (progress.eta) {
+      detailsText += ` • ${progress.eta}s remaining`;
+    }
+    progressDetails.textContent = detailsText;
+  }
+}
+
+/**
+ * Show/hide page indicator
+ */
+function updatePageIndicator(pageInfo) {
+  const pageIndicator = document.getElementById('page-indicator');
+  const pageName = document.getElementById('page-name');
+  
+  if (!pageInfo) {
+    if (pageIndicator) pageIndicator.style.display = 'none';
+    return;
+  }
+  
+  if (pageIndicator) pageIndicator.style.display = 'flex';
+  if (pageName) {
+    pageName.textContent = pageInfo.domain || pageInfo.title || 'Current page';
+  }
+}
+
+/**
+ * Show/hide success indicator
+ */
+function showSuccessIndicator(message) {
+  const successIndicator = document.getElementById('success-indicator');
+  const successMessage = document.getElementById('success-message');
+  
+  if (successIndicator) {
+    successIndicator.style.display = 'flex';
+    if (successMessage) successMessage.textContent = message || 'Success!';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      successIndicator.style.display = 'none';
+    }, 5000);
+  }
+}
+
+function hideSuccessIndicator() {
+  const successIndicator = document.getElementById('success-indicator');
+  if (successIndicator) successIndicator.style.display = 'none';
+}
+
+/**
+ * Show/hide restore button
+ */
+function showRestoreButton() {
+  const restoreButton = document.getElementById('restore-button');
+  if (restoreButton) restoreButton.style.display = 'flex';
+}
+
+function hideRestoreButton() {
+  const restoreButton = document.getElementById('restore-button');
+  if (restoreButton) restoreButton.style.display = 'none';
+}
+
+/**
+ * Show/hide select new text button
+ */
+function showSelectNewButton() {
+  const selectNewButton = document.getElementById('select-new-button');
+  if (selectNewButton) selectNewButton.style.display = 'flex';
+}
+
+function hideSelectNewButton() {
+  const selectNewButton = document.getElementById('select-new-button');
+  if (selectNewButton) selectNewButton.style.display = 'none';
+}
+
+/**
  * Listen for progress updates from content script
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'PROGRESS_UPDATE') {
-    const { status, message: progressMessage, progress, buttonId } = message;
+    const { status, message: progressMessage, progress, pageInfo, buttonId } = message;
     
-    // New format: status + message
     if (status === 'processing') {
-      // Show progress in button and status
+      // Show progress bar and page indicator
+      updateProgressBar(progress);
+      updatePageIndicator(pageInfo);
+      
+      // Show cancel button
+      showCancelButton();
+      
+      // Update button state
       setButtonLoading('simplify-page', true, progressMessage || 'Processing...');
-      updateStatus("", "info"); // Clear any previous status
+      updateStatus("", "info");
       isPageProcessing = true;
+      
+      // Hide completion UI
+      hideSuccessIndicator();
+      hideRestoreButton();
+      hideSelectNewButton();
+      
     } else if (status === 'complete') {
-      // Processing complete
+      // Hide progress UI
+      updateProgressBar(null);
+      updatePageIndicator(null);
+      hideCancelButton();
+      
+      // Show success indicator
+      showSuccessIndicator(progressMessage || "✓ Simplification complete!");
+      
+      // Show restore button
+      showRestoreButton();
+      
+      // Show select new text button (only for selection mode)
+      // We'll determine mode based on button context
+      if (buttonId === 'simplify-selection') {
+        showSelectNewButton();
+      }
+      
+      // Reset button states
       setButtonLoading('simplify-page', false);
-      updateStatus(progressMessage || "✓ Complete!", "success");
+      setButtonLoading('simplify-selection', false);
       isPageProcessing = false;
       
-      // Clear success message after 3 seconds
-      setTimeout(() => {
-        updateStatus("", "info");
-      }, 3000);
     } else if (status === 'error') {
-      // Processing error
-      setButtonLoading('simplify-page', false);
+      // Hide progress UI
+      updateProgressBar(null);
+      updatePageIndicator(null);
+      hideCancelButton();
+      
+      // Show error
       updateStatus(progressMessage || "Error occurred", "error");
+      
+      // Reset button states
+      setButtonLoading('simplify-page', false);
+      setButtonLoading('simplify-selection', false);
       isPageProcessing = false;
       
-      // Clear error message after 5 seconds
+      // Clear error after 5 seconds
       setTimeout(() => {
         updateStatus("", "info");
       }, 5000);
+      
     } else if (status === 'idle') {
-      // Reset to idle state
+      // Reset everything to idle
+      updateProgressBar(null);
+      updatePageIndicator(null);
+      hideCancelButton();
+      hideSuccessIndicator();
       setButtonLoading('simplify-page', false);
+      setButtonLoading('simplify-selection', false);
       isPageProcessing = false;
-    }
-    // Legacy format: progress field (for backwards compatibility)
-    else if (progress) {
-      setButtonLoading(buttonId || 'simplify-page', true, progress);
-      updateStatus("", "info");
-    } else if (progress === '' || progress === null) {
-      setButtonLoading(buttonId || 'simplify-page', false);
-      updateStatus("✓ Complete!", "success");
-      setTimeout(() => updateStatus("", "info"), 3000);
     }
     
     sendResponse({ ok: true });
@@ -342,6 +474,51 @@ if (cancelBtn) {
     } catch (error) {
       console.error('[KlarText Sidepanel] Failed to cancel:', error);
       updateStatus("Failed to cancel simplification", "error");
+    }
+  });
+}
+
+// Add restore button handler
+const restoreBtn = document.getElementById('restore-button');
+if (restoreBtn) {
+  restoreBtn.addEventListener("click", async () => {
+    try {
+      // Send restore message to content script
+      await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
+      
+      // Hide buttons after restore
+      hideRestoreButton();
+      hideSelectNewButton();
+      hideSuccessIndicator();
+      
+      updateStatus("Page will reload to restore original text...", "info");
+    } catch (error) {
+      console.error('[KlarText Sidepanel] Failed to restore:', error);
+      updateStatus("Failed to restore original text", "error");
+    }
+  });
+}
+
+// Add select new text button handler
+const selectNewBtn = document.getElementById('select-new-button');
+if (selectNewBtn) {
+  selectNewBtn.addEventListener("click", async () => {
+    try {
+      // Reset UI state
+      hideSuccessIndicator();
+      hideRestoreButton();
+      hideSelectNewButton();
+      updateStatus('Select text on the page, then click "Simplify Selection"', 'info');
+      enableSelectionButton();
+      
+      // Optionally show selection dialog
+      await chrome.tabs.sendMessage(currentTabId, { type: 'SHOW_SELECTION_DIALOG' });
+      
+      // Clear status after 3 seconds
+      setTimeout(() => updateStatus("", "info"), 3000);
+    } catch (error) {
+      console.error('[KlarText Sidepanel] Failed to reset selection:', error);
+      // Non-critical error, just log it
     }
   });
 }

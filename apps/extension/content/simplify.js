@@ -151,6 +151,77 @@ function collectTextChunks() {
 }
 
 /**
+ * Optimize chunks by combining small adjacent chunks
+ * This reduces the number of API calls needed
+ * 
+ * Phase 1 Optimization: Smart Chunking
+ * Combines small text chunks that are near each other to reduce API calls
+ * while staying under the API's character limit per text.
+ */
+function optimizeChunks(chunks) {
+  const optimized = [];
+  const TARGET_CHUNK_SIZE = 1500; // Sweet spot for combining chunks
+  const MAX_CHUNK_SIZE = 4000;    // Stay under API limit of 5000 with buffer
+  
+  let currentBatch = {
+    parents: [],
+    textNodes: [],
+    originalText: '',
+    combinedLength: 0
+  };
+  
+  for (const chunk of chunks) {
+    const chunkLength = chunk.originalText.length;
+    
+    // If this chunk alone is large, keep it separate
+    if (chunkLength > TARGET_CHUNK_SIZE) {
+      // First, save any accumulated batch
+      if (currentBatch.textNodes.length > 0) {
+        optimized.push(currentBatch);
+        currentBatch = { parents: [], textNodes: [], originalText: '', combinedLength: 0 };
+      }
+      // Then add the large chunk as-is
+      optimized.push(chunk);
+      continue;
+    }
+    
+    // Try to combine with current batch
+    const wouldBe = currentBatch.combinedLength + chunkLength + 2; // +2 for separator
+    
+    if (wouldBe <= MAX_CHUNK_SIZE && currentBatch.textNodes.length > 0) {
+      // Combine chunks - add separator between different text sections
+      currentBatch.parents.push(chunk.parent);
+      currentBatch.textNodes.push(...chunk.textNodes);
+      currentBatch.originalText += '\n\n' + chunk.originalText;
+      currentBatch.combinedLength = wouldBe;
+    } else {
+      // Start new batch
+      if (currentBatch.textNodes.length > 0) {
+        optimized.push(currentBatch);
+      }
+      currentBatch = {
+        parents: [chunk.parent],
+        textNodes: chunk.textNodes,
+        originalText: chunk.originalText,
+        combinedLength: chunkLength
+      };
+    }
+  }
+  
+  // Don't forget last batch
+  if (currentBatch.textNodes.length > 0) {
+    optimized.push(currentBatch);
+  }
+  
+  if (CONFIG.DEBUG) {
+    console.log(`[KlarText Smart Chunking] Optimized ${chunks.length} chunks → ${optimized.length} combined chunks`);
+    console.log(`[KlarText Smart Chunking] Reduction: ${((1 - optimized.length / chunks.length) * 100).toFixed(1)}%`);
+  }
+  
+  return optimized;
+}
+
+/**
  * Call the KlarText API to simplify text(s)
  * Uses batch endpoint if available, falls back to single endpoint
  */
@@ -272,16 +343,38 @@ async function simplifyInBatches(chunks, targetLanguage) {
     const progressPercent = Math.round((completedChunks / totalChunks) * 100);
     
     // Estimate remaining time based on average batch time
-    let etaText = '';
+    let estimatedSeconds = null;
     if (batchTimes.length > 0 && batchNum < totalBatches) {
       const avgBatchTime = batchTimes.reduce((a, b) => a + b, 0) / batchTimes.length;
       const remainingBatches = totalBatches - batchNum + 1;
-      const estimatedSeconds = Math.ceil(avgBatchTime * remainingBatches);
-      etaText = ` ~${estimatedSeconds}s remaining`;
+      estimatedSeconds = Math.ceil(avgBatchTime * remainingBatches);
     }
     
-    // Show detailed progress
-    updateProgress(`[${domain}] Batch ${batchNum}/${totalBatches} (${progressPercent}% - ${completedChunks}/${totalChunks} chunks)${etaText}...`);
+    // Send structured progress update
+    try {
+      chrome.runtime.sendMessage({
+        type: 'PROGRESS_UPDATE',
+        status: 'processing',
+        pageInfo: {
+          domain: domain,
+          title: document.title,
+          url: window.location.href
+        },
+        progress: {
+          percent: progressPercent,
+          current: batchNum,
+          total: totalBatches,
+          eta: estimatedSeconds,
+          message: `Processing batch ${batchNum} of ${totalBatches}`
+        },
+        message: `Processing batch ${batchNum} of ${totalBatches}`
+      });
+    } catch (e) {
+      // Non-critical, continue
+      if (CONFIG.DEBUG) {
+        console.log('[KlarText] Could not send progress update:', e);
+      }
+    }
     
     // Extract texts from chunks
     const texts = batch.map(chunk => chunk.originalText);
@@ -316,9 +409,32 @@ async function simplifyInBatches(chunks, targetLanguage) {
         }
       }
       
-      // Show progress after batch completion
+      // Send updated progress after batch completion
       const newProgressPercent = Math.round((completedChunks / totalChunks) * 100);
-      updateProgress(`[${domain}] Batch ${batchNum}/${totalBatches} complete (${newProgressPercent}% - ${completedChunks}/${totalChunks} chunks)`);
+      try {
+        chrome.runtime.sendMessage({
+          type: 'PROGRESS_UPDATE',
+          status: 'processing',
+          pageInfo: {
+            domain: domain,
+            title: document.title,
+            url: window.location.href
+          },
+          progress: {
+            percent: newProgressPercent,
+            current: batchNum,
+            total: totalBatches,
+            eta: estimatedSeconds,
+            message: `Batch ${batchNum} complete`
+          },
+          message: `Batch ${batchNum} of ${totalBatches} complete`
+        });
+      } catch (e) {
+        // Non-critical
+        if (CONFIG.DEBUG) {
+          console.log('[KlarText] Could not send progress update:', e);
+        }
+      }
       
     } catch (error) {
       failedBatches++;
@@ -344,6 +460,7 @@ async function simplifyInBatches(chunks, targetLanguage) {
 
 /**
  * Update text nodes with simplified text
+ * Handles both single chunks and combined chunks (from smart chunking)
  */
 function updateTextNodes(results) {
   let successCount = 0;
@@ -353,17 +470,37 @@ function updateTextNodes(results) {
     if (result.simplified && !result.error) {
       const { chunk, simplified } = result;
       
-      // Replace the text content of the parent element
-      // This is simpler than trying to update individual text nodes
-      // and preserves the HTML structure
-      try {
-        chunk.parent.textContent = simplified;
-        chunk.parent.dataset.klartextSimplified = '1';
-        chunk.parent.dataset.klartextOriginal = chunk.originalText;
-        successCount++;
-      } catch (error) {
-        console.error('[KlarText] Failed to update element:', error);
-        failCount++;
+      // Check if this is a combined chunk (has multiple parents)
+      const isCombinedChunk = Array.isArray(chunk.parents) && chunk.parents.length > 0;
+      
+      if (isCombinedChunk) {
+        // Combined chunk - split simplified text and update each parent
+        // The API should return text with same structure (separated by \n\n)
+        const simplifiedSections = simplified.split('\n\n');
+        
+        try {
+          for (let i = 0; i < chunk.parents.length && i < simplifiedSections.length; i++) {
+            const parent = chunk.parents[i];
+            parent.textContent = simplifiedSections[i].trim();
+            parent.dataset.klartextSimplified = '1';
+            parent.dataset.klartextOriginal = chunk.originalText; // Store full original for restore
+          }
+          successCount += chunk.parents.length;
+        } catch (error) {
+          console.error('[KlarText] Failed to update combined chunk:', error);
+          failCount++;
+        }
+      } else {
+        // Single chunk - update single parent
+        try {
+          chunk.parent.textContent = simplified;
+          chunk.parent.dataset.klartextSimplified = '1';
+          chunk.parent.dataset.klartextOriginal = chunk.originalText;
+          successCount++;
+        } catch (error) {
+          console.error('[KlarText] Failed to update element:', error);
+          failCount++;
+        }
       }
     } else {
       failCount++;
@@ -376,10 +513,17 @@ function updateTextNodes(results) {
   return { successCount, failCount };
 }
 
+// Store selection listener and languages globally for cleanup
+let selectionListener = null;
+let selectionLanguages = { source: 'en', target: 'en' };
+
 /**
  * Show selection dialog prompting user to select text
  */
-function showSelectionDialog() {
+function showSelectionDialog(sourceLanguage = 'en', targetLanguage = 'en') {
+  // Store languages for when selection happens
+  selectionLanguages = { source: sourceLanguage, target: targetLanguage };
+  
   // Check if dialog already exists
   if (document.getElementById('klartext-selection-dialog')) {
     return;
@@ -387,75 +531,127 @@ function showSelectionDialog() {
   
   const dialog = document.createElement('div');
   dialog.id = 'klartext-selection-dialog';
+  
+  // Get icon URL from extension
+  const iconUrl = chrome.runtime.getURL('icons/selecttext.png');
+  
   dialog.innerHTML = `
+    <button class="klartext-dialog-close" aria-label="Close">×</button>
+    <img src="${iconUrl}" class="klartext-dialog-icon" alt="Select text">
     <div class="klartext-dialog-content">
-      <div class="klartext-dialog-icon">✨</div>
-      <div class="klartext-dialog-title">Please select text on the page to simplify</div>
-      <div class="klartext-dialog-subtitle">Highlight any text and it will be simplified automatically</div>
-      <button class="klartext-dialog-cancel">Cancel</button>
+      <div class="klartext-dialog-title">Highlight the text you want to simplify</div>
+      <div class="klartext-dialog-subtitle">Simplification will start automatically</div>
     </div>
   `;
   
+  // Non-blocking notification banner at top of screen
   dialog.style.cssText = `
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     z-index: 999999;
     font-family: system-ui, -apple-system, sans-serif;
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    pointer-events: auto;
+    animation: slideDown 0.3s ease-out;
+  `;
+  
+  // Add slide-down animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  const icon = dialog.querySelector('.klartext-dialog-icon');
+  icon.style.cssText = `
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    object-fit: contain;
   `;
   
   const content = dialog.querySelector('.klartext-dialog-content');
   content.style.cssText = `
-    background: white;
-    padding: 32px;
-    border-radius: 12px;
-    text-align: center;
-    max-width: 400px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  `;
-  
-  const icon = dialog.querySelector('.klartext-dialog-icon');
-  icon.style.cssText = `
-    font-size: 48px;
-    margin-bottom: 16px;
+    flex: 1;
+    text-align: left;
   `;
   
   const title = dialog.querySelector('.klartext-dialog-title');
   title.style.cssText = `
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: hsl(220 20% 20%);
-    margin-bottom: 8px;
+    margin: 0 0 4px 0;
   `;
   
   const subtitle = dialog.querySelector('.klartext-dialog-subtitle');
   subtitle.style.cssText = `
     font-size: 14px;
     color: hsl(220 20% 50%);
-    margin-bottom: 24px;
+    margin: 0;
   `;
   
-  const cancelBtn = dialog.querySelector('.klartext-dialog-cancel');
-  cancelBtn.style.cssText = `
-    background: hsl(220 20% 90%);
-    color: hsl(220 20% 30%);
+  const closeBtn = dialog.querySelector('.klartext-dialog-close');
+  closeBtn.style.cssText = `
+    background: none;
     border: none;
-    padding: 10px 24px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 28px;
+    color: hsl(220 20% 50%);
     cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s;
+    flex-shrink: 0;
+    margin-left: auto;
   `;
   
-  cancelBtn.addEventListener('click', () => {
+  closeBtn.addEventListener('mouseenter', () => {
+    closeBtn.style.color = 'hsl(220 20% 20%)';
+  });
+  
+  closeBtn.addEventListener('mouseleave', () => {
+    closeBtn.style.color = 'hsl(220 20% 50%)';
+  });
+  
+  closeBtn.addEventListener('click', () => {
     dialog.remove();
-    // Notify sidepanel that selection was cancelled
+    
+    // Remove selection listener if exists
+    if (selectionListener) {
+      document.removeEventListener('mouseup', selectionListener);
+      selectionListener = null;
+    }
+    
+    // Reset selection prompt state (defined globally at top of listener)
+    if (typeof selectionPromptShown !== 'undefined') {
+      selectionPromptShown = false;
+    }
+    
+    // Notify sidepanel that dialog was dismissed
     try {
       chrome.runtime.sendMessage({
         type: 'PROGRESS_UPDATE',
@@ -469,8 +665,48 @@ function showSelectionDialog() {
   
   document.body.appendChild(dialog);
   
+  // Set up automatic selection detection
+  selectionListener = function(event) {
+    const selection = window.getSelection();
+    const selectedText = selection?.toString()?.trim() || '';
+    
+    if (selectedText && selectedText.length >= CONFIG.MIN_SELECTION_LENGTH) {
+      if (CONFIG.DEBUG) {
+        console.log('[KlarText] Text selected automatically, starting simplification');
+        console.log('[KlarText] Selected text length:', selectedText.length);
+      }
+      
+      // Hide dialog
+      hideSelectionDialog();
+      
+      // Remove this listener
+      document.removeEventListener('mouseup', selectionListener);
+      selectionListener = null;
+      
+      // Reset prompt state
+      if (typeof selectionPromptShown !== 'undefined') {
+        selectionPromptShown = false;
+      }
+      
+      // Start simplification automatically
+      simplifyPage('selection', selectionLanguages.source, selectionLanguages.target);
+    }
+  };
+  
+  // Listen for text selection (mouseup event)
+  document.addEventListener('mouseup', selectionListener);
+  
+  // Auto-cleanup listener after 60 seconds
+  setTimeout(() => {
+    if (selectionListener) {
+      document.removeEventListener('mouseup', selectionListener);
+      selectionListener = null;
+      hideSelectionDialog();
+    }
+  }, 60000);
+  
   if (CONFIG.DEBUG) {
-    console.log('[KlarText] Selection dialog shown');
+    console.log('[KlarText] Selection dialog shown with automatic detection');
   }
 }
 
@@ -481,6 +717,12 @@ function hideSelectionDialog() {
   const dialog = document.getElementById('klartext-selection-dialog');
   if (dialog) {
     dialog.remove();
+  }
+  
+  // Clean up selection listener if exists
+  if (selectionListener) {
+    document.removeEventListener('mouseup', selectionListener);
+    selectionListener = null;
   }
 }
 
@@ -622,144 +864,22 @@ function showSuccess(message) {
 }
 
 /**
- * Show "Restore Original" button in lower right corner
+ * Show "Restore Original" button - DEPRECATED
+ * Restore button is now in sidepanel, not on page
  */
 function showRestoreButton() {
-  // Check if button already exists
-  if (document.getElementById('klartext-restore-button')) {
-    return;
-  }
-  
-  const restoreBtn = document.createElement('button');
-  restoreBtn.id = 'klartext-restore-button';
-  restoreBtn.innerHTML = '🔄 Restore Original';
-  restoreBtn.style.cssText = `
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: hsl(174 50% 35%);
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-family: system-ui, -apple-system, sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    z-index: 1000000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: all 0.2s ease;
-  `;
-  
-  // Hover effect
-  restoreBtn.addEventListener('mouseenter', () => {
-    restoreBtn.style.background = 'hsl(174 50% 30%)';
-    restoreBtn.style.transform = 'translateY(-2px)';
-    restoreBtn.style.boxShadow = '0 6px 16px rgba(0,0,0,0.4)';
-  });
-  
-  restoreBtn.addEventListener('mouseleave', () => {
-    restoreBtn.style.background = 'hsl(174 50% 35%)';
-    restoreBtn.style.transform = 'translateY(0)';
-    restoreBtn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
-  });
-  
-  // Click handler - reload page to restore original
-  restoreBtn.addEventListener('click', () => {
-    if (CONFIG.DEBUG) {
-      console.log('[KlarText] Restoring original content by reloading page');
-    }
-    window.location.reload();
-  });
-  
-  document.body.appendChild(restoreBtn);
-  
+  // No-op: Button now shown in sidepanel instead
   if (CONFIG.DEBUG) {
-    console.log('[KlarText] Restore button added');
+    console.log('[KlarText] Restore button now handled by sidepanel');
   }
 }
 
 /**
- * Hide "Restore Original" button
+ * Hide "Restore Original" button - DEPRECATED
+ * Restore button is now in sidepanel, not on page
  */
 function hideRestoreButton() {
-  const restoreBtn = document.getElementById('klartext-restore-button');
-  if (restoreBtn) {
-    restoreBtn.remove();
-  }
-}
-
-/**
- * Save results and logs to downloadable JSON file
- */
-function saveResultsToFile(results, metadata, errorLog = []) {
-  try {
-    // Separate successful and failed results
-    const successful = results.filter(r => r.simplified && !r.error);
-    const failed = results.filter(r => !r.simplified || r.error);
-    
-    const data = {
-      metadata: {
-        ...metadata,
-        timestamp: new Date().toISOString(),
-        url: window.location.href,
-        title: document.title,
-        successfulCount: successful.length,
-        failedCount: failed.length,
-        errorCount: errorLog.length,
-      },
-      errors: errorLog,
-      successfulResults: successful.map(r => ({
-        originalText: r.chunk?.originalText?.substring(0, 200) + '...' || '',
-        simplifiedText: r.simplified?.substring(0, 200) + '...' || '',
-        elementTag: r.chunk?.parent?.tagName?.toLowerCase() || 'unknown',
-      })),
-      failedResults: failed.map(r => ({
-        originalText: r.chunk?.originalText?.substring(0, 200) + '...' || '',
-        error: r.error || 'Unknown error',
-        elementTag: r.chunk?.parent?.tagName?.toLowerCase() || 'unknown',
-      })),
-    };
-    
-    console.log('[KlarText] Creating download with', results.length, 'results...');
-    console.log('[KlarText] Successful:', successful.length, 'Failed:', failed.length);
-    
-    // Create downloadable JSON
-    const jsonString = JSON.stringify(data, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    
-    const filename = `klartext-results-${Date.now()}.json`;
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.style.display = 'none';
-    
-    document.body.appendChild(a);
-    
-    // Try to trigger download
-    console.log('[KlarText] Triggering download:', filename);
-    a.click();
-    
-    // Clean up
-    setTimeout(() => {
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }, 100);
-    
-    console.log('[KlarText] ✓ Results saved to:', filename);
-    
-    const message = `Results saved to Downloads folder:\n${filename}\n\n` +
-      `✓ Successful: ${successful.length}\n` +
-      `✗ Failed: ${failed.length}\n` +
-      `📊 File size: ${(blob.size / 1024).toFixed(1)} KB`;
-    
-    alert(message);
-    
-  } catch (error) {
-    console.error('[KlarText] Failed to save results:', error);
-    alert('Failed to save results file. Check console for details.');
-  }
+  // No-op: Button now handled by sidepanel
 }
 
 /**
@@ -810,8 +930,29 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
         console.log('[KlarText] Selected text length:', selectedText.length);
       }
       
-      // Simplify the selected text
-      showLoading('Simplifying selected text...');
+      // Send progress update - processing
+      try {
+        chrome.runtime.sendMessage({
+          type: 'PROGRESS_UPDATE',
+          status: 'processing',
+          pageInfo: {
+            domain: new URL(window.location.href).hostname,
+            title: document.title,
+            url: window.location.href
+          },
+          progress: {
+            percent: 50,
+            current: 1,
+            total: 1,
+            eta: null,
+            message: 'Simplifying selected text'
+          },
+          message: 'Simplifying selected text...',
+          buttonId: 'simplify-selection'
+        });
+      } catch (e) {
+        // Non-critical
+      }
       
       try {
         const apiResult = await callAPI([selectedText], targetLanguage);
@@ -824,21 +965,47 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
           const textNode = document.createTextNode(simplified);
           range.insertNode(textNode);
           
-          hideLoading();
-          showSuccess(`✓ Simplified selected text. Refresh to restore.`);
-          showRestoreButton();
+          // Send completion update
+          try {
+            chrome.runtime.sendMessage({
+              type: 'PROGRESS_UPDATE',
+              status: 'complete',
+              message: '✓ Simplified selected text',
+              buttonId: 'simplify-selection'
+            });
+          } catch (e) {
+            // Non-critical
+          }
           
           if (CONFIG.DEBUG) {
             console.log('[KlarText] Selection simplified successfully');
           }
         } else {
-          hideLoading();
-          showError('Failed to simplify selected text.');
+          // Send error update
+          try {
+            chrome.runtime.sendMessage({
+              type: 'PROGRESS_UPDATE',
+              status: 'error',
+              message: 'Failed to simplify selected text',
+              buttonId: 'simplify-selection'
+            });
+          } catch (e) {
+            // Non-critical
+          }
         }
       } catch (error) {
-        hideLoading();
         console.error('[KlarText] Selection simplification failed:', error);
-        showError('Failed to simplify selected text: ' + error.message);
+        // Send error update
+        try {
+          chrome.runtime.sendMessage({
+            type: 'PROGRESS_UPDATE',
+            status: 'error',
+            message: 'Failed to simplify selected text: ' + error.message,
+            buttonId: 'simplify-selection'
+          });
+        } catch (e) {
+          // Non-critical
+        }
       }
       
       return; // Exit early for selection mode
@@ -847,14 +1014,32 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     // Page mode: Show loading
     showLoading('Analyzing page...');
     
-    // Collect text chunks
-    const chunks = collectTextChunks();
+    // Phase 1: Collect and optimize text chunks
+    const rawChunks = collectTextChunks();
     
-    if (chunks.length === 0) {
+    if (rawChunks.length === 0) {
       hideLoading();
       showError('No text found to simplify on this page.');
       return;
     }
+    
+    // Apply smart chunking optimization
+    const optimizationStartTime = Date.now();
+    const chunks = optimizeChunks(rawChunks);
+    const optimizationTime = Date.now() - optimizationStartTime;
+    
+    // Log Phase 1 metrics
+    const metrics = {
+      phase: 'smart-chunking',
+      rawChunks: rawChunks.length,
+      optimizedChunks: chunks.length,
+      reductionPercent: ((1 - chunks.length / rawChunks.length) * 100).toFixed(1),
+      optimizationTimeMs: optimizationTime,
+      estimatedBatches: Math.ceil(chunks.length / CONFIG.MAX_BATCH_SIZE),
+      originalBatches: Math.ceil(rawChunks.length / CONFIG.MAX_BATCH_SIZE)
+    };
+    
+    console.log('[KlarText Performance - Phase 1]', JSON.stringify(metrics, null, 2));
     
     // Simplify in batches
     showLoading(`Simplifying ${chunks.length} text sections...`);
@@ -873,16 +1058,22 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     // Hide loading
     hideLoading();
     
-    // Log summary
+    // Log summary with Phase 1 metrics comparison
     const summary = {
       totalChunks: chunks.length,
       successCount,
       failCount,
       totalTime: `${totalTime.toFixed(1)}s`,
       apiTime: `${apiTime.toFixed(1)}s`,
+      // Phase 1 metrics
+      phase1_rawChunks: metrics.rawChunks,
+      phase1_optimizedChunks: metrics.optimizedChunks,
+      phase1_reduction: `${metrics.reductionPercent}%`,
+      phase1_batchesSaved: metrics.originalBatches - metrics.estimatedBatches
     };
     
     console.log('[KlarText] Summary:', summary);
+    console.log(`[KlarText Phase 1 Impact] Smart chunking reduced API calls by ${metrics.reductionPercent}% (${metrics.originalBatches} batches → ${metrics.estimatedBatches} batches)`);
     
     // Show result first
     if (successCount > 0) {
@@ -892,10 +1083,6 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     } else {
       showError(`Failed to simplify text. ${failCount} section(s) failed.`);
     }
-    
-    // Always save results to file for review
-    console.log('[KlarText] Preparing to save results...');
-    saveResultsToFile(results, summary, errorLog);
     
     if (CONFIG.DEBUG) {
       console.log(`[KlarText] Done! Success: ${successCount}, Failed: ${failCount}, Errors logged: ${errorLog.length}`);
@@ -947,37 +1134,28 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log('[KlarText] Mode:', mode, 'Source:', sourceLanguage, 'Target:', targetLanguage);
     }
     
-    // Handle selection mode differently
+    // Handle selection mode with automatic detection
     if (mode === 'selection') {
-      // Show dialog prompting user to select text
-      showSelectionDialog();
+      const selection = window.getSelection();
+      const selectedText = selection?.toString()?.trim() || '';
       
-      // Set up one-time listener for text selection
-      const handleSelection = () => {
-        const selection = window.getSelection();
-        const selectedText = selection?.toString()?.trim() || '';
-        
-        if (selectedText && selectedText.length >= CONFIG.MIN_SELECTION_LENGTH) {
-          // Hide dialog
-          hideSelectionDialog();
-          
-          // Remove this listener
-          document.removeEventListener('mouseup', handleSelection);
-          
-          // Start simplification
-          simplifyPage(mode, sourceLanguage, targetLanguage);
+      // If text is already selected, start immediately
+      if (selectedText && selectedText.length >= CONFIG.MIN_SELECTION_LENGTH) {
+        if (CONFIG.DEBUG) {
+          console.log('[KlarText] Text already selected, starting immediately');
         }
-      };
+        simplifyPage(mode, sourceLanguage, targetLanguage);
+        sendResponse({ ok: true });
+        return true;
+      }
       
-      // Listen for mouse up (text selection complete)
-      document.addEventListener('mouseup', handleSelection);
-      
-      // Clean up listener after 60 seconds
-      setTimeout(() => {
-        document.removeEventListener('mouseup', handleSelection);
-      }, 60000);
-      
+      // No text selected - show dialog and wait for selection
+      if (CONFIG.DEBUG) {
+        console.log('[KlarText] No text selected - showing selection dialog');
+      }
+      showSelectionDialog(sourceLanguage, targetLanguage);
       sendResponse({ ok: true });
+      return true;
     } else {
       // Page mode: start immediately
       simplifyPage(mode, sourceLanguage, targetLanguage);
@@ -1001,6 +1179,30 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     hideSelectionDialog();
     hideLoading();
     hideRestoreButton();
+    
+    sendResponse({ ok: true });
+  }
+  
+  // Handle restore original text
+  if (message.type === 'RESTORE_ORIGINAL') {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Restore original requested - reloading page');
+    }
+    
+    // Reload the page to restore original content
+    window.location.reload();
+    
+    sendResponse({ ok: true });
+  }
+  
+  // Handle show selection dialog
+  if (message.type === 'SHOW_SELECTION_DIALOG') {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Show selection dialog requested');
+    }
+    
+    // Use stored languages from previous selection or defaults
+    showSelectionDialog(selectionLanguages.source, selectionLanguages.target);
     
     sendResponse({ ok: true });
   }

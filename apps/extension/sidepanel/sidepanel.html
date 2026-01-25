@@ -12,7 +12,7 @@
       <!-- Header with close button -->
       <header class="header">
         <div class="header-content">
-          <img src="../icons/klartextlogo2.png" alt="KlarText" class="logo">
+          <img src="../icons/klartextlogo3.png" alt="KlarText" class="logo">
           <p class="tagline">Easy Language for Everyone</p>
         </div>
         <button id="close-panel" class="close-button" aria-label="Close panel">×</button>
@@ -48,15 +48,55 @@
         
         <button id="simplify-selection" class="secondary-button">
           <span class="button-content">
-            <img src="../icons/Klartext.png" alt="" class="button-icon" aria-hidden="true">
+            <img src="../icons/simplyselection.png" alt="" class="button-icon" aria-hidden="true">
             <span class="button-text">Simplify Selection</span>
           </span>
         </button>
         
         <p class="hint-text">Highlight text on the page to simplify specific sections</p>
         
+        <!-- Progress container -->
+        <div id="progress-container" class="progress-container" style="display: none;">
+          <!-- Page indicator -->
+          <div id="page-indicator" class="page-indicator" style="display: none;">
+            <span class="page-icon">📄</span>
+            <span id="page-name" class="page-name">Page name here</span>
+          </div>
+          
+          <!-- Progress bar -->
+          <div class="progress-bar-wrapper">
+            <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+            <div id="progress-text" class="progress-text">0%</div>
+          </div>
+          
+          <!-- Progress details (ETA) -->
+          <div id="progress-details" class="progress-details"></div>
+        </div>
+        
         <!-- Status messages -->
         <div id="status" class="status-message" role="status" aria-live="polite"></div>
+        
+        <!-- Success indicator -->
+        <div id="success-indicator" class="success-indicator" style="display: none;">
+          <div class="success-icon">✓</div>
+          <div id="success-message" class="success-message"></div>
+        </div>
+        
+        <!-- Restore original text button -->
+        <button id="restore-button" class="restore-button" style="display: none;">
+          <span class="button-content">
+            <span class="button-icon">🔄</span>
+            <span class="button-text">Restore Original Text</span>
+          </span>
+        </button>
+        
+        <!-- Select new text button -->
+        <button id="select-new-button" class="select-new-button" style="display: none;">
+          <span class="button-content">
+            <span class="button-icon">✨</span>
+            <span class="button-text">Select New Text</span>
+          </span>
+        </button>
         
         <!-- Cancel button (shown during page processing) -->
         <button id="cancel-button" class="cancel-button" style="display: none;">
