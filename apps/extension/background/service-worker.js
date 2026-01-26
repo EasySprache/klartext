@@ -57,78 +57,143 @@ function getErrorMessage(error, tabUrl) {
 }
 
 /**
- * Handle messages from popup
+ * Handle messages from sidepanel and content scripts
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // Only handle SIMPLIFY_ACTIVE_TAB messages
-  if (message?.type !== 'SIMPLIFY_ACTIVE_TAB') {
-    return false;
+  const messageType = message?.type;
+  
+  if (DEBUG) {
+    console.log('[KlarText Service Worker] Received message:', messageType);
   }
   
-  // Handle async operation
-  (async () => {
-    try {
-      if (DEBUG) {
-        console.log('[KlarText] Received SIMPLIFY_ACTIVE_TAB message');
-      }
-      
-      // Get active tab
-      const [tab] = await chrome.tabs.query({ 
-        active: true, 
-        currentWindow: true 
-      });
-      
-      if (!tab?.id) {
-        sendResponse({ 
-          ok: false, 
-          error: 'No active tab found' 
+  // Handle GET_ACTIVE_TAB request from sidepanel
+  if (messageType === 'GET_ACTIVE_TAB') {
+    (async () => {
+      try {
+        const [tab] = await chrome.tabs.query({ 
+          active: true, 
+          currentWindow: true 
         });
-        return;
+        
+        if (!tab) {
+          sendResponse({ ok: false, error: 'No active tab found' });
+          return;
+        }
+        
+        if (DEBUG) {
+          console.log('[KlarText] Found active tab:', tab.id, tab.url);
+        }
+        
+        sendResponse({ ok: true, tab: tab });
+      } catch (error) {
+        console.error('[KlarText] Failed to get active tab:', error);
+        sendResponse({ ok: false, error: error.message });
       }
-      
-      if (DEBUG) {
-        console.log(`[KlarText] Active tab: ${tab.url}`);
-      }
-      
-      // Check if URL is injectable
-      if (!isInjectableURL(tab.url)) {
-        sendResponse({ 
-          ok: false, 
-          error: 'Cannot simplify browser extension pages or chrome:// URLs' 
-        });
-        return;
-      }
-      
-      // Inject configuration first, then content script
-      // This ensures CONFIG is available when simplify.js runs
-      await chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        files: ['config.js', 'content/simplify.js'],
-      });
-      
-      if (DEBUG) {
-        console.log('[KlarText] Content script injected successfully');
-      }
-      
-      // Success
-      sendResponse({ ok: true });
-      
-    } catch (error) {
-      console.error('[KlarText] Injection failed:', error);
-      
-      // Get user-friendly error message
-      const errorMsg = getErrorMessage(error, tab?.url);
-      
+    })();
+    return true;
+  }
+  
+  // Handle simplification requests from sidepanel
+  if (messageType === 'SIMPLIFY_PAGE' || messageType === 'SIMPLIFY_SELECTION') {
+    handleSimplification(message, sender, sendResponse);
+    return true;
+  }
+  
+  // Unknown message type
+  return false;
+});
+
+/**
+ * Handle simplification requests from sidepanel
+ */
+async function handleSimplification(message, sender, sendResponse) {
+  try {
+    const { type, tabId, sourceLanguage, targetLanguage } = message;
+    const mode = type === 'SIMPLIFY_PAGE' ? 'page' : 'selection';
+    
+    if (DEBUG) {
+      console.log(`[KlarText] Handling ${type} for tab ${tabId} (source: ${sourceLanguage}, target: ${targetLanguage})`);
+    }
+    
+    if (!tabId) {
       sendResponse({ 
         ok: false, 
-        error: errorMsg 
+        error: 'No tab ID provided' 
       });
+      return;
     }
-  })();
-  
-  // Return true to indicate async response
-  return true;
-});
+    
+    // Get tab info
+    const tab = await chrome.tabs.get(tabId);
+    
+    if (!tab) {
+      sendResponse({ 
+        ok: false, 
+        error: 'Tab not found' 
+      });
+      return;
+    }
+    
+    if (DEBUG) {
+      console.log(`[KlarText] Tab URL: ${tab.url}`);
+    }
+    
+    // Check if URL is injectable
+    if (tab.url && !isInjectableURL(tab.url)) {
+      sendResponse({ 
+        ok: false, 
+        error: 'Cannot simplify browser extension pages or chrome:// URLs' 
+      });
+      return;
+    }
+    
+    // Check if extension_logger.js exists, inject it if available
+    const filesToInject = ['config.js'];
+    try {
+      // Try to inject logger if it exists
+      const loggerExists = await fetch(chrome.runtime.getURL('extension_logger.js'))
+        .then(() => true)
+        .catch(() => false);
+      if (loggerExists) {
+        filesToInject.push('extension_logger.js');
+      }
+    } catch (e) {
+      // Logger not available, continue without it
+    }
+    filesToInject.push('content/simplify.js');
+    
+    // Inject configuration and content script
+    await chrome.scripting.executeScript({
+      target: { tabId: tabId },
+      files: filesToInject,
+    });
+    
+    // Send message to content script with mode and languages
+    await chrome.tabs.sendMessage(tabId, {
+      type: 'START_SIMPLIFICATION',
+      mode: mode,
+      sourceLanguage: sourceLanguage || 'en',
+      targetLanguage: targetLanguage || 'en'
+    });
+    
+    if (DEBUG) {
+      console.log('[KlarText] Content script injected and simplification started');
+    }
+    
+    // Success
+    sendResponse({ ok: true });
+    
+  } catch (error) {
+    console.error('[KlarText] Simplification failed:', error);
+    
+    const errorMsg = getErrorMessage(error, null);
+    
+    sendResponse({ 
+      ok: false, 
+      error: errorMsg 
+    });
+  }
+}
 
 // Log when service worker starts
 if (DEBUG) {

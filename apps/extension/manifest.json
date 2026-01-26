@@ -5,23 +5,25 @@
   "version": "0.1.0",
   "author": "KlarText Team",
   "action": {
-    "default_title": "KlarText - Simplify page text",
-    "default_popup": "popup/popup.html"
+    "default_title": "KlarText - Simplify page text"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
   },
   "background": {
     "service_worker": "background/service-worker.js",
     "type": "module"
   },
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": [],
+  "permissions": ["activeTab", "tabs", "scripting", "sidePanel", "storage"],
+  "host_permissions": ["<all_urls>"],
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/textbubble-16.png",
+    "48": "icons/textbubble-48.png",
+    "128": "icons/textbubble-128.png"
   },
   "web_accessible_resources": [
     {
-      "resources": ["content/styles.css", "config.js"],
+      "resources": ["content/styles.css", "config.js", "extension_logger.js", "icons/selecttext.png"],
       "matches": ["<all_urls>"]
     }
   ]
