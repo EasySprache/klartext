@@ -22,10 +22,19 @@ def preprocess_text_for_tts(text: str) -> str:
     """
     Preprocess text to improve TTS output quality.
     
+    - Removes bullet point markers that would be read aloud (*, -, •, etc.)
     - Ensures spacing after punctuation marks for proper pauses
     - Normalizes whitespace
     - Adds slight pauses for better readability
     """
+    # Remove bullet point markers at start of lines - gTTS would read them as "asterisk", "dash", etc.
+    # Replace with empty string - the newline already provides a natural pause
+    text = re.sub(r'^[\*\-•●▪►▸‣⁃]\s*', '', text, flags=re.MULTILINE)
+    
+    # Also handle numbered lists (e.g., "1.", "2)", "a.") - keep the content, remove the marker
+    text = re.sub(r'^(\d+[\.\)]\s*)', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^([a-zA-Z][\.\)]\s*)', '', text, flags=re.MULTILINE)
+    
     # Ensure space after sentence-ending punctuation if followed by a letter
     text = re.sub(r'([.!?])([A-Za-zÄÖÜäöüß])', r'\1 \2', text)
     
@@ -38,10 +47,10 @@ def preprocess_text_for_tts(text: str) -> str:
     # Normalize multiple newlines to double newline (paragraph break)
     text = re.sub(r'\n{3,}', '\n\n', text)
     
-    # Add a slight pause (comma) after bullet points/list markers for clarity
-    text = re.sub(r'^([-•●▪])\s*', r'\1, ', text, flags=re.MULTILINE)
+    # Strip leading/trailing whitespace from each line
+    text = '\n'.join(line.strip() for line in text.split('\n'))
     
-    # Strip leading/trailing whitespace
+    # Strip leading/trailing whitespace from entire text
     text = text.strip()
     
     return text

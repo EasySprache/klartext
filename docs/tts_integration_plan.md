@@ -97,10 +97,17 @@ def preprocess_text_for_tts(text: str) -> str:
     """
     Preprocess text to improve TTS output quality.
     
+    - Removes bullet point markers that would be read aloud (*, -, •, etc.)
     - Ensures spacing after punctuation marks for proper pauses
     - Normalizes whitespace
-    - Adds slight pauses for better readability
     """
+    # Remove bullet point markers - gTTS would read them as "asterisk", "dash", etc.
+    text = re.sub(r'^[\*\-•●▪►▸‣⁃]\s*', '', text, flags=re.MULTILINE)
+    
+    # Remove numbered list markers (e.g., "1.", "2)", "a.")
+    text = re.sub(r'^(\d+[\.\)]\s*)', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^([a-zA-Z][\.\)]\s*)', '', text, flags=re.MULTILINE)
+    
     # Ensure space after sentence-ending punctuation if followed by a letter
     text = re.sub(r'([.!?])([A-Za-zÄÖÜäöüß])', r'\1 \2', text)
     
@@ -112,9 +119,6 @@ def preprocess_text_for_tts(text: str) -> str:
     
     # Normalize multiple newlines to double newline (paragraph break)
     text = re.sub(r'\n{3,}', '\n\n', text)
-    
-    # Add a slight pause (comma) after bullet points for clarity
-    text = re.sub(r'^([-•●▪])\s*', r'\1, ', text, flags=re.MULTILINE)
     
     return text.strip()
 
@@ -139,10 +143,11 @@ def text_to_speech(text: str, lang: str = "de") -> dict:
 
 | Issue | Solution |
 |-------|----------|
+| Bullet markers read aloud (`*` → "asterisk") | Markers removed completely (`*`, `-`, `•`, etc.) |
+| Numbered lists read markers (`1.` → "one dot") | Number markers removed, content kept |
 | Missing space after periods (`Hello.World`) | Regex adds space: `Hello. World` |
 | Missing space after commas | Regex adds space for proper pause |
 | Multiple spaces | Normalized to single space |
-| Bullet points read too fast | Comma added after marker for pause |
 
 ---
 
