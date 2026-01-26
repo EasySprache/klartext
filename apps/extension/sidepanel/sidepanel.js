@@ -483,15 +483,14 @@ const restoreBtn = document.getElementById('restore-button');
 if (restoreBtn) {
   restoreBtn.addEventListener("click", async () => {
     try {
-      // Send restore message to content script
-      await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
-      
-      // Hide buttons after restore
+      // Hide buttons and clear status immediately
       hideRestoreButton();
       hideSelectNewButton();
       hideSuccessIndicator();
+      updateStatus("", "info");
       
-      updateStatus("Page will reload to restore original text...", "info");
+      // Send restore message to content script (page will reload immediately)
+      await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
     } catch (error) {
       console.error('[KlarText Sidepanel] Failed to restore:', error);
       updateStatus("Failed to restore original text", "error");
