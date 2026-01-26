@@ -97,6 +97,10 @@
   .increased-spacing {
     line-height: 2 !important;
   }
+
+  .increased-word-spacing {
+    word-spacing: 0.16em !important;
+  }
 }
 
 @layer base {

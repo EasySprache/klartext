@@ -60,6 +60,8 @@ source .venv/bin/activate
 uvicorn app.main:app --reload --port 8000
 ```
 
+**Important**: The backend must be running for the frontend to work. If you see a password screen when opening the frontend, the password is **`dev123`** (set in `services/api/.env` as `APP_PASSWORD`).
+
 ## Features
 
 | Feature | Status |

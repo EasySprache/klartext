@@ -50,13 +50,26 @@ const translations: Translations = {
     scrollUpHint: { en: 'Scroll up to see what you wrote', de: 'Nach oben scrollen um deinen Original-Text zu sehen' },
 
     // Accessibility Panel
-    accessibilitySettings: { en: 'Accessibility Settings', de: 'Barrierefreiheit-Einstellungen' },
+    makeTextEasier: { en: 'Make text easier to read', de: 'Text leichter lesbar machen' },
     textSize: { en: 'Text Size', de: 'Textgröße' },
     smaller: { en: 'Smaller', de: 'Kleiner' },
     larger: { en: 'Larger', de: 'Größer' },
-    moreSpace: { en: 'More Space Between Lines', de: 'Mehr Zeilenabstand' },
-    dyslexiaFont: { en: 'Dyslexia-Friendly Font', de: 'Legasthenie-freundliche Schrift' },
-    highContrast: { en: 'High Contrast', de: 'Hoher Kontrast' },
+    moreSpace: { en: 'More space between lines', de: 'Mehr Platz zwischen Zeilen' },
+    moreWordSpace: { en: 'More space between words', de: 'Mehr Platz zwischen Wörtern' },
+    easierFont: { en: 'Easier-to-read font', de: 'Leichter lesbare Schrift' },
+    strongerColors: { en: 'Stronger colors', de: 'Stärkere Farben' },
+
+    // Warnings
+    privacyWarningTitle: { en: 'We need to tell you something', de: 'Wir müssen Ihnen etwas sagen' },
+    privacyWarningText: {
+        en: 'We save your text to make our tool better. Do not write private things like your name, address, or personal documents. (If you do not know what this means, you can paste it into the tool to make it easier to understand!)',
+        de: 'Wir speichern Ihren Text, um unser Tool besser zu machen. Schreiben Sie keine privaten Dinge wie Ihren Namen, Ihre Adresse oder persönliche Dokumente. (Wenn Sie nicht wissen, was das bedeutet, können Sie es in das Tool einfügen, um es einfacher zu verstehen!)'
+    },
+    aiLimitationsTitle: { en: 'Be careful with this text', de: 'Seien Sie vorsichtig mit diesem Text' },
+    aiLimitationsText: {
+        en: 'A computer made this text. It can make mistakes. Do not use it for important things like legal papers or health questions. Ask an expert if you need help with something important.',
+        de: 'Ein Computer hat diesen Text gemacht. Er kann Fehler machen. Verwenden Sie ihn nicht für wichtige Dinge wie rechtliche Papiere oder Gesundheitsfragen. Fragen Sie einen Experten, wenn Sie Hilfe bei etwas Wichtigem brauchen.'
+    },
 
     // Errors
     uploadError: { en: 'Could not read the PDF file', de: 'Die PDF-Datei konnte nicht gelesen werden' },

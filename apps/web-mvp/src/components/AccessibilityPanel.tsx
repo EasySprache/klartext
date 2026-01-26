@@ -15,11 +15,13 @@ export default function AccessibilityPanel({ open, onOpenChange }: Accessibility
     const {
         fontSize,
         increasedSpacing,
+        increasedWordSpacing,
         dyslexiaFont,
         highContrast,
         increaseFontSize,
         decreaseFontSize,
         toggleSpacing,
+        toggleWordSpacing,
         toggleDyslexiaFont,
         toggleHighContrast,
     } = useAccessibility();
@@ -29,7 +31,7 @@ export default function AccessibilityPanel({ open, onOpenChange }: Accessibility
         <Sheet open={open} onOpenChange={onOpenChange}>
             <SheetContent className="w-80 sm:w-96">
                 <SheetHeader>
-                    <SheetTitle className="text-2xl font-display">{t('accessibilitySettings')}</SheetTitle>
+                    <SheetTitle className="text-2xl font-display">{t('makeTextEasier')}</SheetTitle>
                 </SheetHeader>
 
                 <div className="mt-8 space-y-8">
@@ -79,9 +81,23 @@ export default function AccessibilityPanel({ open, onOpenChange }: Accessibility
 
                     <div className="flex items-center justify-between">
                         <div className="space-y-1">
+                            <Label htmlFor="word-spacing" className="text-lg font-medium flex items-center gap-2">
+                                <AlignJustify className="w-5 h-5" aria-hidden="true" />
+                                {t('moreWordSpace')}
+                            </Label>
+                        </div>
+                        <Switch
+                            id="word-spacing"
+                            checked={increasedWordSpacing}
+                            onCheckedChange={toggleWordSpacing}
+                        />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                        <div className="space-y-1">
                             <Label htmlFor="dyslexia" className="text-lg font-medium flex items-center gap-2">
                                 <Type className="w-5 h-5" aria-hidden="true" />
-                                {t('dyslexiaFont')}
+                                {t('easierFont')}
                             </Label>
                         </div>
                         <Switch
@@ -95,7 +111,7 @@ export default function AccessibilityPanel({ open, onOpenChange }: Accessibility
                         <div className="space-y-1">
                             <Label htmlFor="contrast" className="text-lg font-medium flex items-center gap-2">
                                 <Eye className="w-5 h-5" aria-hidden="true" />
-                                {t('highContrast')}
+                                {t('strongerColors')}
                             </Label>
                         </div>
                         <Switch
