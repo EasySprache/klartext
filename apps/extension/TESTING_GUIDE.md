@@ -93,6 +93,17 @@ The extension should appear in your extensions list:
 2. Find "KlarText - Easy Language"
 3. Click the pin icon to keep it visible
 
+### Step 5: Open Sidepanel (First Time)
+
+> **Important:** The sidepanel does not open automatically on first use. This is a known issue.
+
+1. **Right-click** the KlarText extension icon in the toolbar
+2. Select **"Open side panel"** from the context menu
+3. The sidepanel will open on the right side of the browser
+4. After this first time, you can left-click the icon normally
+
+**Note:** Chrome will remember your preference after the first manual open, so subsequent left-clicks will work automatically.
+
 ---
 
 ## Test Plan
@@ -106,7 +117,7 @@ The extension should appear in your extensions list:
    ```
    https://de.wikipedia.org/wiki/K%C3%BCnstliche_Intelligenz
    ```
-2. Click the KlarText extension icon (opens sidepanel)
+2. **Right-click** the KlarText extension icon and select "Open side panel" (first time only)
 3. Click "Simplify Entire Page" button
 4. Observe:
    - Loading overlay appears
@@ -589,17 +600,25 @@ Then test on any page - timeout will trigger quickly.
 
 These are expected and documented:
 
-1. **No automatic language detection per section**: Uses selected language from dropdown
-2. **No level selection**: Uses DEFAULT_LEVEL from config  
-3. **Dynamic content**: Only simplifies what's visible when button clicked
-4. **Chrome internal pages**: Cannot run on `chrome://` URLs
-5. **Sidepanel persistence**: Sidepanel stays visible across tabs (workaround: domain indicators)
+1. **First-time sidepanel open**: Must right-click icon → "Open side panel" on first use (left-click works automatically after that)
+2. **No automatic language detection per section**: Uses selected language from dropdown
+3. **No level selection**: Uses DEFAULT_LEVEL from config  
+4. **Dynamic content**: Only simplifies what's visible when button clicked
+5. **Chrome internal pages**: Cannot run on `chrome://` URLs
+6. **Sidepanel persistence**: Sidepanel stays visible across tabs (workaround: domain indicators)
 
 These will be addressed in future phases.
 
 ---
 
 ## Common Issues & Fixes
+
+### Issue: Sidepanel doesn't open when clicking icon
+**Fix:**
+- **Right-click** the extension icon instead of left-clicking
+- Select "Open side panel" from the context menu
+- After opening once, left-clicking will work automatically
+- This is a known issue (see known_issues.md)
 
 ### Issue: Extension not loading
 **Fix:** 

@@ -12,7 +12,10 @@ This Chrome extension uses the KlarText API to simplify web content in real-time
 
 1. **Install:** Load unpacked from `apps/extension` folder in Chrome
 2. **Start API:** Run KlarText API at `localhost:8000`
-3. **Use:** Click extension icon → Select mode → Watch text simplify!
+3. **Open Sidepanel:** Right-click extension icon → "Open side panel" (first time only)
+4. **Use:** Select mode → Watch text simplify!
+
+> **Note:** On first use, you must right-click the extension icon and select "Open side panel". After that, clicking the icon normally will work automatically.
 
 ## Table of Contents
 
@@ -84,7 +87,7 @@ This version represents a major redesign from popup to sidepanel UI:
 
 ## How it works
 
-1. **Open the sidepanel** by clicking the extension icon in your browser toolbar
+1. **Open the sidepanel** by right-clicking the extension icon and selecting "Open side panel" (first time only; after that, left-click works)
 2. **Choose a simplification mode:**
    - **Simplify Entire Page** - Automatically collects and simplifies all text on the page
    - **Simplify Selection** - Highlight text on the page, then click to simplify just that portion
@@ -188,8 +191,9 @@ The extension uses Chrome's messaging API to communicate between components:
 
 3. **Test the extension:**
    - Open a normal website (e.g., news article, blog post, Wikipedia)
-   - Click the KlarText extension icon in your toolbar
+   - **Right-click** the KlarText extension icon and select "Open side panel"
    - The sidepanel opens on the right side
+   - After first use, normal left-clicking will work automatically
 
 ### Testing Entire Page Simplification
 
@@ -255,6 +259,7 @@ The extension uses Chrome's messaging API to communicate between components:
 
 ### Known Limitations
 
+- ⚠️ **First-time setup:** Must right-click extension icon → "Open side panel" on first use (left-click works automatically after that)
 - ⚠️ **Chrome internal pages:** Extension cannot run on `chrome://` URLs
 - ⚠️ **Dynamic content:** Pages that heavily re-render may overwrite simplified text
 - ⚠️ **API required:** Extension requires KlarText API running (local or remote)
@@ -428,6 +433,15 @@ Before each release:
 - ✅ Refresh the page after installing/reloading the extension
 - ✅ Check that page is a standard HTTP/HTTPS website
 - ✅ Some sites block extensions - try a different site to verify it works
+
+### Sidepanel Doesn't Open When Clicking Icon
+
+**Problem:** Left-clicking the extension icon does nothing.
+
+**Solutions:**
+- ✅ Right-click the extension icon and select "Open side panel"
+- ✅ After opening once, left-clicking will work automatically
+- ✅ This is a known issue - see [known_issues.md](known_issues.md) for details
 
 ### "Could not find active tab" Error
 
