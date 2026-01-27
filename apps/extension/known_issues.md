@@ -504,6 +504,53 @@ A race condition occurred when a user cancelled a page simplification and then i
 
 ---
 
+## Issue #8: Extension Doesn't Always Properly Detect Page Language
+
+**Status:** Open - Investigation needed  
+**Priority:** Medium  
+**Date Reported:** 2026-01-27
+
+### Description
+The extension doesn't always correctly detect the language of the webpage being simplified. This can lead to the API receiving text with an incorrect language parameter, potentially resulting in poor simplification quality or errors.
+
+### Expected Behavior
+- Extension should accurately detect the language of the page content
+- Language detection should work consistently across different websites
+- Detected language should match the primary language of the text being simplified
+
+### Current Behavior
+- Language detection is inconsistent or inaccurate in some cases
+- May cause API to process text with wrong language parameter
+- Impact on simplification quality varies by case
+
+### Impact
+- 🟡 **Medium** - Affects simplification quality
+- May result in poor or incorrect simplifications
+- User may not be aware that wrong language was detected
+- Could lead to confusing results
+
+### Technical Context
+- Language detection logic needs investigation
+- May be related to how page language is determined (HTML lang attribute, content analysis, etc.)
+- Could vary by website structure and metadata quality
+
+### Proposed Solutions
+- Review and improve language detection algorithm
+- Add fallback mechanisms for ambiguous cases
+- Consider allowing users to manually specify/override language
+- Add logging to track language detection accuracy
+
+### Workaround
+None currently documented. Users may need to be aware that simplification quality can vary.
+
+### Files Involved
+- Investigation needed to identify specific files handling language detection
+
+### References
+- Issue reported: 2026-01-27
+
+---
+
 ## Future Investigation Tasks
 - [ ] Research Chrome extension permission best practices for localhost
 - [ ] Test with chrome.permissions.request() API
