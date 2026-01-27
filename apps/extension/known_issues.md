@@ -551,6 +551,140 @@ None currently documented. Users may need to be aware that simplification qualit
 
 ---
 
+## Issue #9: Restore Button UI State Cleared Before Message Success
+
+**Status:** Open - Regression introduced  
+**Priority:** Medium  
+**Date Reported:** 2026-01-27
+
+### Description
+The restore button handler now hides UI elements (restore button, select new button, success indicator) and clears status before attempting to send the restore message to the content script. If the message fails (e.g., tab closed or content script error), the buttons are already hidden, so users cannot retry. This is a regression from the previous behavior where buttons remained visible on message failure, allowing retry attempts.
+
+### Expected Behavior
+- User clicks "Restore Original"
+- Restore message is sent to content script
+- If message succeeds: UI elements are hidden and page reloads
+- If message fails: Buttons remain visible, error is shown, user can retry
+
+### Current Behavior
+1. User clicks "Restore Original"
+2. UI elements are hidden immediately (restore button, select new button, success indicator)
+3. Status is cleared
+4. Restore message is sent to content script
+5. **If message fails:** Error message shows but buttons are already gone
+6. User has no way to retry without reloading the extension
+
+### Impact
+- 🟡 **Medium** - Poor error recovery UX
+- Users cannot retry failed restore operations
+- Forces users to reload extension or refresh page manually
+- Degrades user experience when errors occur
+- Particularly problematic if tab is in an unexpected state
+
+### Technical Context
+- **Location:** `apps/extension/sidepanel/sidepanel.js:484-493`
+- **Root cause:** UI cleanup moved before async message operation
+- The change was likely made to provide faster visual feedback, but breaks error handling
+
+**Current problematic code:**
+```javascript
+try {
+  // Hide buttons and clear status immediately
+  hideRestoreButton();
+  hideSelectNewButton();
+  hideSuccessIndicator();
+  updateStatus("", "info");
+  
+  // Send restore message to content script (page will reload immediately)
+  await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
+} catch (error) {
+  console.error('[KlarText Sidepanel] Failed to restore:', error);
+  updateStatus("Failed to restore original text", "error");
+  // Buttons are already hidden - user cannot retry!
+}
+```
+
+### Proposed Solution
+Move UI cleanup to after successful message delivery, or restore buttons in catch block:
+
+**Option A: Move UI cleanup after success (Recommended)**
+```javascript
+try {
+  // Send restore message first
+  await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
+  
+  // Only hide UI after successful message delivery
+  hideRestoreButton();
+  hideSelectNewButton();
+  hideSuccessIndicator();
+  updateStatus("", "info");
+} catch (error) {
+  console.error('[KlarText Sidepanel] Failed to restore:', error);
+  updateStatus("Failed to restore original text", "error");
+  // Buttons remain visible for retry
+}
+```
+
+**Option B: Restore buttons in catch block**
+```javascript
+try {
+  hideRestoreButton();
+  hideSelectNewButton();
+  hideSuccessIndicator();
+  updateStatus("", "info");
+  
+  await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
+} catch (error) {
+  console.error('[KlarText Sidepanel] Failed to restore:', error);
+  updateStatus("Failed to restore original text", "error");
+  
+  // Restore buttons on error
+  showRestoreButton();
+  showSelectNewButton();
+}
+```
+
+**Option C: Optimistic UI with rollback**
+```javascript
+try {
+  // Provide immediate feedback
+  updateStatus("Restoring original text...", "info");
+  
+  // Send message
+  await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
+  
+  // Hide UI only after success
+  hideRestoreButton();
+  hideSelectNewButton();
+  hideSuccessIndicator();
+  updateStatus("", "info");
+} catch (error) {
+  console.error('[KlarText Sidepanel] Failed to restore:', error);
+  updateStatus("Failed to restore original text", "error");
+  // Buttons already visible, user can retry
+}
+```
+
+### Workaround
+**For users:**
+If restore fails and buttons disappear:
+1. Reload the extension by clicking the extension icon again
+2. Or refresh the entire page (Ctrl+R / Cmd+R)
+3. Simplified text will be lost, but page returns to original state
+
+**For developers:**
+Revert the change or implement one of the proposed solutions above.
+
+### Files Involved
+- `apps/extension/sidepanel/sidepanel.js:484-493` - Restore button click handler
+
+### References
+- Regression introduced in recent commit (visible in git diff)
+- Previous behavior: buttons remained visible on error
+- Issue reported: 2026-01-27
+
+---
+
 ## Future Investigation Tasks
 - [ ] Research Chrome extension permission best practices for localhost
 - [ ] Test with chrome.permissions.request() API
