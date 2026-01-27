@@ -41,6 +41,10 @@ def preprocess_text_for_tts(text: str) -> str:
     # Ensure space after commas, colons, semicolons if followed by a letter
     text = re.sub(r'([,:;])([A-Za-zÄÖÜäöüß])', r'\1 \2', text)
     
+    # Remove any XML-like tags (e.g., <simplified_text>, </simplified_text>)
+    # These would be read aloud by TTS or might cause issues
+    text = re.sub(r'<[^>]+>', '', text)
+    
     # Normalize multiple spaces to single space
     text = re.sub(r' +', ' ', text)
     
