@@ -56,7 +56,8 @@ The system takes dense bureaucratic, legal, medical, or technical text and trans
 │                         Frontend                                 │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
 │  │  web-mvp    │    │   demo      │    │  extension  │         │
-│  │  (React)    │    │  (Gradio)   │    │  (Chrome)   │         │
+│  │ (React/Vite)│    │(Gradio Test)│    │  (Chrome)   │         │
+│  │ Production  │    │   Staging   │    │  Optional   │         │
 │  └──────┬──────┘    └──────┬──────┘    └──────┬──────┘         │
 └─────────┼──────────────────┼──────────────────┼─────────────────┘
           │                  │                  │
@@ -91,13 +92,18 @@ The system takes dense bureaucratic, legal, medical, or technical text and trans
 ```
 klartext/
 ├── apps/
-│   ├── web-mvp/              # React frontend (Vite + TypeScript)
+│   ├── web-mvp/              # Production React frontend (Vite + TypeScript)
 │   │   ├── src/
 │   │   │   ├── App.tsx       # Main application
 │   │   │   ├── components/   # UI components
 │   │   │   └── contexts/     # React contexts (language, accessibility)
 │   │   └── package.json
+│   ├── demo/                 # Testing/staging Gradio application
+│   │   ├── app.py
+│   │   └── requirements.txt
+│   ├── extension/            # Chrome extension (optional)
 │   └── deprecated/           # Previous frontend experiments
+│       └── accessible-word-craft-main/  # v1 frontend
 │
 ├── services/
 │   └── api/                  # FastAPI backend
@@ -110,10 +116,6 @@ klartext/
 │       │       └── prompts.py         # Prompt template loading
 │       ├── requirements.txt
 │       └── Dockerfile
-│
-├── demo/                     # Gradio demo application
-│   ├── app.py
-│   └── requirements.txt
 │
 ├── prompts/
 │   └── templates/

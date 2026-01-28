@@ -133,8 +133,7 @@ function App() {
     try {
       const response = await apiJsonRequest('/v1/simplify', {
         text: inputText,
-        target_lang: language,
-        level: 'easy'
+        target_lang: language
       });
 
       if (!response.ok) {

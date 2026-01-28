@@ -68,7 +68,7 @@ templates/
 
 Applications reference templates via the `current/` symlink:
 ```python
-# Demo app (demo/app.py)
+# Demo app (apps/demo/app.py)
 TEMPLATE_FILES = {
     "en": {
         "system": "current/system_prompt_en.txt",  # Always uses latest
@@ -195,7 +195,7 @@ While templates can support multiple levels, current focus is on **"very easy"**
 
 ### Testing New Prompts
 
-1. **Gradio Demo** (`demo/app.py`):
+1. **Gradio Demo** (`apps/demo/app.py`):
    - Already uses `current/` symlink
    - Just restart demo to test new version
    - Check quality scores in UI
@@ -241,7 +241,7 @@ Track these metrics when comparing versions:
 - **Sample texts**: `data/samples/`
 - **Evaluation framework**: `notebooks/05_easy_language_evaluation.ipynb`
 - **API integration**: `services/api/README.md`
-- **Demo app**: `demo/README.md`
+- **Demo app**: `apps/demo/README.md`
 
 ## Notes
 

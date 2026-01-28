@@ -1,5 +1,11 @@
 # Local Runbook for KlarText
 
+> **⚠️ DEPRECATED:** This v1 frontend has been replaced by `apps/web-mvp`. This documentation is kept for historical reference only.
+>
+> For current setup instructions, see the main [README.md](../../../README.md) in the project root.
+
+---
+
 This guide will help you run the KlarText project locally, including the backend API and the new frontend.
 
 ## A. Quick Start (Fastest Path)

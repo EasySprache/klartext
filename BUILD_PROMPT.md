@@ -102,7 +102,8 @@ Build a web prototype that:
   - Medium: plain language; normal sentence length; less repetition
 
 ## Repo deliverables (what to create)
-- Next.js web app under apps/web
+- React/Vite web app under apps/web-mvp (production)
+- Gradio demo app under apps/demo (testing/staging)
 - FastAPI service under services/api
 - optional extension under apps/extension
 - docker-compose for local dev

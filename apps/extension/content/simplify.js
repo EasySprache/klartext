@@ -24,6 +24,10 @@ if (typeof CONFIG === 'undefined') {
 // 4. All in-flight and pending batches will stop gracefully
 let userCancellationController = null;
 
+// Re-entry guard to prevent overlapping simplifications
+// This prevents race conditions where multiple simplifications run simultaneously
+let isSimplificationActive = false;
+
 /**
  * Check if an element should be skipped during text collection
  */
@@ -248,6 +252,12 @@ async function callAPI(texts, targetLanguage) {
       batchTimeoutController.abort();
     }, CONFIG.REQUEST_TIMEOUT);
     
+    // Combine both abort signals: user cancellation OR timeout
+    // This allows the fetch to be aborted by either condition
+    const combinedSignal = userCancellationController 
+      ? AbortSignal.any([userCancellationController.signal, batchTimeoutController.signal])
+      : batchTimeoutController.signal;
+    
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -258,7 +268,7 @@ async function callAPI(texts, targetLanguage) {
         target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
         level: CONFIG.DEFAULT_LEVEL,
       }),
-      signal: batchTimeoutController.signal,
+      signal: combinedSignal,
     });
     
     clearTimeout(timeoutId);
@@ -304,7 +314,12 @@ async function callAPI(texts, targetLanguage) {
     
   } catch (error) {
     if (error.name === 'AbortError') {
-      throw new Error('Request timed out. The page may be too large.');
+      // Check which signal caused the abort
+      if (userCancellationController?.signal.aborted) {
+        throw new Error('Simplification cancelled by user');
+      } else {
+        throw new Error('Request timed out. The page may be too large.');
+      }
     }
     throw error;
   }
@@ -889,6 +904,17 @@ function hideRestoreButton() {
  * @param {string} targetLanguage - Target language code (e.g. 'en', 'de')
  */
 async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage = 'en') {
+  // Re-entry guard: Prevent overlapping simplifications
+  if (isSimplificationActive) {
+    if (CONFIG.DEBUG) {
+      console.log('[KlarText] Ignoring new simplification request - one is already active');
+    }
+    showError('A simplification is already in progress. Please wait or cancel it first.');
+    return;
+  }
+  
+  // Set active flag and create cancellation controller
+  isSimplificationActive = true;
   const startTime = Date.now();
   const errorLog = [];
   
@@ -1092,13 +1118,20 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     hideLoading();
     
     // Check if it was cancelled (user clicked cancel button)
-    if (error.name === 'AbortError') {
+    if (error.message?.includes('cancelled by user')) {
       if (CONFIG.DEBUG) {
         console.log('[KlarText] Simplification was cancelled by user');
       }
-      showError('Simplification cancelled.');
-      // Reset controller
-      userCancellationController = null;
+      // Send idle status to reset sidepanel UI
+      try {
+        chrome.runtime.sendMessage({
+          type: 'PROGRESS_UPDATE',
+          status: 'error',
+          message: 'Simplification cancelled'
+        });
+      } catch (e) {
+        // Non-critical
+      }
       return;
     }
     
@@ -1121,6 +1154,9 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     
     // Clean up cancellation controller
     userCancellationController = null;
+    
+    // Clear active flag to allow future simplifications
+    isSimplificationActive = false;
   }
 }
 
@@ -1172,13 +1208,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Abort any ongoing API requests
     if (userCancellationController) {
       userCancellationController.abort();
-      userCancellationController = null;
+      // Don't set to null yet - let the simplification's finally block clean it up
     }
     
     // Hide any dialogs
     hideSelectionDialog();
     hideLoading();
     hideRestoreButton();
+    
+    // DON'T reset isSimplificationActive here!
+    // Let the original simplification's finally block do it
+    // This prevents new operations from starting while the cancelled one is still cleaning up
     
     sendResponse({ ok: true });
   }

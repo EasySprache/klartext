@@ -1,4 +1,4 @@
-"""LLM adapter for text simplification (ported from demo/app.py)"""
+"""LLM adapter for text simplification (ported from apps/demo/app.py)"""
 import os
 from groq import Groq
 from .prompts import load_templates, render_user_prompt
@@ -10,7 +10,6 @@ GROQ_MODEL = "llama-3.1-8b-instant"  # Best from evaluation (good LIX score, str
 def simplify_text_with_llm(
     text: str,
     target_lang: str,
-    level: str = "easy",
     api_key: str | None = None,
 ) -> str:
     """
@@ -19,7 +18,6 @@ def simplify_text_with_llm(
     Args:
         text: The text to simplify
         target_lang: Target language ('de' or 'en')
-        level: Simplification level (currently unused, templates are 'very_easy')
         api_key: Groq API key (defaults to GROQ_API_KEY env var)
     
     Returns:
