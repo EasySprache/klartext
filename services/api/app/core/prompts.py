@@ -1,4 +1,4 @@
-"""Prompt template loading (ported from demo/app.py)"""
+"""Prompt template loading (ported from apps/demo/app.py)"""
 import os
 from pathlib import Path
 from pybars import Compiler

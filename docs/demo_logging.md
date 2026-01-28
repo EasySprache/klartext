@@ -11,11 +11,11 @@ The logging system automatically records each simplification request processed b
 ## Architecture
 
 ```
-demo/app.py                    # Calls log_simplification() after each request
+apps/demo/app.py                    # Calls log_simplification() after each request
     ↓
-demo/demo_logger.py            # Computes metrics, evaluates guardrails, writes JSONL
+apps/demo/demo_logger.py            # Computes metrics, evaluates guardrails, writes JSONL
     ↓
-data/logs/demo_outputs.jsonl   # Append-only log file (one JSON object per line)
+data/logs/demo_outputs.jsonl        # Append-only log file (one JSON object per line)
 ```
 
 ## Log Entry Structure
@@ -94,7 +94,7 @@ Four guardrails are evaluated for each output:
 
 ### Automatic Logging (Demo App)
 
-The demo app (`demo/app.py`) automatically logs each simplification:
+The demo app (`apps/demo/app.py`) automatically logs each simplification:
 
 ```python
 from demo_logger import log_simplification
@@ -179,8 +179,8 @@ print(df[["avg_sentence_len_words", "ari_score", "meaning_cosine"]].mean())
 
 | File | Description |
 |------|-------------|
-| `demo/demo_logger.py` | Logger module with metrics and guardrails |
-| `demo/app.py` | Demo app with logging integration |
+| `apps/demo/demo_logger.py` | Logger module with metrics and guardrails |
+| `apps/demo/app.py` | Demo app with logging integration |
 | `data/logs/demo_outputs.jsonl` | Main log file (JSONL format) |
 | `data/logs/demo_outputs_summary.json` | Exported summary with averages |
 | `notebooks/12_demo_logging_setup.ipynb` | Setup notebook with DataFrame display |
@@ -315,7 +315,7 @@ Total Entries: 28
 ## Troubleshooting
 
 ### Logs not appearing
-- Check that `demo/demo_logger.py` exists and is importable
+- Check that `apps/demo/demo_logger.py` exists and is importable
 - Verify `data/logs/` directory exists (created automatically)
 - Check console for warning messages during simplification
 

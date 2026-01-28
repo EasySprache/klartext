@@ -1,7 +1,7 @@
 """
 PDF text extraction with cleanup for KlarText API.
 
-Ported from demo/pdf_utils.py with enhancements for API usage.
+Ported from apps/demo/pdf_utils.py with enhancements for API usage.
 """
 
 import re
