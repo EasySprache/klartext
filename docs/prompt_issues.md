@@ -36,3 +36,27 @@ This report documents the current state of prompt handling across the project, i
 1.  **Synchronize API Prompts**: If you want the API to actually use the "improved" prompts, the contents of `prompts/templates/v2/` must be copied into `services/api/prompts/templates/`.
 2.  **Harmonize Configs**: Update `apps/extension/config.js` to accurately reflect `v1` (to match reality) or update the API to `v2` as mentioned above.
 3.  **Remove Dead Code**: Clear out the unused `level` parameter logic from `services/api/app/main.py` and `services/api/app/core/llm_adapter.py` to stop the confusion.
+
+---
+
+## 5. Cleanup Completed (2026-01-28)
+
+### Changes Made:
+
+1. **apps/extension/config.js**:
+   - ✅ Removed `CURRENT_TEMPLATE_VERSION: 'v2'` config (was unused, API doesn't support version selection)
+   - ✅ Removed `DEFAULT_LEVEL: 'easy'` config (was unused, API doesn't accept level parameter)
+
+2. **apps/extension/content/simplify.js**:
+   - ✅ Removed `level` parameter from API call to `/v1/simplify/batch` (API doesn't accept this parameter)
+
+3. **apps/extension/extension_logger.js**:
+   - ✅ Removed `source_lang` from logging payload (API's `/v1/log-run` only accepts `target_lang`)
+   - ✅ Removed `template_version` from logging payload (API doesn't accept this field)
+   - ✅ Removed `level` from logging payload (API doesn't accept this field)
+
+### Actual Status (Verified):
+
+**All prompts are already synchronized.** The API is using the current v2 prompts, and no copying is needed.
+
+The only issue was the extension sending parameters (`level`, `template_version`, `source_lang`) that the API was silently ignoring. This has been fixed.

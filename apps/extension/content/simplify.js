@@ -266,7 +266,6 @@ async function callAPI(texts, targetLanguage) {
       body: JSON.stringify({
         texts: texts,
         target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
-        level: CONFIG.DEFAULT_LEVEL,
       }),
       signal: combinedSignal,
     });
