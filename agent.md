@@ -13,7 +13,8 @@ Build KlarText: an accessibility-first tool that simplifies German/English text 
 - API has OpenAPI docs at `/docs`.
 
 ## Repo map
-- `apps/web` (Next.js): the user-facing UI
+- `apps/web-mvp` (React/Vite): production web UI
+- `apps/demo` (Gradio): testing/staging environment
 - `services/api` (FastAPI): ingestion + simplify + TTS
 - `apps/extension` (optional): Chrome extension MV3
 - `prompts`: prompt templates and test fixtures
@@ -27,7 +28,8 @@ Recommended via Docker:
 - `docker compose logs -f web` – web logs
 
 If running without Docker:
-- Web: `cd apps/web && npm i && npm run dev`
+- Web: `cd apps/web-mvp && npm i && npm run dev`
+- Demo: `cd apps/demo && python app.py`
 - API: `cd services/api && pip install -r requirements.txt && uvicorn app.main:app --reload`
 
 ## Engineering principles

@@ -75,7 +75,7 @@ All endpoints use Pydantic models with:
 - Pattern validation for language codes and levels
 - File size limits (10MB for PDFs)
 
-## Frontend Security (`accessible-word-craft-main`)
+## Frontend Security (`apps/web-mvp`)
 
 ### Session Management
 

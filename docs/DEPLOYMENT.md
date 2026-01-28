@@ -119,7 +119,7 @@ Once set, pushes to `main` that modify `services/api/**` will trigger a deploy.
 
 1. Go to [vercel.com/new](https://vercel.com/new)
 2. Import your GitHub repository
-3. **Important**: Set the root directory to `accessible-word-craft-main`
+3. **Important**: Set the root directory to `apps/web-mvp`
 
 ### 2.2 Configure Build Settings
 
@@ -234,7 +234,7 @@ fly ssh console
 
 ### Build Failures on Vercel
 
-1. Check that root directory is set to `accessible-word-craft-main`
+1. Check that root directory is set to `apps/web-mvp`
 2. Verify Node.js version compatibility (18.x recommended)
 3. Check build logs for specific errors
 

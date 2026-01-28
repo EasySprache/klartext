@@ -49,7 +49,7 @@ samples/
 
 ## Usage in Demo App
 
-The Gradio demo (`demo/app.py`) loads samples from this directory:
+The Gradio demo (`apps/demo/app.py`) loads samples from this directory:
 - **Random Sample Button**: Picks a random category, then a random file from that category
 - All samples are automatically available in the UI
 
