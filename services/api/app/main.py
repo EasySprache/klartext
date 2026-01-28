@@ -28,8 +28,7 @@ legal/bureaucratic phrasing, or technical language. This includes people with:
 ### How It Works
 
 1. **Send text** via paste, PDF upload, or URL
-2. **Choose a difficulty level** (very_easy, easy, medium)
-3. **Get simplified text** back — optionally with audio (TTS)
+2. **Get simplified text** back — optionally with audio (TTS)
 
 ### Important Notes
 
@@ -46,8 +45,7 @@ response = requests.post(
     "http://localhost:8000/v1/simplify",
     json={
         "text": "Your complex text here...",
-        "target_lang": "de",
-        "level": "easy"
+        "target_lang": "de"
     }
 )
 print(response.json()["simplified_text"])
@@ -63,7 +61,7 @@ TAGS_METADATA = [
     {
         "name": "Simplification",
         "description": "**Core feature** — Transform complex text into easy-to-understand language. "
-                       "Supports German and English with three difficulty levels.",
+                       "Supports German and English.",
     },
     {
         "name": "Ingestion",
@@ -279,24 +277,14 @@ class SimplifyRequest(BaseModel):
         description="Target language for the simplified output. Options: `de` (German), `en` (English).",
         json_schema_extra={"example": "de"}
     )
-    level: str = Field(
-        default="easy",
-        pattern="^(very_easy|easy|medium)$",
-        description="""Simplification level:
-        
-- **very_easy**: Very short sentences (8-10 words max), defines all uncommon words in parentheses, extra whitespace between paragraphs, uses bullet points
-- **easy**: Short sentences (12-15 words), clear structure with headings, minimal jargon, active voice
-- **medium**: Plain language with normal sentence length, avoids complex structures, technical terms only when necessary""",
-        json_schema_extra={"example": "easy"}
-    )
+
 
     model_config = {
         "json_schema_extra": {
             "examples": [
                 {
                     "text": "Der Antragsteller muss die erforderlichen Unterlagen innerhalb der gesetzlich vorgeschriebenen Frist einreichen.",
-                    "target_lang": "de",
-                    "level": "very_easy"
+                    "target_lang": "de"
                 }
             ]
         }
@@ -416,11 +404,7 @@ class LogRunRequest(BaseModel):
         description="Target language used",
         json_schema_extra={"example": "de"}
     )
-    level: str = Field(
-        pattern="^(very_easy|easy|medium)$",
-        description="Simplification level used",
-        json_schema_extra={"example": "easy"}
-    )
+
     model_used: str = Field(
         description="Model identifier (e.g., 'llama-3.1-8b-instant')",
         json_schema_extra={"example": "llama-3.1-8b-instant"}
@@ -490,12 +474,7 @@ class BatchSimplifyRequest(BaseModel):
         description="Target language for all simplified outputs",
         json_schema_extra={"example": "de"}
     )
-    level: str = Field(
-        default="easy",
-        pattern="^(very_easy|easy|medium)$",
-        description="Simplification level for all texts",
-        json_schema_extra={"example": "easy"}
-    )
+
 
 
 class BatchItemResult(BaseModel):
@@ -641,16 +620,8 @@ def simplify(req: SimplifyRequest):
     
     1. Text is analyzed for language (or uses provided `source_lang`)
     2. Long texts are automatically chunked to stay within LLM limits
-    3. Each chunk is simplified according to the selected `level`
+    3. Each chunk is simplified
     4. Results are recombined into coherent output
-    
-    ## Simplification Levels
-    
-    | Level | Sentence Length | Style |
-    |-------|-----------------|-------|
-    | **very_easy** | 8-10 words max | Defines all uncommon words, bullet points, extra spacing |
-    | **easy** | 12-15 words | Clear structure, headings, minimal jargon |
-    | **medium** | Normal length | Plain language, avoids complex structures |
     
     ## Guidelines followed
     
@@ -666,7 +637,7 @@ def simplify(req: SimplifyRequest):
     **Input (German legal text):**
     > "Der Antragsteller muss die erforderlichen Unterlagen innerhalb der gesetzlich vorgeschriebenen Frist einreichen."
     
-    **Output (level: very_easy):**
+    **Output:**
     > "Sie müssen Papiere abgeben. Das müssen Sie bis zu einem bestimmten Tag tun. Der Tag steht im Gesetz."
     """
     from .core.llm_adapter import simplify_text_with_llm
@@ -676,7 +647,6 @@ def simplify(req: SimplifyRequest):
         simplified_text = simplify_text_with_llm(
             text=req.text,
             target_lang=req.target_lang,
-            level=req.level,
         )
         
         # TODO: Add chunking for long texts
@@ -1005,7 +975,6 @@ def log_run(req: LogRunRequest):
         "input_hash": input_hash,
         "input_length": len(text),
         "target_lang": "de",
-        "level": "easy",
         "model_used": "llama-3.1-8b-instant",
         "output_length": len(simplified_text),
         "latency_ms": latency_ms,
@@ -1119,8 +1088,7 @@ def simplify_batch(req: BatchSimplifyRequest):
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         texts: selectedTexts,
-        target_lang: 'de',
-        level: 'easy'
+        target_lang: 'de'
       })
     });
     
@@ -1182,7 +1150,6 @@ def simplify_batch(req: BatchSimplifyRequest):
             simplified_text = simplify_text_with_llm(
                 text=text,
                 target_lang=req.target_lang,
-                level=req.level,
             )
             
             # Success
