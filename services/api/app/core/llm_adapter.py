@@ -1,4 +1,4 @@
-"""LLM adapter for text simplification (ported from demo/app.py)"""
+"""LLM adapter for text simplification (ported from apps/demo/app.py)"""
 import os
 from groq import Groq
 from .prompts import load_templates, render_user_prompt

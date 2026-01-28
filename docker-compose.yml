@@ -10,13 +10,13 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   web:
-    build: ./apps/web
+    build: ./apps/web-mvp
     ports:
       - "3000:3000"
     env_file:
       - ./.env
     volumes:
-      - ./apps/web:/app
+      - ./apps/web-mvp:/app
     command: npm run dev
     depends_on:
       - api

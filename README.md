@@ -32,7 +32,7 @@ cp env.example .env
 cd services/api && uvicorn app.main:app --reload --port 8000
 
 # Terminal 2: Demo
-cd demo && python app.py
+cd apps/demo && python app.py
 
 # Open: http://localhost:7860
 ```
@@ -125,7 +125,7 @@ uvicorn app.main:app --reload --port 8000
 
 ### 3) Frontend Setup
 ```bash
-cd accessible-word-craft-main
+cd apps/web-mvp
 npm install
 npm run dev
 ```
@@ -146,7 +146,7 @@ npm run dev
 | `ALLOWED_ORIGINS` | No | CORS origins (defaults to localhost) |
 | `ENVIRONMENT` | No | `development` or `production` |
 
-### Frontend (`accessible-word-craft-main/.env.local`)
+### Frontend (`apps/web-mvp/.env.local`)
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
@@ -157,7 +157,7 @@ npm run dev
 See **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** for full deployment instructions.
 
 **Quick overview:**
-- **Frontend**: Deploy to [Vercel](https://vercel.com) (set root to `accessible-word-craft-main`)
+- **Frontend**: Deploy to [Vercel](https://vercel.com) (set root to `apps/web-mvp`)
 - **Backend**: Deploy to [Fly.io](https://fly.io) (uses existing Dockerfile)
 
 ```bash
@@ -169,7 +169,8 @@ fly deploy
 ```
 
 ## Repo layout
-- `apps/web` – Web UI
+- `apps/web-mvp` – Production web UI (React/Vite)
+- `apps/demo` – Testing/staging Gradio app
 - `services/api` – API service
 - `apps/extension` – Chrome extension (optional track)
 - `prompts` – prompt templates + eval fixtures
