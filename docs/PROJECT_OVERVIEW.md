@@ -52,37 +52,40 @@ The system takes dense bureaucratic, legal, medical, or technical text and trans
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────────────┐
 │                         Frontend                                 │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
-│  │  web-mvp    │    │   demo      │    │  extension  │         │
-│  │ (React/Vite)│    │(Gradio Test)│    │  (Chrome)   │         │
-│  │ Production  │    │   Staging   │    │  Optional   │         │
-│  └──────┬──────┘    └──────┬──────┘    └──────┬──────┘         │
-└─────────┼──────────────────┼──────────────────┼─────────────────┘
-          │                  │                  │
-          └──────────────────┼──────────────────┘
-                             │ REST API
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐        │
+│  │   web-mvp    │    │     demo     │    │  extension   │        │
+│  │   (React)    │    │   (Gradio)   │    │   (Chrome)   │        │
+│  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘        │
+└─────────┼───────────────────┼───────────────────┼────────────────┘
+          │                   │                   │
+          └───────────────────┼───────────────────┘
+                              │ REST API
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
 │                      Backend API (FastAPI)                       │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                     Endpoints                            │   │
-│  │  /v1/simplify  │  /v1/ingest/pdf  │  /v1/tts  │ /healthz │   │
-│  └─────────────────────────────────────────────────────────┘   │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │                      Endpoints                             │  │
+│  │ /v1/simplify(/batch) │ /v1/ingest/pdf │ /v1/tts │ /log-run │  │
+│  └────────────────────────────────────────────────────────────┘  │
 │                             │                                    │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                    Core Modules                          │   │
-│  │  llm_adapter.py  │  pdf_extractor.py  │  tts_adapter.py │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                             │
-          ┌──────────────────┼──────────────────┐
-          ▼                  ▼                  ▼
-    ┌───────────┐     ┌───────────┐      ┌───────────┐
-    │   Groq    │     │  PyMuPDF  │      │   gTTS    │
-    │   (LLM)   │     │   (PDF)   │      │  (Audio)  │
-    └───────────┘     └───────────┘      └───────────┘
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │                    Core Logic & Assets                     │  │
+│  │  llm_adapter.py  │  pdf_extractor.py  │  tts_adapter.py    │  │
+│  │  run_logger.py   │  prompts.py        │  Live Prompts      │  │
+│  └──────────────────────────┬─────────────────────────────────┘  │
+└─────────────────────────────┼────────────────────────────────────┘
+          ┌───────────────────┼───────────────────┐
+          ▼                   ▼                   ▼
+    ┌───────────┐       ┌───────────┐       ┌───────────┐
+    │   Groq    │       │  PyMuPDF  │       │   gTTS    │
+    │   (LLM)   │       │   (PDF)   │       │  (Audio)  │
+    └─────┬─────┘       └───────────┘       └───────────┘
+          │
+    ┌─────▼──────┐
+    │ Logs (JSONL)│
+    └─────────────┘
 ```
 
 ---
@@ -101,9 +104,8 @@ klartext/
 │   ├── demo/                 # Testing/staging Gradio application
 │   │   ├── app.py
 │   │   └── requirements.txt
-│   ├── extension/            # Chrome extension (optional)
+│   ├── extension/            # Chrome extension
 │   └── deprecated/           # Previous frontend experiments
-│       └── accessible-word-craft-main/  # v1 frontend
 │
 ├── services/
 │   └── api/                  # FastAPI backend
@@ -113,23 +115,32 @@ klartext/
 │       │       ├── llm_adapter.py     # LLM integration (Groq)
 │       │       ├── pdf_extractor.py   # PDF text extraction
 │       │       ├── tts_adapter.py     # Text-to-speech
+│       │       ├── run_logger.py      # Telemetry & performance logging
 │       │       └── prompts.py         # Prompt template loading
+│       ├── prompts/          # Live/Production Prompts (manual deployment)
+│       │   └── templates/    # Active system/user prompts
 │       ├── requirements.txt
 │       └── Dockerfile
 │
-├── prompts/
+├── prompts/               # Central Prompt Library (Exploration & Versioning)
 │   └── templates/
-│       ├── v1/               # Version 1 prompts
-│       └── v2/               # Version 2 prompts (current)
-│           ├── system_prompt_de.txt
-│           ├── system_prompt_en.txt
-│           ├── user_prompt_de.txt
-│           └── user_prompt_en.txt
+│       ├── v1/               # Legacy prompts
+│       └── v2/               # Latest prompts (system, user, version_notes)
 │
-├── docs/                     # Documentation
-├── notebooks/                # Jupyter notebooks for exploration
-├── data/                     # Sample texts and benchmarks
-└── scripts/                  # Utility scripts
+├── data/                     # Project data storage
+│   ├── logs/                 # API run logs (JSONL)
+│   ├── benchmarks/           # Evaluation datasets
+│   └── samples/              # Test input documents
+│
+├── notebooks/                # Development & research
+│   ├── evaluation/           # Accuracy & scoring notebooks
+│   └── feedback_loop/        # Analytics & improvement workflows
+│
+├── scripts/                  # Automation
+│   ├── metrics_reporter.py    # Report generation
+│   └── scheduled_metrics.py   # CRON jobs for telemetry
+│
+└── docs/                     # Documentation (API, UI, Deployment)
 ```
 
 ---
@@ -143,8 +154,8 @@ http://localhost:8000
 
 ### Endpoints
 
-#### `POST /v1/simplify`
-Simplify text into easy language.
+#### `POST /v1/simplify` | `/v1/simplify/batch`
+Core feature — Transform complex text into easy language. The batch endpoint allows parallel processing for multiple snippets (optimized for browser extensions).
 
 **Request:**
 ```json
@@ -164,22 +175,8 @@ Simplify text into easy language.
 }
 ```
 
-#### `POST /v1/ingest/pdf`
-Extract text from a PDF file.
-
-**Request:** `multipart/form-data` with `file` field
-
-**Response:**
-```json
-{
-  "extracted_text": "...",
-  "pages": 5,
-  "warnings": []
-}
-```
-
 #### `POST /v1/tts`
-Convert text to speech audio.
+Accessibility feature — Convert simplified text to MP3 audio (returned as Base64).
 
 **Request:**
 ```json
@@ -198,15 +195,11 @@ Convert text to speech audio.
 }
 ```
 
-#### `GET /healthz`
-Health check endpoint.
+#### `POST /v1/log-run`
+Analytics feature — Log performance data and user feedback for the continuous improvement loop.
 
-**Response:**
-```json
-{
-  "ok": true
-}
-```
+#### `GET /healthz`
+Monitoring — Standard health check. Returns `{"ok": true}`.
 
 ---
 
@@ -265,7 +258,8 @@ npm run dev
 | **Backend** | Python, FastAPI, Uvicorn |
 | **LLM** | Groq (llama-3.1-8b-instant) |
 | **PDF Extraction** | PyMuPDF |
-| **TTS** | gTTS (Google Text-to-Speech) |
+| **TTS** | gTTS (v2), OpenAI TTS (optional) |
+| **Telemetry** | JSONL, python-json-logger, Metrics Scripts |
 | **Deployment** | Docker, Fly.io (backend), Vercel (frontend) |
 
 ---
