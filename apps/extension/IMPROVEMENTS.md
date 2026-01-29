@@ -216,7 +216,132 @@ Users can cancel page simplification but not selection simplification. The cance
 
 ---
 
-### 3. Smart Chunking Analytics
+### 4. Custom Selection Highlighting with Persistent Markers
+
+**Status**: Not implemented
+
+**Description**:
+Improve the visual feedback for text selection mode by using a lighter, more visible highlight color and persisting the highlight after clicking "Restore original text" so users can see what they previously selected.
+
+**Current Behavior**:
+- Uses browser's default selection highlighting (typically dark blue)
+- Selected text is directly replaced with simplified text (lines 988-991 in `simplify.js`)
+- No tracking or marking of what was selected
+- Restore functionality reloads entire page (line 1232), losing all state
+
+**Desired Improvements**:
+
+1. **Lighter/Custom Selection Color**
+   - Apply a lighter, more accessible highlight color (e.g., light teal `hsl(174 50% 90%)`)
+   - Make simplified selections visually distinct from surrounding text
+
+2. **Persistent Highlighting After Restore**
+   - Keep the highlight visible after clicking "Restore original text"
+   - Users can see what sections they previously simplified
+   - Helps users track their progress through a page
+
+**Implementation Approach**:
+
+**Option A - Wrap selected text in styled element (Recommended):**
+
+1. **Modify text replacement logic** (around lines 988-991 in `simplify.js`):
+```javascript
+// Instead of:
+// const textNode = document.createTextNode(simplified);
+// range.insertNode(textNode);
+
+// Use:
+const span = document.createElement('span');
+span.className = 'klartext-simplified-selection';
+span.textContent = simplified;
+span.dataset.klartextOriginal = selectedText;
+range.insertNode(span);
+```
+
+2. **Add styling** to `content/styles.css`:
+```css
+.klartext-simplified-selection {
+  background-color: hsl(174 50% 90%); /* Light teal highlight */
+  padding: 2px 0;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.klartext-simplified-selection:hover {
+  background-color: hsl(174 50% 85%);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .klartext-simplified-selection {
+    background-color: hsl(174 80% 70%);
+    outline: 2px solid hsl(174 50% 40%);
+  }
+}
+```
+
+3. **Update restore functionality** (lines 1226-1234 in `simplify.js`):
+```javascript
+// Instead of reloading page for selections:
+if (message.type === 'RESTORE_ORIGINAL') {
+  // Check if there are selection-mode simplifications
+  const selections = document.querySelectorAll('.klartext-simplified-selection');
+  
+  if (selections.length > 0) {
+    // Restore text but keep wrapper with highlight
+    selections.forEach(el => {
+      const original = el.dataset.klartextOriginal;
+      if (original) {
+        el.textContent = original;
+        // Keep the element with its highlight class
+      }
+    });
+    sendResponse({ ok: true });
+  } else {
+    // Page mode - reload as before
+    window.location.reload();
+    sendResponse({ ok: true });
+  }
+}
+```
+
+**Option B - CSS ::selection pseudo-element:**
+- Simpler but affects ALL selections on the page, not just KlarText selections
+- Less control and can't persist after restore
+
+**Benefits**:
+- Better visual feedback for users
+- Improved accessibility with customizable colors
+- Users can track what they've simplified
+- Non-intrusive highlighting that works with any page design
+- Persistent markers help users understand restore state
+
+**Considerations**:
+- Ensure highlight color has good contrast on both light and dark backgrounds
+- Test with various website color schemes
+- Respect `prefers-reduced-motion` for transitions
+- Consider adding a "Clear all highlights" option
+
+**Files to Modify**:
+- `apps/extension/content/simplify.js` (lines 988-991 for text replacement, lines 1226-1234 for restore)
+- `apps/extension/content/styles.css` (add highlight styling)
+
+**Testing Checklist**:
+- [ ] Selection highlight is visible and lighter than browser default
+- [ ] Highlight persists after restore
+- [ ] Works on light and dark background pages
+- [ ] High contrast mode supported
+- [ ] Multiple selections on same page work correctly
+- [ ] Restore returns correct original text
+- [ ] Page reload clears all highlights
+- [ ] Doesn't interfere with page's native styles
+
+**Priority Rationale**:
+Medium priority because it improves UX and provides better visual feedback, but core functionality works without it.
+
+---
+
+### 5. Smart Chunking Analytics
 
 **Status**: Working, could surface to user
 
@@ -232,7 +357,7 @@ The smart chunking system (Phase 1 optimization) reduces API calls by 30-70% but
 
 ## 🟢 LOW PRIORITY / NICE TO HAVE
 
-### 4. Language Detection Enhancement
+### 6. Language Detection Enhancement
 
 **Status**: Basic implementation
 
@@ -241,7 +366,7 @@ The smart chunking system (Phase 1 optimization) reduces API calls by 30-70% but
 
 ---
 
-### 5. Offline Support
+### 7. Offline Support
 
 **Status**: Not implemented
 
@@ -252,7 +377,7 @@ The smart chunking system (Phase 1 optimization) reduces API calls by 30-70% but
 
 ---
 
-### 6. Metrics Dashboard
+### 8. Metrics Dashboard
 
 **Status**: Not implemented
 
