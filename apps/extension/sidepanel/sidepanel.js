@@ -84,17 +84,12 @@ function setButtonLoading(buttonId, loading, progressText = null) {
   
   const textSpan = button.querySelector('.button-text');
   const spinner = button.querySelector('.button-spinner');
-  const buttonContent = button.querySelector('.button-content');
   
   if (loading) {
     button.classList.add('processing');
     button.disabled = true;
     
     if (spinner) spinner.style.display = 'inline-block';
-    if (buttonContent) {
-      const icon = buttonContent.querySelector('.button-icon');
-      if (icon) icon.style.display = 'none';
-    }
     
     // Show progress text if provided, otherwise default
     if (textSpan) {
@@ -105,10 +100,6 @@ function setButtonLoading(buttonId, loading, progressText = null) {
     button.disabled = false;
     
     if (spinner) spinner.style.display = 'none';
-    if (buttonContent) {
-      const icon = buttonContent.querySelector('.button-icon');
-      if (icon) icon.style.display = 'inline-block';
-    }
     
     // Restore original text
     if (buttonId === 'simplify-page') {
@@ -287,8 +278,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       // Show cancel button
       showCancelButton();
       
-      // Update button state
-      setButtonLoading('simplify-page', true, progressMessage || 'Processing...');
+      // Update button state (use buttonId from message, default to page)
+      setButtonLoading(buttonId || 'simplify-page', true, progressMessage || 'Processing...');
       updateStatus("", "info");
       isPageProcessing = true;
       

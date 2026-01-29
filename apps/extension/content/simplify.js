@@ -379,9 +379,9 @@ async function simplifyInBatches(chunks, targetLanguage) {
           current: batchNum,
           total: totalBatches,
           eta: estimatedSeconds,
-          message: `Processing batch ${batchNum} of ${totalBatches}`
+          message: 'Simplifying...'
         },
-        message: `Processing batch ${batchNum} of ${totalBatches}`
+        message: 'Simplifying...'
       });
     } catch (e) {
       // Non-critical, continue
@@ -439,9 +439,9 @@ async function simplifyInBatches(chunks, targetLanguage) {
             current: batchNum,
             total: totalBatches,
             eta: estimatedSeconds,
-            message: `Batch ${batchNum} complete`
+            message: 'Simplifying...'
           },
-          message: `Batch ${batchNum} of ${totalBatches} complete`
+          message: 'Simplifying...'
         });
       } catch (e) {
         // Non-critical

@@ -1,5 +1,6 @@
 """LLM adapter for text simplification (ported from apps/demo/app.py)"""
 import os
+import asyncio
 from groq import Groq
 from .prompts import load_templates, render_user_prompt
 
@@ -60,3 +61,38 @@ def simplify_text_with_llm(
     simplified_text = response.choices[0].message.content
     
     return simplified_text
+
+
+async def simplify_text_async(
+    text: str,
+    target_lang: str,
+    api_key: str | None = None,
+) -> str:
+    """
+    Async wrapper for simplify_text_with_llm.
+    Runs the blocking LLM call in a thread pool to enable parallel processing.
+    
+    This allows multiple texts to be simplified concurrently without blocking
+    the event loop, which is essential for batch endpoint performance.
+    
+    Args:
+        text: The text to simplify
+        target_lang: Target language ('de' or 'en')
+        api_key: Groq API key (defaults to GROQ_API_KEY env var)
+    
+    Returns:
+        Simplified text string
+        
+    Raises:
+        ValueError: If API key missing or invalid input
+        FileNotFoundError: If template files not found
+        Exception: If LLM API call fails
+    """
+    loop = asyncio.get_event_loop()
+    return await loop.run_in_executor(
+        None,  # Use default thread pool
+        simplify_text_with_llm,
+        text,
+        target_lang,
+        api_key
+    )

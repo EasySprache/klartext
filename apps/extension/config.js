@@ -67,8 +67,9 @@ const CONFIG = {
   /**
    * Request timeout in milliseconds
    * Large pages may take longer to process
+   * Increased to 180s to handle batch processing of large pages
    */
-  REQUEST_TIMEOUT: 60000, // 60 seconds
+  REQUEST_TIMEOUT: 180000, // 180 seconds (3 minutes)
 
   /**
    * Debug mode - logs additional information to console
