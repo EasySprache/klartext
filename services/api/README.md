@@ -127,10 +127,6 @@ curl -X POST http://localhost:8000/v1/simplify \
 |----------|-------------|---------|
 | `API_KEY` | API key for authenticating API requests | `abc123...` |
 | `APP_PASSWORD` | Password for frontend access | `secure_pass_123` |
-| `DEMO_PASSWORD` | (Optional) Temporary demo password | `demo_xyz_789` |
-| `DEMO_END_AT` | (Optional) Demo password expiration time | `2026-02-01T18:00:00Z` |
-
-**See [DEMO_SECURITY.md](./DEMO_SECURITY.md)** for complete security and demo management guide.
 
 ### Optional
 
@@ -163,29 +159,17 @@ curl -X POST http://localhost:8000/v1/simplify \
 
 See full API documentation at `/docs` or in `docs/api_design.md`.
 
-## Security & Demo Management
+## Security
 
-### Demo Password Setup
-
-For demonstrations where you need to share temporary access:
+For production deployments, set secure passwords:
 
 ```bash
-# Quick setup (see DEMO_QUICKSTART.md)
-fly secrets set DEMO_PASSWORD="$(openssl rand -base64 24)"
-fly secrets set DEMO_END_AT="$(date -u -v+4H +%Y-%m-%dT%H:%M:%SZ)"  # 4-hour expiration
-```
-
-**⚠️ After demo - rotate secrets to invalidate captured keys:**
-
-```bash
+# Set API key for request authentication
 fly secrets set API_KEY="$(openssl rand -hex 32)"
-fly secrets unset DEMO_PASSWORD
-fly secrets unset DEMO_END_AT
-```
 
-**Documentation:**
-- **Quick reference**: [DEMO_QUICKSTART.md](./DEMO_QUICKSTART.md) - Essential commands
-- **Complete guide**: [DEMO_SECURITY.md](./DEMO_SECURITY.md) - Security best practices, troubleshooting, workflows
+# Set frontend access password
+fly secrets set APP_PASSWORD="$(openssl rand -base64 24)"
+```
 
 ## Architecture
 

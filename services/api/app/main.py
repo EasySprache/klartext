@@ -569,15 +569,9 @@ def verify_password(req: AuthRequest):
     This endpoint is used by the web frontend to gate access.
     The password is configured via the `APP_PASSWORD` environment variable.
     
-    For demos, a temporary `DEMO_PASSWORD` can be set with optional expiration via `DEMO_END_AT`.
-    
     On successful authentication, returns the API key needed for subsequent requests.
     """
-    import datetime
-    
     app_password = os.getenv("APP_PASSWORD")
-    demo_password = os.getenv("DEMO_PASSWORD")
-    demo_end_at = os.getenv("DEMO_END_AT")  # ISO 8601 timestamp
     
     if not app_password:
         raise HTTPException(
@@ -585,29 +579,7 @@ def verify_password(req: AuthRequest):
             detail="APP_PASSWORD not configured on server"
         )
     
-    # Check if demo password is expired
-    demo_password_valid = False
-    if demo_password:
-        if demo_end_at:
-            try:
-                expiry = datetime.datetime.fromisoformat(demo_end_at.replace('Z', '+00:00'))
-                now = datetime.datetime.now(datetime.timezone.utc)
-                if now < expiry:
-                    demo_password_valid = True
-            except (ValueError, AttributeError):
-                # Invalid timestamp format - treat demo password as invalid
-                pass
-        else:
-            # No expiry set - demo password is valid
-            demo_password_valid = True
-    
-    # Accept either APP_PASSWORD or valid DEMO_PASSWORD
-    password_correct = (
-        req.password == app_password or 
-        (demo_password_valid and req.password == demo_password)
-    )
-    
-    if not password_correct:
+    if req.password != app_password:
         raise HTTPException(
             status_code=401,
             detail="Invalid password"
