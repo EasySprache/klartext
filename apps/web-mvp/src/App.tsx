@@ -8,6 +8,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import AccessibilityPanel from '@/components/AccessibilityPanel';
 import PasswordGate from '@/components/PasswordGate';
 import { apiJsonRequest, apiRequest } from '@/lib/api';
+import { logSimplification } from '@/lib/logger';
 import { SidebarNav } from '@/components/SidebarNav';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { InfoWarning } from '@/components/InfoWarning';
@@ -126,6 +127,9 @@ function App() {
     setIsLoading(true);
     setError(null);
 
+    // Track start time for logging
+    const startTime = Date.now();
+
     try {
       const response = await apiJsonRequest('/v1/simplify', {
         text: inputText,
@@ -138,6 +142,19 @@ function App() {
 
       const data = await response.json();
       setOutputText(data.simplified_text);
+
+      // Log the simplification run (fire and forget)
+      logSimplification({
+        inputText: inputText,
+        outputText: data.simplified_text,
+        targetLang: language,
+        level: 'easy',
+        startTime: startTime,
+        warnings: data.warnings || [],
+      }).catch(err => {
+        // Silent fail - don't disrupt user experience
+        console.warn('Failed to log simplification:', err);
+      });
 
       // Allow DOM update then scroll
       setTimeout(() => scrollToSection('output'), 100);

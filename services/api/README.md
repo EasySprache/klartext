@@ -12,8 +12,8 @@ FastAPI-based REST API for text simplification with accessibility features.
 | Prompt template loading | ✅ **Implemented** | Loads from `prompts/templates/` |
 | LLM integration | ✅ **Implemented** | Groq llama-3.1-8b-instant model |
 | `/v1/ingest/pdf` | ✅ **Implemented** | PyMuPDF extraction with cleanup |
+| `/v1/log-run` | ✅ **Implemented** | JSONL logging with file locking |
 | `/v1/simplify/batch` | 📝 Placeholder | Endpoint defined, logic pending |
-| `/v1/log-run` | 📝 Placeholder | Endpoint defined, storage pending |
 | `/v1/ingest/url` | 📝 Placeholder | Endpoint defined, logic pending |
 | `/v1/tts` | 📝 Placeholder | Endpoint defined, logic pending |
 
@@ -121,6 +121,17 @@ curl -X POST http://localhost:8000/v1/simplify \
 |----------|-------------|---------|
 | `GROQ_API_KEY` | Groq API key for LLM | `gsk_...` |
 
+### Security (Production)
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `API_KEY` | API key for authenticating API requests | `abc123...` |
+| `APP_PASSWORD` | Password for frontend access | `secure_pass_123` |
+| `DEMO_PASSWORD` | (Optional) Temporary demo password | `demo_xyz_789` |
+| `DEMO_END_AT` | (Optional) Demo password expiration time | `2026-02-01T18:00:00Z` |
+
+**See [DEMO_SECURITY.md](./DEMO_SECURITY.md)** for complete security and demo management guide.
+
 ### Optional
 
 | Variable | Default | Description |
@@ -142,6 +153,7 @@ curl -X POST http://localhost:8000/v1/simplify \
 ### Core Endpoints
 
 - `GET /healthz` - Health check
+- `POST /v1/auth/verify` - Verify frontend access password
 - `POST /v1/simplify` - Simplify a single text
 - `POST /v1/simplify/batch` - Simplify multiple texts
 - `POST /v1/ingest/pdf` - Extract text from PDF
@@ -150,6 +162,30 @@ curl -X POST http://localhost:8000/v1/simplify \
 - `POST /v1/log-run` - Log run data for feedback loop
 
 See full API documentation at `/docs` or in `docs/api_design.md`.
+
+## Security & Demo Management
+
+### Demo Password Setup
+
+For demonstrations where you need to share temporary access:
+
+```bash
+# Quick setup (see DEMO_QUICKSTART.md)
+fly secrets set DEMO_PASSWORD="$(openssl rand -base64 24)"
+fly secrets set DEMO_END_AT="$(date -u -v+4H +%Y-%m-%dT%H:%M:%SZ)"  # 4-hour expiration
+```
+
+**⚠️ After demo - rotate secrets to invalidate captured keys:**
+
+```bash
+fly secrets set API_KEY="$(openssl rand -hex 32)"
+fly secrets unset DEMO_PASSWORD
+fly secrets unset DEMO_END_AT
+```
+
+**Documentation:**
+- **Quick reference**: [DEMO_QUICKSTART.md](./DEMO_QUICKSTART.md) - Essential commands
+- **Complete guide**: [DEMO_SECURITY.md](./DEMO_SECURITY.md) - Security best practices, troubleshooting, workflows
 
 ## Architecture
 
@@ -309,30 +345,68 @@ docker-compose up --build
 - **Monitoring**: Prometheus + Grafana
 - **Logging**: Structured JSON logs to stdout → ELK/Loki
 
-## Feedback Loop
+## Logging & Feedback Loop
 
-The `/v1/log-run` endpoint collects performance data for continuous improvement:
+The `/v1/log-run` endpoint collects privacy-preserving analytics for continuous improvement.
 
-- No raw user text stored (only SHA256 hashes)
-- Logs to JSONL file by default (configurable)
-- Use `LOG_FILE_PATH` to specify log location
-- See `docs/scoring_feedback_pipeline_proposal.md` for details
+### Features
 
-Example log entry:
+✅ **Privacy-preserving** - Only stores SHA256 hash of input text, not raw text
+✅ **Non-blocking** - Asynchronous logging doesn't slow down app
+✅ **File locking** - Safe concurrent writes with fcntl
+✅ **Structured** - JSONL format for easy analysis
+✅ **Frontend integration** - Automatic logging from web-mvp
+
+### Quick Example
+
+```typescript
+// Frontend (automatic in web-mvp)
+import { logSimplification } from '@/lib/logger';
+
+await logSimplification({
+  inputText: original,
+  outputText: simplified,
+  targetLang: 'de',
+  level: 'easy',
+  startTime: Date.now() - 1234
+});
+```
+
+### Configuration
+
+```bash
+# Optional: Set log file location (default: ./data/logs/api_runs.jsonl)
+export LOG_FILE_PATH="/path/to/logs/api_runs.jsonl"
+```
+
+### Log Entry Example
 
 ```json
 {
   "run_id": "123e4567-e89b-12d3-a456-426614174000",
-  "input_hash": "abc123...",
+  "timestamp": "2026-01-27T14:30:00Z",
+  "input_hash": "abc123def456...",
   "input_length": 150,
+  "output_length": 120,
   "target_lang": "de",
   "level": "easy",
   "model_used": "llama-3.1-8b-instant",
   "latency_ms": 250,
-  "scores": {"lix": 37.3, "avg_sentence_len": 12.0},
-  "timestamp": "2026-01-10T14:30:00Z"
+  "chunk_count": 1,
+  "scores": {"avg_sentence_len": 12.0, "word_count": 45},
+  "warnings": [],
+  "user_feedback": null
 }
 ```
+
+### Complete Documentation
+
+See **[LOGGING_GUIDE.md](./LOGGING_GUIDE.md)** for:
+- Architecture overview
+- Frontend integration examples
+- Privacy & security details
+- Log analysis with Python/Jupyter
+- Troubleshooting guide
 
 ## Troubleshooting
 

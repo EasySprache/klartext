@@ -390,14 +390,13 @@ class LogRunRequest(BaseModel):
         description="Unique identifier for this run (UUID recommended)",
         json_schema_extra={"example": "123e4567-e89b-12d3-a456-426614174000"}
     )
-    input_hash: str = Field(
-        description="SHA256 hash of input text (for deduplication, not storing raw text)",
-        json_schema_extra={"example": "abc123def456..."}
+    input_text: str = Field(
+        description="Original input text",
+        json_schema_extra={"example": "Der Antragsteller muss die erforderlichen Unterlagen einreichen."}
     )
-    input_length: int = Field(
-        gt=0,
-        description="Character count of input text",
-        json_schema_extra={"example": 150}
+    output_text: str = Field(
+        description="Simplified output text",
+        json_schema_extra={"example": "Sie müssen Dokumente abgeben."}
     )
     target_lang: str = Field(
         pattern="^(de|en)$",
@@ -408,11 +407,6 @@ class LogRunRequest(BaseModel):
     model_used: str = Field(
         description="Model identifier (e.g., 'llama-3.1-8b-instant')",
         json_schema_extra={"example": "llama-3.1-8b-instant"}
-    )
-    output_length: int = Field(
-        gt=0,
-        description="Character count of output text",
-        json_schema_extra={"example": 120}
     )
     latency_ms: int = Field(
         gt=0,
@@ -575,9 +569,15 @@ def verify_password(req: AuthRequest):
     This endpoint is used by the web frontend to gate access.
     The password is configured via the `APP_PASSWORD` environment variable.
     
+    For demos, a temporary `DEMO_PASSWORD` can be set with optional expiration via `DEMO_END_AT`.
+    
     On successful authentication, returns the API key needed for subsequent requests.
     """
+    import datetime
+    
     app_password = os.getenv("APP_PASSWORD")
+    demo_password = os.getenv("DEMO_PASSWORD")
+    demo_end_at = os.getenv("DEMO_END_AT")  # ISO 8601 timestamp
     
     if not app_password:
         raise HTTPException(
@@ -585,7 +585,29 @@ def verify_password(req: AuthRequest):
             detail="APP_PASSWORD not configured on server"
         )
     
-    if req.password != app_password:
+    # Check if demo password is expired
+    demo_password_valid = False
+    if demo_password:
+        if demo_end_at:
+            try:
+                expiry = datetime.datetime.fromisoformat(demo_end_at.replace('Z', '+00:00'))
+                now = datetime.datetime.now(datetime.timezone.utc)
+                if now < expiry:
+                    demo_password_valid = True
+            except (ValueError, AttributeError):
+                # Invalid timestamp format - treat demo password as invalid
+                pass
+        else:
+            # No expiry set - demo password is valid
+            demo_password_valid = True
+    
+    # Accept either APP_PASSWORD or valid DEMO_PASSWORD
+    password_correct = (
+        req.password == app_password or 
+        (demo_password_valid and req.password == demo_password)
+    )
+    
+    if not password_correct:
         raise HTTPException(
             status_code=401,
             detail="Invalid password"
@@ -945,61 +967,72 @@ def log_run(req: LogRunRequest):
     
     ## Implementation Notes
     
-    For MVP, logs can be written to:
-    - JSON Lines file (append-only)
-    - SQLite database
-    - Postgres table (for production)
+    Logs are written to JSONL file with file locking for concurrent access.
+    Default location: `./data/logs/api_runs.jsonl`
+    Configure via: `LOG_FILE_PATH` environment variable
     
     Data structure aligns with the scoring framework described in 
     `docs/scoring_feedback_pipeline_proposal.md`.
     
-    ## Example Usage
+    ## Example Usage (Frontend)
     
-    ```python
-    import hashlib
-    import time
-    import uuid
+    ```javascript
+    // After successful simplification
+    const runId = crypto.randomUUID();
+    const inputHash = await sha256(inputText);
     
-    # Before simplification
-    start_time = time.time()
-    input_hash = hashlib.sha256(text.encode()).hexdigest()
-    
-    # ... perform simplification ...
-    
-    # After simplification
-    latency_ms = int((time.time() - start_time) * 1000)
-    
-    # Log the run
-    requests.post("/v1/log-run", json={
-        "run_id": str(uuid.uuid4()),
-        "input_hash": input_hash,
-        "input_length": len(text),
-        "target_lang": "de",
-        "model_used": "llama-3.1-8b-instant",
-        "output_length": len(simplified_text),
-        "latency_ms": latency_ms,
-        "scores": {"lix": 37.3, "avg_sentence_len": 12.0}
-    })
+    await fetch('/v1/log-run', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': apiKey
+      },
+      body: JSON.stringify({
+        run_id: runId,
+        input_hash: inputHash,
+        input_length: inputText.length,
+        target_lang: 'de',
+        level: 'easy',
+        model_used: 'llama-3.1-8b-instant',
+        output_length: simplifiedText.length,
+        latency_ms: elapsedTime,
+        chunk_count: 1,
+        warnings: []
+      })
+    });
     ```
     """
-    # TODO: Implement logging to database/file
-    # For MVP: append to JSONL file with proper file locking
-    # For production: insert into Postgres with async batch writes
+    from .core.run_logger import write_log_entry
     
-    # Placeholder implementation
-    import datetime
-    timestamp = req.timestamp or datetime.datetime.utcnow().isoformat()
-    
-    # In production, you would:
-    # 1. Add timestamp if not provided
-    # 2. Validate run_id is unique (or allow duplicates for retries)
-    # 3. Write to storage (JSONL file or DB)
-    # 4. Optionally emit to metrics system (Prometheus, DataDog, etc.)
-    
-    return LogRunResponse(
-        logged=True,
-        run_id=req.run_id,
-    )
+    try:
+        # Write log entry to JSONL file
+        entry = write_log_entry(
+            run_id=req.run_id,
+            input_text=req.input_text,
+            output_text=req.output_text,
+            target_lang=req.target_lang,
+            level=req.level,
+            model_used=req.model_used,
+            latency_ms=req.latency_ms,
+            chunk_count=req.chunk_count,
+            scores=req.scores,
+            warnings=req.warnings,
+            user_feedback=req.user_feedback,
+            timestamp=req.timestamp
+        )
+        
+        return LogRunResponse(
+            logged=True,
+            run_id=req.run_id
+        )
+        
+    except Exception as e:
+        # Log error but don't crash the app
+        print(f"Error logging run: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to log run: {str(e)}"
+        )
 
 
 # =============================================================================
