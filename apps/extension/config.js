@@ -41,18 +41,6 @@ const CONFIG = {
   },
 
   /**
-   * Current template version for logging and A/B testing
-   */
-  CURRENT_TEMPLATE_VERSION: 'v2',
-
-  /**
-   * Default simplification level
-   * Options: 'very_easy', 'easy', 'medium'
-   * Future: Will be selectable in sidepanel UI
-   */
-  DEFAULT_LEVEL: 'easy',
-
-  /**
    * Maximum number of text chunks to send in a single batch request
    * API limit: 10 texts per batch
    */
