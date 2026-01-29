@@ -1013,7 +1013,7 @@ def log_run(req: LogRunRequest):
     summary="Simplify multiple texts in one request",
     response_description="Results for all texts in the batch",
 )
-def simplify_batch(req: BatchSimplifyRequest):
+async def simplify_batch(req: BatchSimplifyRequest):
     """
     **Simplify multiple independent texts in a single API call.**
     
@@ -1109,8 +1109,9 @@ def simplify_batch(req: BatchSimplifyRequest):
     - Potential for parallel LLM processing
     - Better rate limiting (counts as 1 API call or proportional credit usage)
     """
-    from .core.llm_adapter import simplify_text_with_llm
+    from .core.llm_adapter import simplify_text_async
     import uuid
+    import asyncio
     
     # Generate unique batch ID
     batch_id = f"batch_{uuid.uuid4().hex[:8]}"
@@ -1122,77 +1123,96 @@ def simplify_batch(req: BatchSimplifyRequest):
             detail="Maximum 10 texts per batch. Please split into multiple requests."
         )
     
-    results = []
+    # CONTROLLED CONCURRENCY SETTING
+    # Set to 2 to stay under Groq free tier TPM limit (6000 tokens/minute)
+    # Can increase to 3-5 with paid tier
+    CONCURRENT_LIMIT = 2
     
-    # Process each text individually
-    for i, text in enumerate(req.texts):
+    async def process_single_text(i: int, text: str) -> BatchItemResult:
+        """Process a single text and return result."""
         # Validate text length
         if not text or len(text.strip()) < 10:
-            results.append(BatchItemResult(
+            return BatchItemResult(
                 index=i,
                 simplified_text=None,
                 error="Text too short to simplify (minimum 10 characters)",
                 warnings=[],
-            ))
-            continue
+            )
         
         if len(text) > 5000:
-            results.append(BatchItemResult(
+            return BatchItemResult(
                 index=i,
                 simplified_text=None,
                 error="Text too long (maximum 5000 characters per text in batch mode)",
                 warnings=[],
-            ))
-            continue
+            )
         
         # Simplify this text
         try:
-            simplified_text = simplify_text_with_llm(
+            simplified_text = await simplify_text_async(
                 text=text,
                 target_lang=req.target_lang,
             )
             
-            # Success
-            results.append(BatchItemResult(
+            return BatchItemResult(
                 index=i,
                 simplified_text=simplified_text,
                 error=None,
                 warnings=[],
-            ))
+            )
             
         except ValueError as e:
-            # Validation error for this specific text
-            results.append(BatchItemResult(
+            return BatchItemResult(
                 index=i,
                 simplified_text=None,
                 error=f"Validation error: {str(e)}",
                 warnings=[],
-            ))
+            )
             
         except FileNotFoundError as e:
-            # Template loading error (should not happen per-text, but handle it)
-            results.append(BatchItemResult(
+            return BatchItemResult(
                 index=i,
                 simplified_text=None,
                 error=f"Template error: {str(e)}",
                 warnings=[],
-            ))
+            )
             
         except Exception as e:
-            # LLM API or other errors for this specific text
-            results.append(BatchItemResult(
+            # Check if it's a rate limit error
+            error_msg = str(e)
+            if "rate_limit" in error_msg.lower() or "429" in error_msg:
+                error_msg = f"Rate limit exceeded: {error_msg}"
+            else:
+                error_msg = f"Simplification failed: {error_msg}"
+            
+            return BatchItemResult(
                 index=i,
                 simplified_text=None,
-                error=f"Simplification failed: {str(e)}",
+                error=error_msg,
                 warnings=[],
-            ))
+            )
+    
+    # Process texts in controlled batches (mini-batches of CONCURRENT_LIMIT)
+    all_results = []
+    
+    for batch_start in range(0, len(req.texts), CONCURRENT_LIMIT):
+        batch_end = min(batch_start + CONCURRENT_LIMIT, len(req.texts))
+        current_batch = req.texts[batch_start:batch_end]
+        
+        # Process this mini-batch in parallel
+        tasks = [
+            process_single_text(i, text) 
+            for i, text in enumerate(current_batch, start=batch_start)
+        ]
+        batch_results = await asyncio.gather(*tasks)
+        all_results.extend(batch_results)
     
     # Calculate success/failure counts
-    successful_count = sum(1 for r in results if r.simplified_text is not None)
-    failed_count = len(results) - successful_count
+    successful_count = sum(1 for r in all_results if r.simplified_text is not None)
+    failed_count = len(all_results) - successful_count
     
     return BatchSimplifyResponse(
-        results=results,
+        results=all_results,
         batch_id=batch_id,
         successful_count=successful_count,
         failed_count=failed_count,
