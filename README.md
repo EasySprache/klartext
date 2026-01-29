@@ -39,10 +39,6 @@ See `docs/phase_0_testing_guide.md` for detailed setup instructions.
 ### Text Simplification
 - Transforms complex text into easy-to-understand language
 - Supports German (`de`) and English (`en`)
-- Three simplification levels:
-  - **very_easy**: 8-10 word sentences, defines uncommon terms, bullet points
-  - **easy**: 12-15 word sentences, clear structure, minimal jargon
-  - **medium**: Plain language with normal sentence length
 
 ### PDF Ingestion
 - Upload PDF documents for text extraction
