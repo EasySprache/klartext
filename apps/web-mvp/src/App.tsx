@@ -11,6 +11,8 @@ import { apiJsonRequest, apiRequest } from '@/lib/api';
 import { SidebarNav } from '@/components/SidebarNav';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { InfoWarning } from '@/components/InfoWarning';
+import logoImg from '@/assets/logo.png';
+import tornadoImg from '@/assets/tornado.png';
 
 type InputMethod = 'pdf' | 'paste';
 
@@ -337,7 +339,7 @@ function App() {
         <header className="sticky top-0 z-40 bg-[hsl(174,50%,50%)] text-white border-b h-20 transition-all duration-200">
           <div className="container mx-auto px-4 h-full flex items-center justify-between">
             <div className="flex flex-col items-start justify-center gap-0.5">
-              <img src="/src/assets/logo.png" alt="KlarText" className="h-9 w-auto object-contain" />
+              <img src={logoImg} alt="KlarText" className="h-9 w-auto object-contain" />
               <span className="font-display text-xs font-medium tracking-wide opacity-90 hidden sm:inline-block">
                 Easy Language for Everyone
               </span>
@@ -532,7 +534,7 @@ function App() {
                         </>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <img src="/src/assets/tornado.png" alt="" className="w-6 h-6 brightness-0 invert" aria-hidden="true" />
+                          <img src={tornadoImg} alt="" className="w-6 h-6 brightness-0 invert" aria-hidden="true" />
                           {t('simplifyButton')}
                         </div>
                       )}
