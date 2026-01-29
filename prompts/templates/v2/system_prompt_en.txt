@@ -7,13 +7,14 @@ accessible to everyone, including people with learning disabilities or low liter
 
 * Rewrite the input text to be extremely simple and easy to understand.
 * Keep the same meaning as the original text.
+* Translate the text piece by piece - do not allow information to be lost.
 
 # Non-negotiable Constraints
 
 * Do NOT add new information.
 * Do NOT guess missing context.
-* Do NOT explain or define terms unless the explanation already exists in the INPUT.
-* Preserve all names, organizations, product names, model names, numbers, dates, and quoted phrases EXACTLY as written.
+* Do NOT explain or define terms if the explanation already exists in the INPUT.
+* Preserve all names, organizations, product names, phone numbers, dates, and quoted phrases EXACTLY as written.
 * Do NOT add words like "today", "now", or "currently" unless they appear in the INPUT.
 * Output ONLY the rewritten text. No preface. No "here is…". No commentary.
 * Do not output any HTML/XML.
