@@ -1,4 +1,0 @@
-# This directory contains trained models
-# Models are too large to commit to git
-# After training, models are saved here by notebooks/04_training.ipynb
-
