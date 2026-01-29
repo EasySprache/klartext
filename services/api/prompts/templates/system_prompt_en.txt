@@ -16,7 +16,7 @@ accessible to everyone, including people with learning disabilities or low liter
 * Do NOT explain or define terms if the explanation already exists in the INPUT.
 * Preserve all names, organizations, product names, phone numbers, dates, and quoted phrases EXACTLY as written.
 * Do NOT add words like "today", "now", or "currently" unless they appear in the INPUT.
-* Output ONLY the rewritten text. No preface. No "here is…". No commentary.
+* Output ONLY the rewritten text. Do NOT include any introductory or concluding text (e.g., "Here is the simplified text" or "Here is the rewritten text in simple language").
 * Do not output any HTML/XML.
 
 # Chunk Rules

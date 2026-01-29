@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { FileText, Loader2, Copy, Check, Volume2, VolumeX, Wand2, BookOpen, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,6 +16,36 @@ import logoImg from '@/assets/logo.png';
 import tornadoImg from '@/assets/tornado.png';
 
 type InputMethod = 'pdf' | 'paste';
+
+// Helper to clean markdown syntax for TTS
+const cleanTextForTTS = (text: string) => {
+  return text
+    // Remove bold/italic markers
+    .replace(/(\*\*|__|\*|_)/g, '')
+    // Remove heading markers (#)
+    .replace(/^#+\s+/gm, '')
+    // Remove list bullets (*, -, +) at start of lines
+    .replace(/^[\*\-\+]\s+/gm, '')
+    // Remove links [text](url) -> text
+    .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')
+    // Remove code blocks
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`([^`]+)`/g, '$1')
+    .trim();
+};
+
+// Helper to preprocess text for markdown rendering
+// Ensures lines starting with "+ " are treated as nested lists by indenting them
+const preprocessMarkdown = (text: string) => {
+  return text
+    // Remove common LLM lead-in phrases (case insensitive, allowing for variations)
+    .replace(/^(Here is|This is) (the |your )?(rewritten |simplified |simple )?text( in simple language)?[:\.]?\s*/i, '')
+    // Replace "+ " at start of line with "  * " (indentation for sub-list)
+    .replace(/^\+\s+/gm, '  * ')
+    // Ensure "State Agencies:" etc are followed by a newline if they aren't already
+    // This helps separating the list from the header
+    .replace(/:\s*(\n\s*\+\s+)/g, ':\n$1');
+};
 
 function App() {
   const { language, t } = useLanguage();
@@ -242,7 +273,7 @@ function App() {
     try {
       // Try API TTS first for consistent voice quality
       const response = await apiJsonRequest('/v1/tts', {
-        text: outputText,
+        text: cleanTextForTTS(outputText),
         lang: language
       }, 'POST', controller.signal);
 
@@ -299,7 +330,7 @@ function App() {
 
       if ('speechSynthesis' in window) {
         speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(outputText);
+        const utterance = new SpeechSynthesisUtterance(cleanTextForTTS(outputText));
         utterance.rate = 0.9;
         utterance.lang = language === 'de' ? 'de-DE' : 'en-US';
 
@@ -563,10 +594,10 @@ function App() {
                         variant="caution"
                       />
 
-                      <div className="bg-background rounded-xl p-8 shadow-sm border border-primary/10">
-                        <p className="text-xl leading-relaxed whitespace-pre-wrap font-medium text-foreground">
-                          {outputText}
-                        </p>
+                      <div className="bg-background rounded-xl p-8 shadow-sm border border-primary/10 prose prose-lg prose-slate max-w-none prose-headings:font-display prose-headings:text-primary prose-a:text-primary prose-strong:text-primary">
+                        <ReactMarkdown>
+                          {preprocessMarkdown(outputText)}
+                        </ReactMarkdown>
                       </div>
 
                       <div className="flex flex-col sm:flex-row gap-4 justify-center">
