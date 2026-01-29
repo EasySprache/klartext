@@ -49,14 +49,11 @@ See `docs/phase_0_testing_guide.md` for detailed setup instructions.
 ### Text-to-Speech (TTS)
 - Converts simplified text to audio using gTTS
 - Supports German and English voices
-- Returns base64-encoded MP3 audio
 - Text preprocessing for better punctuation handling
 
 ### Accessibility-First UI
 - Large, readable fonts (18-20px base)
 - High contrast mode support
-- Keyboard navigation
-- Screen reader compatible
 - Dyslexia-friendly font option
 - Reduced motion support
 
