@@ -334,23 +334,21 @@ function App() {
     <PasswordGate>
       <div className="min-h-screen bg-background flex flex-col">
         {/* Header */}
-        <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b h-16">
+        <header className="sticky top-0 z-40 bg-[hsl(174,50%,50%)] text-white border-b h-20 transition-all duration-200">
           <div className="container mx-auto px-4 h-full flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="bg-primary text-primary-foreground px-3 py-1 rounded-lg font-display font-bold text-sm leading-none shadow-sm transform -rotate-2 border-2 border-primary/20 origin-left">
-                Ja klar!
-              </div>
-              <span className="font-display text-2xl font-bold text-foreground tracking-tight">
-                Klartext
+            <div className="flex flex-col items-start justify-center gap-0.5">
+              <img src="/src/assets/logo.png" alt="KlarText" className="h-9 w-auto object-contain" />
+              <span className="font-display text-xs font-medium tracking-wide opacity-90 hidden sm:inline-block">
+                Easy Language for Everyone
               </span>
             </div>
 
             <div className="flex items-center gap-4">
               <LanguageToggle />
               <Button
-                variant="outline"
+                variant="ghost"
                 onClick={() => setAccessibilityOpen(true)}
-                className="gap-2 text-sm font-medium"
+                className="gap-2 text-sm font-medium text-white hover:text-white hover:bg-white/10"
               >
                 <Eye className="h-4 w-4" />
                 {t('makeTextEasier')}
@@ -533,7 +531,10 @@ function App() {
                           {t('processing')}
                         </>
                       ) : (
-                        t('simplifyButton')
+                        <div className="flex items-center gap-2">
+                          <img src="/src/assets/tornado.png" alt="" className="w-6 h-6 brightness-0 invert" aria-hidden="true" />
+                          {t('simplifyButton')}
+                        </div>
                       )}
                     </Button>
 
