@@ -1,25 +1,20 @@
 # KlarText
 
-KlarText turns dense German or English text into easy-to-understand language and can read it aloud. It’s built for people who get overwhelmed by long sentences, legal/bureaucratic phrasing, or technical language.
+KlarText turns dense German or English text into easy-to-understand language and can read it aloud. It's built to bring easy language to everyone.
 
 > **Important:** KlarText produces “easy language” / plain-language simplifications. It is **not** certified “Leichte Sprache” and does not guarantee legal/medical accuracy.
 
-## 🎯 Current Status
+## Introduction
 
-**Phase 0: ✅ Complete** (January 10, 2026)
+KlarText is an accessibility-focused application designed to help users who struggle with complex text. This includes people with:
 
-| Component | Status | Details |
-|-----------|--------|---------|
-| **API Core** | ✅ Working | `/v1/simplify` endpoint with Groq LLM |
-| **PDF Extraction** | ✅ Working | `/v1/ingest/pdf` with PyMuPDF |
-| **Gradio Demo** | ✅ Working | Direct LLM & Via API modes |
-| **Prompt Templates** | ✅ Working | German & English from `prompts/templates/` |
-| **Quality Scoring** | ✅ Working | LIX, sentence length, readability |
-| **Swagger Docs** | ✅ Available | `http://localhost:8000/docs` |
-| Batch Endpoint | 📝 Defined | Logic pending |
-| TTS | 📝 Defined | Logic pending |
-| URL Extraction | 📝 Defined | Logic pending |
-| Frontend (Next.js) | ⏳ Planned | Will replace Gradio |
+- Reading or cognitive difficulties
+- Dyslexia
+- Non-native language speakers
+- Anyone who needs simpler, clearer text
+
+The system takes dense bureaucratic, legal, medical, or technical text and transforms it into plain language while preserving the original meaning.
+
 
 **Quick Start:**
 ```bash
@@ -39,44 +34,98 @@ cd apps/demo && python app.py
 
 See `docs/phase_0_testing_guide.md` for detailed setup instructions.
 
-## What it does (MVP)
-- Paste text → get an easy-to-read version (DE/EN)
-- Upload a PDF → extract text → simplify it
-- Optional **Text-to-Speech (TTS)** for the simplified text
-- No login required (MVP)
+## Core Features
 
-Stretch (optional):
-- Paste a URL → extract main article text → simplify
-- Chrome extension: simplify selected text or the current page
+### Text Simplification
+- Transforms complex text into easy-to-understand language
+- Supports German (`de`) and English (`en`)
+- Three simplification levels:
+  - **very_easy**: 8-10 word sentences, defines uncommon terms, bullet points
+  - **easy**: 12-15 word sentences, clear structure, minimal jargon
+  - **medium**: Plain language with normal sentence length
+
+### PDF Ingestion
+- Upload PDF documents for text extraction
+- Automatic header/footer removal
+- Handles multi-page documents
+- Text cleanup and normalization
+
+### Text-to-Speech (TTS)
+- Converts simplified text to audio using gTTS
+- Supports German and English voices
+- Returns base64-encoded MP3 audio
+- Text preprocessing for better punctuation handling
+
+### Accessibility-First UI
+- Large, readable fonts (18-20px base)
+- High contrast mode support
+- Keyboard navigation
+- Screen reader compatible
+- Dyslexia-friendly font option
+- Reduced motion support
+
+### Browser Extension
+- Chrome extension for in-page simplification
+- Simplify selected text or entire pages
+- Side panel interface for easy access
+- Real-time processing with progress indicators
+
+### Quality Monitoring & Feedback Loop
+- Automatic quality scoring (readability, sentence length, meaning preservation)
+- JSONL logging for performance tracking and analysis
+- Metrics collection for continuous improvement
+- Evaluation framework for model and prompt optimization
 
 ## Architecture
-```mermaid
-flowchart LR
-  U[User] -->|Paste text<br/>Upload PDF<br/>Enter URL| WEB[Web UI<br/>Next.js]
-  WEB -->|REST| API[API<br/>FastAPI]
-  API --> INGEST[Ingestion]
-  INGEST --> CHUNK[Chunking]
-  CHUNK --> LLM[LLM Adapter]
-  LLM --> SIMP[Simplified Text]
-  SIMP -->|optional| TTS[TTS Provider]
-  API --> WEB
-  TTS --> API
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                         Frontend                                 │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐        │
+│  │   web-mvp    │    │     demo     │    │  extension   │        │
+│  │   (React)    │    │   (Gradio)   │    │   (Chrome)   │        │
+│  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘        │
+└─────────┼───────────────────┼───────────────────┼────────────────┘
+          │                   │                   │
+          └───────────────────┼───────────────────┘
+                              │ REST API
+                              ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                      Backend API (FastAPI)                       │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │                      Endpoints                             │  │
+│  │ /v1/simplify(/batch) │ /v1/ingest/pdf │ /v1/tts │ /log-run │  │
+│  └────────────────────────────────────────────────────────────┘  │
+│                             │                                    │
+│  ┌────────────────────────────────────────────────────────────┐  │
+│  │                    Core Logic & Assets                     │  │
+│  │  llm_adapter.py  │  pdf_extractor.py  │  tts_adapter.py    │  │
+│  │  run_logger.py   │  prompts.py        │  Live Prompts      │  │
+│  └──────────────────────────┬─────────────────────────────────┘  │
+└─────────────────────────────┼────────────────────────────────────┘
+          ┌───────────────────┼───────────────────┐
+          ▼                   ▼                   ▼
+    ┌───────────┐       ┌───────────┐       ┌───────────┐
+    │   Groq    │       │  PyMuPDF  │       │   gTTS    │
+    │   (LLM)   │       │   (PDF)   │       │  (Audio)  │
+    └─────┬─────┘       └───────────┘       └───────────┘
+          │
+    ┌─────▼──────┐
+    │ Logs (JSONL)│
+    └─────────────┘
 ```
 
-**Components:**
-- **Ingestion** — Extract text from PDF, pasted text, or URL
-- **Chunking** — Split long texts, ensure no hallucinations
-- **LLM Adapter** — Configurable provider (OpenAI, Azure, Groq, Google)
-- **TTS Provider** — Text-to-speech for audio output
+## Technology Stack
 
-## Tech stack (recommended)
-- **Frontend:** Next.js (React), TypeScript, Tailwind (or vanilla CSS), accessible UI patterns
-- **Backend:** Python + FastAPI + Uvicorn
-- **LLM:** configurable provider via an adapter layer
-- **PDF extraction:** PyMuPDF or pdfplumber
-- **URL extraction (stretch):** trafilatura or readability-lxml
-- **Rate limiting / caching (optional):** Redis
-- **Storage (optional):** Postgres (metrics/logging) + local file storage in dev
+| Component | Technology |
+|-----------|------------|
+| **Frontend** | React, TypeScript, Vite, Tailwind CSS |
+| **Backend** | Python, FastAPI, Uvicorn |
+| **LLM** | Groq (llama-3.1-8b-instant) |
+| **PDF Extraction** | PyMuPDF |
+| **TTS** | gTTS (v2), OpenAI TTS (optional) |
+| **Telemetry** | JSONL, python-json-logger, Metrics Scripts |
+| **Deployment** | Docker, Fly.io (backend), Vercel (frontend) |
 
 ## API overview
 Base path: `/v1`
@@ -168,35 +217,71 @@ fly secrets set GROQ_API_KEY=your_key ALLOWED_ORIGINS=https://your-app.vercel.ap
 fly deploy
 ```
 
-## Repo layout
-- `apps/web-mvp` – Production web UI (React/Vite)
-- `apps/demo` – Testing/staging Gradio app
-- `services/api` – API service
-- `apps/extension` – Chrome extension (optional track)
-- `prompts` – prompt templates + eval fixtures
-- `docs` – architecture notes + screenshots
+## Project Structure
 
-## Design reference
-Lovable prototype: https://lovable.dev/projects/7d82e6e7-3919-4389-9b79-30543806c5e0
+```
+klartext/
+├── apps/
+│   ├── web-mvp/              # Production React frontend
+│   ├── demo/                 # Testing/staging Gradio app
+│   └── extension/            # Chrome extension
+├── services/api/             # FastAPI backend
+├── prompts/                  # Prompt templates & versioning
+├── data/                     # Benchmarks, samples, logs
+├── notebooks/                # Evaluation & research
+└── docs/                     # Documentation
+```
+
+## Running Locally
+
+### Web Application
+See [apps/web-mvp/README.md](apps/web-mvp/README.md) for detailed setup and development instructions.
+
+### Chrome Extension
+See [apps/extension/README.md](apps/extension/README.md) for extension installation and testing guide.
+
+### Demo/Testing Environment
+See [apps/demo/README.md](apps/demo/README.md) for Gradio demo setup.
+
+## Key Design Decisions
+
+### No File Storage for TTS
+Audio is generated in-memory and returned as base64. No audio files are stored on disk, simplifying deployment and avoiding storage management.
+
+### Prompt Templates
+System and user prompts are stored as separate text files in `prompts/templates/`. This allows:
+- Easy iteration on prompts without code changes
+- Version control for prompt evolution
+- Language-specific prompts (DE/EN)
+
+### Accessibility First
+The UI is designed with accessibility as a core requirement:
+- Semantic HTML with proper ARIA labels
+- Visible focus indicators
+- Keyboard navigation support
+- Configurable text size and contrast
+
+### Graceful Degradation
+- TTS falls back to browser speech synthesis if API fails
+- PDF extraction handles corrupted/password-protected files gracefully
+- LLM errors return helpful error messages
+
+## Documentation
+
+### Core Documentation
+- **[docs/PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md)** - Comprehensive project documentation
+- **[docs/api_design.md](docs/api_design.md)** - Full API specification
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Production deployment guide
+- **[docs/SECURITY.md](docs/SECURITY.md)** - Security considerations
+- **[agent.md](agent.md)** - Developer conventions
+
+### Research & Analysis
+- **[notebooks/README.md](notebooks/README.md)** - Jupyter notebooks for evaluation and scoring
+- **[data/README.md](data/README.md)** - Datasets, benchmarks, and test samples
+- **outputs/** - Analysis reports and model comparisons
 
 ## License
-Usage & Licensing Notice (Non-Commercial)
-This project, including all code, models, datasets, documentation, and related materials, is provided for personal, educational, and non-commercial research use only.
 
-Allowed
-Personal use
-Academic and non-commercial research
-Forking and modifying for non-commercial purposes
-Contributing via pull requests
-Not Allowed
-Any commercial use
-Selling or monetizing the software, models, datasets, or outputs
-Using the project in products or services that generate revenue
-Use within commercial organizations without permission
-Attribution
-If you share or publish derivative work, you must provide credit to:
+This project is for non-commercial use only. See [LICENSE](LICENSE) for full terms.
 
-Based on work from the KlarText Team (2025).
-
-Commercial Licensing
-To request commercial usage rights, contact a repository administrator.
+For commercial licensing inquiries, contact a repository administrator.

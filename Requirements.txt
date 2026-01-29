@@ -1,3 +1,13 @@
+# KlarText Development & Notebook Dependencies
+# =============================================
+# This file contains dependencies for:
+# - Jupyter notebooks (evaluation, scoring, analysis)
+# - Development tools and data science packages
+#
+# For API deployment dependencies, see: services/api/requirements.txt
+#
+# =============================================
+
 # Web framework
 fastapi==0.115.0
 uvicorn[standard]==0.30.6
