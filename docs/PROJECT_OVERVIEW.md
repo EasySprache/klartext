@@ -94,6 +94,7 @@ The system takes dense bureaucratic, legal, medical, or technical text and trans
 
 ```
 klartext/
+├── Requirements.txt          # Development & notebook dependencies
 ├── apps/
 │   ├── web-mvp/              # Production React frontend (Vite + TypeScript)
 │   │   ├── src/
@@ -119,7 +120,7 @@ klartext/
 │       │       └── prompts.py         # Prompt template loading
 │       ├── prompts/          # Live/Production Prompts (manual deployment)
 │       │   └── templates/    # Active system/user prompts
-│       ├── requirements.txt
+│       ├── requirements.txt  # API deployment dependencies
 │       └── Dockerfile
 │
 ├── prompts/               # Central Prompt Library (Exploration & Versioning)
@@ -133,6 +134,7 @@ klartext/
 │   └── samples/              # Test input documents
 │
 ├── notebooks/                # Development & research
+│   ├── README.md             # Notebook documentation
 │   ├── evaluation/           # Accuracy & scoring notebooks
 │   └── feedback_loop/        # Analytics & improvement workflows
 │
@@ -142,6 +144,10 @@ klartext/
 │
 └── docs/                     # Documentation (API, UI, Deployment)
 ```
+
+**Note on Requirements Files:**
+- **Root `Requirements.txt`**: Used for notebooks and development/evaluation work (includes data science packages)
+- **`services/api/requirements.txt`**: Used for API deployment (production dependencies only)
 
 ---
 
