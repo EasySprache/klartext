@@ -297,6 +297,9 @@ class SimplifyResponse(BaseModel):
     simplified_text: str = Field(
         description="The simplified version of the input text, written in easy-to-understand language."
     )
+    model_used: str = Field(
+        description="The model that was used for simplification (e.g., 'llama-3.1-8b-instant')."
+    )
     key_points: Optional[list[str]] = Field(
         default=None,
         description="Optional list of 2-3 key points summarizing the main ideas. Useful for quick understanding."
@@ -636,6 +639,8 @@ def simplify(req: SimplifyRequest):
     """
     from .core.llm_adapter import simplify_text_with_llm
     
+    from .core.llm_adapter import GROQ_MODEL
+    
     try:
         # Call LLM to simplify text
         simplified_text = simplify_text_with_llm(
@@ -649,6 +654,7 @@ def simplify(req: SimplifyRequest):
         
         return SimplifyResponse(
             simplified_text=simplified_text,
+            model_used=GROQ_MODEL,  # Return actual model used
             key_points=[],  # TODO: Implement key point extraction
             warnings=[],    # TODO: Add validation warnings
         )

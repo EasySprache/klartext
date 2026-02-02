@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.klartext.metrics</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>{{PYTHON_PATH}}</string>
+        <string>{{PROJECT_ROOT}}/scripts/run_scheduled_metrics.py</string>
+        <string>--run-once</string>
+    </array>
+    
+    <key>WorkingDirectory</key>
+    <string>{{PROJECT_ROOT}}</string>
+    
+    <key>StandardOutPath</key>
+    <string>{{PROJECT_ROOT}}/data/logs/metrics_scheduler.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>{{PROJECT_ROOT}}/data/logs/metrics_scheduler_error.log</string>
+    
+    <key>StartInterval</key>
+    <integer>172800</integer> <!-- 48 hours in seconds -->
+    
+    <key>RunAtLoad</key>
+    <true/> <!-- Run immediately when loaded -->
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>{{PYTHON_DIR}}:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

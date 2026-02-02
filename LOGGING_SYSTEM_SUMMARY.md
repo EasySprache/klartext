@@ -159,7 +159,30 @@ Every simplification run logs:
 | `warnings` | array | Warning messages (optional) |
 | `user_feedback` | string | User feedback (optional) |
 
-**Note**: Full text is stored because this is a study project. For production with privacy concerns, you would store only SHA-256 hashes instead of full text.
+**⚠️  PRIVACY WARNING - STUDY PROJECT CONFIGURATION:**
+
+This logging system is currently configured to store **FULL TEXT** (input and output). This is intentional for study/research purposes where text analysis is needed.
+
+**For production deployment with real users:**
+
+1. **Environment Configuration**:
+   ```bash
+   # Frontend: Disable full text logging
+   echo "VITE_LOG_FULL_TEXT=false" >> apps/web-mvp/.env.production
+   ```
+
+2. **Code Changes Required**:
+   - Update `apps/web-mvp/src/lib/logger.ts` to use `hashText()` function (already implemented)
+   - Update `services/api/app/core/run_logger.py` to accept `input_hash` instead of `input_text`
+   - Update `services/api/app/main.py` LogRunRequest model to use hashes
+
+3. **Legal Requirements**:
+   - Update privacy policy to reflect logging practices
+   - Implement user consent mechanisms (GDPR compliance)
+   - Document data retention and deletion policies
+   - Consider geographic data residency requirements
+
+See workspace rule: "Never log raw user text in production paths."
 
 ---
 

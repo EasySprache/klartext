@@ -149,6 +149,7 @@ function App() {
         outputText: data.simplified_text,
         targetLang: language,
         level: 'easy',
+        modelUsed: data.model_used, // Use actual model from API response
         startTime: startTime,
         warnings: data.warnings || [],
       }).catch(err => {
