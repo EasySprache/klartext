@@ -131,3 +131,8 @@ apps/extension/logs/*.log
 # But keep documentation
 !apps/extension/logs/MOVED_BENCHMARKS.md
 !apps/extension/logs/README.md
+# API logging reports (generated files)
+data/logs/reports/*.txt
+data/logs/reports/*.json
+services/api/data/logs/*.jsonl
+services/api/data/logs/test_*.jsonl

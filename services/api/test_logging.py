@@ -19,7 +19,6 @@ from app.core.run_logger import (
     write_log_entry,
     load_all_logs,
     compute_aggregate_stats,
-    hash_text,
     create_run_log_from_simplification,
 )
 
@@ -43,17 +42,16 @@ def test_basic_logging():
     print(f"\n✓ Generated run_id: {run_id}")
     
     input_text = "Der Antragsteller muss die erforderlichen Unterlagen einreichen."
-    input_hash = hash_text(input_text)
-    print(f"✓ Generated input_hash: {input_hash[:16]}...")
+    output_text = "Sie müssen Dokumente abgeben."
+    print(f"✓ Input text: {input_text[:30]}...")
     
     entry = write_log_entry(
         run_id=run_id,
-        input_hash=input_hash,
-        input_length=len(input_text),
+        input_text=input_text,
+        output_text=output_text,
         target_lang="de",
         level="easy",
         model_used="llama-3.1-8b-instant",
-        output_length=50,
         latency_ms=250,
         chunk_count=1,
         scores={"avg_sentence_len": 12.0, "word_count": 15},
@@ -74,7 +72,8 @@ def test_basic_logging():
     
     # Verify contents
     assert logs[0]["run_id"] == run_id
-    assert logs[0]["input_hash"] == input_hash
+    assert logs[0]["input_text"] == input_text
+    assert logs[0]["output_text"] == output_text
     assert logs[0]["input_length"] == len(input_text)
     assert logs[0]["target_lang"] == "de"
     assert logs[0]["level"] == "easy"
@@ -92,14 +91,15 @@ def test_multiple_entries(test_log):
     
     # Write 5 more entries
     for i in range(5):
+        input_text = f"Test input text number {i} with some content."
+        output_text = f"Simplified test output {i}."
         entry = write_log_entry(
             run_id=str(uuid.uuid4()),
-            input_hash=hash_text(f"Test input {i}"),
-            input_length=100 + i * 10,
+            input_text=input_text,
+            output_text=output_text,
             target_lang="de" if i % 2 == 0 else "en",
             level=["very_easy", "easy", "medium"][i % 3],
             model_used="llama-3.1-8b-instant",
-            output_length=80 + i * 5,
             latency_ms=200 + i * 50,
             log_file=test_log
         )
@@ -176,7 +176,7 @@ def test_convenience_function(test_log):
         
         print(f"✓ Created log entry")
         print(f"  Run ID: {entry['run_id']}")
-        print(f"  Input hash: {entry['input_hash'][:16]}...")
+        print(f"  Input text: {entry['input_text'][:30]}...")
         print(f"  Input length: {entry['input_length']}")
         print(f"  Output length: {entry['output_length']}")
         
