@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException, Request
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from pydantic import BaseModel, Field, HttpUrl
@@ -96,19 +96,17 @@ app = FastAPI(
 )
 
 # =============================================================================
-# API Key Authentication & CORS
+# CORS & Rate Limiting
 # =============================================================================
 import os
 import time
 from collections import defaultdict
 from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 # Get environment
 environment = os.getenv("ENVIRONMENT", "development")
-
-# API key for production authentication
-api_key = os.getenv("API_KEY")
 
 if environment == "development":
     # Development: Allow ALL origins for local testing
@@ -116,7 +114,7 @@ if environment == "development":
 else:
     # Production: Only allow specific origins
     allowed_origins_str = os.getenv(
-        "ALLOWED_ORIGINS", 
+        "ALLOWED_ORIGINS",
         "http://localhost:3000,http://localhost:5173,http://localhost:7860"
     )
     allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",")]
@@ -127,31 +125,31 @@ else:
 # =============================================================================
 class RateLimiter:
     """
-    Simple in-memory rate limiter for auth endpoint.
+    Simple in-memory rate limiter.
     Limits requests per IP address within a time window.
     """
-    
-    def __init__(self, max_requests: int = 5, window_seconds: int = 60):
+
+    def __init__(self, max_requests: int = 30, window_seconds: int = 60):
         self.max_requests = max_requests
         self.window_seconds = window_seconds
         self.requests: dict[str, list[float]] = defaultdict(list)
-    
+
     def is_allowed(self, ip: str) -> bool:
         """Check if request from IP is allowed."""
         now = time.time()
         window_start = now - self.window_seconds
-        
+
         # Clean old requests
         self.requests[ip] = [t for t in self.requests[ip] if t > window_start]
-        
+
         # Check limit
         if len(self.requests[ip]) >= self.max_requests:
             return False
-        
+
         # Record this request
         self.requests[ip].append(now)
         return True
-    
+
     def get_retry_after(self, ip: str) -> int:
         """Get seconds until next request is allowed."""
         if not self.requests[ip]:
@@ -160,90 +158,58 @@ class RateLimiter:
         return max(0, int(oldest + self.window_seconds - time.time()))
 
 
-# Rate limiter for auth endpoint: 5 attempts per 60 seconds per IP
-auth_rate_limiter = RateLimiter(max_requests=5, window_seconds=60)
+# Per-endpoint rate limiters (requests per 60 seconds per IP)
+endpoint_rate_limiters: dict[str, RateLimiter] = {
+    "/v1/simplify": RateLimiter(max_requests=5, window_seconds=60),
+    "/v1/simplify/batch": RateLimiter(max_requests=2, window_seconds=60),
+    "/v1/tts": RateLimiter(max_requests=5, window_seconds=60),
+    "/v1/ingest/pdf": RateLimiter(max_requests=3, window_seconds=60),
+}
+
+# Fallback for all other endpoints
+default_rate_limiter = RateLimiter(max_requests=30, window_seconds=60)
 
 
-class APIKeyMiddleware(BaseHTTPMiddleware):
+class RateLimitMiddleware(BaseHTTPMiddleware):
     """
-    API key authentication middleware.
-    
-    In production, requires valid X-API-Key header on all requests.
-    
-    Exceptions:
-    - /healthz endpoint (for monitoring)
-    - /v1/auth/verify (authentication endpoint - returns the API key, rate limited)
-    - OPTIONS requests (CORS preflight)
-    - Development mode (no key required)
-    
-    Note: API docs are hidden in production for security.
+    Per-IP rate limiting middleware with per-endpoint budgets.
+
+    Expensive endpoints (simplify, batch, TTS, PDF) have tight limits.
+    All other endpoints share a generous fallback.
+    Skipped for /healthz, OPTIONS, and development mode.
     """
-    
+
     async def dispatch(self, request: Request, call_next):
-        # Skip validation in development
+        # No rate limiting in development
         if environment == "development":
             return await call_next(request)
-        
-        # Block API docs in production (hide API structure from attackers)
-        if request.url.path in ["/docs", "/redoc", "/openapi.json"]:
+
+        # Skip health check and CORS preflight
+        if request.url.path == "/healthz" or request.method == "OPTIONS":
+            return await call_next(request)
+
+        # Get client IP (check X-Forwarded-For for reverse proxy)
+        client_ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+        if not client_ip:
+            client_ip = request.client.host if request.client else "unknown"
+
+        # Pick the limiter for this endpoint, or fall back to default
+        limiter = endpoint_rate_limiters.get(request.url.path, default_rate_limiter)
+
+        if not limiter.is_allowed(client_ip):
+            retry_after = limiter.get_retry_after(client_ip)
             return JSONResponse(
-                status_code=404,
-                content={"detail": "Not found"}
+                status_code=429,
+                content={"detail": f"Too many requests. Try again in {retry_after} seconds."},
+                headers={"Retry-After": str(retry_after)},
             )
-        
-        # Skip if no API_KEY configured (allows gradual rollout)
-        if not api_key:
-            return await call_next(request)
-        
-        # Skip validation for health check (needed for Fly.io monitoring)
-        if request.url.path == "/healthz":
-            return await call_next(request)
-        
-        # Auth endpoint: rate limited but no API key required
-        if request.url.path == "/v1/auth/verify":
-            # Get client IP (check X-Forwarded-For for reverse proxy)
-            client_ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
-            if not client_ip:
-                client_ip = request.client.host if request.client else "unknown"
-            
-            # Check rate limit
-            if not auth_rate_limiter.is_allowed(client_ip):
-                retry_after = auth_rate_limiter.get_retry_after(client_ip)
-                return JSONResponse(
-                    status_code=429,
-                    content={"detail": f"Too many login attempts. Try again in {retry_after} seconds."},
-                    headers={"Retry-After": str(retry_after)}
-                )
-            return await call_next(request)
-        
-        # Skip validation for OPTIONS (CORS preflight)
-        if request.method == "OPTIONS":
-            return await call_next(request)
-        
-        # Get API key from header
-        request_api_key = request.headers.get("x-api-key")
-        
-        # Reject if no API key
-        if not request_api_key:
-            return JSONResponse(
-                status_code=401,
-                content={"detail": "API key required"}
-            )
-        
-        # Reject if API key doesn't match
-        if request_api_key != api_key:
-            return JSONResponse(
-                status_code=401,
-                content={"detail": "Invalid API key"}
-            )
-        
+
         return await call_next(request)
 
 
-# Add API key middleware (runs before CORS)
-app.add_middleware(APIKeyMiddleware)
-
-# Add CORS middleware
+# Middleware execution order is reverse of registration order in Starlette.
+# Register CORS first so it wraps outermost and always adds CORS headers,
+# even on error responses from inner middleware/handlers.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
@@ -251,6 +217,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(RateLimitMiddleware)
 
 
 # =============================================================================
@@ -530,66 +497,6 @@ def healthz():
     Returns `{"ok": true}` when healthy.
     """
     return {"ok": True}
-
-
-# =============================================================================
-# Authentication
-# =============================================================================
-
-class AuthRequest(BaseModel):
-    """Request body for password verification."""
-    password: str = Field(
-        min_length=1,
-        description="The password to verify for frontend access"
-    )
-
-
-class AuthResponse(BaseModel):
-    """Response from password verification."""
-    authenticated: bool = Field(
-        description="Whether the password was valid"
-    )
-    api_key: Optional[str] = Field(
-        default=None,
-        description="API key for subsequent requests (only returned on successful auth in production)"
-    )
-
-
-@app.post(
-    "/v1/auth/verify",
-    response_model=AuthResponse,
-    tags=["Health"],
-    summary="Verify frontend access password",
-    response_description="Authentication result",
-)
-def verify_password(req: AuthRequest):
-    """
-    **Verify the frontend access password.**
-    
-    This endpoint is used by the web frontend to gate access.
-    The password is configured via the `APP_PASSWORD` environment variable.
-    
-    On successful authentication, returns the API key needed for subsequent requests.
-    """
-    app_password = os.getenv("APP_PASSWORD")
-    
-    if not app_password:
-        raise HTTPException(
-            status_code=500,
-            detail="APP_PASSWORD not configured on server"
-        )
-    
-    if req.password != app_password:
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid password"
-        )
-    
-    # Return API key on successful auth (for use in subsequent requests)
-    return AuthResponse(
-        authenticated=True,
-        api_key=api_key  # api_key from environment, may be None in dev
-    )
 
 
 # =============================================================================
@@ -956,8 +863,7 @@ def log_run(req: LogRunRequest):
     await fetch('/v1/log-run', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-API-Key': apiKey
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         run_id: runId,

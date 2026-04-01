@@ -51,8 +51,7 @@ Updated `/v1/log-run` endpoint from placeholder to full implementation:
 - Writes to JSONL file with file locking
 - Returns confirmation with run_id
 - Handles errors gracefully (500 on failure)
-- Protected by API key authentication
-- Rate limited (5 req/min per IP)
+- Subject to app-wide production rate limiting
 
 **Request Example:**
 ```json
@@ -444,7 +443,6 @@ Test 1: Basic Logging
    # Check API logs endpoint
    curl -X POST https://your-api.fly.dev/v1/log-run \
      -H "Content-Type: application/json" \
-     -H "X-API-Key: $API_KEY" \
      -d '{"run_id":"test","input_hash":"test",...}'
    
    # Should return: {"logged": true, "run_id": "test"}

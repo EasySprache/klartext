@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useLanguage } from '@/contexts/LanguageContext';
 import AccessibilityPanel from '@/components/AccessibilityPanel';
-import PasswordGate from '@/components/PasswordGate';
 import { apiJsonRequest, apiRequest } from '@/lib/api';
 import { logSimplification } from '@/lib/logger';
 import { SidebarNav } from '@/components/SidebarNav';
@@ -381,7 +380,6 @@ function App() {
   if (outputText.length > 0) completedSections.push('output');
 
   return (
-    <PasswordGate>
       <div className="min-h-screen bg-background flex flex-col">
         {/* Header */}
         <header className="sticky top-0 z-40 bg-[hsl(174,50%,50%)] text-white border-b h-20 transition-all duration-200">
@@ -668,7 +666,6 @@ function App() {
           onOpenChange={setAccessibilityOpen}
         />
       </div>
-    </PasswordGate>
   );
 }
 

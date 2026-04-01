@@ -121,13 +121,6 @@ curl -X POST http://localhost:8000/v1/simplify \
 |----------|-------------|---------|
 | `GROQ_API_KEY` | Groq API key for LLM | `gsk_...` |
 
-### Security (Production)
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `API_KEY` | API key for authenticating API requests | `abc123...` |
-| `APP_PASSWORD` | Password for frontend access | `secure_pass_123` |
-
 ### Optional
 
 | Variable | Default | Description |
@@ -149,7 +142,6 @@ curl -X POST http://localhost:8000/v1/simplify \
 ### Core Endpoints
 
 - `GET /healthz` - Health check
-- `POST /v1/auth/verify` - Verify frontend access password
 - `POST /v1/simplify` - Simplify a single text
 - `POST /v1/simplify/batch` - Simplify multiple texts
 - `POST /v1/ingest/pdf` - Extract text from PDF
@@ -161,15 +153,13 @@ See full API documentation at `/docs` or in `docs/api_design.md`.
 
 ## Security
 
-For production deployments, set secure passwords:
+For production deployments, restrict allowed browser origins:
 
 ```bash
-# Set API key for request authentication
-fly secrets set API_KEY="$(openssl rand -hex 32)"
-
-# Set frontend access password
-fly secrets set APP_PASSWORD="$(openssl rand -base64 24)"
+fly secrets set ALLOWED_ORIGINS="https://your-app.vercel.app"
 ```
+
+All endpoints are public. Per-IP rate limiting is applied in production to prevent abuse.
 
 ## Architecture
 
