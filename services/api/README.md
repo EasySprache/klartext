@@ -131,6 +131,7 @@ curl -X POST http://localhost:8000/v1/simplify \
 | `ENVIRONMENT` | `development` | Environment: `development`, `staging`, `production` |
 | `LOG_LEVEL` | `INFO` | Logging level: `DEBUG`, `INFO`, `WARNING`, `ERROR` |
 | `ALLOWED_ORIGINS` | `http://localhost:3000` | Comma-separated CORS origins |
+| `TRUSTED_PROXY_IPS` | - | Optional comma-separated public proxy IPs allowed to supply forwarded client IP headers |
 | `MAX_INPUT_LENGTH` | `40000` | Maximum input text length (characters) |
 | `MAX_PDF_SIZE_MB` | `10` | Maximum PDF file size (MB) |
 | `RATE_LIMIT_PER_MINUTE` | `30` | Rate limit for simplify endpoint |

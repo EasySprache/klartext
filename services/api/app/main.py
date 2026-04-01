@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field, HttpUrl
 from typing import Optional
 import base64
 from dotenv import load_dotenv
+import ipaddress
 
 # Load environment variables from .env file
 load_dotenv()
@@ -123,6 +124,68 @@ else:
 # =============================================================================
 # Rate Limiter (in-memory, per IP)
 # =============================================================================
+IPAddress = ipaddress.IPv4Address | ipaddress.IPv6Address
+
+
+def _parse_ip(value: str | None) -> IPAddress | None:
+    """Parse an IP address string safely."""
+    if not value:
+        return None
+
+    try:
+        return ipaddress.ip_address(value.strip())
+    except ValueError:
+        return None
+
+
+def _is_trusted_proxy(peer_ip: str | None) -> bool:
+    """
+    Decide whether forwarded client IP headers should be trusted.
+
+    Trust private/loopback/link-local peers by default because production
+    deployments often sit behind an internal reverse proxy. Public proxy IPs
+    can be allowlisted explicitly with TRUSTED_PROXY_IPS.
+    """
+    parsed_peer_ip = _parse_ip(peer_ip)
+    if parsed_peer_ip is None:
+        return False
+
+    trusted_proxy_ips = os.getenv("TRUSTED_PROXY_IPS", "")
+    for trusted_ip in trusted_proxy_ips.split(","):
+        trusted_ip = trusted_ip.strip()
+        if trusted_ip and trusted_ip == str(parsed_peer_ip):
+            return True
+
+    return (
+        parsed_peer_ip.is_private
+        or parsed_peer_ip.is_loopback
+        or parsed_peer_ip.is_link_local
+    )
+
+
+def get_client_ip(request: Request) -> str:
+    """
+    Resolve the rate-limiting client IP safely.
+
+    Forwarded headers are only trusted when the direct peer looks like a
+    trusted reverse proxy; otherwise callers could spoof their IP and bypass
+    rate limits by sending arbitrary X-Forwarded-For values.
+    """
+    peer_ip = request.client.host if request.client else None
+
+    if _is_trusted_proxy(peer_ip):
+        forwarded_for = request.headers.get("x-forwarded-for", "")
+        forwarded_ip = forwarded_for.split(",")[0].strip()
+        if _parse_ip(forwarded_ip):
+            return forwarded_ip
+
+        real_ip = request.headers.get("x-real-ip", "").strip()
+        if _parse_ip(real_ip):
+            return real_ip
+
+    return peer_ip or "unknown"
+
+
 class RateLimiter:
     """
     Simple in-memory rate limiter.
@@ -188,10 +251,8 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         if request.url.path == "/healthz" or request.method == "OPTIONS":
             return await call_next(request)
 
-        # Get client IP (check X-Forwarded-For for reverse proxy)
-        client_ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
-        if not client_ip:
-            client_ip = request.client.host if request.client else "unknown"
+        # Get client IP, only trusting forwarded headers from trusted proxies
+        client_ip = get_client_ip(request)
 
         # Pick the limiter for this endpoint, or fall back to default
         limiter = endpoint_rate_limiters.get(request.url.path, default_rate_limiter)

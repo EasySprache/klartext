@@ -33,6 +33,7 @@ The deployed system relies on:
 | `GROQ_API_KEY` | Yes | LLM provider API key |
 | `ALLOWED_ORIGINS` | Production | Comma-separated list of allowed CORS origins |
 | `ENVIRONMENT` | No | `development` or `production` (default: `development`) |
+| `TRUSTED_PROXY_IPS` | No | Optional comma-separated public proxy IPs trusted for forwarded client IP headers |
 
 ### Request Controls
 
