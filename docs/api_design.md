@@ -545,9 +545,7 @@ async function simplifyViaApi(texts, targetLang = 'de', level = 'easy') {
     const response = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        // Add API key header when implementing auth
-        // 'X-API-Key': chrome.storage.sync.get('apiKey')
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         texts: texts,
@@ -720,7 +718,7 @@ class ExtensionElementResult(BaseModel):
 3. **Production Deployment:**
    - Deploy API to Railway/Render
    - Update extension `API_ENDPOINT` to production URL
-   - Add API key authentication
+   - Add upstream access control if public exposure is not acceptable
    - Monitor `/v1/log-run` for usage patterns
 
 ---
@@ -856,7 +854,6 @@ All errors follow this structure:
 |------|---------|---------|
 | `200` | Success | Request processed successfully |
 | `400` | Bad Request | Invalid input, validation failed |
-| `401` | Unauthorized | Missing or invalid API key |
 | `413` | Payload Too Large | File upload exceeds size limit |
 | `422` | Unprocessable Entity | Valid JSON but invalid data |
 | `429` | Too Many Requests | Rate limit exceeded |
@@ -918,16 +915,16 @@ limiter = Limiter(
     storage_uri="redis://localhost:6379"
 )
 
-# Tiered rate limits based on API key tier
+# Example of future tiered rate limits by caller identity
 @app.post("/v1/simplify")
-@limiter.limit("100/minute", key_func=get_api_key)  # Pro tier
-@limiter.limit("30/minute", key_func=get_remote_address)  # Free tier
+@limiter.limit("100/minute", key_func=get_caller_identity)  # Trusted tier
+@limiter.limit("30/minute", key_func=get_remote_address)  # Default tier
 def simplify(req: SimplifyRequest):
     ...
 ```
 
 **Future Enhancements:**
-- API key-based rate limiting (replace IP-based)
+- Identity-based rate limiting (replace pure IP-based limits)
 - Tiered plans (free, pro, enterprise)
 - Quota tracking (monthly request limits)
 - Rate limit headers in responses
@@ -976,7 +973,7 @@ simplified = result["simplified_text"]
 | **Documentation** | None | Auto-generated Swagger |
 | **Versioning** | None | URL path versioning |
 | **Rate Limiting** | None | Built-in support |
-| **Authentication** | None | API key support |
+| **Authentication** | None | None built in |
 | **Monitoring** | None | Logging endpoint |
 
 ---

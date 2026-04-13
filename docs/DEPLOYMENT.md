@@ -62,9 +62,6 @@ fly secrets set GROQ_API_KEY=your_groq_api_key_here
 # Set CORS for your Vercel frontend URL
 fly secrets set ALLOWED_ORIGINS=https://your-app.vercel.app
 
-# Optional: Set frontend password protection
-fly secrets set APP_PASSWORD=your_secure_password_here
-
 # Deploy
 fly deploy
 ```
@@ -90,7 +87,6 @@ Your API should be running at `https://klartext-api.fly.dev` (or your custom app
 |----------|----------|-------------|
 | `GROQ_API_KEY` | Yes | Groq API key for LLM calls |
 | `ALLOWED_ORIGINS` | Yes | Comma-separated allowed CORS origins (your Vercel URL) |
-| `APP_PASSWORD` | No | Password for frontend access control |
 | `ENVIRONMENT` | No | Set in fly.toml as `production` |
 | `PORT` | No | Set in fly.toml as `8080` |
 
@@ -151,35 +147,12 @@ cd services/api
 fly secrets set ALLOWED_ORIGINS=https://klartext-rho.vercel.app
 ```
 
-## Part 3: Password Protection (Optional)
+## Part 3: Access Model
 
-The frontend includes an optional password gate for access control.
+All endpoints are public. The backend relies on:
 
-### Enable Password Protection
-
-1. Set the password on Fly.io:
-   ```bash
-   fly secrets set APP_PASSWORD=your_secure_password
-   ```
-
-2. The frontend will automatically show a password prompt when:
-   - `APP_PASSWORD` is set on the backend
-   - User hasn't authenticated in current browser session
-
-### How It Works
-
-- Password is validated against the API endpoint `/v1/auth/verify`
-- Authentication is stored in `sessionStorage` (cleared when browser closes)
-- Chrome extension bypasses this check (API endpoints remain open)
-
-### Disable Password Protection
-
-Remove the secret from Fly.io:
-```bash
-fly secrets unset APP_PASSWORD
-```
-
-Note: With no `APP_PASSWORD` set, the API returns a 500 error on auth attempts, and you should remove the `PasswordGate` component from the frontend.
+- `ALLOWED_ORIGINS` to constrain browser access
+- Per-IP rate limiting to reduce burst abuse
 
 ## Environment Variables Summary
 
@@ -195,7 +168,6 @@ Note: With no `APP_PASSWORD` set, the API returns a 500 error on auth attempts, 
 |----------|----------|---------|-------------|
 | `GROQ_API_KEY` | Yes | - | Groq API key for LLM |
 | `ALLOWED_ORIGINS` | Yes | localhost URLs | CORS allowed origins |
-| `APP_PASSWORD` | No | - | Frontend access password |
 | `ENVIRONMENT` | No | `production` | Set in fly.toml |
 | `PORT` | No | `8080` | Set in fly.toml |
 | `TTS_PROVIDER` | No | `gtts` | TTS provider |
@@ -206,7 +178,6 @@ Note: With no `APP_PASSWORD` set, the API returns a 500 error on auth attempts, 
 | Variable | Location | Value |
 |----------|----------|-------|
 | `GROQ_API_KEY` | `services/api/.env` | Your Groq key |
-| `APP_PASSWORD` | `services/api/.env` | Optional dev password |
 | `VITE_API_URL` | Not needed | Defaults to localhost:8000 |
 
 ## Troubleshooting
@@ -238,13 +209,13 @@ fly ssh console
 2. Verify Node.js version compatibility (18.x recommended)
 3. Check build logs for specific errors
 
-### Password Gate Issues
+### Unexpected Public Access
 
-If password verification fails:
+If the app should not be reachable by the public internet:
 
-1. Check `APP_PASSWORD` is set: `fly secrets list`
-2. Verify API is reachable from frontend
-3. Check browser console for error details
+1. Confirm `ALLOWED_ORIGINS` only contains your intended frontend URL
+2. Add upstream authentication, VPN, or IP allowlisting
+3. Check hosting platform access controls
 
 ## Updating Deployments
 

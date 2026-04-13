@@ -249,8 +249,6 @@ npm run dev
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `GROQ_API_KEY` | Yes | Groq API key for LLM |
-| `APP_PASSWORD` | No | Password for production access |
-| `API_KEY` | No | API key for production auth |
 | `ALLOWED_ORIGINS` | No | CORS origins (comma-separated) |
 | `ENVIRONMENT` | No | `development` or `production` |
 

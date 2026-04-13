@@ -120,7 +120,6 @@ The `/v1/log-run` endpoint is already implemented and ready to use.
 ```bash
 curl -X POST http://localhost:8000/v1/log-run \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: $API_KEY" \
   -d '{
     "run_id": "123e4567-e89b-12d3-a456-426614174000",
     "input_hash": "abc123...",
@@ -460,7 +459,6 @@ echo $LOG_FILE_PATH
 ```bash
 curl -X POST http://localhost:8000/v1/log-run \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: $API_KEY" \
   -d '{"run_id":"test","input_hash":"test","input_length":10,"target_lang":"de","level":"easy","model_used":"test","output_length":10,"latency_ms":100}'
 ```
 
@@ -471,11 +469,10 @@ curl -X POST http://localhost:8000/v1/log-run \
 import { logSimplification } from '@/lib/logger';
 ```
 
-**Check 2: API key**
+**Check 2: Request helper**
 ```typescript
-// Make sure API key is set
-import { getApiKey } from '@/lib/api';
-console.log('API Key:', getApiKey());
+import { logSimplification } from '@/lib/logger';
+console.log('Logger loaded:', typeof logSimplification === 'function');
 ```
 
 **Check 3: Network requests**
