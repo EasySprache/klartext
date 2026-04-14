@@ -63,7 +63,7 @@ This version represents a major redesign from popup to sidepanel UI:
 **UI Changes:**
 - Migrated from popup to persistent sidepanel interface
 - Added KlarText branding with logo and tagline
-- New icon set (textbubble design replacing previous icons)
+- New icon set (tornado toolbar icons replacing previous icons)
 - Clean, modern layout with better visual hierarchy
 
 **New Features:**
@@ -113,7 +113,7 @@ apps/extension/
 │   ├── sidepanel.css               # Accessible styling (18px base, AA contrast)
 │   └── sidepanel.js                # UI logic and message handling
 └── icons/
-    ├── textbubble-*.png            # Extension toolbar icons
+    ├── tornado-*.png               # Extension toolbar icons
     ├── klartextlogo3.png           # Branding logo
     ├── tornado.png                 # Page simplification icon
     ├── simplyselection.png         # Selection mode icon
@@ -160,7 +160,7 @@ The extension uses Chrome's messaging API to communicate between components:
 ### Changes from Previous Version
 - **Removed popup** - Popup UI deprecated in favor of sidepanel
 - **Enhanced sidepanel** - Added branding, language controls, progress tracking
-- **New icons** - Updated to textbubble icons, added action icons
+- **New icons** - Updated to tornado toolbar icons, added action icons
 - **Cancel support** - User can abort processing at any time
 - **Selection mode** - Added ability to simplify highlighted text only
 - **Progress tracking** - Real-time updates with percentage and ETA
@@ -189,7 +189,23 @@ The extension uses Chrome's messaging API to communicate between components:
    # Or update API_ENDPOINT in config.js to point to your API instance
    ```
 
-3. **Test the extension:**
+3. **Toggle extension API environment (dev/prod):**
+   ```bash
+   # From project root
+   cd apps/extension
+
+   # Use local API and verbose logs for development
+   ./scripts/toggle-config-env.sh dev
+
+   # Use production API settings for release testing
+   ./scripts/toggle-config-env.sh prod
+
+   # Check current setting
+   ./scripts/toggle-config-env.sh status
+   ```
+   After toggling, reload the extension in `chrome://extensions` and refresh your test page.
+
+4. **Test the extension:**
    - Open a normal website (e.g., news article, blog post, Wikipedia)
    - **Right-click** the KlarText extension icon and select "Open side panel"
    - The sidepanel opens on the right side
@@ -261,6 +277,7 @@ The extension uses Chrome's messaging API to communicate between components:
 
 - ⚠️ **First-time setup:** Must right-click extension icon → "Open side panel" on first use (left-click works automatically after that)
 - ⚠️ **Chrome internal pages:** Extension cannot run on `chrome://` URLs
+- ⚠️ **Protected/gated websites:** Some authenticated pages, strict CSP contexts, or embedded frames may prevent content access or script injection
 - ⚠️ **Dynamic content:** Pages that heavily re-render may overwrite simplified text
 - ⚠️ **API required:** Extension requires KlarText API running (local or remote)
 - ⚠️ **Large pages:** Very large pages (1000+ text chunks) may take several minutes
@@ -292,7 +309,7 @@ The extension connects to the KlarText API. Configure the endpoint and settings:
 
 ```javascript
 const CONFIG = {
-  API_ENDPOINT: 'http://localhost:8000',  // API base URL
+  API_ENDPOINT: 'https://klartext-api.fly.dev',  // Production API base URL
   API_TIMEOUT: 30000,                     // Request timeout (ms)
   MIN_TEXT_LENGTH: 10,                    // Minimum characters to simplify
   BATCH_SIZE: 20,                         // Chunks per batch request
@@ -309,8 +326,14 @@ const CONFIG = {
 - `/simplify` - Single text simplification (for selections)
 - `/simplify-batch` - Batch text simplification (for entire pages)
 
+**Integration approach used in this extension:**
+- Calls the KlarText backend through the extension service worker (API proxy)
+- Does **not** require Google Analytics 4 for core functionality
+- Does **not** require OAuth 2.0 unless user-account features are introduced later
+
 **Production setup:**
-- Update `API_ENDPOINT` to your production API URL
+- Keep `API_ENDPOINT` on your production HTTPS API URL
+- Set `DEBUG` to `false`
 - Update `WEBAPP_URL` to your production webapp URL
 - Adjust `API_TIMEOUT` and `BATCH_SIZE` based on your API performance
 
@@ -322,19 +345,15 @@ const CONFIG = {
 # From the project root
 cd apps/extension
 
-# Create distribution ZIP (excludes development files)
-zip -r klartext-extension.zip . \
-  -x "*.DS_Store" \
-  -x "*.zip" \
-  -x "logs/*" \
-  -x "*.md" \
-  -x "TESTING_GUIDE.md" \
-  -x "known_issues.md" \
-  -x "CHANGELOG.md"
-
-# Verify contents
-unzip -l klartext-extension.zip
+# Create and verify a release ZIP in dist/
+./scripts/package-extension-zip.sh
 ```
+
+The script:
+- Reads `version` from `manifest.json`
+- Produces `dist/klartext-extension-v<version>.zip`
+- Excludes development-only files
+- Verifies the archive contains `manifest.json`
 
 ### Publish to Chrome Web Store
 
@@ -373,6 +392,7 @@ unzip -l klartext-extension.zip
      - `tabs` - Identify current page for processing
    - **Host permissions:** Required to simplify text on any website
    - **Privacy policy URL:** Link to your privacy policy (required)
+   - **Telemetry note:** `/v1/log-run` stores hashed input metadata; raw user text is not logged by this endpoint
 
 6. **Submit for Review**
    - Review takes 1-3 business days typically
@@ -383,6 +403,7 @@ unzip -l klartext-extension.zip
 Before each release:
 - [ ] Bump `version` in `manifest.json` (use semantic versioning)
 - [ ] Update `CHANGELOG.md` with changes
+- [ ] Confirm manifest icon paths point to current production branding assets
 - [ ] Test all features thoroughly:
   - [ ] Page simplification on multiple sites
   - [ ] Selection simplification
@@ -391,18 +412,22 @@ Before each release:
   - [ ] Restore original text
   - [ ] Webapp feature links
 - [ ] Test on different types of websites (news, blogs, documentation)
-- [ ] Verify API endpoint configuration for production
+- [ ] Verify API endpoint configuration for production in `config.js`:
+  - [ ] `API_ENDPOINT` uses production `https://` URL (not localhost)
+  - [ ] `DEBUG` is set to `false`
 - [ ] Review and update privacy policy if needed
-- [ ] Create clean ZIP file
+- [ ] Verify backend CORS production allowlist includes expected extension/web origins
+- [ ] Confirm production telemetry/logging does not include raw user text
+- [ ] Create clean ZIP file using `./scripts/package-extension-zip.sh`
 - [ ] Upload to Chrome Web Store
 - [ ] Test installed version from store (unlisted first)
 
 ## Icons & Assets
 
 ### Extension Icons (Toolbar)
-- `icons/textbubble-16.png` - 16x16px toolbar icon
-- `icons/textbubble-48.png` - 48x48px toolbar icon
-- `icons/textbubble-128.png` - 128x128px store listing icon
+- `icons/tornado-16.png` - 16x16px toolbar icon
+- `icons/tornado-48.png` - 48x48px toolbar icon
+- `icons/tornado-128.png` - 128x128px store listing icon
 
 ### UI Icons (In-Extension)
 - `icons/klartextlogo3.png` - KlarText logo for branding

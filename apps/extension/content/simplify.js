@@ -231,66 +231,79 @@ function optimizeChunks(chunks) {
  */
 async function callAPI(texts, targetLanguage) {
   const url = `${CONFIG.API_ENDPOINT}${CONFIG.API_ROUTES.SIMPLIFY_BATCH}`;
-  
+  const requestId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+    ? crypto.randomUUID()
+    : `req-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
   if (CONFIG.DEBUG) {
-    console.log(`[KlarText] Calling API: ${url}`);
+    console.log(`[KlarText] Calling API via service worker: ${url}`);
     console.log(`[KlarText] Texts to simplify: ${texts.length}`);
     console.log(`[KlarText] Target language: ${targetLanguage}`);
   }
-  
-  try {
-    // Check if user has cancelled before making request
-    if (userCancellationController?.signal.aborted) {
-      throw new Error('Simplification cancelled by user');
-    }
-    
-    // Create a fresh timeout controller for THIS batch only
-    // This prevents one timeout from affecting subsequent batches
-    const batchTimeoutController = new AbortController();
-    
-    const timeoutId = setTimeout(() => {
-      batchTimeoutController.abort();
-    }, CONFIG.REQUEST_TIMEOUT);
-    
-    // Combine both abort signals: user cancellation OR timeout
-    // This allows the fetch to be aborted by either condition
-    const combinedSignal = userCancellationController 
-      ? AbortSignal.any([userCancellationController.signal, batchTimeoutController.signal])
-      : batchTimeoutController.signal;
-    
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+
+  // Check if user has cancelled before making request
+  if (userCancellationController?.signal.aborted) {
+    throw new Error('Simplification cancelled by user');
+  }
+
+  const proxyRequestPromise = new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(
+      {
+        type: 'API_SIMPLIFY_BATCH',
+        requestId,
+        apiEndpoint: CONFIG.API_ENDPOINT,
+        route: CONFIG.API_ROUTES.SIMPLIFY_BATCH,
+        texts,
+        targetLanguage: targetLanguage || CONFIG.DEFAULT_LANG,
+        timeoutMs: CONFIG.REQUEST_TIMEOUT,
       },
-      body: JSON.stringify({
-        texts: texts,
-        target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
-      }),
-      signal: combinedSignal,
-    });
-    
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) {
-      // Try to get error message from response
-      let errorMsg = `API error: ${response.status}`;
-      try {
-        const errorData = await response.json();
-        errorMsg = errorData.detail || errorMsg;
-      } catch (e) {
-        // Could not parse error response
+      (response) => {
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+          return;
+        }
+        resolve(response);
       }
-      throw new Error(errorMsg);
+    );
+  });
+
+  let abortListener = null;
+  const cancellationPromise = new Promise((_, reject) => {
+    if (!userCancellationController) return;
+    abortListener = () => {
+      chrome.runtime.sendMessage({ type: 'API_CANCEL_REQUEST', requestId }, () => {
+        // Ignore cancellation response errors.
+      });
+      reject(new Error('Simplification cancelled by user'));
+    };
+    userCancellationController.signal.addEventListener('abort', abortListener, { once: true });
+  });
+
+  try {
+    const proxyResponse = await Promise.race([
+      proxyRequestPromise,
+      cancellationPromise,
+    ]);
+
+    if (!proxyResponse?.ok) {
+      if (proxyResponse?.aborted) {
+        if (userCancellationController?.signal.aborted) {
+          throw new Error('Simplification cancelled by user');
+        }
+        if (proxyResponse?.timedOut) {
+          throw new Error('Request timed out. The page may be too large.');
+        }
+      }
+      throw new Error(proxyResponse?.error || 'Unexpected API proxy failure');
     }
-    
-    const data = await response.json();
-    
+
+    const data = proxyResponse.data;
+
     if (CONFIG.DEBUG) {
       console.log(`[KlarText] API response:`, data);
       console.log(`[KlarText] Response has ${data.results?.length || 0} results`);
     }
-    
+
     // Handle batch response format
     if (data.results && Array.isArray(data.results)) {
       const mapped = data.results.map(r => ({
@@ -303,24 +316,17 @@ async function callAPI(texts, targetLanguage) {
       }
       return mapped;
     }
-    
+
     // Fallback: single simplify response
     if (data.simplified_text) {
       return [{ simplified_text: data.simplified_text, error: null }];
     }
-    
+
     throw new Error('Unexpected API response format');
-    
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      // Check which signal caused the abort
-      if (userCancellationController?.signal.aborted) {
-        throw new Error('Simplification cancelled by user');
-      } else {
-        throw new Error('Request timed out. The page may be too large.');
-      }
+  } finally {
+    if (abortListener && userCancellationController) {
+      userCancellationController.signal.removeEventListener('abort', abortListener);
     }
-    throw error;
   }
 }
 

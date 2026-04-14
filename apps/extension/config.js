@@ -12,10 +12,10 @@
 const CONFIG = {
   /**
    * API endpoint for KlarText simplification service
-   * Development: http://localhost:8000
-   * Production: Update this when deploying to production
+   * Production default for Chrome Web Store releases.
+   * For local development, temporarily change to http://localhost:8000.
    */
-  API_ENDPOINT: 'http://localhost:8000',
+  API_ENDPOINT: 'https://klartext-api.fly.dev',
 
   /**
    * API routes
@@ -73,9 +73,9 @@ const CONFIG = {
 
   /**
    * Debug mode - logs additional information to console
-   * Set to false in production
+   * Keep false in production builds.
    */
-  DEBUG: true,
+  DEBUG: false,
 
   /**
    * Webapp URL for feature links in sidepanel
