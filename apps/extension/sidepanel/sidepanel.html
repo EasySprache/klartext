@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>KlarText - Easy Language</title>
+    <title data-i18n="sidepanelTitle">KlarText - Easy Language</title>
     <link rel="stylesheet" href="sidepanel.css" />
     <script src="../config.js"></script>
   </head>
@@ -13,51 +13,51 @@
       <header class="header">
         <div class="header-content">
           <img src="../icons/klartextlogo3.png" alt="KlarText" class="logo">
-          <p class="tagline">Easy Language for Everyone</p>
+          <p class="tagline" data-i18n="tagline">Easy Language for Everyone</p>
         </div>
-        <button id="close-panel" class="close-button" aria-label="Close panel">×</button>
+        <button id="close-panel" class="close-button" data-i18n-aria-label="closePanelAriaLabel" aria-label="Close panel">×</button>
       </header>
       
       <!-- Main content -->
       <main class="content">
-        <p class="description">
+        <p class="description" data-i18n="description">
           Transform complex text on this page into easy-to-understand language.
         </p>
         
         <!-- Language detection -->
         <div class="language-info">
           <p class="detected-language">
-            Page language: <strong id="detected-lang">English</strong>
+            <span id="page-language-label" data-i18n="pageLanguageLabel">Page language:</span> <strong id="detected-lang">English</strong>
           </p>
-          <button id="change-lang" class="text-button">Wrong? Click to change</button>
+          <button id="change-lang" class="text-button" data-i18n="changeLanguageButton">Wrong? Click to change</button>
         </div>
         
         <select id="language-override" class="language-select" style="display: none;">
-          <option value="en">English</option>
-          <option value="de">Deutsch (German)</option>
+          <option value="en" data-i18n="langEnglishOption">English</option>
+          <option value="de" data-i18n="langGermanOption">Deutsch (German)</option>
         </select>
         
         <!-- Action buttons with in-button progress -->
         <button id="simplify-selection" class="secondary-button">
           <img src="../icons/simplifytextbl.png" alt="" class="button-icon" aria-hidden="true">
-          <span class="button-text">Simplify selection</span>
+          <span class="button-text" data-i18n="simplifySelectionButton">Simplify selection</span>
           <span class="button-spinner" style="display: none;"></span>
         </button>
         
         <button id="simplify-page" class="primary-button">
           <img src="../icons/tornado.png" alt="" class="button-icon" aria-hidden="true">
-          <span class="button-text">Simplify full page</span>
+          <span class="button-text" data-i18n="simplifyPageButton">Simplify full page</span>
           <span class="button-spinner" style="display: none;"></span>
         </button>
         
-        <p class="hint-text">Highlight text on the page to simplify specific sections</p>
+        <p class="hint-text" data-i18n="hintText">Highlight text on the page to simplify specific sections</p>
         
         <!-- Progress container -->
         <div id="progress-container" class="progress-container" style="display: none;">
           <!-- Page indicator -->
           <div id="page-indicator" class="page-indicator" style="display: none;">
             <span class="page-icon">📄</span>
-            <span id="page-name" class="page-name">Page name here</span>
+            <span id="page-name" class="page-name" data-i18n="pageNamePlaceholder">Page name here</span>
           </div>
           
           <!-- Progress bar -->
@@ -81,29 +81,29 @@
         
         <!-- Restore original text button -->
         <button id="restore-button" class="restore-button" style="display: none;">
-          <span class="button-text">Restore original text</span>
+          <span class="button-text" data-i18n="restoreButton">Restore original text</span>
         </button>
         
         <!-- Select new text button -->
         <button id="select-new-button" class="select-new-button" style="display: none;">
-          <span class="button-text">Select new text</span>
+          <span class="button-text" data-i18n="selectNewTextButton">Select new text</span>
         </button>
         
         <!-- Cancel button (shown during page processing) -->
         <button id="cancel-button" class="cancel-button" style="display: none;">
-          Cancel simplification
+          <span data-i18n="cancelButton">Cancel simplification</span>
         </button>
       </main>
       
       <!-- Webapp Features Section -->
       <section class="webapp-features">
-        <h2 class="section-title">MORE FEATURES ON THE WEBAPP</h2>
+        <h2 class="section-title" data-i18n="moreFeaturesHeading">MORE FEATURES ON THE WEBAPP</h2>
         
         <a href="#" id="feature-input-text" class="feature-card" target="_blank">
           <img src="../icons/Klartexticon1.png" alt="" class="feature-icon" aria-hidden="true">
           <div class="feature-content">
-            <h3 class="feature-title">Input Text</h3>
-            <p class="feature-description">Paste or type text to simplify</p>
+            <h3 class="feature-title" data-i18n="featureInputTitle">Input Text</h3>
+            <p class="feature-description" data-i18n="featureInputDescription">Paste or type text to simplify</p>
           </div>
           <span class="external-link-icon">↗</span>
         </a>
@@ -111,8 +111,8 @@
         <a href="#" id="feature-upload-pdf" class="feature-card" target="_blank">
           <img src="../icons/Klartext.png" alt="" class="feature-icon" aria-hidden="true">
           <div class="feature-content">
-            <h3 class="feature-title">Upload PDF</h3>
-            <p class="feature-description">Simplify documents and files</p>
+            <h3 class="feature-title" data-i18n="featureUploadPdfTitle">Upload PDF</h3>
+            <p class="feature-description" data-i18n="featureUploadPdfDescription">Simplify documents and files</p>
           </div>
           <span class="external-link-icon">↗</span>
         </a>
@@ -120,13 +120,13 @@
         <a href="#" id="feature-text-to-speech" class="feature-card" target="_blank">
           <img src="../icons/Klartextsound.png" alt="" class="feature-icon" aria-hidden="true">
           <div class="feature-content">
-            <h3 class="feature-title">Text to Speech</h3>
-            <p class="feature-description">Listen to simplified content</p>
+            <h3 class="feature-title" data-i18n="featureTtsTitle">Text to Speech</h3>
+            <p class="feature-description" data-i18n="featureTtsDescription">Listen to simplified content</p>
           </div>
           <span class="external-link-icon">↗</span>
         </a>
         
-        <a href="#" id="powered-by-link" class="powered-by" target="_blank">
+        <a href="#" id="powered-by-link" class="powered-by" data-i18n="poweredByLabel" target="_blank">
           Powered by Klartext
         </a>
       </section>

@@ -1,0 +1,206 @@
+{
+  "extName": {
+    "message": "KlarText",
+    "description": "Erweiterungsname in Chrome."
+  },
+  "extDescription": {
+    "message": "Wandelt komplexe Texte in leicht verstandliche Sprache um. Macht Websites fur alle zuganglicher.",
+    "description": "Erweiterungsbeschreibung in Chrome."
+  },
+  "actionTitle": {
+    "message": "KlarText - Seitentext vereinfachen",
+    "description": "Tooltip fur die Erweiterungsaktion."
+  },
+  "sidepanelTitle": {
+    "message": "KlarText - Leichte Sprache",
+    "description": "Titel des Sidepanels."
+  },
+  "tagline": {
+    "message": "Leichte Sprache fur alle",
+    "description": "Slogan im Sidepanel-Header."
+  },
+  "closePanelAriaLabel": {
+    "message": "Panel schliessen",
+    "description": "Barrierefreies Label fur den Schliessen-Button."
+  },
+  "description": {
+    "message": "Wandle komplexe Texte auf dieser Seite in leicht verstandliche Sprache um.",
+    "description": "Hauptbeschreibung im Sidepanel."
+  },
+  "pageLanguageLabel": {
+    "message": "Seitensprache:",
+    "description": "Label vor erkannter Seitensprache."
+  },
+  "changeLanguageButton": {
+    "message": "Falsch? Klicken zum Andern",
+    "description": "Button fur manuelle Sprachwahl."
+  },
+  "langEnglishOption": {
+    "message": "Englisch",
+    "description": "Sprachoption Englisch."
+  },
+  "langGermanOption": {
+    "message": "Deutsch",
+    "description": "Sprachoption Deutsch."
+  },
+  "langEnglishLabel": {
+    "message": "Englisch",
+    "description": "Anzeigename fur erkannte Sprache Englisch."
+  },
+  "langGermanLabel": {
+    "message": "Deutsch",
+    "description": "Anzeigename fur erkannte Sprache Deutsch."
+  },
+  "simplifySelectionButton": {
+    "message": "Auswahl vereinfachen",
+    "description": "Aktion fur die Vereinfachung markierter Texte."
+  },
+  "simplifyPageButton": {
+    "message": "Ganze Seite vereinfachen",
+    "description": "Aktion fur die Vereinfachung der ganzen Seite."
+  },
+  "hintText": {
+    "message": "Markiere Text auf der Seite, um bestimmte Abschnitte zu vereinfachen",
+    "description": "Hinweis unter den Aktionsbuttons."
+  },
+  "hintSelectionDisabledProcessing": {
+    "message": "Seitenvereinfachung lauft. Der Auswahlmodus ist danach wieder verfugbar.",
+    "description": "Hinweis wahrend laufender Seitenvereinfachung."
+  },
+  "pageNamePlaceholder": {
+    "message": "Seitenname hier",
+    "description": "Platzhalter fur Seitenname."
+  },
+  "pageNameCurrent": {
+    "message": "Aktuelle Seite",
+    "description": "Fallback fur Seitenanzeige."
+  },
+  "restoreButton": {
+    "message": "Originaltext wiederherstellen",
+    "description": "Button zum Wiederherstellen des Originaltexts."
+  },
+  "selectNewTextButton": {
+    "message": "Neuen Text auswahlen",
+    "description": "Button fur neue Textauswahl."
+  },
+  "cancelButton": {
+    "message": "Vereinfachung abbrechen",
+    "description": "Button zum Abbrechen der Vereinfachung."
+  },
+  "moreFeaturesHeading": {
+    "message": "MEHR FUNKTIONEN IN DER WEBAPP",
+    "description": "Uberschrift des Webapp-Bereichs."
+  },
+  "featureInputTitle": {
+    "message": "Text eingeben",
+    "description": "Titel der Webapp-Karte fur Texteingabe."
+  },
+  "featureInputDescription": {
+    "message": "Text einfugen oder tippen und vereinfachen",
+    "description": "Beschreibung der Webapp-Karte fur Texteingabe."
+  },
+  "featureUploadPdfTitle": {
+    "message": "PDF hochladen",
+    "description": "Titel der Webapp-Karte fur PDF-Upload."
+  },
+  "featureUploadPdfDescription": {
+    "message": "Dokumente und Dateien vereinfachen",
+    "description": "Beschreibung der Webapp-Karte fur PDF-Upload."
+  },
+  "featureTtsTitle": {
+    "message": "Text zu Sprache",
+    "description": "Titel der Webapp-Karte fur Text zu Sprache."
+  },
+  "featureTtsDescription": {
+    "message": "Vereinfachte Inhalte vorlesen lassen",
+    "description": "Beschreibung der Webapp-Karte fur Text zu Sprache."
+  },
+  "poweredByLabel": {
+    "message": "Powered by KlarText",
+    "description": "Footer-Label fur Webapp-Link."
+  },
+  "statusSimplifying": {
+    "message": "Vereinfacht...",
+    "description": "Allgemeiner Vereinfachungsstatus."
+  },
+  "statusWaitForPageCompletion": {
+    "message": "Bitte warte, bis die Seitenvereinfachung abgeschlossen ist",
+    "description": "Status bei laufender Seitenvereinfachung."
+  },
+  "statusStarting": {
+    "message": "Startet...",
+    "description": "Button-Status beim Start."
+  },
+  "statusStartingSimplification": {
+    "message": "Vereinfachung startet...",
+    "description": "Statusmeldung zu Beginn der Vereinfachung."
+  },
+  "statusProcessing": {
+    "message": "Wird verarbeitet...",
+    "description": "Allgemeiner Verarbeitungsstatus."
+  },
+  "statusSuccess": {
+    "message": "Erfolg!",
+    "description": "Fallback fur Erfolgsmeldung."
+  },
+  "statusSimplificationComplete": {
+    "message": "Vereinfachung abgeschlossen!",
+    "description": "Abschlussmeldung fur Vereinfachung."
+  },
+  "statusSelectionSimplified": {
+    "message": "Auswahl vereinfacht!",
+    "description": "Abschlussmeldung fur Auswahlvereinfachung."
+  },
+  "statusSimplificationCancelled": {
+    "message": "Vereinfachung abgebrochen",
+    "description": "Status bei Abbruch durch Benutzer."
+  },
+  "statusSelectTextThenSimplify": {
+    "message": "Markiere Text auf der Seite und klicke dann auf \"Auswahl vereinfachen\"",
+    "description": "Anweisung fur Auswahlmodus."
+  },
+  "progressBatchOfTotal": {
+    "message": "Batch $1 von $2",
+    "description": "Batch-Fortschritt mit aktuellem und gesamtem Wert."
+  },
+  "errorUnknown": {
+    "message": "Unbekannter Fehler",
+    "description": "Fallback fur unbekannten Fehler."
+  },
+  "errorWithDetail": {
+    "message": "Fehler: $1",
+    "description": "Fehlermeldung mit Details."
+  },
+  "errorOccurred": {
+    "message": "Ein Fehler ist aufgetreten",
+    "description": "Allgemeine Fehlermeldung."
+  },
+  "errorFailedCommunication": {
+    "message": "Kommunikation mit der Erweiterung fehlgeschlagen",
+    "description": "Fehler bei Kommunikation mit Runtime."
+  },
+  "errorFailedCancel": {
+    "message": "Abbruch der Vereinfachung fehlgeschlagen",
+    "description": "Fehler beim Abbruch."
+  },
+  "errorFailedRestore": {
+    "message": "Wiederherstellung des Originaltexts fehlgeschlagen",
+    "description": "Fehler beim Wiederherstellen."
+  },
+  "errorFailedSelection": {
+    "message": "Ausgewahlter Text konnte nicht vereinfacht werden",
+    "description": "Fehler bei der Auswahlvereinfachung."
+  },
+  "errorFailedSelectionWithDetail": {
+    "message": "Ausgewahlter Text konnte nicht vereinfacht werden: $1",
+    "description": "Fehler bei der Auswahlvereinfachung mit Details."
+  },
+  "errorNoActiveTab": {
+    "message": "Kein aktiver Tab gefunden. Bitte zu einer Webseite wechseln.",
+    "description": "Fehler wenn kein aktiver Tab verfugbar ist."
+  },
+  "errorInitialization": {
+    "message": "Initialisierungsfehler: $1",
+    "description": "Initialisierungsfehler mit Details."
+  }
+}

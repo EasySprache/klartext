@@ -25,6 +25,7 @@ This Chrome extension uses the KlarText API to simplify web content in real-time
 - [Architecture](#architecture)
 - [Development & Testing](#development--testing)
 - [Configuration](#configuration)
+- [Internationalization (i18n)](#internationalization-i18n)
 - [Packaging & Distribution](#packaging--distribution)
 - [Icons & Assets](#icons--assets)
 - [Troubleshooting](#troubleshooting)
@@ -112,6 +113,9 @@ apps/extension/
 │   ├── sidepanel.html              # Main UI structure
 │   ├── sidepanel.css               # Accessible styling (18px base, AA contrast)
 │   └── sidepanel.js                # UI logic and message handling
+├── _locales/
+│   ├── en/messages.json            # English UI + manifest strings
+│   └── de/messages.json            # German UI + manifest strings
 └── icons/
     ├── tornado-*.png               # Extension toolbar icons
     ├── klartextlogo3.png           # Branding logo
@@ -337,6 +341,32 @@ const CONFIG = {
 - Update `WEBAPP_URL` to your production webapp URL
 - Adjust `API_TIMEOUT` and `BATCH_SIZE` based on your API performance
 
+## Internationalization (i18n)
+
+KlarText uses Chrome extension i18n message catalogs in `_locales/`.
+
+### What is localized
+- Manifest fields (`name`, `description`, `action.default_title`) via `__MSG_*__` keys
+- Sidepanel static text via `data-i18n` / `data-i18n-aria-label` attributes
+- Sidepanel runtime status/error text via locale catalogs loaded from `_locales/*/messages.json`
+- Sidepanel UI locale follows the detected/selected page language (`en`/`de`) instead of the browser UI language
+
+### Locale files
+- `apps/extension/_locales/en/messages.json`
+- `apps/extension/_locales/de/messages.json`
+
+### Add another language
+1. Create `apps/extension/_locales/<locale>/messages.json`
+2. Copy all keys from English catalog and translate `message` values
+3. Reload extension at `chrome://extensions`
+4. Verify manifest title/description and sidepanel labels in that browser language
+
+### Chrome Web Store listing language vs extension i18n
+- Web Store listing language is configured in the Developer Dashboard listing form
+- Extension runtime i18n is controlled by `_locales/*/messages.json` in code
+- Manifest-level strings still follow Chrome UI locale rules, while sidepanel text follows KlarText's in-app language selection
+- Maintain both so listing text and in-product UI stay aligned
+
 ## Packaging & Distribution
 
 ### Create ZIP for Chrome Web Store
@@ -363,11 +393,11 @@ The script:
 
 2. **Upload Extension**
    - Click **"New Item"**
-   - Upload `klartext-extension.zip`
+   - Upload `dist/klartext-extension-v<version>.zip`
    - Wait for automatic checks to complete
 
 3. **Store Listing**
-   - **Name:** KlarText - Easy Language
+   - **Name:** KlarText - Easy Language for Everyone
    - **Summary:** Transform complex text into easy-to-understand language
    - **Description:** Use the detailed description from manifest
    - **Category:** Accessibility
@@ -404,6 +434,7 @@ Before each release:
 - [ ] Bump `version` in `manifest.json` (use semantic versioning)
 - [ ] Update `CHANGELOG.md` with changes
 - [ ] Confirm manifest icon paths point to current production branding assets
+- [ ] Confirm manifest i18n keys resolve correctly from `_locales/en/messages.json`
 - [ ] Test all features thoroughly:
   - [ ] Page simplification on multiple sites
   - [ ] Selection simplification

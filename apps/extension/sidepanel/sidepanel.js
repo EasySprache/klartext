@@ -16,6 +16,92 @@ let detectedLanguage = 'en';  // Default fallback
 let currentDomain = '';
 let currentTabId = null; // Store the actual tab ID we're working with
 let isPageProcessing = false; // Track if page simplification is active
+let uiLocale = 'en';
+const localeCatalogs = {};
+const SUPPORTED_UI_LOCALES = new Set(['en', 'de']);
+
+function t(key, fallback = '') {
+  const localized = localeCatalogs[uiLocale]?.[key]?.message || chrome.i18n?.getMessage?.(key);
+  return localized || fallback;
+}
+
+function tFormat(key, substitutions, fallback = '') {
+  const localizedTemplate = localeCatalogs[uiLocale]?.[key]?.message;
+  if (localizedTemplate) {
+    const values = Array.isArray(substitutions) ? substitutions : [substitutions];
+    return values.reduce((msg, value, index) => {
+      return msg.replaceAll(`$${index + 1}`, String(value));
+    }, localizedTemplate);
+  }
+  const localized = chrome.i18n?.getMessage?.(key, substitutions);
+  return localized || fallback;
+}
+
+function getLanguageLabel(code) {
+  return code === 'de'
+    ? t('langGermanLabel', 'Deutsch')
+    : t('langEnglishLabel', 'English');
+}
+
+function applyStaticI18n() {
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    if (!key) return;
+    const localized = t(key, el.textContent || '');
+    if (localized) el.textContent = localized;
+  });
+
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    if (!key) return;
+    const localized = t(key, el.getAttribute('aria-label') || '');
+    if (localized) el.setAttribute('aria-label', localized);
+  });
+}
+
+async function ensureLocaleCatalog(locale) {
+  if (localeCatalogs[locale]) return;
+  const localePath = chrome.runtime.getURL(`_locales/${locale}/messages.json`);
+  const response = await fetch(localePath);
+  if (!response.ok) {
+    throw new Error(`Failed to load locale catalog: ${locale}`);
+  }
+  localeCatalogs[locale] = await response.json();
+}
+
+function normalizeUiLocale(locale) {
+  return SUPPORTED_UI_LOCALES.has(locale) ? locale : 'en';
+}
+
+function applyDynamicLocalizedText() {
+  // Refresh button labels/status text that can be changed dynamically during runtime.
+  const pageBtnText = document.querySelector('#simplify-page .button-text');
+  if (pageBtnText && !simplifyPageBtn?.classList.contains('processing')) {
+    pageBtnText.textContent = t('simplifyPageButton', 'Simplify full page');
+  }
+  const selectionBtnText = document.querySelector('#simplify-selection .button-text');
+  if (selectionBtnText && !simplifySelectionBtn?.classList.contains('processing')) {
+    selectionBtnText.textContent = t('simplifySelectionButton', 'Simplify selection');
+  }
+
+  if (isPageProcessing) {
+    disableSelectionButton();
+  } else {
+    enableSelectionButton();
+  }
+
+  if (detectedLangEl) {
+    detectedLangEl.textContent = getLanguageLabel(detectedLanguage);
+  }
+}
+
+async function setUiLocale(locale) {
+  const normalized = normalizeUiLocale(locale);
+  await ensureLocaleCatalog(normalized);
+  uiLocale = normalized;
+  applyStaticI18n();
+  applyDynamicLocalizedText();
+}
 
 /**
  * Initialize webapp feature links
@@ -93,7 +179,7 @@ function setButtonLoading(buttonId, loading, progressText = null) {
     
     // Show progress text if provided, otherwise default
     if (textSpan) {
-      textSpan.textContent = progressText || 'Simplifying...';
+      textSpan.textContent = progressText || t('statusSimplifying', 'Simplifying...');
     }
   } else {
     button.classList.remove('processing');
@@ -103,9 +189,9 @@ function setButtonLoading(buttonId, loading, progressText = null) {
     
     // Restore original text
     if (buttonId === 'simplify-page') {
-      if (textSpan) textSpan.textContent = 'Simplify Entire Page';
+      if (textSpan) textSpan.textContent = t('simplifyPageButton', 'Simplify full page');
     } else {
-      if (textSpan) textSpan.textContent = 'Simplify Selection';
+      if (textSpan) textSpan.textContent = t('simplifySelectionButton', 'Simplify selection');
     }
   }
 }
@@ -117,7 +203,7 @@ async function handleSimplify(mode = 'page') {
   try {
     // Quick Win #2: Block selection mode during page processing
     if (mode === 'selection' && isPageProcessing) {
-      updateStatus("Please wait for page simplification to complete", "error");
+      updateStatus(t('statusWaitForPageCompletion', 'Please wait for page simplification to complete'), "error");
       setTimeout(() => updateStatus("", "info"), 3000);
       return;
     }
@@ -130,8 +216,8 @@ async function handleSimplify(mode = 'page') {
     
     // Update UI to loading state
     const buttonId = mode === 'page' ? 'simplify-page' : 'simplify-selection';
-    setButtonLoading(buttonId, true, 'Starting...');
-    updateStatus("Starting simplification...", "loading");
+    setButtonLoading(buttonId, true, t('statusStarting', 'Starting...'));
+    updateStatus(t('statusStartingSimplification', 'Starting simplification...'), "loading");
     
     // CRITICAL: Pass the tabId we stored during initialization
     // The service worker needs this because sidepanel context can't query the active tab reliably
@@ -148,14 +234,14 @@ async function handleSimplify(mode = 'page') {
       // Don't show success message - wait for progress updates
       // The PROGRESS_UPDATE message will handle UI updates
     } else {
-      const errorMsg = response?.error || "Unknown error occurred";
-      updateStatus(`Error: ${errorMsg}`, "error");
+      const errorMsg = response?.error || t('errorUnknown', 'Unknown error occurred');
+      updateStatus(tFormat('errorWithDetail', [errorMsg], `Error: ${errorMsg}`), "error");
       setButtonLoading(buttonId, false);
     }
     
   } catch (error) {
     console.error("[KlarText Sidepanel] Error:", error);
-    updateStatus("Failed to communicate with extension", "error");
+    updateStatus(t('errorFailedCommunication', 'Failed to communicate with extension'), "error");
     const buttonId = mode === 'page' ? 'simplify-page' : 'simplify-selection';
     setButtonLoading(buttonId, false);
   }
@@ -187,7 +273,11 @@ function updateProgressBar(progress) {
   if (progressDetails) {
     let detailsText = '';
     if (progress.current && progress.total) {
-      detailsText = `Batch ${progress.current} of ${progress.total}`;
+      detailsText = tFormat(
+        'progressBatchOfTotal',
+        [String(progress.current), String(progress.total)],
+        `Batch ${progress.current} of ${progress.total}`
+      );
     }
     if (progress.eta) {
       detailsText += ` • ${progress.eta}s remaining`;
@@ -210,7 +300,7 @@ function updatePageIndicator(pageInfo) {
   
   if (pageIndicator) pageIndicator.style.display = 'flex';
   if (pageName) {
-    pageName.textContent = pageInfo.domain || pageInfo.title || 'Current page';
+    pageName.textContent = pageInfo.domain || pageInfo.title || t('pageNameCurrent', 'Current page');
   }
 }
 
@@ -223,7 +313,7 @@ function showSuccessIndicator(message) {
   
   if (successIndicator) {
     successIndicator.style.display = 'flex';
-    if (successMessage) successMessage.textContent = message || 'Success!';
+    if (successMessage) successMessage.textContent = message || t('statusSuccess', 'Success!');
     
     // Auto-hide after 5 seconds
     setTimeout(() => {
@@ -235,6 +325,42 @@ function showSuccessIndicator(message) {
 function hideSuccessIndicator() {
   const successIndicator = document.getElementById('success-indicator');
   if (successIndicator) successIndicator.style.display = 'none';
+}
+
+function resolveRuntimeMessage(messageKey, messageArgs, fallbackMessage, status) {
+  if (messageKey) {
+    if (Array.isArray(messageArgs) && messageArgs.length > 0) {
+      return tFormat(messageKey, messageArgs, fallbackMessage || '');
+    }
+    return t(messageKey, fallbackMessage || '');
+  }
+
+  if (fallbackMessage) {
+    const knownMessageKeys = {
+      'Simplifying...': 'statusSimplifying',
+      'Simplifying selected text...': 'statusSimplifying',
+      '✓ Simplified selected text': 'statusSelectionSimplified',
+      'Failed to simplify selected text': 'errorFailedSelection',
+      'Simplification cancelled': 'statusSimplificationCancelled',
+      'Error occurred': 'errorOccurred',
+      'Processing...': 'statusProcessing',
+      'Simplification complete!': 'statusSimplificationComplete',
+    };
+
+    if (knownMessageKeys[fallbackMessage]) {
+      return t(knownMessageKeys[fallbackMessage], fallbackMessage);
+    }
+
+    if (fallbackMessage.startsWith('Failed to simplify selected text: ')) {
+      const detail = fallbackMessage.replace('Failed to simplify selected text: ', '');
+      return tFormat('errorFailedSelectionWithDetail', [detail], fallbackMessage);
+    }
+  }
+
+  if (status === 'processing') return t('statusSimplifying', 'Simplifying...');
+  if (status === 'complete') return t('statusSimplificationComplete', 'Simplification complete!');
+  if (status === 'error') return t('errorOccurred', 'Error occurred');
+  return fallbackMessage || '';
 }
 
 /**
@@ -268,7 +394,8 @@ function hideSelectNewButton() {
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'PROGRESS_UPDATE') {
-    const { status, message: progressMessage, progress, pageInfo, buttonId } = message;
+    const { status, message: progressMessage, messageKey, messageArgs, progress, pageInfo, buttonId } = message;
+    const localizedMessage = resolveRuntimeMessage(messageKey, messageArgs, progressMessage, status);
     
     if (status === 'processing') {
       // Show progress bar and page indicator
@@ -279,7 +406,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       showCancelButton();
       
       // Update button state (use buttonId from message, default to page)
-      setButtonLoading(buttonId || 'simplify-page', true, progressMessage || 'Processing...');
+      setButtonLoading(buttonId || 'simplify-page', true, localizedMessage || t('statusSimplifying', 'Simplifying...'));
       updateStatus("", "info");
       isPageProcessing = true;
       
@@ -295,7 +422,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       hideCancelButton();
       
       // Show success indicator
-      showSuccessIndicator(progressMessage || "✓ Simplification complete!");
+      showSuccessIndicator(localizedMessage || t('statusSimplificationComplete', 'Simplification complete!'));
       
       // Show restore button
       showRestoreButton();
@@ -318,7 +445,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       hideCancelButton();
       
       // Show error
-      updateStatus(progressMessage || "Error occurred", "error");
+      updateStatus(localizedMessage || t('errorOccurred', 'Error occurred'), "error");
       
       // Reset button states
       setButtonLoading('simplify-page', false);
@@ -371,12 +498,15 @@ function disableSelectionButton() {
   simplifySelectionBtn.disabled = true;
   simplifySelectionBtn.style.opacity = '0.5';
   simplifySelectionBtn.style.cursor = 'not-allowed';
-  simplifySelectionBtn.title = 'Please wait for page simplification to complete';
+  simplifySelectionBtn.title = t('statusWaitForPageCompletion', 'Please wait for page simplification to complete');
   
   // Update hint text to explain why it's disabled
   const hintText = document.querySelector('.hint-text');
   if (hintText) {
-    hintText.textContent = 'Page simplification in progress. Selection mode will be available when complete.';
+    hintText.textContent = t(
+      'hintSelectionDisabledProcessing',
+      'Page simplification in progress. Selection mode will be available when complete.'
+    );
     hintText.style.color = 'hsl(220 20% 50%)';
   }
 }
@@ -395,7 +525,7 @@ function enableSelectionButton() {
   // Restore original hint text
   const hintText = document.querySelector('.hint-text');
   if (hintText) {
-    hintText.textContent = 'Highlight text on the page to simplify specific sections';
+    hintText.textContent = t('hintText', 'Highlight text on the page to simplify specific sections');
     hintText.style.color = 'hsl(220 20% 50%)';
   }
 }
@@ -431,7 +561,7 @@ if (changeLangBtn && languageOverride) {
 if (languageOverride && detectedLangEl) {
   languageOverride.addEventListener('change', async () => {
     detectedLanguage = languageOverride.value;
-    detectedLangEl.textContent = detectedLanguage === 'de' ? 'Deutsch' : 'English';
+    await setUiLocale(detectedLanguage);
     
     // Save per-domain preference
     const key = `lang_${currentDomain}`;
@@ -459,12 +589,12 @@ if (cancelBtn) {
       hideCancelButton();
       enableSelectionButton();
       setButtonLoading('simplify-page', false);
-      updateStatus("Simplification cancelled", "error");
+      updateStatus(t('statusSimplificationCancelled', 'Simplification cancelled'), "error");
       
       setTimeout(() => updateStatus("", "info"), 3000);
     } catch (error) {
       console.error('[KlarText Sidepanel] Failed to cancel:', error);
-      updateStatus("Failed to cancel simplification", "error");
+      updateStatus(t('errorFailedCancel', 'Failed to cancel simplification'), "error");
     }
   });
 }
@@ -484,7 +614,7 @@ if (restoreBtn) {
       await chrome.tabs.sendMessage(currentTabId, { type: 'RESTORE_ORIGINAL' });
     } catch (error) {
       console.error('[KlarText Sidepanel] Failed to restore:', error);
-      updateStatus("Failed to restore original text", "error");
+      updateStatus(t('errorFailedRestore', 'Failed to restore original text'), "error");
     }
   });
 }
@@ -498,11 +628,15 @@ if (selectNewBtn) {
       hideSuccessIndicator();
       hideRestoreButton();
       hideSelectNewButton();
-      updateStatus('Select text on the page, then click "Simplify Selection"', 'info');
+      updateStatus(t('statusSelectTextThenSimplify', 'Select text on the page, then click "Simplify Selection"'), 'info');
       enableSelectionButton();
       
       // Optionally show selection dialog
-      await chrome.tabs.sendMessage(currentTabId, { type: 'SHOW_SELECTION_DIALOG' });
+      await chrome.tabs.sendMessage(currentTabId, {
+        type: 'SHOW_SELECTION_DIALOG',
+        sourceLanguage: detectedLanguage,
+        targetLanguage: detectedLanguage,
+      });
       
       // Clear status after 3 seconds
       setTimeout(() => updateStatus("", "info"), 3000);
@@ -534,6 +668,7 @@ if (simplifySelectionBtn) {
 async function initializeSidepanel() {
   try {
     console.log('[KlarText Sidepanel] Starting initialization...');
+    await ensureLocaleCatalog('en');
     
     // Reset processing state (Quick Win #2)
     isPageProcessing = false;
@@ -547,7 +682,7 @@ async function initializeSidepanel() {
     
     if (!response?.ok || !response?.tab) {
       console.error('[KlarText Sidepanel] Failed to get active tab:', response);
-      updateStatus("Could not find active tab. Please navigate to a webpage.", "error");
+      updateStatus(t('errorNoActiveTab', 'Could not find active tab. Please navigate to a webpage.'), "error");
       return;
     }
     
@@ -564,9 +699,7 @@ async function initializeSidepanel() {
     if (saved[key]) {
       // Use saved override
       detectedLanguage = saved[key];
-      if (detectedLangEl) {
-        detectedLangEl.textContent = detectedLanguage === 'de' ? 'Deutsch' : 'English';
-      }
+      await setUiLocale(detectedLanguage);
       console.log('[KlarText Sidepanel] Using saved language:', detectedLanguage);
     } else {
       // Request detection from content script (optional - page may not have content script yet)
@@ -575,21 +708,18 @@ async function initializeSidepanel() {
           type: 'DETECT_LANGUAGE' 
         });
         detectedLanguage = langResponse.language || 'en';
-        if (detectedLangEl) {
-          detectedLangEl.textContent = detectedLanguage === 'de' ? 'Deutsch' : 'English';
-        }
+        await setUiLocale(detectedLanguage);
         console.log('[KlarText Sidepanel] Detected language:', detectedLanguage);
       } catch (e) {
         // Page not ready or content script not injected yet - use fallback
         console.log('[KlarText Sidepanel] Content script not ready, using default language');
-        if (detectedLangEl) {
-          detectedLangEl.textContent = 'English';
-        }
+        detectedLanguage = 'en';
+        await setUiLocale('en');
       }
     }
   } catch (error) {
     console.error('[KlarText Sidepanel] Failed to initialize:', error);
-    updateStatus("Initialization error: " + error.message, "error");
+    updateStatus(tFormat('errorInitialization', [String(error.message || '')], `Initialization error: ${error.message}`), "error");
   }
 }
 
@@ -606,6 +736,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
 });
 
 // Set initial state
+setUiLocale('en').catch((error) => {
+  console.error('[KlarText Sidepanel] Failed to initialize locale:', error);
+});
 updateStatus("", "info");
 initializeSidepanel();
 initializeWebappFeatures();
