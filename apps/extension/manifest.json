@@ -1,11 +1,12 @@
 {
   "manifest_version": 3,
-  "name": "KlarText - Easy Language",
-  "description": "Transform complex text into easy-to-understand language. Makes websites more accessible for everyone.",
-  "version": "0.1.0",
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1.1",
   "author": "KlarText Team",
   "action": {
-    "default_title": "KlarText - Simplify page text"
+    "default_title": "__MSG_actionTitle__"
   },
   "side_panel": {
     "default_path": "sidepanel/sidepanel.html"
@@ -23,7 +24,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["content/styles.css", "config.js", "extension_logger.js", "icons/selecttext.png", "icons/tornado.png", "icons/simplyselection.png"],
+      "resources": ["content/styles.css", "config.js", "extension_logger.js", "icons/selecttext.png", "icons/tornado.png", "icons/simplyselection.png", "_locales/en/messages.json", "_locales/de/messages.json"],
       "matches": ["<all_urls>"]
     }
   ]

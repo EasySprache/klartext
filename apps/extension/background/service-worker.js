@@ -6,6 +6,7 @@
  */
 
 const DEBUG = true;
+const activeApiRequests = new Map();
 
 /**
  * Check if a URL can have content scripts injected
@@ -66,6 +67,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log('[KlarText Service Worker] Received message:', messageType);
   }
   
+  // Proxy API calls through extension origin to avoid page-origin CORS issues.
+  if (messageType === 'API_SIMPLIFY_BATCH') {
+    proxyBatchSimplifyRequest(message, sendResponse);
+    return true;
+  }
+
+  // Cancel an in-flight proxied API request.
+  if (messageType === 'API_CANCEL_REQUEST') {
+    const cancelled = cancelApiRequest(message?.requestId);
+    sendResponse({ ok: true, cancelled });
+    return true;
+  }
+
   // Handle GET_ACTIVE_TAB request from sidepanel
   if (messageType === 'GET_ACTIVE_TAB') {
     (async () => {
@@ -102,6 +116,71 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   // Unknown message type
   return false;
 });
+
+function cancelApiRequest(requestId) {
+  if (!requestId) return false;
+  const controller = activeApiRequests.get(requestId);
+  if (!controller) return false;
+  controller.abort();
+  activeApiRequests.delete(requestId);
+  return true;
+}
+
+async function proxyBatchSimplifyRequest(message, sendResponse) {
+  const { requestId, apiEndpoint, route, texts, targetLanguage, timeoutMs } = message || {};
+
+  if (!requestId || !apiEndpoint || !route || !Array.isArray(texts)) {
+    sendResponse({ ok: false, error: 'Invalid API proxy request payload' });
+    return;
+  }
+
+  const controller = new AbortController();
+  activeApiRequests.set(requestId, controller);
+  const resolvedTimeoutMs = Number(timeoutMs) > 0 ? Number(timeoutMs) : 180000;
+  let timedOut = false;
+  const timeoutId = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, resolvedTimeoutMs);
+
+  try {
+    const response = await fetch(`${apiEndpoint}${route}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        texts,
+        target_lang: targetLanguage || 'en',
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      let errorMsg = `API error: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        errorMsg = errorData?.detail || errorMsg;
+      } catch (e) {
+        // Ignore JSON parse failures for error payloads.
+      }
+      sendResponse({ ok: false, error: errorMsg, status: response.status });
+      return;
+    }
+
+    const data = await response.json();
+    sendResponse({ ok: true, data });
+  } catch (error) {
+    if (error?.name === 'AbortError') {
+      sendResponse({ ok: false, error: timedOut ? 'Request timed out' : 'Request aborted', aborted: true, timedOut });
+      return;
+    }
+    sendResponse({ ok: false, error: String(error?.message || error) });
+  } finally {
+    clearTimeout(timeoutId);
+    activeApiRequests.delete(requestId);
+  }
+}
 
 /**
  * Handle simplification requests from sidepanel

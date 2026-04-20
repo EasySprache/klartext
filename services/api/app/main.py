@@ -113,12 +113,13 @@ if environment == "development":
     # Development: Allow ALL origins for local testing
     allowed_origins = ["*"]
 else:
-    # Production: Only allow specific origins
-    allowed_origins_str = os.getenv(
-        "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://localhost:5173,http://localhost:7860"
-    )
-    allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",")]
+    # Production: fail closed unless explicit origins are configured
+    allowed_origins_str = os.getenv("ALLOWED_ORIGINS", "").strip()
+    if not allowed_origins_str:
+        print("WARNING: ALLOWED_ORIGINS is empty in production; browser requests will be blocked.")
+        allowed_origins = []
+    else:
+        allowed_origins = [origin.strip() for origin in allowed_origins_str.split(",") if origin.strip()]
 
 
 # =============================================================================

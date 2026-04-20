@@ -1,0 +1,206 @@
+{
+  "extName": {
+    "message": "KlarText",
+    "description": "Extension name shown in Chrome UI."
+  },
+  "extDescription": {
+    "message": "Transform complex text into easy-to-understand language. Makes websites more accessible for everyone.",
+    "description": "Extension description shown in Chrome UI."
+  },
+  "actionTitle": {
+    "message": "KlarText - Simplify page text",
+    "description": "Tooltip for extension action."
+  },
+  "sidepanelTitle": {
+    "message": "KlarText - Easy Language",
+    "description": "Sidepanel document title."
+  },
+  "tagline": {
+    "message": "Easy Language for Everyone",
+    "description": "Brand tagline in sidepanel header."
+  },
+  "closePanelAriaLabel": {
+    "message": "Close panel",
+    "description": "Accessible label for sidepanel close button."
+  },
+  "description": {
+    "message": "Transform complex text on this page into easy-to-understand language.",
+    "description": "Primary sidepanel description text."
+  },
+  "pageLanguageLabel": {
+    "message": "Page language:",
+    "description": "Label shown before detected page language."
+  },
+  "changeLanguageButton": {
+    "message": "Wrong? Click to change",
+    "description": "Button for manual language override."
+  },
+  "langEnglishOption": {
+    "message": "English",
+    "description": "Language dropdown option for English."
+  },
+  "langGermanOption": {
+    "message": "Deutsch (German)",
+    "description": "Language dropdown option for German."
+  },
+  "langEnglishLabel": {
+    "message": "English",
+    "description": "Display label for detected English language."
+  },
+  "langGermanLabel": {
+    "message": "Deutsch",
+    "description": "Display label for detected German language."
+  },
+  "simplifySelectionButton": {
+    "message": "Simplify selection",
+    "description": "Primary action for selected text simplification."
+  },
+  "simplifyPageButton": {
+    "message": "Simplify full page",
+    "description": "Primary action for full page simplification."
+  },
+  "hintText": {
+    "message": "Highlight text on the page to simplify specific sections",
+    "description": "Hint beneath simplify actions."
+  },
+  "hintSelectionDisabledProcessing": {
+    "message": "Page simplification in progress. Selection mode will be available when complete.",
+    "description": "Hint shown when page processing blocks selection mode."
+  },
+  "pageNamePlaceholder": {
+    "message": "Page name here",
+    "description": "Placeholder page name in page indicator."
+  },
+  "pageNameCurrent": {
+    "message": "Current page",
+    "description": "Fallback page indicator label."
+  },
+  "restoreButton": {
+    "message": "Restore original text",
+    "description": "Button label to restore page text."
+  },
+  "selectNewTextButton": {
+    "message": "Select new text",
+    "description": "Button label for selecting another text range."
+  },
+  "cancelButton": {
+    "message": "Cancel simplification",
+    "description": "Button label to cancel ongoing simplification."
+  },
+  "moreFeaturesHeading": {
+    "message": "MORE FEATURES ON THE WEBAPP",
+    "description": "Heading for webapp links section."
+  },
+  "featureInputTitle": {
+    "message": "Input Text",
+    "description": "Webapp feature card title for input text."
+  },
+  "featureInputDescription": {
+    "message": "Paste or type text to simplify",
+    "description": "Webapp feature card description for input text."
+  },
+  "featureUploadPdfTitle": {
+    "message": "Upload PDF",
+    "description": "Webapp feature card title for upload PDF."
+  },
+  "featureUploadPdfDescription": {
+    "message": "Simplify documents and files",
+    "description": "Webapp feature card description for upload PDF."
+  },
+  "featureTtsTitle": {
+    "message": "Text to Speech",
+    "description": "Webapp feature card title for text to speech."
+  },
+  "featureTtsDescription": {
+    "message": "Listen to simplified content",
+    "description": "Webapp feature card description for text to speech."
+  },
+  "poweredByLabel": {
+    "message": "Powered by KlarText",
+    "description": "Footer label for webapp link."
+  },
+  "statusSimplifying": {
+    "message": "Simplifying...",
+    "description": "Generic simplification progress label."
+  },
+  "statusWaitForPageCompletion": {
+    "message": "Please wait for page simplification to complete",
+    "description": "Status shown when page simplification is already running."
+  },
+  "statusStarting": {
+    "message": "Starting...",
+    "description": "Button state when action starts."
+  },
+  "statusStartingSimplification": {
+    "message": "Starting simplification...",
+    "description": "Status message shown at start of simplification."
+  },
+  "statusProcessing": {
+    "message": "Processing...",
+    "description": "Generic processing state."
+  },
+  "statusSuccess": {
+    "message": "Success!",
+    "description": "Fallback success label."
+  },
+  "statusSimplificationComplete": {
+    "message": "Simplification complete!",
+    "description": "Completion status message."
+  },
+  "statusSelectionSimplified": {
+    "message": "Selection simplified!",
+    "description": "Completion status for selection simplification."
+  },
+  "statusSimplificationCancelled": {
+    "message": "Simplification cancelled",
+    "description": "Status shown when user cancels simplification."
+  },
+  "statusSelectTextThenSimplify": {
+    "message": "Select text on the page, then click \"Simplify Selection\"",
+    "description": "Instruction shown for selection flow."
+  },
+  "progressBatchOfTotal": {
+    "message": "Batch $1 of $2",
+    "description": "Batch progress text with current and total counts."
+  },
+  "errorUnknown": {
+    "message": "Unknown error occurred",
+    "description": "Fallback unknown error message."
+  },
+  "errorWithDetail": {
+    "message": "Error: $1",
+    "description": "Error message with details."
+  },
+  "errorOccurred": {
+    "message": "Error occurred",
+    "description": "Generic error status."
+  },
+  "errorFailedCommunication": {
+    "message": "Failed to communicate with extension",
+    "description": "Error when sidepanel cannot reach runtime."
+  },
+  "errorFailedCancel": {
+    "message": "Failed to cancel simplification",
+    "description": "Error when cancel action fails."
+  },
+  "errorFailedRestore": {
+    "message": "Failed to restore original text",
+    "description": "Error when restore action fails."
+  },
+  "errorFailedSelection": {
+    "message": "Failed to simplify selected text",
+    "description": "Error shown when selected text simplification fails."
+  },
+  "errorFailedSelectionWithDetail": {
+    "message": "Failed to simplify selected text: $1",
+    "description": "Error shown when selected text simplification fails with details."
+  },
+  "errorNoActiveTab": {
+    "message": "Could not find active tab. Please navigate to a webpage.",
+    "description": "Error shown when no active tab is available."
+  },
+  "errorInitialization": {
+    "message": "Initialization error: $1",
+    "description": "Initialization error with details."
+  }
+}

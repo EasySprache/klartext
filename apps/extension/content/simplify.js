@@ -231,66 +231,80 @@ function optimizeChunks(chunks) {
  */
 async function callAPI(texts, targetLanguage) {
   const url = `${CONFIG.API_ENDPOINT}${CONFIG.API_ROUTES.SIMPLIFY_BATCH}`;
-  
+  const requestId = (typeof crypto !== 'undefined' && crypto.randomUUID)
+    ? crypto.randomUUID()
+    : `req-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
   if (CONFIG.DEBUG) {
-    console.log(`[KlarText] Calling API: ${url}`);
+    console.log(`[KlarText] Calling API via service worker: ${url}`);
     console.log(`[KlarText] Texts to simplify: ${texts.length}`);
     console.log(`[KlarText] Target language: ${targetLanguage}`);
   }
-  
-  try {
-    // Check if user has cancelled before making request
-    if (userCancellationController?.signal.aborted) {
-      throw new Error('Simplification cancelled by user');
-    }
-    
-    // Create a fresh timeout controller for THIS batch only
-    // This prevents one timeout from affecting subsequent batches
-    const batchTimeoutController = new AbortController();
-    
-    const timeoutId = setTimeout(() => {
-      batchTimeoutController.abort();
-    }, CONFIG.REQUEST_TIMEOUT);
-    
-    // Combine both abort signals: user cancellation OR timeout
-    // This allows the fetch to be aborted by either condition
-    const combinedSignal = userCancellationController 
-      ? AbortSignal.any([userCancellationController.signal, batchTimeoutController.signal])
-      : batchTimeoutController.signal;
-    
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+
+  // Check if user has cancelled before making request
+  if (userCancellationController?.signal.aborted) {
+    throw new Error('Simplification cancelled by user');
+  }
+
+  const proxyRequestPromise = new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(
+      {
+        type: 'API_SIMPLIFY_BATCH',
+        requestId,
+        apiEndpoint: CONFIG.API_ENDPOINT,
+        route: CONFIG.API_ROUTES.SIMPLIFY_BATCH,
+        texts,
+        targetLanguage: targetLanguage || CONFIG.DEFAULT_LANG,
+        timeoutMs: CONFIG.REQUEST_TIMEOUT,
       },
-      body: JSON.stringify({
-        texts: texts,
-        target_lang: targetLanguage || CONFIG.DEFAULT_LANG,
-      }),
-      signal: combinedSignal,
-    });
-    
-    clearTimeout(timeoutId);
-    
-    if (!response.ok) {
-      // Try to get error message from response
-      let errorMsg = `API error: ${response.status}`;
-      try {
-        const errorData = await response.json();
-        errorMsg = errorData.detail || errorMsg;
-      } catch (e) {
-        // Could not parse error response
+      (response) => {
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+          return;
+        }
+        resolve(response);
       }
-      throw new Error(errorMsg);
+    );
+  });
+
+  let abortListener = null;
+  let cancellationPromise = null;
+  if (userCancellationController) {
+    cancellationPromise = new Promise((_, reject) => {
+      abortListener = () => {
+        chrome.runtime.sendMessage({ type: 'API_CANCEL_REQUEST', requestId }, () => {
+          // Ignore cancellation response errors.
+        });
+        reject(new Error('Simplification cancelled by user'));
+      };
+      userCancellationController.signal.addEventListener('abort', abortListener, { once: true });
+    });
+  }
+
+  try {
+    const proxyResponse = await (cancellationPromise
+      ? Promise.race([proxyRequestPromise, cancellationPromise])
+      : proxyRequestPromise);
+
+    if (!proxyResponse?.ok) {
+      if (proxyResponse?.aborted) {
+        if (userCancellationController?.signal.aborted) {
+          throw new Error('Simplification cancelled by user');
+        }
+        if (proxyResponse?.timedOut) {
+          throw new Error('Request timed out. The page may be too large.');
+        }
+      }
+      throw new Error(proxyResponse?.error || 'Unexpected API proxy failure');
     }
-    
-    const data = await response.json();
-    
+
+    const data = proxyResponse.data;
+
     if (CONFIG.DEBUG) {
       console.log(`[KlarText] API response:`, data);
       console.log(`[KlarText] Response has ${data.results?.length || 0} results`);
     }
-    
+
     // Handle batch response format
     if (data.results && Array.isArray(data.results)) {
       const mapped = data.results.map(r => ({
@@ -303,24 +317,17 @@ async function callAPI(texts, targetLanguage) {
       }
       return mapped;
     }
-    
+
     // Fallback: single simplify response
     if (data.simplified_text) {
       return [{ simplified_text: data.simplified_text, error: null }];
     }
-    
+
     throw new Error('Unexpected API response format');
-    
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      // Check which signal caused the abort
-      if (userCancellationController?.signal.aborted) {
-        throw new Error('Simplification cancelled by user');
-      } else {
-        throw new Error('Request timed out. The page may be too large.');
-      }
+  } finally {
+    if (abortListener && userCancellationController) {
+      userCancellationController.signal.removeEventListener('abort', abortListener);
     }
-    throw error;
   }
 }
 
@@ -381,7 +388,8 @@ async function simplifyInBatches(chunks, targetLanguage) {
           eta: estimatedSeconds,
           message: 'Simplifying...'
         },
-        message: 'Simplifying...'
+        message: 'Simplifying...',
+        messageKey: 'statusSimplifying'
       });
     } catch (e) {
       // Non-critical, continue
@@ -441,7 +449,8 @@ async function simplifyInBatches(chunks, targetLanguage) {
             eta: estimatedSeconds,
             message: 'Simplifying...'
           },
-          message: 'Simplifying...'
+        message: 'Simplifying...',
+        messageKey: 'statusSimplifying'
         });
       } catch (e) {
         // Non-critical
@@ -530,6 +539,62 @@ function updateTextNodes(results) {
 // Store selection listener and languages globally for cleanup
 let selectionListener = null;
 let selectionLanguages = { source: 'en', target: 'en' };
+let currentUiLanguage = 'en';
+
+const CONTENT_UI_STRINGS = {
+  en: {
+    inProgressError: 'A simplification is already in progress. Please wait or cancel it first.',
+    selectMinChars: 'Please select at least $1 characters of text to simplify.',
+    noTextFound: 'No text found to simplify on this page.',
+    simplifySectionsInTime: 'Simplified $1 text section(s) in $2s. Refresh to restore.',
+    simplifySectionsFailed: 'Failed to simplify text. $1 section(s) failed.',
+    simplifyFailedPrefix: 'Simplification failed. ',
+    apiUnavailable: 'Cannot reach KlarText API. Check API endpoint and availability.',
+    timeoutRetry: 'Request timed out. Try refreshing and simplifying again.',
+  },
+  de: {
+    inProgressError: 'Eine Vereinfachung laeuft bereits. Bitte warte oder brich zuerst ab.',
+    selectMinChars: 'Bitte markiere mindestens $1 Zeichen, um den Text zu vereinfachen.',
+    noTextFound: 'Kein Text auf dieser Seite zum Vereinfachen gefunden.',
+    simplifySectionsInTime: '$1 Textabschnitt(e) in $2s vereinfacht. Zum Wiederherstellen Seite neu laden.',
+    simplifySectionsFailed: 'Text konnte nicht vereinfacht werden. $1 Abschnitt(e) fehlgeschlagen.',
+    simplifyFailedPrefix: 'Vereinfachung fehlgeschlagen. ',
+    apiUnavailable: 'KlarText API ist nicht erreichbar. Bitte Endpunkt und Verfuegbarkeit pruefen.',
+    timeoutRetry: 'Zeitueberschreitung. Bitte Seite neu laden und erneut versuchen.',
+  },
+};
+
+function setContentUiLanguage(language = 'en') {
+  currentUiLanguage = language === 'de' ? 'de' : 'en';
+}
+
+function uiText(key, substitutions = []) {
+  const template = CONTENT_UI_STRINGS[currentUiLanguage]?.[key]
+    || CONTENT_UI_STRINGS.en[key]
+    || '';
+  return substitutions.reduce((text, value, index) => {
+    return text.replaceAll(`$${index + 1}`, String(value));
+  }, template);
+}
+
+function getSelectionDialogStrings(language = 'en') {
+  const locale = language === 'de' ? 'de' : 'en';
+  const strings = {
+    en: {
+      closeLabel: 'Close',
+      iconAlt: 'Select text',
+      title: 'Highlight the text you want to simplify',
+      subtitle: 'Simplification will start automatically',
+    },
+    de: {
+      closeLabel: 'Schliessen',
+      iconAlt: 'Text auswaehlen',
+      title: 'Markiere den Text, den du vereinfachen moechtest',
+      subtitle: 'Die Vereinfachung startet automatisch',
+    },
+  };
+  return strings[locale];
+}
 
 /**
  * Show selection dialog prompting user to select text
@@ -537,6 +602,7 @@ let selectionLanguages = { source: 'en', target: 'en' };
 function showSelectionDialog(sourceLanguage = 'en', targetLanguage = 'en') {
   // Store languages for when selection happens
   selectionLanguages = { source: sourceLanguage, target: targetLanguage };
+  const uiText = getSelectionDialogStrings(targetLanguage || sourceLanguage);
   
   // Check if dialog already exists
   if (document.getElementById('klartext-selection-dialog')) {
@@ -550,11 +616,11 @@ function showSelectionDialog(sourceLanguage = 'en', targetLanguage = 'en') {
   const iconUrl = chrome.runtime.getURL('icons/selecttext.png');
   
   dialog.innerHTML = `
-    <button class="klartext-dialog-close" aria-label="Close">×</button>
-    <img src="${iconUrl}" class="klartext-dialog-icon" alt="Select text">
+    <button class="klartext-dialog-close" aria-label="${uiText.closeLabel}">×</button>
+    <img src="${iconUrl}" class="klartext-dialog-icon" alt="${uiText.iconAlt}">
     <div class="klartext-dialog-content">
-      <div class="klartext-dialog-title">Highlight the text you want to simplify</div>
-      <div class="klartext-dialog-subtitle">Simplification will start automatically</div>
+      <div class="klartext-dialog-title">${uiText.title}</div>
+      <div class="klartext-dialog-subtitle">${uiText.subtitle}</div>
     </div>
   `;
   
@@ -903,12 +969,14 @@ function hideRestoreButton() {
  * @param {string} targetLanguage - Target language code (e.g. 'en', 'de')
  */
 async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage = 'en') {
+  setContentUiLanguage(targetLanguage || sourceLanguage || 'en');
+
   // Re-entry guard: Prevent overlapping simplifications
   if (isSimplificationActive) {
     if (CONFIG.DEBUG) {
       console.log('[KlarText] Ignoring new simplification request - one is already active');
     }
-    showError('A simplification is already in progress. Please wait or cancel it first.');
+    showError(uiText('inProgressError'));
     return;
   }
   
@@ -946,7 +1014,7 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
       
       if (!selectedText || selectedText.length < CONFIG.MIN_SELECTION_LENGTH) {
         hideLoading();
-        showError(`Please select at least ${CONFIG.MIN_SELECTION_LENGTH} characters of text to simplify.`);
+        showError(uiText('selectMinChars', [CONFIG.MIN_SELECTION_LENGTH]));
         return;
       }
       
@@ -973,6 +1041,7 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
             message: 'Simplifying selected text'
           },
           message: 'Simplifying selected text...',
+          messageKey: 'statusSimplifying',
           buttonId: 'simplify-selection'
         });
       } catch (e) {
@@ -996,6 +1065,7 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
               type: 'PROGRESS_UPDATE',
               status: 'complete',
               message: '✓ Simplified selected text',
+              messageKey: 'statusSelectionSimplified',
               buttonId: 'simplify-selection'
             });
           } catch (e) {
@@ -1012,6 +1082,7 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
               type: 'PROGRESS_UPDATE',
               status: 'error',
               message: 'Failed to simplify selected text',
+              messageKey: 'errorFailedSelection',
               buttonId: 'simplify-selection'
             });
           } catch (e) {
@@ -1026,6 +1097,8 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
             type: 'PROGRESS_UPDATE',
             status: 'error',
             message: 'Failed to simplify selected text: ' + error.message,
+            messageKey: 'errorFailedSelectionWithDetail',
+            messageArgs: [String(error.message || '')],
             buttonId: 'simplify-selection'
           });
         } catch (e) {
@@ -1044,7 +1117,7 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     
     if (rawChunks.length === 0) {
       hideLoading();
-      showError('No text found to simplify on this page.');
+      showError(uiText('noTextFound'));
       return;
     }
     
@@ -1102,11 +1175,11 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     
     // Show result first
     if (successCount > 0) {
-      showSuccess(`✓ Simplified ${successCount} text section(s) in ${totalTime.toFixed(0)}s. Refresh to restore.`);
+      showSuccess(`✓ ${uiText('simplifySectionsInTime', [successCount, totalTime.toFixed(0)])}`);
       // Show "Restore Original" button in lower right corner
       showRestoreButton();
     } else {
-      showError(`Failed to simplify text. ${failCount} section(s) failed.`);
+      showError(uiText('simplifySectionsFailed', [failCount]));
     }
     
     if (CONFIG.DEBUG) {
@@ -1126,7 +1199,8 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
         chrome.runtime.sendMessage({
           type: 'PROGRESS_UPDATE',
           status: 'error',
-          message: 'Simplification cancelled'
+          message: 'Simplification cancelled',
+          messageKey: 'statusSimplificationCancelled'
         });
       } catch (e) {
         // Non-critical
@@ -1137,11 +1211,11 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
     console.error('[KlarText] Simplification failed:', error);
     
     // User-friendly error messages
-    let errorMsg = 'Simplification failed. ';
+    let errorMsg = uiText('simplifyFailedPrefix');
     if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-      errorMsg += 'Cannot reach KlarText API. Make sure it\'s running at localhost:8000';
+      errorMsg += uiText('apiUnavailable');
     } else if (error.message.includes('timed out')) {
-      errorMsg += 'Request timed out. Try refreshing and simplifying again.';
+      errorMsg += uiText('timeoutRetry');
     } else {
       errorMsg += error.message;
     }
@@ -1240,8 +1314,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log('[KlarText] Show selection dialog requested');
     }
     
-    // Use stored languages from previous selection or defaults
-    showSelectionDialog(selectionLanguages.source, selectionLanguages.target);
+    // Use explicit languages from message when provided to avoid stale locale state.
+    const sourceLanguage = message.sourceLanguage || selectionLanguages.source;
+    const targetLanguage = message.targetLanguage || selectionLanguages.target;
+    showSelectionDialog(sourceLanguage, targetLanguage);
     
     sendResponse({ ok: true });
   }
