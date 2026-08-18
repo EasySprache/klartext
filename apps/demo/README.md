@@ -18,7 +18,7 @@ This demo **loads prompts directly from the project's template files**:
 ### 1. Install dependencies
 
 ```bash
-cd demo
+cd apps/demo
 pip install -r requirements.txt
 ```
 
@@ -99,16 +99,18 @@ Scores show ✅ Good, ⚠️ Review, or ❌ Needs work based on how many checks 
 
 ## Model
 
-Uses **Llama 3.1 8B Instant** (`llama-3.1-8b-instant`) via Groq's API.
+The production API (`services/api/app/core/llm_adapter.py`) uses **GPT-OSS 120B** (`openai/gpt-oss-120b`) via Groq.
 
 **Why this model?**
-Based on comprehensive evaluation in `notebooks/05_easy_language_evaluation.ipynb`:
-- **Best LIX score**: 37.3 (lowest complexity, target: < 40)
-- **Good structure**: Uses bullet points and clear formatting
-- **Fast inference**: 0.25s average latency
-- **Balanced output**: Maintains meaning while simplifying (vs. 70B which can be too concise)
+Based on model scoring in `notebooks/08.1_ext_model_scoring_v2.ipynb` (Aug 2026):
+- **Better meaning preservation** than `openai/gpt-oss-20b`, especially on legal/formal text
+- **Production model** on Groq (vs. preview-tier alternatives tested in the notebook)
+- **Strong structure** on medical and bureaucratic samples (bullets, clear paragraphs)
+- Selected over `qwen/qwen3.6-27b` after manual review flagged meaning drift on legal text
 
-See `docs/scoring_feedback_pipeline_proposal.md` for full model comparison.
+This Gradio demo uses the same production model as `services/api/app/core/llm_adapter.py`.
+
+See `docs/scoring_feedback_pipeline_proposal.md` for earlier baseline comparisons.
 
 ## Customization
 

@@ -10,7 +10,7 @@ FastAPI-based REST API for text simplification with accessibility features.
 |---------|--------|-------|
 | `/v1/simplify` endpoint | ✅ **Implemented** | Uses Groq LLM with project prompt templates |
 | Prompt template loading | ✅ **Implemented** | Loads from `prompts/templates/` |
-| LLM integration | ✅ **Implemented** | Groq llama-3.1-8b-instant model |
+| LLM integration | ✅ **Implemented** | Groq `openai/gpt-oss-120b` model |
 | `/v1/ingest/pdf` | ✅ **Implemented** | PyMuPDF extraction with cleanup |
 | `/v1/log-run` | ✅ **Implemented** | JSONL logging with file locking |
 | `/v1/simplify/batch` | 📝 Placeholder | Endpoint defined, logic pending |
@@ -216,8 +216,10 @@ The core simplification pipeline is now working:
 - Ported from working Gradio demo
 
 **`app/core/llm_adapter.py`**
-- Calls Groq API with `llama-3.1-8b-instant` model
+- Calls Groq API with `openai/gpt-oss-120b` model
+- Reasoning settings: `include_reasoning: false`, `reasoning_effort: low` (GPT-OSS models)
 - Temperature: 0.3 for consistent output
+- Strips leaked reasoning tags from model output before returning
 - Proper error handling for API failures
 - Uses split message structure (system + user prompts)
 
@@ -365,7 +367,7 @@ export LOG_FILE_PATH="/path/to/logs/api_runs.jsonl"
   "output_length": 120,
   "target_lang": "de",
   "level": "easy",
-  "model_used": "llama-3.1-8b-instant",
+  "model_used": "openai/gpt-oss-120b",
   "latency_ms": 250,
   "chunk_count": 1,
   "scores": {"avg_sentence_len": 12.0, "word_count": 45},

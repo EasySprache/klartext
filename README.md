@@ -114,7 +114,7 @@ See `docs/phase_0_testing_guide.md` for detailed setup instructions.
 |-----------|------------|
 | **Frontend** | React, TypeScript, Vite, Tailwind CSS |
 | **Backend** | Python, FastAPI, Uvicorn |
-| **LLM** | Groq (llama-3.1-8b-instant) |
+| **LLM** | Groq (`openai/gpt-oss-120b`) |
 | **PDF Extraction** | PyMuPDF |
 | **TTS** | gTTS (v2), OpenAI TTS (optional) |
 | **Telemetry** | JSONL, python-json-logger, Metrics Scripts |
