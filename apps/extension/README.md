@@ -421,7 +421,7 @@ The script:
      - `sidePanel` - Display sidepanel interface
      - `tabs` - Identify current page for processing
    - **Host permissions:** Required to simplify text on any website
-   - **Privacy policy URL:** Link to your privacy policy (required)
+   - **Privacy policy URL:** Production webapp `/privacy` page (for example `https://your-app.vercel.app/privacy`)
    - **Telemetry note:** `/v1/log-run` stores hashed input metadata; raw user text is not logged by this endpoint
 
 6. **Submit for Review**

@@ -138,6 +138,10 @@ In Vercel project settings → Environment Variables:
 
 Click "Deploy" and wait for the build to complete.
 
+The public privacy policy is at **`https://your-app.vercel.app/privacy`**. Use that URL in the Chrome Web Store privacy policy field.
+
+The public imprint (Impressum) is at **`https://your-app.vercel.app/impressum`**. Replace the placeholders in `apps/web-mvp/src/lib/imprint.ts` before treating that page as live.
+
 ### 2.5 Update CORS on Backend
 
 After getting your Vercel URL (e.g., `https://klartext-rho.vercel.app`), update the backend:
