@@ -39,7 +39,7 @@ except ImportError:
 # -----------------------------------------------------------------------------
 
 # Default log file location
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 DEFAULT_LOG_FILE = PROJECT_ROOT / "data" / "logs" / "demo_outputs.jsonl"
 
 # Ensure directory exists

@@ -337,7 +337,8 @@ const CONFIG = {
 
 **Production setup:**
 - Keep `API_ENDPOINT` on your production HTTPS API URL
-- Set `DEBUG` to `false`
+- The service worker only proxies allowlisted API origins and `/v1/simplify/batch`. Add a new host in `background/service-worker.js` before changing `API_ENDPOINT` to it.
+- Set `DEBUG` to `false` in `config.js` and `background/service-worker.js` (or run `./scripts/toggle-config-env.sh prod`)
 - Update `WEBAPP_URL` to your production webapp URL
 - Adjust `API_TIMEOUT` and `BATCH_SIZE` based on your API performance
 
