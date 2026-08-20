@@ -1,11 +1,33 @@
 """LLM adapter for text simplification (ported from apps/demo/app.py)"""
 import os
+import re
 import asyncio
 from groq import Groq
 from .prompts import load_templates, render_user_prompt
 
 # Model configuration
-GROQ_MODEL = "llama-3.1-8b-instant"  # Best from evaluation (good LIX score, structure)
+GROQ_MODEL = "openai/gpt-oss-120b"
+
+
+def _build_groq_extra_body(model_id: str) -> dict:
+    """Groq reasoning-model settings aligned with model scoring notebook."""
+    extra_body = {"include_reasoning": False}
+    if model_id.startswith("qwen/"):
+        extra_body["reasoning_effort"] = "none"
+    elif "gpt-oss" in model_id:
+        extra_body["reasoning_effort"] = "low"
+    return extra_body
+
+
+def _normalize_llm_content(content: str | None) -> str:
+    if not content:
+        return ""
+    return re.sub(
+        r"<think>.*?</think>",
+        "",
+        content,
+        flags=re.DOTALL,
+    ).strip()
 
 
 def simplify_text_with_llm(
@@ -52,15 +74,14 @@ def simplify_text_with_llm(
         model=GROQ_MODEL,
         messages=[
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
+            {"role": "user", "content": user_prompt},
         ],
         temperature=0.3,  # Lower for more consistent output
         max_tokens=2000,
+        extra_body=_build_groq_extra_body(GROQ_MODEL),
     )
-    
-    simplified_text = response.choices[0].message.content
-    
-    return simplified_text
+
+    return _normalize_llm_content(response.choices[0].message.content)
 
 
 async def simplify_text_async(

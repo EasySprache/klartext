@@ -74,6 +74,90 @@ const translations: Translations = {
     // Errors
     uploadError: { en: 'Could not read the PDF file', de: 'Die PDF-Datei konnte nicht gelesen werden' },
     simplifyError: { en: 'Something went wrong. Please try again.', de: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.' },
+
+    // Footer
+    footerTagline: { en: 'Easy Language for Everyone', de: 'Einfache Sprache für alle' },
+    footerDisclaimer: {
+        en: 'KlarText makes hard text easier to read. It is not official Easy Language (Leichte Sprache).',
+        de: 'KlarText macht schwierige Texte leichter lesbar. Es ist keine offizielle Leichte Sprache.',
+    },
+    footerCopyright: { en: '© 2026 KlarText. Non-commercial use only.', de: '© 2026 KlarText. Nur für nicht-kommerzielle Nutzung.' },
+    privacyPolicy: { en: 'Privacy Policy', de: 'Datenschutz' },
+    privacyPolicyTitle: { en: 'How we use your text', de: 'Wie wir Ihren Text verwenden' },
+    privacyPolicyP1: {
+        en: 'We want you to know what happens to your text.',
+        de: 'Wir möchten, dass Sie wissen, was mit Ihrem Text passiert.',
+    },
+    privacyPolicyP2: {
+        en: 'When you paste text or upload a PDF, we send it to our server. A computer then rewrites it.',
+        de: 'Wenn Sie Text einfügen oder eine PDF-Datei hochladen, senden wir sie an unseren Server. Ein Computer schreibt den Text dann um.',
+    },
+    privacyPolicyExtension: {
+        en: 'If you use the KlarText browser extension, the same rules apply. When you click Simplify, we send the page text or the text you selected to our server.',
+        de: 'Wenn Sie die KlarText-Browsererweiterung nutzen, gelten dieselben Regeln. Wenn Sie auf Vereinfachen klicken, senden wir den Seitentext oder den markierten Text an unseren Server.',
+    },
+    privacyPolicyExtensionLocal: {
+        en: 'The extension only reads a page when you ask it to. It saves your language choice for that website on your computer. It does not save the page text on your computer.',
+        de: 'Die Erweiterung liest eine Seite nur, wenn Sie sie dazu auffordern. Sie speichert Ihre Sprachwahl für diese Website auf Ihrem Computer. Sie speichert den Seitentext nicht auf Ihrem Computer.',
+    },
+    privacyPolicyP3: {
+        en: 'We save your text only to make KlarText better. We do not sell your text. We do not give it to advertisers.',
+        de: 'Wir speichern Ihren Text nur, um KlarText besser zu machen. Wir verkaufen Ihren Text nicht. Wir geben ihn nicht an Werbeunternehmen weiter.',
+    },
+    privacyPolicyP4: {
+        en: 'To rewrite the text, our server sends it to Groq. Groq is the computer that makes the simple version.',
+        de: 'Um den Text umzuschreiben, sendet unser Server ihn an Groq. Groq ist der Computer, der die einfache Fassung erstellt.',
+    },
+    privacyPolicyP5: {
+        en: 'If you click “read this text aloud”, we send the simple text to Google. Google turns the words into speech.',
+        de: 'Wenn Sie auf „Diesen Text vorlesen“ klicken, senden wir den einfachen Text an Google. Google macht aus den Worten Sprache.',
+    },
+    privacyPolicyP6: {
+        en: 'Do not write private things like your name, address, or personal documents.',
+        de: 'Schreiben Sie keine privaten Dinge wie Ihren Namen, Ihre Adresse oder persönliche Dokumente.',
+    },
+    privacyPolicyP7: {
+        en: 'We do not use cookies.',
+        de: 'Wir verwenden keine Cookies.',
+    },
+    privacyPolicyP8: {
+        en: 'You do not need an account. We do not ask for your name.',
+        de: 'Sie brauchen kein Konto. Wir fragen nicht nach Ihrem Namen.',
+    },
+    privacyHttps: {
+        en: 'We send your text over a secure connection (HTTPS).',
+        de: 'Wir senden Ihren Text über eine sichere Verbindung (HTTPS).',
+    },
+    privacyLimitedUse: {
+        en: 'KlarText only uses your text to make it easier to read and to improve that feature. This follows the Chrome Web Store User Data Policy, including the Limited Use requirements.',
+        de: 'KlarText nutzt Ihren Text nur, um ihn leichter lesbar zu machen und diese Funktion zu verbessern. Das folgt der Chrome Web Store User Data Policy, einschließlich der Limited Use-Anforderungen.',
+    },
+    backToKlarText: { en: 'Back to KlarText', de: 'Zurück zu KlarText' },
+    footerLegalNav: { en: 'Legal pages', de: 'Rechtliche Seiten' },
+    imprint: { en: 'Imprint', de: 'Impressum' },
+    imprintTitle: { en: 'Who is responsible for KlarText', de: 'Wer ist verantwortlich für KlarText' },
+    imprintP1: {
+        en: 'This page says who is responsible for this website.',
+        de: 'Diese Seite sagt, wer für diese Website verantwortlich ist.',
+    },
+    imprintP2: {
+        en: 'A small team made KlarText. The person named below is the contact for this website.',
+        de: 'Ein kleines Team hat KlarText gemacht. Die unten genannte Person ist der Kontakt für diese Website.',
+    },
+    imprintP3: {
+        en: 'You can write an email if you have a question.',
+        de: 'Sie können eine E-Mail schreiben, wenn Sie eine Frage haben.',
+    },
+    imprintLegalHeading: { en: 'Legal information', de: 'Angaben gemäß § 5 DDG' },
+    imprintResponsible: { en: 'Responsible person', de: 'Verantwortlich' },
+    imprintAddress: { en: 'Address', de: 'Adresse' },
+    imprintEmail: { en: 'Email', de: 'E-Mail' },
+    imprintCountry: { en: 'Germany', de: 'Deutschland' },
+    imprintTeamHeading: { en: 'Who made KlarText', de: 'Wer KlarText gemacht hat' },
+    imprintTeam: {
+        en: 'KlarText was built by the team members listed below.',
+        de: 'KlarText wurde von den unten genannten Teammitgliedern gebaut.',
+    },
 };
 
 interface LanguageContextType {

@@ -124,6 +124,8 @@ data/benchmarks/v*/outputs/**
 data/logs/*.jsonl
 data/logs/*.json
 !data/logs/README.md
+apps/data/logs/*.jsonl
+apps/data/logs/*.json
 
 # Extension runtime logs (user-specific, temporary)
 apps/extension/logs/*.json

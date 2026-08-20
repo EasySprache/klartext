@@ -3,10 +3,53 @@
  * 
  * Handles messages from popup and manages content script injection.
  * MV3 service worker (module-based).
+ * DEBUG is kept in sync with config.js by ./scripts/toggle-config-env.sh.
  */
 
-const DEBUG = true;
+const DEBUG = false;
 const activeApiRequests = new Map();
+
+const ALLOWED_API_ORIGINS = new Set([
+  'https://klartext-api.fly.dev',
+  'http://localhost:8000',
+  'http://127.0.0.1:8000',
+]);
+
+const ALLOWED_API_PATHS = new Set([
+  '/v1/simplify/batch',
+]);
+
+/**
+ * Build a fetch URL only if origin and path are on the KlarText allowlist.
+ * Parses with URL() so string-concat tricks cannot change the host.
+ */
+function resolveAllowedApiUrl(apiEndpoint, route) {
+  if (typeof apiEndpoint !== 'string' || typeof route !== 'string') {
+    return null;
+  }
+
+  let url;
+  try {
+    url = new URL(route, apiEndpoint);
+  } catch {
+    return null;
+  }
+
+  if (url.username || url.password) {
+    return null;
+  }
+  if (url.search || url.hash) {
+    return null;
+  }
+  if (!ALLOWED_API_ORIGINS.has(url.origin)) {
+    return null;
+  }
+  if (!ALLOWED_API_PATHS.has(url.pathname)) {
+    return null;
+  }
+
+  return url.href;
+}
 
 /**
  * Check if a URL can have content scripts injected
@@ -57,6 +100,32 @@ function getErrorMessage(error, tabUrl) {
   return `Extension error: ${errorStr}`;
 }
 
+function isFromThisExtension(sender) {
+  return sender?.id === chrome.runtime.id;
+}
+
+function isFromExtensionPage(sender) {
+  if (!isFromThisExtension(sender) || typeof sender.url !== 'string') {
+    return false;
+  }
+  try {
+    return new URL(sender.url).origin === `chrome-extension://${chrome.runtime.id}`;
+  } catch {
+    return false;
+  }
+}
+
+function isFromContentScript(sender) {
+  if (!isFromThisExtension(sender) || !sender.tab?.id) {
+    return false;
+  }
+  return !isFromExtensionPage(sender);
+}
+
+function rejectUnauthorized(sendResponse) {
+  sendResponse({ ok: false, error: 'Unauthorized' });
+}
+
 /**
  * Handle messages from sidepanel and content scripts
  */
@@ -66,15 +135,28 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (DEBUG) {
     console.log('[KlarText Service Worker] Received message:', messageType);
   }
+
+  if (!isFromThisExtension(sender)) {
+    rejectUnauthorized(sendResponse);
+    return true;
+  }
   
   // Proxy API calls through extension origin to avoid page-origin CORS issues.
   if (messageType === 'API_SIMPLIFY_BATCH') {
+    if (!isFromContentScript(sender)) {
+      rejectUnauthorized(sendResponse);
+      return true;
+    }
     proxyBatchSimplifyRequest(message, sendResponse);
     return true;
   }
 
   // Cancel an in-flight proxied API request.
   if (messageType === 'API_CANCEL_REQUEST') {
+    if (!isFromContentScript(sender)) {
+      rejectUnauthorized(sendResponse);
+      return true;
+    }
     const cancelled = cancelApiRequest(message?.requestId);
     sendResponse({ ok: true, cancelled });
     return true;
@@ -82,6 +164,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   // Handle GET_ACTIVE_TAB request from sidepanel
   if (messageType === 'GET_ACTIVE_TAB') {
+    if (!isFromExtensionPage(sender)) {
+      rejectUnauthorized(sendResponse);
+      return true;
+    }
     (async () => {
       try {
         const [tab] = await chrome.tabs.query({ 
@@ -109,6 +195,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   
   // Handle simplification requests from sidepanel
   if (messageType === 'SIMPLIFY_PAGE' || messageType === 'SIMPLIFY_SELECTION') {
+    if (!isFromExtensionPage(sender)) {
+      rejectUnauthorized(sendResponse);
+      return true;
+    }
     handleSimplification(message, sender, sendResponse);
     return true;
   }
@@ -126,11 +216,26 @@ function cancelApiRequest(requestId) {
   return true;
 }
 
+async function isContentScriptAlive(tabId) {
+  try {
+    const response = await chrome.tabs.sendMessage(tabId, { type: 'KLARTEXT_PING' });
+    return response?.ok === true;
+  } catch {
+    return false;
+  }
+}
+
 async function proxyBatchSimplifyRequest(message, sendResponse) {
   const { requestId, apiEndpoint, route, texts, targetLanguage, timeoutMs } = message || {};
 
-  if (!requestId || !apiEndpoint || !route || !Array.isArray(texts)) {
+  if (!requestId || !Array.isArray(texts)) {
     sendResponse({ ok: false, error: 'Invalid API proxy request payload' });
+    return;
+  }
+
+  const requestUrl = resolveAllowedApiUrl(apiEndpoint, route);
+  if (!requestUrl) {
+    sendResponse({ ok: false, error: 'API endpoint is not allowed' });
     return;
   }
 
@@ -144,7 +249,7 @@ async function proxyBatchSimplifyRequest(message, sendResponse) {
   }, resolvedTimeoutMs);
 
   try {
-    const response = await fetch(`${apiEndpoint}${route}`, {
+    const response = await fetch(requestUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -187,14 +292,15 @@ async function proxyBatchSimplifyRequest(message, sendResponse) {
  */
 async function handleSimplification(message, sender, sendResponse) {
   try {
-    const { type, tabId, sourceLanguage, targetLanguage } = message;
+    const { type, sourceLanguage, targetLanguage } = message;
+    const tabId = Number(message.tabId);
     const mode = type === 'SIMPLIFY_PAGE' ? 'page' : 'selection';
     
     if (DEBUG) {
       console.log(`[KlarText] Handling ${type} for tab ${tabId} (source: ${sourceLanguage}, target: ${targetLanguage})`);
     }
     
-    if (!tabId) {
+    if (!Number.isInteger(tabId) || tabId <= 0) {
       sendResponse({ 
         ok: false, 
         error: 'No tab ID provided' 
@@ -240,12 +346,14 @@ async function handleSimplification(message, sender, sendResponse) {
       // Logger not available, continue without it
     }
     filesToInject.push('content/simplify.js');
-    
-    // Inject configuration and content script
-    await chrome.scripting.executeScript({
-      target: { tabId: tabId },
-      files: filesToInject,
-    });
+
+    const contentAlive = await isContentScriptAlive(tabId);
+    if (!contentAlive) {
+      await chrome.scripting.executeScript({
+        target: { tabId: tabId },
+        files: filesToInject,
+      });
+    }
     
     // Send message to content script with mode and languages
     await chrome.tabs.sendMessage(tabId, {

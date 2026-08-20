@@ -9,11 +9,13 @@
  * - Phase C: Support custom API endpoints via options page
  */
 
-const CONFIG = {
+var CONFIG = {
   /**
    * API endpoint for KlarText simplification service
    * Production default for Chrome Web Store releases.
    * For local development, temporarily change to http://localhost:8000.
+   * The service worker only proxies allowlisted origins (see background/service-worker.js).
+   * New hosts must be added to that allowlist.
    */
   API_ENDPOINT: 'https://klartext-api.fly.dev',
 
@@ -107,5 +109,4 @@ const CONFIG = {
 // Note: This config file is injected into the content script context by the service worker.
 // When injected via chrome.scripting.executeScript(), CONFIG becomes a global variable
 // available to subsequently injected scripts (like simplify.js).
-// 
-// The service worker itself does not need access to CONFIG - only content scripts do.
+// The service worker still allowlists API origins independently of this file.

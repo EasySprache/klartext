@@ -145,7 +145,7 @@ function compute_metrics(source_text, output_text) {
 // Guardrails
 // -----------------------------------------------------------------------------
 
-const GUARDRAILS = {
+var GUARDRAILS = {
   short_sentences: {
     name: "Short Sentences",
     check: (metrics) => metrics.avg_sentence_len_words <= 15

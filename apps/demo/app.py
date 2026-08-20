@@ -4,10 +4,12 @@ KlarText Gradio Demo
 A shareable test interface for the team to evaluate text simplification.
 
 Run locally:
-    python demo/app.py
+    cd apps/demo
+    python app.py
 
 Share with team:
-    python demo/app.py --share
+    cd apps/demo
+    python app.py --share
 
 Environment variables:
     GROQ_API_KEY - Your Groq API key (required)
@@ -27,7 +29,7 @@ from dotenv import load_dotenv
 import gradio as gr
 
 # Load environment variables from .env file in project root
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 from groq import Groq
 from pybars import Compiler
@@ -48,7 +50,28 @@ except Exception:
 # Configuration
 # -----------------------------------------------------------------------------
 
-GROQ_MODEL = "llama-3.1-8b-instant"  # Recommended from evaluation (best LIX score, good structure)
+GROQ_MODEL = "openai/gpt-oss-120b"
+
+
+def _build_groq_extra_body(model_id: str) -> dict:
+    """Groq reasoning-model settings aligned with services/api llm_adapter."""
+    extra_body = {"include_reasoning": False}
+    if model_id.startswith("qwen/"):
+        extra_body["reasoning_effort"] = "none"
+    elif "gpt-oss" in model_id:
+        extra_body["reasoning_effort"] = "low"
+    return extra_body
+
+
+def _normalize_llm_content(content: str | None) -> str:
+    if not content:
+        return ""
+    return re.sub(
+        r"<think>.*?</think>",
+        "",
+        content,
+        flags=re.DOTALL,
+    ).strip()
 
 # Templates and samples directories
 TEMPLATES_DIR = PROJECT_ROOT / "prompts" / "templates"
@@ -346,13 +369,14 @@ def simplify_text(
             model=GROQ_MODEL,
             messages=[
                 {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
+                {"role": "user", "content": user_prompt},
             ],
             temperature=0.3,  # Lower for more consistent output
             max_tokens=2000,
+            extra_body=_build_groq_extra_body(GROQ_MODEL),
         )
-        
-        output = response.choices[0].message.content
+
+        output = _normalize_llm_content(response.choices[0].message.content)
         
         # Compute and format scores
         scores = compute_simple_scores(output)

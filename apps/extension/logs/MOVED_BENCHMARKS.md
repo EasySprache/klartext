@@ -26,10 +26,7 @@ See `data/benchmarks/README.md` for full documentation.
 
 ## What Stays Here
 
-This `apps/extension/logs/` directory now contains only:
-- Transient test runs: `klartext-results-*.json` (timestamped experiments)
-- Extension-specific debug logs
-- Files intended to be regenerated or deleted regularly
+This `apps/extension/logs/` directory is for local, gitignored test runs only (`klartext-results-*.json`). Do not commit those files; they can contain original page text.
 
 ## Why the Move?
 

@@ -5,8 +5,11 @@
  * It collects text nodes, sends them to the KlarText API, and updates the page.
  * 
  * Configuration is loaded from config.js (injected by service worker before this script).
+ * Wrapped in an IIFE so a second inject (extension reload or another Simplify) does not
+ * redeclare top-level bindings.
  */
 
+(function initKlarTextContentScript() {
 // CONFIG is loaded from config.js - see background/service-worker.js
 // If CONFIG is not defined, something went wrong with script injection order
 if (typeof CONFIG === 'undefined') {
@@ -506,7 +509,6 @@ function updateTextNodes(results) {
             const parent = chunk.parents[i];
             parent.textContent = simplifiedSections[i].trim();
             parent.dataset.klartextSimplified = '1';
-            parent.dataset.klartextOriginal = chunk.originalText; // Store full original for restore
           }
           successCount += chunk.parents.length;
         } catch (error) {
@@ -518,7 +520,6 @@ function updateTextNodes(results) {
         try {
           chunk.parent.textContent = simplified;
           chunk.parent.dataset.klartextSimplified = '1';
-          chunk.parent.dataset.klartextOriginal = chunk.originalText;
           successCount++;
         } catch (error) {
           console.error('[KlarText] Failed to update element:', error);
@@ -1233,8 +1234,13 @@ async function simplifyPage(mode = 'page', sourceLanguage = 'en', targetLanguage
   }
 }
 
-// Listen for simplification start message from service worker
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+function handleKlarTextMessage(message, sender, sendResponse) {
+  if (message.type === 'KLARTEXT_PING') {
+    sendResponse({ ok: true });
+    return false;
+  }
+
+  // Listen for simplification start message from service worker
   if (message.type === 'START_SIMPLIFICATION') {
     const { mode, sourceLanguage, targetLanguage } = message;
     
@@ -1323,36 +1329,50 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
   
   return true;
-});
+}
+
+if (globalThis.__klartextOnMessage) {
+  try {
+    chrome.runtime.onMessage.removeListener(globalThis.__klartextOnMessage);
+  } catch (e) {
+    // Previous listener may already be invalid after an extension reload.
+  }
+}
+globalThis.__klartextOnMessage = handleKlarTextMessage;
+chrome.runtime.onMessage.addListener(handleKlarTextMessage);
 
 // Navigation detection - cleanup UI when navigating away
 try {
-  // Detect page unload
-  window.addEventListener('beforeunload', () => {
+  if (globalThis.__klartextBeforeUnload) {
+    window.removeEventListener('beforeunload', globalThis.__klartextBeforeUnload);
+  }
+  globalThis.__klartextBeforeUnload = () => {
     hideLoading();
     if (CONFIG.DEBUG) {
       console.log('[KlarText] Page unloading, cleaning up UI');
     }
-  });
-  
-  // Detect SPA navigation (history.pushState/replaceState)
-  const originalPushState = history.pushState;
-  const originalReplaceState = history.replaceState;
-  
+  };
+  window.addEventListener('beforeunload', globalThis.__klartextBeforeUnload);
+
+  if (!globalThis.__klartextOriginalPushState) {
+    globalThis.__klartextOriginalPushState = history.pushState.bind(history);
+    globalThis.__klartextOriginalReplaceState = history.replaceState.bind(history);
+  }
+
   history.pushState = function(...args) {
     hideLoading();
     if (CONFIG.DEBUG) {
       console.log('[KlarText] SPA navigation detected (pushState), cleaning up UI');
     }
-    return originalPushState.apply(this, args);
+    return globalThis.__klartextOriginalPushState(...args);
   };
-  
+
   history.replaceState = function(...args) {
     hideLoading();
     if (CONFIG.DEBUG) {
       console.log('[KlarText] SPA navigation detected (replaceState), cleaning up UI');
     }
-    return originalReplaceState.apply(this, args);
+    return globalThis.__klartextOriginalReplaceState(...args);
   };
   
   if (CONFIG.DEBUG) {
@@ -1361,3 +1381,4 @@ try {
 } catch (error) {
   console.error('[KlarText] Failed to initialize navigation detection:', error);
 }
+})();

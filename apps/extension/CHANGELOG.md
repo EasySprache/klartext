@@ -4,6 +4,24 @@ This document tracks all notable changes to the KlarText Chrome Extension.
 
 ---
 
+## August 19, 2026
+
+**Focus:** Privacy and API proxy hardening
+
+### Security
+
+- Removed `data-klartext-original` after full-page simplify. Original text was readable by same-origin page scripts. Restore still reloads the page and does not need those attributes.
+- `data-klartext-simplified="1"` is unchanged so already-simplified nodes are skipped.
+- Service worker API proxy only fetches allowlisted origins (`https://klartext-api.fly.dev`, `http://localhost:8000`, `http://127.0.0.1:8000`) and path `/v1/simplify/batch`.
+- Content scripts can be injected more than once (extension reload or a second Simplify) without redeclaring `CONFIG`, `GUARDRAILS`, or simplify.js bindings. The service worker skips injection when the content script already answers a ping.
+- Service worker message handlers check the sender. `SIMPLIFY_PAGE`, `SIMPLIFY_SELECTION`, and `GET_ACTIVE_TAB` are limited to extension pages (sidepanel). API proxy messages are limited to this extension's content scripts. Other extensions are rejected.
+- Service worker `DEBUG` defaults to `false` and is toggled with `config.js` via `./scripts/toggle-config-env.sh`, so production builds do not log tab URLs.
+- Stopped tracking `apps/extension/logs/klartext-results-*.json`. Those files contain original page text and were already gitignored for new runs.
+
+**Files:** `apps/extension/content/simplify.js`, `apps/extension/background/service-worker.js`, `apps/extension/config.js`, `apps/extension/extension_logger.js`, `apps/extension/scripts/toggle-config-env.sh`
+
+---
+
 ## January 28, 2026
 
 **Branch:** extension-prompt-update  

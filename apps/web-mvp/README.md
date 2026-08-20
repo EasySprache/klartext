@@ -6,7 +6,9 @@ This is the MVP UI for our final project presentation. It builds upon the focus 
 
 This UI transforms the standard dashboard into a guided conversation:
 
-- **Single page, no routing** — Users never leave the page
+- **Single page flow** — Simplification stays on one page
+- **Privacy page** — Public policy at `/privacy` for Chrome Web Store and footer links
+- **Imprint page** — Public Impressum at `/impressum` (placeholders until a responsible person is named)
 - **Progressive disclosure** — Sections reveal one at a time
 - **Clear action language** — Buttons say exactly what they do
 - **Input always visible** — Users can scroll up to see what they wrote
@@ -31,6 +33,10 @@ npm run dev
 ```
 
 Open **http://localhost:5174/** in your browser.
+
+Privacy policy (public page for Chrome Web Store): **http://localhost:5174/privacy**
+
+Imprint (Impressum): **http://localhost:5174/impressum** — fill in name, address, and email in `src/lib/imprint.ts` before going live.
 
 ### Environment Variables
 
@@ -89,13 +95,20 @@ src/
 ├── App.tsx                    # Main progressive flow
 ├── main.tsx                   # Entry point with providers
 ├── index.css                  # Design tokens (copied from main app)
+├── pages/
+│   ├── PrivacyPage.tsx        # Public privacy policy at /privacy
+│   └── ImprintPage.tsx        # Public Impressum at /impressum
 ├── components/
 │   ├── AccessibilityPanel.tsx # Font size, spacing, contrast settings
+│   ├── Footer.tsx
+│   ├── ImprintContent.tsx
+│   ├── PrivacyPolicyContent.tsx
 │   ├── ProgressIndicator.tsx  # Step 1-2-3-4 indicator
 │   └── ui/                    # shadcn-style components
 ├── contexts/
 │   ├── LanguageContext.tsx    # EN/DE translations
 │   └── AccessibilityContext.tsx
 └── lib/
+    ├── imprint.ts             # Impressum name, address, email placeholders
     └── utils.ts               # Tailwind class helper
 ```

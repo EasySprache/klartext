@@ -12,6 +12,7 @@ import { logSimplification } from '@/lib/logger';
 import { SidebarNav } from '@/components/SidebarNav';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { InfoWarning } from '@/components/InfoWarning';
+import { Footer } from '@/components/Footer';
 import logoImg from '@/assets/logo.png';
 import tornadoImg from '@/assets/tornado.png';
 
@@ -86,6 +87,15 @@ function App() {
   ];
 
   // Scroll handler
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#privacy') {
+      window.location.replace('/privacy');
+    } else if (hash === '#impressum' || hash === '#imprint') {
+      window.location.replace('/impressum');
+    }
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const section = sections.find(s => s.id === sectionId);
     if (section && section.ref.current) {
@@ -416,7 +426,7 @@ function App() {
           </aside>
 
           {/* Main Content */}
-          <main className="flex-1 space-y-24 max-w-3xl pb-24">
+          <main className="flex-1 space-y-24 max-w-3xl pb-12">
 
             {/* Section 1: Welcome */}
             <section id="welcome" ref={welcomeRef} className="scroll-mt-24 space-y-8">
@@ -660,6 +670,8 @@ function App() {
 
           </main >
         </div >
+
+        <Footer />
 
         <AccessibilityPanel
           open={accessibilityOpen}

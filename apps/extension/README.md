@@ -337,7 +337,8 @@ const CONFIG = {
 
 **Production setup:**
 - Keep `API_ENDPOINT` on your production HTTPS API URL
-- Set `DEBUG` to `false`
+- The service worker only proxies allowlisted API origins and `/v1/simplify/batch`. Add a new host in `background/service-worker.js` before changing `API_ENDPOINT` to it.
+- Set `DEBUG` to `false` in `config.js` and `background/service-worker.js` (or run `./scripts/toggle-config-env.sh prod`)
 - Update `WEBAPP_URL` to your production webapp URL
 - Adjust `API_TIMEOUT` and `BATCH_SIZE` based on your API performance
 
@@ -421,7 +422,7 @@ The script:
      - `sidePanel` - Display sidepanel interface
      - `tabs` - Identify current page for processing
    - **Host permissions:** Required to simplify text on any website
-   - **Privacy policy URL:** Link to your privacy policy (required)
+   - **Privacy policy URL:** Production webapp `/privacy` page (for example `https://your-app.vercel.app/privacy`)
    - **Telemetry note:** `/v1/log-run` stores hashed input metadata; raw user text is not logged by this endpoint
 
 6. **Submit for Review**
